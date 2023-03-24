@@ -146,6 +146,14 @@ func TestGenesisState_Validate(t *testing.T) {
 					DeadlineTaxes:   "89",
 					DeadlineErasmus: "99",
 				},
+				UniversityDetailsList: []types.UniversityDetails{
+					{
+						UniversityName: "0",
+					},
+					{
+						UniversityName: "1",
+					},
+				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
@@ -253,6 +261,20 @@ func TestGenesisState_Validate(t *testing.T) {
 					},
 					{
 						Index: "0",
+					},
+				},
+			},
+			valid: false,
+		},
+		{
+			desc: "duplicated universityDetails",
+			genState: &types.GenesisState{
+				UniversityDetailsList: []types.UniversityDetails{
+					{
+						UniversityName: "0",
+					},
+					{
+						UniversityName: "0",
 					},
 				},
 			},

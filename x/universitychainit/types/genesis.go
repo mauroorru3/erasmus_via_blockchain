@@ -11,22 +11,23 @@ const DefaultIndex uint64 = 1
 // DefaultGenesis returns the default Capability genesis state
 func DefaultGenesis() *GenesisState {
 	return &GenesisState{
-		PortId:              PortID,
-		ProfessorsExamsList: []ProfessorsExams{},
-		StudentInfo:         nil,
-		ExamsInfoList:       []ExamsInfo{},
-		TranscriptOfRecords: nil,
-		PersonalInfo:        nil,
-		ResidenceInfo:       nil,
-		ContactInfo:         nil,
-		AnnualTaxesList:     []AnnualTaxes{},
-		TaxesInfo:           nil,
-		ErasmusContribution: nil,
-		ErasmusExamsList:    []ErasmusExams{},
-		ErasmusCareerList:   []ErasmusCareer{},
-		ErasmusInfo:         nil,
-		StoredStudentList:   []StoredStudent{},
-		UniversityInfo:      nil,
+		PortId:                PortID,
+		ProfessorsExamsList:   []ProfessorsExams{},
+		StudentInfo:           nil,
+		ExamsInfoList:         []ExamsInfo{},
+		TranscriptOfRecords:   nil,
+		PersonalInfo:          nil,
+		ResidenceInfo:         nil,
+		ContactInfo:           nil,
+		AnnualTaxesList:       []AnnualTaxes{},
+		TaxesInfo:             nil,
+		ErasmusContribution:   nil,
+		ErasmusExamsList:      []ErasmusExams{},
+		ErasmusCareerList:     []ErasmusCareer{},
+		ErasmusInfo:           nil,
+		StoredStudentList:     []StoredStudent{},
+		UniversityInfo:        nil,
+		UniversityDetailsList: []UniversityDetails{},
 		// this line is used by starport scaffolding # genesis/types/default
 		Params: DefaultParams(),
 	}
@@ -101,6 +102,16 @@ func (gs GenesisState) Validate() error {
 			return fmt.Errorf("duplicated index for storedStudent")
 		}
 		storedStudentIndexMap[index] = struct{}{}
+	}
+	// Check for duplicated index in universityDetails
+	universityDetailsIndexMap := make(map[string]struct{})
+
+	for _, elem := range gs.UniversityDetailsList {
+		index := string(UniversityDetailsKey(elem.UniversityName))
+		if _, ok := universityDetailsIndexMap[index]; ok {
+			return fmt.Errorf("duplicated index for universityDetails")
+		}
+		universityDetailsIndexMap[index] = struct{}{}
 	}
 	// this line is used by starport scaffolding # genesis/types/validate
 

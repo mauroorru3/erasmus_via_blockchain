@@ -18,6 +18,7 @@ import "universitychainit/erasmus_career.proto";
 import "universitychainit/erasmus_info.proto";
 import "universitychainit/stored_student.proto";
 import "universitychainit/university_info.proto";
+import "universitychainit/university_details.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 
 option go_package = "university_chain_it/x/universitychainit/types";
@@ -43,5 +44,6 @@ message GenesisState {
   ErasmusInfo erasmusInfo = 17;
   repeated StoredStudent storedStudentList = 18 [(gogoproto.nullable) = false];
   UniversityInfo universityInfo = 19;
+  repeated UniversityDetails universityDetailsList = 20 [(gogoproto.nullable) = false];
   // this line is used by starport scaffolding # genesis/proto/state
 }

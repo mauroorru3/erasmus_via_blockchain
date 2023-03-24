@@ -5,15 +5,16 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "universitychainit/params.proto";
-import "universitychainit/professors_exams.proto";
 import "universitychainit/exams_info.proto";
 import "universitychainit/annual_taxes.proto";
 import "universitychainit/erasmus_contribution.proto";
 import "universitychainit/erasmus_exams.proto";
 import "universitychainit/erasmus_career.proto";
+import "universitychainit/university_details.proto";
+// this line is used by starport scaffolding # 1
 import "universitychainit/stored_student.proto";
 import "universitychainit/university_info.proto";
-// this line is used by starport scaffolding # 1
+import "universitychainit/professors_exams.proto";
 import "universitychainit/erasmus_info.proto";
 import "universitychainit/taxes_info.proto";
 import "universitychainit/contact_info.proto";
@@ -126,6 +127,16 @@ service Query {
 	rpc UniversityInfo(QueryGetUniversityInfoRequest) returns (QueryGetUniversityInfoResponse) {
 		option (google.api.http).get = "/university_chain_it/universitychainit/university_info";
 	}
+// Queries a UniversityDetails by index.
+	rpc UniversityDetails(QueryGetUniversityDetailsRequest) returns (QueryGetUniversityDetailsResponse) {
+		option (google.api.http).get = "/university_chain_it/universitychainit/university_details/{universityName}";
+	}
+
+	// Queries a list of UniversityDetails items.
+	rpc UniversityDetailsAll(QueryAllUniversityDetailsRequest) returns (QueryAllUniversityDetailsResponse) {
+		option (google.api.http).get = "/university_chain_it/universitychainit/university_details";
+	}
+
 // this line is used by starport scaffolding # 2
 }
 
@@ -289,4 +300,22 @@ message QueryGetUniversityInfoRequest {}
 message QueryGetUniversityInfoResponse {
 	UniversityInfo UniversityInfo = 1 [(gogoproto.nullable) = false];
 }
+message QueryGetUniversityDetailsRequest {
+	  string universityName = 1;
+
+}
+
+message QueryGetUniversityDetailsResponse {
+	UniversityDetails universityDetails = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllUniversityDetailsRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllUniversityDetailsResponse {
+	repeated UniversityDetails universityDetails = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
 // this line is used by starport scaffolding # 3

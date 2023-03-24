@@ -17,10 +17,11 @@ import { StoredStudent } from "./module/types/universitychainit/stored_student"
 import { StudentInfo } from "./module/types/universitychainit/student_info"
 import { TaxesInfo } from "./module/types/universitychainit/taxes_info"
 import { TranscriptOfRecords } from "./module/types/universitychainit/transcript_of_records"
+import { UniversityDetails } from "./module/types/universitychainit/university_details"
 import { UniversityInfo } from "./module/types/universitychainit/university_info"
 
 
-export { AnnualTaxes, ContactInfo, ErasmusCareer, ErasmusContribution, ErasmusExams, ErasmusInfo, ExamsInfo, UniversitychainitPacketData, NoData, Params, PersonalInfo, ProfessorsExams, ResidenceInfo, StoredStudent, StudentInfo, TaxesInfo, TranscriptOfRecords, UniversityInfo };
+export { AnnualTaxes, ContactInfo, ErasmusCareer, ErasmusContribution, ErasmusExams, ErasmusInfo, ExamsInfo, UniversitychainitPacketData, NoData, Params, PersonalInfo, ProfessorsExams, ResidenceInfo, StoredStudent, StudentInfo, TaxesInfo, TranscriptOfRecords, UniversityDetails, UniversityInfo };
 
 async function initTxClient(vuexGetters) {
 	return await txClient(vuexGetters['common/wallet/signer'], {
@@ -80,6 +81,8 @@ const getDefaultState = () => {
 				StoredStudent: {},
 				StoredStudentAll: {},
 				UniversityInfo: {},
+				UniversityDetails: {},
+				UniversityDetailsAll: {},
 				
 				_Structure: {
 						AnnualTaxes: getStructure(AnnualTaxes.fromPartial({})),
@@ -99,6 +102,7 @@ const getDefaultState = () => {
 						StudentInfo: getStructure(StudentInfo.fromPartial({})),
 						TaxesInfo: getStructure(TaxesInfo.fromPartial({})),
 						TranscriptOfRecords: getStructure(TranscriptOfRecords.fromPartial({})),
+						UniversityDetails: getStructure(UniversityDetails.fromPartial({})),
 						UniversityInfo: getStructure(UniversityInfo.fromPartial({})),
 						
 		},
@@ -259,6 +263,18 @@ export default {
 						(<any> params).query=null
 					}
 			return state.UniversityInfo[JSON.stringify(params)] ?? {}
+		},
+				getUniversityDetails: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.UniversityDetails[JSON.stringify(params)] ?? {}
+		},
+				getUniversityDetailsAll: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.UniversityDetailsAll[JSON.stringify(params)] ?? {}
 		},
 				
 		getTypeStructure: (state) => (type) => {
@@ -797,6 +813,54 @@ export default {
 				return getters['getUniversityInfo']( { params: {...key}, query}) ?? {}
 			} catch (e) {
 				throw new Error('QueryClient:QueryUniversityInfo API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryUniversityDetails({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryUniversityDetails( key.universityName)).data
+				
+					
+				commit('QUERY', { query: 'UniversityDetails', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryUniversityDetails', payload: { options: { all }, params: {...key},query }})
+				return getters['getUniversityDetails']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryUniversityDetails API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryUniversityDetailsAll({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryUniversityDetailsAll(query)).data
+				
+					
+				while (all && (<any> value).pagination && (<any> value).pagination.next_key!=null) {
+					let next_values=(await queryClient.queryUniversityDetailsAll({...query, 'pagination.key':(<any> value).pagination.next_key})).data
+					value = mergeResults(value, next_values);
+				}
+				commit('QUERY', { query: 'UniversityDetailsAll', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryUniversityDetailsAll', payload: { options: { all }, params: {...key},query }})
+				return getters['getUniversityDetailsAll']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryUniversityDetailsAll API Node Unavailable. Could not perform query: ' + e.message)
 				
 			}
 		},

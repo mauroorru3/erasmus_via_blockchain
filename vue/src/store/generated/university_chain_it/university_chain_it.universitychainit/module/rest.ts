@@ -268,6 +268,21 @@ export interface UniversitychainitQueryAllStoredStudentResponse {
   pagination?: V1Beta1PageResponse;
 }
 
+export interface UniversitychainitQueryAllUniversityDetailsResponse {
+  universityDetails?: UniversitychainitUniversityDetails[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
+
 export interface UniversitychainitQueryGetAnnualTaxesResponse {
   AnnualTaxes?: UniversitychainitAnnualTaxes;
 }
@@ -322,6 +337,10 @@ export interface UniversitychainitQueryGetTaxesInfoResponse {
 
 export interface UniversitychainitQueryGetTranscriptOfRecordsResponse {
   TranscriptOfRecords?: UniversitychainitTranscriptOfRecords;
+}
+
+export interface UniversitychainitQueryGetUniversityDetailsResponse {
+  universityDetails?: UniversitychainitUniversityDetails;
 }
 
 export interface UniversitychainitQueryGetUniversityInfoResponse {
@@ -399,6 +418,13 @@ export interface UniversitychainitTranscriptOfRecords {
 
   /** @format uint64 */
   achievedCredits?: string;
+}
+
+export interface UniversitychainitUniversityDetails {
+  universityName?: string;
+  professorsInfo?: UniversitychainitProfessorsExams;
+  universityData?: UniversitychainitUniversityInfo;
+  studentDetails?: UniversitychainitStoredStudent;
 }
 
 export interface UniversitychainitUniversityInfo {
@@ -1063,6 +1089,48 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryTranscriptOfRecords = (params: RequestParams = {}) =>
     this.request<UniversitychainitQueryGetTranscriptOfRecordsResponse, RpcStatus>({
       path: `/university_chain_it/universitychainit/transcript_of_records`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryUniversityDetailsAll
+   * @summary Queries a list of UniversityDetails items.
+   * @request GET:/university_chain_it/universitychainit/university_details
+   */
+  queryUniversityDetailsAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<UniversitychainitQueryAllUniversityDetailsResponse, RpcStatus>({
+      path: `/university_chain_it/universitychainit/university_details`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryUniversityDetails
+   * @summary Queries a UniversityDetails by index.
+   * @request GET:/university_chain_it/universitychainit/university_details/{universityName}
+   */
+  queryUniversityDetails = (universityName: string, params: RequestParams = {}) =>
+    this.request<UniversitychainitQueryGetUniversityDetailsResponse, RpcStatus>({
+      path: `/university_chain_it/universitychainit/university_details/${universityName}`,
       method: "GET",
       format: "json",
       ...params,

@@ -21,6 +21,7 @@ import { ErasmusCareer } from "../universitychainit/erasmus_career";
 import { ErasmusInfo } from "../universitychainit/erasmus_info";
 import { StoredStudent } from "../universitychainit/stored_student";
 import { UniversityInfo } from "../universitychainit/university_info";
+import { UniversityDetails } from "../universitychainit/university_details";
 
 export const protobufPackage = "university_chain_it.universitychainit";
 
@@ -187,6 +188,23 @@ export interface QueryGetUniversityInfoRequest {}
 
 export interface QueryGetUniversityInfoResponse {
   UniversityInfo: UniversityInfo | undefined;
+}
+
+export interface QueryGetUniversityDetailsRequest {
+  universityName: string;
+}
+
+export interface QueryGetUniversityDetailsResponse {
+  universityDetails: UniversityDetails | undefined;
+}
+
+export interface QueryAllUniversityDetailsRequest {
+  pagination: PageRequest | undefined;
+}
+
+export interface QueryAllUniversityDetailsResponse {
+  universityDetails: UniversityDetails[];
+  pagination: PageResponse | undefined;
 }
 
 const baseQueryParamsRequest: object = {};
@@ -3383,6 +3401,345 @@ export const QueryGetUniversityInfoResponse = {
   },
 };
 
+const baseQueryGetUniversityDetailsRequest: object = { universityName: "" };
+
+export const QueryGetUniversityDetailsRequest = {
+  encode(
+    message: QueryGetUniversityDetailsRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.universityName !== "") {
+      writer.uint32(10).string(message.universityName);
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetUniversityDetailsRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetUniversityDetailsRequest,
+    } as QueryGetUniversityDetailsRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.universityName = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetUniversityDetailsRequest {
+    const message = {
+      ...baseQueryGetUniversityDetailsRequest,
+    } as QueryGetUniversityDetailsRequest;
+    if (object.universityName !== undefined && object.universityName !== null) {
+      message.universityName = String(object.universityName);
+    } else {
+      message.universityName = "";
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetUniversityDetailsRequest): unknown {
+    const obj: any = {};
+    message.universityName !== undefined &&
+      (obj.universityName = message.universityName);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetUniversityDetailsRequest>
+  ): QueryGetUniversityDetailsRequest {
+    const message = {
+      ...baseQueryGetUniversityDetailsRequest,
+    } as QueryGetUniversityDetailsRequest;
+    if (object.universityName !== undefined && object.universityName !== null) {
+      message.universityName = object.universityName;
+    } else {
+      message.universityName = "";
+    }
+    return message;
+  },
+};
+
+const baseQueryGetUniversityDetailsResponse: object = {};
+
+export const QueryGetUniversityDetailsResponse = {
+  encode(
+    message: QueryGetUniversityDetailsResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.universityDetails !== undefined) {
+      UniversityDetails.encode(
+        message.universityDetails,
+        writer.uint32(10).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetUniversityDetailsResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetUniversityDetailsResponse,
+    } as QueryGetUniversityDetailsResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.universityDetails = UniversityDetails.decode(
+            reader,
+            reader.uint32()
+          );
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetUniversityDetailsResponse {
+    const message = {
+      ...baseQueryGetUniversityDetailsResponse,
+    } as QueryGetUniversityDetailsResponse;
+    if (
+      object.universityDetails !== undefined &&
+      object.universityDetails !== null
+    ) {
+      message.universityDetails = UniversityDetails.fromJSON(
+        object.universityDetails
+      );
+    } else {
+      message.universityDetails = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetUniversityDetailsResponse): unknown {
+    const obj: any = {};
+    message.universityDetails !== undefined &&
+      (obj.universityDetails = message.universityDetails
+        ? UniversityDetails.toJSON(message.universityDetails)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetUniversityDetailsResponse>
+  ): QueryGetUniversityDetailsResponse {
+    const message = {
+      ...baseQueryGetUniversityDetailsResponse,
+    } as QueryGetUniversityDetailsResponse;
+    if (
+      object.universityDetails !== undefined &&
+      object.universityDetails !== null
+    ) {
+      message.universityDetails = UniversityDetails.fromPartial(
+        object.universityDetails
+      );
+    } else {
+      message.universityDetails = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllUniversityDetailsRequest: object = {};
+
+export const QueryAllUniversityDetailsRequest = {
+  encode(
+    message: QueryAllUniversityDetailsRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllUniversityDetailsRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllUniversityDetailsRequest,
+    } as QueryAllUniversityDetailsRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllUniversityDetailsRequest {
+    const message = {
+      ...baseQueryAllUniversityDetailsRequest,
+    } as QueryAllUniversityDetailsRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllUniversityDetailsRequest): unknown {
+    const obj: any = {};
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageRequest.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllUniversityDetailsRequest>
+  ): QueryAllUniversityDetailsRequest {
+    const message = {
+      ...baseQueryAllUniversityDetailsRequest,
+    } as QueryAllUniversityDetailsRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllUniversityDetailsResponse: object = {};
+
+export const QueryAllUniversityDetailsResponse = {
+  encode(
+    message: QueryAllUniversityDetailsResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    for (const v of message.universityDetails) {
+      UniversityDetails.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(
+        message.pagination,
+        writer.uint32(18).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllUniversityDetailsResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllUniversityDetailsResponse,
+    } as QueryAllUniversityDetailsResponse;
+    message.universityDetails = [];
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.universityDetails.push(
+            UniversityDetails.decode(reader, reader.uint32())
+          );
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllUniversityDetailsResponse {
+    const message = {
+      ...baseQueryAllUniversityDetailsResponse,
+    } as QueryAllUniversityDetailsResponse;
+    message.universityDetails = [];
+    if (
+      object.universityDetails !== undefined &&
+      object.universityDetails !== null
+    ) {
+      for (const e of object.universityDetails) {
+        message.universityDetails.push(UniversityDetails.fromJSON(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllUniversityDetailsResponse): unknown {
+    const obj: any = {};
+    if (message.universityDetails) {
+      obj.universityDetails = message.universityDetails.map((e) =>
+        e ? UniversityDetails.toJSON(e) : undefined
+      );
+    } else {
+      obj.universityDetails = [];
+    }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageResponse.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllUniversityDetailsResponse>
+  ): QueryAllUniversityDetailsResponse {
+    const message = {
+      ...baseQueryAllUniversityDetailsResponse,
+    } as QueryAllUniversityDetailsResponse;
+    message.universityDetails = [];
+    if (
+      object.universityDetails !== undefined &&
+      object.universityDetails !== null
+    ) {
+      for (const e of object.universityDetails) {
+        message.universityDetails.push(UniversityDetails.fromPartial(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Parameters queries the parameters of the module. */
@@ -3471,6 +3828,14 @@ export interface Query {
   UniversityInfo(
     request: QueryGetUniversityInfoRequest
   ): Promise<QueryGetUniversityInfoResponse>;
+  /** Queries a UniversityDetails by index. */
+  UniversityDetails(
+    request: QueryGetUniversityDetailsRequest
+  ): Promise<QueryGetUniversityDetailsResponse>;
+  /** Queries a list of UniversityDetails items. */
+  UniversityDetailsAll(
+    request: QueryAllUniversityDetailsRequest
+  ): Promise<QueryAllUniversityDetailsResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -3779,6 +4144,34 @@ export class QueryClientImpl implements Query {
     );
     return promise.then((data) =>
       QueryGetUniversityInfoResponse.decode(new Reader(data))
+    );
+  }
+
+  UniversityDetails(
+    request: QueryGetUniversityDetailsRequest
+  ): Promise<QueryGetUniversityDetailsResponse> {
+    const data = QueryGetUniversityDetailsRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "university_chain_it.universitychainit.Query",
+      "UniversityDetails",
+      data
+    );
+    return promise.then((data) =>
+      QueryGetUniversityDetailsResponse.decode(new Reader(data))
+    );
+  }
+
+  UniversityDetailsAll(
+    request: QueryAllUniversityDetailsRequest
+  ): Promise<QueryAllUniversityDetailsResponse> {
+    const data = QueryAllUniversityDetailsRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "university_chain_it.universitychainit.Query",
+      "UniversityDetailsAll",
+      data
+    );
+    return promise.then((data) =>
+      QueryAllUniversityDetailsResponse.decode(new Reader(data))
     );
   }
 }
