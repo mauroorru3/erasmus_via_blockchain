@@ -38,8 +38,5 @@ RUN rm /university_chain_it/go.mod
 
 # Create the image
 # $ docker build -f Dockerfile-ubuntu . -t university_chain_it_i
-# To build container
-# $ docker create --name university_chain_it -i -v $(pwd):/university_chain_it -w /university_chain_it -p 1317:1317 -p 3000:3000 -p 4500:4500 -p 5000:5000 -p 26657:26657 university_chain_it_i
-# $ docker start university_chain_it
 # To run server on it
-# $ docker exec -it university_chain_it ignite chain serve --reset-once
+# docker run --rm -it -v $(pwd):/university_chain_it -w /university_chain_it -p 1317:1317 -p 3000:3000 -p 4500:4500 -p 5000:5000 -p 26657:26657 --name university_chain_it university_chain_it_i ignite chain serve --reset-once
