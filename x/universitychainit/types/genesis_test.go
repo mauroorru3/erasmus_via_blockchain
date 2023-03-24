@@ -159,6 +159,14 @@ func TestGenesisState_Validate(t *testing.T) {
 					ChainKey: "54",
 					Country:  "27",
 				},
+				ForeignUniversitiesList: []types.ForeignUniversities{
+					{
+						UniversityName: "0",
+					},
+					{
+						UniversityName: "1",
+					},
+				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
@@ -275,6 +283,20 @@ func TestGenesisState_Validate(t *testing.T) {
 			desc: "duplicated universityDetails",
 			genState: &types.GenesisState{
 				UniversityDetailsList: []types.UniversityDetails{
+					{
+						UniversityName: "0",
+					},
+					{
+						UniversityName: "0",
+					},
+				},
+			},
+			valid: false,
+		},
+		{
+			desc: "duplicated foreignUniversities",
+			genState: &types.GenesisState{
+				ForeignUniversitiesList: []types.ForeignUniversities{
 					{
 						UniversityName: "0",
 					},

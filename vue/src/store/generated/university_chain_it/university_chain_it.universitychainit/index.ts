@@ -8,6 +8,7 @@ import { ErasmusContribution } from "./module/types/universitychainit/erasmus_co
 import { ErasmusExams } from "./module/types/universitychainit/erasmus_exams"
 import { ErasmusInfo } from "./module/types/universitychainit/erasmus_info"
 import { ExamsInfo } from "./module/types/universitychainit/exams_info"
+import { ForeignUniversities } from "./module/types/universitychainit/foreign_universities"
 import { UniversitychainitPacketData } from "./module/types/universitychainit/packet"
 import { NoData } from "./module/types/universitychainit/packet"
 import { Params } from "./module/types/universitychainit/params"
@@ -22,7 +23,7 @@ import { UniversityDetails } from "./module/types/universitychainit/university_d
 import { UniversityInfo } from "./module/types/universitychainit/university_info"
 
 
-export { AnnualTaxes, ChainInfo, ContactInfo, ErasmusCareer, ErasmusContribution, ErasmusExams, ErasmusInfo, ExamsInfo, UniversitychainitPacketData, NoData, Params, PersonalInfo, ProfessorsExams, ResidenceInfo, StoredStudent, StudentInfo, TaxesInfo, TranscriptOfRecords, UniversityDetails, UniversityInfo };
+export { AnnualTaxes, ChainInfo, ContactInfo, ErasmusCareer, ErasmusContribution, ErasmusExams, ErasmusInfo, ExamsInfo, ForeignUniversities, UniversitychainitPacketData, NoData, Params, PersonalInfo, ProfessorsExams, ResidenceInfo, StoredStudent, StudentInfo, TaxesInfo, TranscriptOfRecords, UniversityDetails, UniversityInfo };
 
 async function initTxClient(vuexGetters) {
 	return await txClient(vuexGetters['common/wallet/signer'], {
@@ -85,6 +86,8 @@ const getDefaultState = () => {
 				UniversityDetails: {},
 				UniversityDetailsAll: {},
 				ChainInfo: {},
+				ForeignUniversities: {},
+				ForeignUniversitiesAll: {},
 				
 				_Structure: {
 						AnnualTaxes: getStructure(AnnualTaxes.fromPartial({})),
@@ -95,6 +98,7 @@ const getDefaultState = () => {
 						ErasmusExams: getStructure(ErasmusExams.fromPartial({})),
 						ErasmusInfo: getStructure(ErasmusInfo.fromPartial({})),
 						ExamsInfo: getStructure(ExamsInfo.fromPartial({})),
+						ForeignUniversities: getStructure(ForeignUniversities.fromPartial({})),
 						UniversitychainitPacketData: getStructure(UniversitychainitPacketData.fromPartial({})),
 						NoData: getStructure(NoData.fromPartial({})),
 						Params: getStructure(Params.fromPartial({})),
@@ -284,6 +288,18 @@ export default {
 						(<any> params).query=null
 					}
 			return state.ChainInfo[JSON.stringify(params)] ?? {}
+		},
+				getForeignUniversities: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.ForeignUniversities[JSON.stringify(params)] ?? {}
+		},
+				getForeignUniversitiesAll: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.ForeignUniversitiesAll[JSON.stringify(params)] ?? {}
 		},
 				
 		getTypeStructure: (state) => (type) => {
@@ -892,6 +908,54 @@ export default {
 				return getters['getChainInfo']( { params: {...key}, query}) ?? {}
 			} catch (e) {
 				throw new Error('QueryClient:QueryChainInfo API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryForeignUniversities({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryForeignUniversities( key.universityName)).data
+				
+					
+				commit('QUERY', { query: 'ForeignUniversities', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryForeignUniversities', payload: { options: { all }, params: {...key},query }})
+				return getters['getForeignUniversities']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryForeignUniversities API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryForeignUniversitiesAll({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryForeignUniversitiesAll(query)).data
+				
+					
+				while (all && (<any> value).pagination && (<any> value).pagination.next_key!=null) {
+					let next_values=(await queryClient.queryForeignUniversitiesAll({...query, 'pagination.key':(<any> value).pagination.next_key})).data
+					value = mergeResults(value, next_values);
+				}
+				commit('QUERY', { query: 'ForeignUniversitiesAll', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryForeignUniversitiesAll', payload: { options: { all }, params: {...key},query }})
+				return getters['getForeignUniversitiesAll']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryForeignUniversitiesAll API Node Unavailable. Could not perform query: ' + e.message)
 				
 			}
 		},

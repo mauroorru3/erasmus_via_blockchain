@@ -23,6 +23,7 @@ import { StoredStudent } from "../universitychainit/stored_student";
 import { UniversityInfo } from "../universitychainit/university_info";
 import { UniversityDetails } from "../universitychainit/university_details";
 import { ChainInfo } from "../universitychainit/chain_info";
+import { ForeignUniversities } from "../universitychainit/foreign_universities";
 
 export const protobufPackage = "university_chain_it.universitychainit";
 
@@ -212,6 +213,23 @@ export interface QueryGetChainInfoRequest {}
 
 export interface QueryGetChainInfoResponse {
   ChainInfo: ChainInfo | undefined;
+}
+
+export interface QueryGetForeignUniversitiesRequest {
+  universityName: string;
+}
+
+export interface QueryGetForeignUniversitiesResponse {
+  foreignUniversities: ForeignUniversities | undefined;
+}
+
+export interface QueryAllForeignUniversitiesRequest {
+  pagination: PageRequest | undefined;
+}
+
+export interface QueryAllForeignUniversitiesResponse {
+  foreignUniversities: ForeignUniversities[];
+  pagination: PageResponse | undefined;
 }
 
 const baseQueryParamsRequest: object = {};
@@ -3871,6 +3889,345 @@ export const QueryGetChainInfoResponse = {
   },
 };
 
+const baseQueryGetForeignUniversitiesRequest: object = { universityName: "" };
+
+export const QueryGetForeignUniversitiesRequest = {
+  encode(
+    message: QueryGetForeignUniversitiesRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.universityName !== "") {
+      writer.uint32(10).string(message.universityName);
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetForeignUniversitiesRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetForeignUniversitiesRequest,
+    } as QueryGetForeignUniversitiesRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.universityName = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetForeignUniversitiesRequest {
+    const message = {
+      ...baseQueryGetForeignUniversitiesRequest,
+    } as QueryGetForeignUniversitiesRequest;
+    if (object.universityName !== undefined && object.universityName !== null) {
+      message.universityName = String(object.universityName);
+    } else {
+      message.universityName = "";
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetForeignUniversitiesRequest): unknown {
+    const obj: any = {};
+    message.universityName !== undefined &&
+      (obj.universityName = message.universityName);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetForeignUniversitiesRequest>
+  ): QueryGetForeignUniversitiesRequest {
+    const message = {
+      ...baseQueryGetForeignUniversitiesRequest,
+    } as QueryGetForeignUniversitiesRequest;
+    if (object.universityName !== undefined && object.universityName !== null) {
+      message.universityName = object.universityName;
+    } else {
+      message.universityName = "";
+    }
+    return message;
+  },
+};
+
+const baseQueryGetForeignUniversitiesResponse: object = {};
+
+export const QueryGetForeignUniversitiesResponse = {
+  encode(
+    message: QueryGetForeignUniversitiesResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.foreignUniversities !== undefined) {
+      ForeignUniversities.encode(
+        message.foreignUniversities,
+        writer.uint32(10).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetForeignUniversitiesResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetForeignUniversitiesResponse,
+    } as QueryGetForeignUniversitiesResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.foreignUniversities = ForeignUniversities.decode(
+            reader,
+            reader.uint32()
+          );
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetForeignUniversitiesResponse {
+    const message = {
+      ...baseQueryGetForeignUniversitiesResponse,
+    } as QueryGetForeignUniversitiesResponse;
+    if (
+      object.foreignUniversities !== undefined &&
+      object.foreignUniversities !== null
+    ) {
+      message.foreignUniversities = ForeignUniversities.fromJSON(
+        object.foreignUniversities
+      );
+    } else {
+      message.foreignUniversities = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetForeignUniversitiesResponse): unknown {
+    const obj: any = {};
+    message.foreignUniversities !== undefined &&
+      (obj.foreignUniversities = message.foreignUniversities
+        ? ForeignUniversities.toJSON(message.foreignUniversities)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetForeignUniversitiesResponse>
+  ): QueryGetForeignUniversitiesResponse {
+    const message = {
+      ...baseQueryGetForeignUniversitiesResponse,
+    } as QueryGetForeignUniversitiesResponse;
+    if (
+      object.foreignUniversities !== undefined &&
+      object.foreignUniversities !== null
+    ) {
+      message.foreignUniversities = ForeignUniversities.fromPartial(
+        object.foreignUniversities
+      );
+    } else {
+      message.foreignUniversities = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllForeignUniversitiesRequest: object = {};
+
+export const QueryAllForeignUniversitiesRequest = {
+  encode(
+    message: QueryAllForeignUniversitiesRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllForeignUniversitiesRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllForeignUniversitiesRequest,
+    } as QueryAllForeignUniversitiesRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllForeignUniversitiesRequest {
+    const message = {
+      ...baseQueryAllForeignUniversitiesRequest,
+    } as QueryAllForeignUniversitiesRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllForeignUniversitiesRequest): unknown {
+    const obj: any = {};
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageRequest.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllForeignUniversitiesRequest>
+  ): QueryAllForeignUniversitiesRequest {
+    const message = {
+      ...baseQueryAllForeignUniversitiesRequest,
+    } as QueryAllForeignUniversitiesRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllForeignUniversitiesResponse: object = {};
+
+export const QueryAllForeignUniversitiesResponse = {
+  encode(
+    message: QueryAllForeignUniversitiesResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    for (const v of message.foreignUniversities) {
+      ForeignUniversities.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(
+        message.pagination,
+        writer.uint32(18).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllForeignUniversitiesResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllForeignUniversitiesResponse,
+    } as QueryAllForeignUniversitiesResponse;
+    message.foreignUniversities = [];
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.foreignUniversities.push(
+            ForeignUniversities.decode(reader, reader.uint32())
+          );
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllForeignUniversitiesResponse {
+    const message = {
+      ...baseQueryAllForeignUniversitiesResponse,
+    } as QueryAllForeignUniversitiesResponse;
+    message.foreignUniversities = [];
+    if (
+      object.foreignUniversities !== undefined &&
+      object.foreignUniversities !== null
+    ) {
+      for (const e of object.foreignUniversities) {
+        message.foreignUniversities.push(ForeignUniversities.fromJSON(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllForeignUniversitiesResponse): unknown {
+    const obj: any = {};
+    if (message.foreignUniversities) {
+      obj.foreignUniversities = message.foreignUniversities.map((e) =>
+        e ? ForeignUniversities.toJSON(e) : undefined
+      );
+    } else {
+      obj.foreignUniversities = [];
+    }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageResponse.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllForeignUniversitiesResponse>
+  ): QueryAllForeignUniversitiesResponse {
+    const message = {
+      ...baseQueryAllForeignUniversitiesResponse,
+    } as QueryAllForeignUniversitiesResponse;
+    message.foreignUniversities = [];
+    if (
+      object.foreignUniversities !== undefined &&
+      object.foreignUniversities !== null
+    ) {
+      for (const e of object.foreignUniversities) {
+        message.foreignUniversities.push(ForeignUniversities.fromPartial(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Parameters queries the parameters of the module. */
@@ -3971,6 +4328,14 @@ export interface Query {
   ChainInfo(
     request: QueryGetChainInfoRequest
   ): Promise<QueryGetChainInfoResponse>;
+  /** Queries a ForeignUniversities by index. */
+  ForeignUniversities(
+    request: QueryGetForeignUniversitiesRequest
+  ): Promise<QueryGetForeignUniversitiesResponse>;
+  /** Queries a list of ForeignUniversities items. */
+  ForeignUniversitiesAll(
+    request: QueryAllForeignUniversitiesRequest
+  ): Promise<QueryAllForeignUniversitiesResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -4321,6 +4686,34 @@ export class QueryClientImpl implements Query {
     );
     return promise.then((data) =>
       QueryGetChainInfoResponse.decode(new Reader(data))
+    );
+  }
+
+  ForeignUniversities(
+    request: QueryGetForeignUniversitiesRequest
+  ): Promise<QueryGetForeignUniversitiesResponse> {
+    const data = QueryGetForeignUniversitiesRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "university_chain_it.universitychainit.Query",
+      "ForeignUniversities",
+      data
+    );
+    return promise.then((data) =>
+      QueryGetForeignUniversitiesResponse.decode(new Reader(data))
+    );
+  }
+
+  ForeignUniversitiesAll(
+    request: QueryAllForeignUniversitiesRequest
+  ): Promise<QueryAllForeignUniversitiesResponse> {
+    const data = QueryAllForeignUniversitiesRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "university_chain_it.universitychainit.Query",
+      "ForeignUniversitiesAll",
+      data
+    );
+    return promise.then((data) =>
+      QueryAllForeignUniversitiesResponse.decode(new Reader(data))
     );
   }
 }

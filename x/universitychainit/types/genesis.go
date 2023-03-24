@@ -11,24 +11,25 @@ const DefaultIndex uint64 = 1
 // DefaultGenesis returns the default Capability genesis state
 func DefaultGenesis() *GenesisState {
 	return &GenesisState{
-		PortId:                PortID,
-		ProfessorsExamsList:   []ProfessorsExams{},
-		StudentInfo:           nil,
-		ExamsInfoList:         []ExamsInfo{},
-		TranscriptOfRecords:   nil,
-		PersonalInfo:          nil,
-		ResidenceInfo:         nil,
-		ContactInfo:           nil,
-		AnnualTaxesList:       []AnnualTaxes{},
-		TaxesInfo:             nil,
-		ErasmusContribution:   nil,
-		ErasmusExamsList:      []ErasmusExams{},
-		ErasmusCareerList:     []ErasmusCareer{},
-		ErasmusInfo:           nil,
-		StoredStudentList:     []StoredStudent{},
-		UniversityInfo:        nil,
-		UniversityDetailsList: []UniversityDetails{},
-		ChainInfo:             nil,
+		PortId:                  PortID,
+		ProfessorsExamsList:     []ProfessorsExams{},
+		StudentInfo:             nil,
+		ExamsInfoList:           []ExamsInfo{},
+		TranscriptOfRecords:     nil,
+		PersonalInfo:            nil,
+		ResidenceInfo:           nil,
+		ContactInfo:             nil,
+		AnnualTaxesList:         []AnnualTaxes{},
+		TaxesInfo:               nil,
+		ErasmusContribution:     nil,
+		ErasmusExamsList:        []ErasmusExams{},
+		ErasmusCareerList:       []ErasmusCareer{},
+		ErasmusInfo:             nil,
+		StoredStudentList:       []StoredStudent{},
+		UniversityInfo:          nil,
+		UniversityDetailsList:   []UniversityDetails{},
+		ChainInfo:               nil,
+		ForeignUniversitiesList: []ForeignUniversities{},
 		// this line is used by starport scaffolding # genesis/types/default
 		Params: DefaultParams(),
 	}
@@ -113,6 +114,16 @@ func (gs GenesisState) Validate() error {
 			return fmt.Errorf("duplicated index for universityDetails")
 		}
 		universityDetailsIndexMap[index] = struct{}{}
+	}
+	// Check for duplicated index in foreignUniversities
+	foreignUniversitiesIndexMap := make(map[string]struct{})
+
+	for _, elem := range gs.ForeignUniversitiesList {
+		index := string(ForeignUniversitiesKey(elem.UniversityName))
+		if _, ok := foreignUniversitiesIndexMap[index]; ok {
+			return fmt.Errorf("duplicated index for foreignUniversities")
+		}
+		foreignUniversitiesIndexMap[index] = struct{}{}
 	}
 	// this line is used by starport scaffolding # genesis/types/validate
 

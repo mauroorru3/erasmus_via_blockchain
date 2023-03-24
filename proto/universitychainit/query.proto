@@ -12,6 +12,7 @@ import "universitychainit/erasmus_exams.proto";
 import "universitychainit/erasmus_career.proto";
 import "universitychainit/university_details.proto";
 import "universitychainit/chain_info.proto";
+import "universitychainit/foreign_universities.proto";
 // this line is used by starport scaffolding # 1
 import "universitychainit/stored_student.proto";
 import "universitychainit/university_info.proto";
@@ -142,6 +143,16 @@ service Query {
 	rpc ChainInfo(QueryGetChainInfoRequest) returns (QueryGetChainInfoResponse) {
 		option (google.api.http).get = "/university_chain_it/universitychainit/chain_info";
 	}
+// Queries a ForeignUniversities by index.
+	rpc ForeignUniversities(QueryGetForeignUniversitiesRequest) returns (QueryGetForeignUniversitiesResponse) {
+		option (google.api.http).get = "/university_chain_it/universitychainit/foreign_universities/{universityName}";
+	}
+
+	// Queries a list of ForeignUniversities items.
+	rpc ForeignUniversitiesAll(QueryAllForeignUniversitiesRequest) returns (QueryAllForeignUniversitiesResponse) {
+		option (google.api.http).get = "/university_chain_it/universitychainit/foreign_universities";
+	}
+
 // this line is used by starport scaffolding # 2
 }
 
@@ -328,4 +339,22 @@ message QueryGetChainInfoRequest {}
 message QueryGetChainInfoResponse {
 	ChainInfo ChainInfo = 1 [(gogoproto.nullable) = false];
 }
+message QueryGetForeignUniversitiesRequest {
+	  string universityName = 1;
+
+}
+
+message QueryGetForeignUniversitiesResponse {
+	ForeignUniversities foreignUniversities = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllForeignUniversitiesRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllForeignUniversitiesResponse {
+	repeated ForeignUniversities foreignUniversities = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
 // this line is used by starport scaffolding # 3

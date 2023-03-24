@@ -151,6 +151,14 @@ func TestGenesis(t *testing.T) {
 			ChainKey: "47",
 			Country:  "82",
 		},
+		ForeignUniversitiesList: []types.ForeignUniversities{
+			{
+				UniversityName: "0",
+			},
+			{
+				UniversityName: "1",
+			},
+		},
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
@@ -183,5 +191,6 @@ func TestGenesis(t *testing.T) {
 	require.Equal(t, genesisState.UniversityInfo, got.UniversityInfo)
 	require.ElementsMatch(t, genesisState.UniversityDetailsList, got.UniversityDetailsList)
 	require.Equal(t, genesisState.ChainInfo, got.ChainInfo)
+	require.ElementsMatch(t, genesisState.ForeignUniversitiesList, got.ForeignUniversitiesList)
 	// this line is used by starport scaffolding # genesis/test/assert
 }

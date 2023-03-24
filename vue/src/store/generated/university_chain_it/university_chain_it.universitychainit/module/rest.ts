@@ -161,6 +161,11 @@ export interface UniversitychainitExamsInfo {
   courseOfStudy?: string;
 }
 
+export interface UniversitychainitForeignUniversities {
+  universityName?: string;
+  foreignUniversitiesKey?: string;
+}
+
 /**
  * Params defines the parameters for the module.
  */
@@ -231,6 +236,21 @@ export interface UniversitychainitQueryAllErasmusExamsResponse {
 
 export interface UniversitychainitQueryAllExamsInfoResponse {
   examsInfo?: UniversitychainitExamsInfo[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
+
+export interface UniversitychainitQueryAllForeignUniversitiesResponse {
+  foreignUniversities?: UniversitychainitForeignUniversities[];
 
   /**
    * PageResponse is to be embedded in gRPC response messages where the
@@ -319,6 +339,10 @@ export interface UniversitychainitQueryGetErasmusInfoResponse {
 
 export interface UniversitychainitQueryGetExamsInfoResponse {
   examsInfo?: UniversitychainitExamsInfo;
+}
+
+export interface UniversitychainitQueryGetForeignUniversitiesResponse {
+  foreignUniversities?: UniversitychainitForeignUniversities;
 }
 
 export interface UniversitychainitQueryGetPersonalInfoResponse {
@@ -935,6 +959,48 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryExamsInfo = (examName: string, params: RequestParams = {}) =>
     this.request<UniversitychainitQueryGetExamsInfoResponse, RpcStatus>({
       path: `/university_chain_it/universitychainit/exams_info/${examName}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryForeignUniversitiesAll
+   * @summary Queries a list of ForeignUniversities items.
+   * @request GET:/university_chain_it/universitychainit/foreign_universities
+   */
+  queryForeignUniversitiesAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<UniversitychainitQueryAllForeignUniversitiesResponse, RpcStatus>({
+      path: `/university_chain_it/universitychainit/foreign_universities`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryForeignUniversities
+   * @summary Queries a ForeignUniversities by index.
+   * @request GET:/university_chain_it/universitychainit/foreign_universities/{universityName}
+   */
+  queryForeignUniversities = (universityName: string, params: RequestParams = {}) =>
+    this.request<UniversitychainitQueryGetForeignUniversitiesResponse, RpcStatus>({
+      path: `/university_chain_it/universitychainit/foreign_universities/${universityName}`,
       method: "GET",
       format: "json",
       ...params,
