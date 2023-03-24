@@ -10,10 +10,11 @@ import { PersonalInfo } from "./module/types/universitychainit/personal_info"
 import { ProfessorsExams } from "./module/types/universitychainit/professors_exams"
 import { ResidenceInfo } from "./module/types/universitychainit/residence_info"
 import { StudentInfo } from "./module/types/universitychainit/student_info"
+import { TaxesInfo } from "./module/types/universitychainit/taxes_info"
 import { TranscriptOfRecords } from "./module/types/universitychainit/transcript_of_records"
 
 
-export { AnnualTaxes, ContactInfo, ExamsInfo, UniversitychainitPacketData, NoData, Params, PersonalInfo, ProfessorsExams, ResidenceInfo, StudentInfo, TranscriptOfRecords };
+export { AnnualTaxes, ContactInfo, ExamsInfo, UniversitychainitPacketData, NoData, Params, PersonalInfo, ProfessorsExams, ResidenceInfo, StudentInfo, TaxesInfo, TranscriptOfRecords };
 
 async function initTxClient(vuexGetters) {
 	return await txClient(vuexGetters['common/wallet/signer'], {
@@ -63,6 +64,7 @@ const getDefaultState = () => {
 				ContactInfo: {},
 				AnnualTaxes: {},
 				AnnualTaxesAll: {},
+				TaxesInfo: {},
 				
 				_Structure: {
 						AnnualTaxes: getStructure(AnnualTaxes.fromPartial({})),
@@ -75,6 +77,7 @@ const getDefaultState = () => {
 						ProfessorsExams: getStructure(ProfessorsExams.fromPartial({})),
 						ResidenceInfo: getStructure(ResidenceInfo.fromPartial({})),
 						StudentInfo: getStructure(StudentInfo.fromPartial({})),
+						TaxesInfo: getStructure(TaxesInfo.fromPartial({})),
 						TranscriptOfRecords: getStructure(TranscriptOfRecords.fromPartial({})),
 						
 		},
@@ -175,6 +178,12 @@ export default {
 						(<any> params).query=null
 					}
 			return state.AnnualTaxesAll[JSON.stringify(params)] ?? {}
+		},
+				getTaxesInfo: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.TaxesInfo[JSON.stringify(params)] ?? {}
 		},
 				
 		getTypeStructure: (state) => (type) => {
@@ -481,6 +490,28 @@ export default {
 				return getters['getAnnualTaxesAll']( { params: {...key}, query}) ?? {}
 			} catch (e) {
 				throw new Error('QueryClient:QueryAnnualTaxesAll API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryTaxesInfo({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryTaxesInfo()).data
+				
+					
+				commit('QUERY', { query: 'TaxesInfo', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryTaxesInfo', payload: { options: { all }, params: {...key},query }})
+				return getters['getTaxesInfo']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryTaxesInfo API Node Unavailable. Could not perform query: ' + e.message)
 				
 			}
 		},

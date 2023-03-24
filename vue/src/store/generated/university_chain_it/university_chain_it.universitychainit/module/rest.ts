@@ -161,6 +161,10 @@ export interface UniversitychainitQueryGetStudentInfoResponse {
   StudentInfo?: UniversitychainitStudentInfo;
 }
 
+export interface UniversitychainitQueryGetTaxesInfoResponse {
+  TaxesInfo?: UniversitychainitTaxesInfo;
+}
+
 export interface UniversitychainitQueryGetTranscriptOfRecordsResponse {
   TranscriptOfRecords?: UniversitychainitTranscriptOfRecords;
 }
@@ -201,6 +205,14 @@ export interface UniversitychainitStudentInfo {
   /** @format uint64 */
   numberOfYearsOutOfCourse?: string;
   studentKey?: string;
+}
+
+export interface UniversitychainitTaxesInfo {
+  status?: boolean;
+
+  /** @format uint64 */
+  totalAmount?: string;
+  taxesHistory?: UniversitychainitAnnualTaxes;
 }
 
 export interface UniversitychainitTranscriptOfRecords {
@@ -679,6 +691,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryStudentInfo = (params: RequestParams = {}) =>
     this.request<UniversitychainitQueryGetStudentInfoResponse, RpcStatus>({
       path: `/university_chain_it/universitychainit/student_info`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryTaxesInfo
+   * @summary Queries a TaxesInfo by index.
+   * @request GET:/university_chain_it/universitychainit/taxes_info
+   */
+  queryTaxesInfo = (params: RequestParams = {}) =>
+    this.request<UniversitychainitQueryGetTaxesInfoResponse, RpcStatus>({
+      path: `/university_chain_it/universitychainit/taxes_info`,
       method: "GET",
       format: "json",
       ...params,

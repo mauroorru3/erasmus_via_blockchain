@@ -31305,6 +31305,63 @@ paths:
                   additionalProperties: {}
       tags:
         - Query
+  /university_chain_it/universitychainit/taxes_info:
+    get:
+      summary: Queries a TaxesInfo by index.
+      operationId: UniversityChainItUniversitychainitTaxesInfo
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              TaxesInfo:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  totalAmount:
+                    type: string
+                    format: uint64
+                  taxesHistory:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uint64
+                      year:
+                        type: string
+                        format: uint64
+                      amount:
+                        type: string
+                        format: uint64
+                      incomeBracket:
+                        type: string
+                        format: uint64
+                      paymentMade:
+                        type: boolean
+                      dateOfPayment:
+                        type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Query
   /university_chain_it/universitychainit/transcript_of_records:
     get:
       summary: Queries a TranscriptOfRecords by index.
@@ -53428,6 +53485,36 @@ definitions:
             format: uint64
           studentKey:
             type: string
+  university_chain_it.universitychainit.QueryGetTaxesInfoResponse:
+    type: object
+    properties:
+      TaxesInfo:
+        type: object
+        properties:
+          status:
+            type: boolean
+          totalAmount:
+            type: string
+            format: uint64
+          taxesHistory:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uint64
+              year:
+                type: string
+                format: uint64
+              amount:
+                type: string
+                format: uint64
+              incomeBracket:
+                type: string
+                format: uint64
+              paymentMade:
+                type: boolean
+              dateOfPayment:
+                type: string
   university_chain_it.universitychainit.QueryGetTranscriptOfRecordsResponse:
     type: object
     properties:
@@ -53523,6 +53610,33 @@ definitions:
         format: uint64
       studentKey:
         type: string
+  university_chain_it.universitychainit.TaxesInfo:
+    type: object
+    properties:
+      status:
+        type: boolean
+      totalAmount:
+        type: string
+        format: uint64
+      taxesHistory:
+        type: object
+        properties:
+          id:
+            type: string
+            format: uint64
+          year:
+            type: string
+            format: uint64
+          amount:
+            type: string
+            format: uint64
+          incomeBracket:
+            type: string
+            format: uint64
+          paymentMade:
+            type: boolean
+          dateOfPayment:
+            type: string
   university_chain_it.universitychainit.TranscriptOfRecords:
     type: object
     properties:

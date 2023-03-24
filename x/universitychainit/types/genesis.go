@@ -20,6 +20,7 @@ func DefaultGenesis() *GenesisState {
 		ResidenceInfo:       nil,
 		ContactInfo:         nil,
 		AnnualTaxesList:     []AnnualTaxes{},
+		TaxesInfo:           nil,
 		// this line is used by starport scaffolding # genesis/types/default
 		Params: DefaultParams(),
 	}

@@ -56,3 +56,7 @@ const (
 	AnnualTaxesKey      = "AnnualTaxes-value-"
 	AnnualTaxesCountKey = "AnnualTaxes-count-"
 )
+
+const (
+	TaxesInfoKey = "TaxesInfo-value-"
+)

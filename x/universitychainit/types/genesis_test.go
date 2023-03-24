@@ -88,6 +88,11 @@ func TestGenesisState_Validate(t *testing.T) {
 					},
 				},
 				AnnualTaxesCount: 2,
+				TaxesInfo: &types.TaxesInfo{
+					Status:       false,
+					TotalAmount:  63,
+					TaxesHistory: new(types.TaxesHistory),
+				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,

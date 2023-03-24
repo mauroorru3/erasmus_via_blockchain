@@ -1,0 +1,12 @@
+syntax = "proto3";
+package university_chain_it.universitychainit;
+
+option go_package = "university_chain_it/x/universitychainit/types";
+import "universitychainit/annual_taxes.proto"; 
+
+message TaxesInfo {
+  bool status = 1; 
+  uint64 totalAmount = 2; 
+  AnnualTaxes taxesHistory = 3; 
+  
+}

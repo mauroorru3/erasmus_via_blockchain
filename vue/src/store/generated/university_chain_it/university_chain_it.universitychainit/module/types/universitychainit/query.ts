@@ -14,6 +14,7 @@ import { PersonalInfo } from "../universitychainit/personal_info";
 import { ResidenceInfo } from "../universitychainit/residence_info";
 import { ContactInfo } from "../universitychainit/contact_info";
 import { AnnualTaxes } from "../universitychainit/annual_taxes";
+import { TaxesInfo } from "../universitychainit/taxes_info";
 
 export const protobufPackage = "university_chain_it.universitychainit";
 
@@ -105,6 +106,12 @@ export interface QueryAllAnnualTaxesRequest {
 export interface QueryAllAnnualTaxesResponse {
   AnnualTaxes: AnnualTaxes[];
   pagination: PageResponse | undefined;
+}
+
+export interface QueryGetTaxesInfoRequest {}
+
+export interface QueryGetTaxesInfoResponse {
+  TaxesInfo: TaxesInfo | undefined;
 }
 
 const baseQueryParamsRequest: object = {};
@@ -1821,6 +1828,130 @@ export const QueryAllAnnualTaxesResponse = {
   },
 };
 
+const baseQueryGetTaxesInfoRequest: object = {};
+
+export const QueryGetTaxesInfoRequest = {
+  encode(
+    _: QueryGetTaxesInfoRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetTaxesInfoRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetTaxesInfoRequest,
+    } as QueryGetTaxesInfoRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): QueryGetTaxesInfoRequest {
+    const message = {
+      ...baseQueryGetTaxesInfoRequest,
+    } as QueryGetTaxesInfoRequest;
+    return message;
+  },
+
+  toJSON(_: QueryGetTaxesInfoRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial(
+    _: DeepPartial<QueryGetTaxesInfoRequest>
+  ): QueryGetTaxesInfoRequest {
+    const message = {
+      ...baseQueryGetTaxesInfoRequest,
+    } as QueryGetTaxesInfoRequest;
+    return message;
+  },
+};
+
+const baseQueryGetTaxesInfoResponse: object = {};
+
+export const QueryGetTaxesInfoResponse = {
+  encode(
+    message: QueryGetTaxesInfoResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.TaxesInfo !== undefined) {
+      TaxesInfo.encode(message.TaxesInfo, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetTaxesInfoResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetTaxesInfoResponse,
+    } as QueryGetTaxesInfoResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.TaxesInfo = TaxesInfo.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetTaxesInfoResponse {
+    const message = {
+      ...baseQueryGetTaxesInfoResponse,
+    } as QueryGetTaxesInfoResponse;
+    if (object.TaxesInfo !== undefined && object.TaxesInfo !== null) {
+      message.TaxesInfo = TaxesInfo.fromJSON(object.TaxesInfo);
+    } else {
+      message.TaxesInfo = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetTaxesInfoResponse): unknown {
+    const obj: any = {};
+    message.TaxesInfo !== undefined &&
+      (obj.TaxesInfo = message.TaxesInfo
+        ? TaxesInfo.toJSON(message.TaxesInfo)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetTaxesInfoResponse>
+  ): QueryGetTaxesInfoResponse {
+    const message = {
+      ...baseQueryGetTaxesInfoResponse,
+    } as QueryGetTaxesInfoResponse;
+    if (object.TaxesInfo !== undefined && object.TaxesInfo !== null) {
+      message.TaxesInfo = TaxesInfo.fromPartial(object.TaxesInfo);
+    } else {
+      message.TaxesInfo = undefined;
+    }
+    return message;
+  },
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Parameters queries the parameters of the module. */
@@ -1869,6 +2000,10 @@ export interface Query {
   AnnualTaxesAll(
     request: QueryAllAnnualTaxesRequest
   ): Promise<QueryAllAnnualTaxesResponse>;
+  /** Queries a TaxesInfo by index. */
+  TaxesInfo(
+    request: QueryGetTaxesInfoRequest
+  ): Promise<QueryGetTaxesInfoResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -2037,6 +2172,20 @@ export class QueryClientImpl implements Query {
     );
     return promise.then((data) =>
       QueryAllAnnualTaxesResponse.decode(new Reader(data))
+    );
+  }
+
+  TaxesInfo(
+    request: QueryGetTaxesInfoRequest
+  ): Promise<QueryGetTaxesInfoResponse> {
+    const data = QueryGetTaxesInfoRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "university_chain_it.universitychainit.Query",
+      "TaxesInfo",
+      data
+    );
+    return promise.then((data) =>
+      QueryGetTaxesInfoResponse.decode(new Reader(data))
     );
   }
 }

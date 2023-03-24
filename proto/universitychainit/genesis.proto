@@ -11,6 +11,7 @@ import "universitychainit/personal_info.proto";
 import "universitychainit/residence_info.proto";
 import "universitychainit/contact_info.proto";
 import "universitychainit/annual_taxes.proto";
+import "universitychainit/taxes_info.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 
 option go_package = "university_chain_it/x/universitychainit/types";
@@ -28,5 +29,6 @@ message GenesisState {
   ContactInfo contactInfo = 9;
   repeated AnnualTaxes annualTaxesList = 10 [(gogoproto.nullable) = false];
   uint64 annualTaxesCount = 11;
+  TaxesInfo taxesInfo = 12;
   // this line is used by starport scaffolding # genesis/proto/state
 }

@@ -10,6 +10,7 @@ import { PersonalInfo } from "../universitychainit/personal_info";
 import { ResidenceInfo } from "../universitychainit/residence_info";
 import { ContactInfo } from "../universitychainit/contact_info";
 import { AnnualTaxes } from "../universitychainit/annual_taxes";
+import { TaxesInfo } from "../universitychainit/taxes_info";
 
 export const protobufPackage = "university_chain_it.universitychainit";
 
@@ -25,8 +26,9 @@ export interface GenesisState {
   residenceInfo: ResidenceInfo | undefined;
   contactInfo: ContactInfo | undefined;
   annualTaxesList: AnnualTaxes[];
-  /** this line is used by starport scaffolding # genesis/proto/state */
   annualTaxesCount: number;
+  /** this line is used by starport scaffolding # genesis/proto/state */
+  taxesInfo: TaxesInfo | undefined;
 }
 
 const baseGenesisState: object = { port_id: "", annualTaxesCount: 0 };
@@ -81,6 +83,9 @@ export const GenesisState = {
     if (message.annualTaxesCount !== 0) {
       writer.uint32(88).uint64(message.annualTaxesCount);
     }
+    if (message.taxesInfo !== undefined) {
+      TaxesInfo.encode(message.taxesInfo, writer.uint32(98).fork()).ldelim();
+    }
     return writer;
   },
 
@@ -133,6 +138,9 @@ export const GenesisState = {
           break;
         case 11:
           message.annualTaxesCount = longToNumber(reader.uint64() as Long);
+          break;
+        case 12:
+          message.taxesInfo = TaxesInfo.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -216,6 +224,11 @@ export const GenesisState = {
     } else {
       message.annualTaxesCount = 0;
     }
+    if (object.taxesInfo !== undefined && object.taxesInfo !== null) {
+      message.taxesInfo = TaxesInfo.fromJSON(object.taxesInfo);
+    } else {
+      message.taxesInfo = undefined;
+    }
     return message;
   },
 
@@ -267,6 +280,10 @@ export const GenesisState = {
     }
     message.annualTaxesCount !== undefined &&
       (obj.annualTaxesCount = message.annualTaxesCount);
+    message.taxesInfo !== undefined &&
+      (obj.taxesInfo = message.taxesInfo
+        ? TaxesInfo.toJSON(message.taxesInfo)
+        : undefined);
     return obj;
   },
 
@@ -343,6 +360,11 @@ export const GenesisState = {
       message.annualTaxesCount = object.annualTaxesCount;
     } else {
       message.annualTaxesCount = 0;
+    }
+    if (object.taxesInfo !== undefined && object.taxesInfo !== null) {
+      message.taxesInfo = TaxesInfo.fromPartial(object.taxesInfo);
+    } else {
+      message.taxesInfo = undefined;
     }
     return message;
   },
