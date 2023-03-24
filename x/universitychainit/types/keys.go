@@ -60,3 +60,7 @@ const (
 const (
 	TaxesInfoKey = "TaxesInfo-value-"
 )
+
+const (
+	ErasmusContributionKey = "ErasmusContribution-value-"
+)

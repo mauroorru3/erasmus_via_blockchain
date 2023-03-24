@@ -85,6 +85,12 @@ func TestGenesis(t *testing.T) {
 			TotalAmount:  73,
 			TaxesHistory: new(types.TaxesHistory),
 		},
+		ErasmusContribution: &types.ErasmusContribution{
+			Amount:        86,
+			IncomeBracket: 20,
+			PaymentMade:   true,
+			DateOfPayment: "33",
+		},
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
@@ -108,5 +114,6 @@ func TestGenesis(t *testing.T) {
 	require.ElementsMatch(t, genesisState.AnnualTaxesList, got.AnnualTaxesList)
 	require.Equal(t, genesisState.AnnualTaxesCount, got.AnnualTaxesCount)
 	require.Equal(t, genesisState.TaxesInfo, got.TaxesInfo)
+	require.Equal(t, genesisState.ErasmusContribution, got.ErasmusContribution)
 	// this line is used by starport scaffolding # genesis/test/assert
 }

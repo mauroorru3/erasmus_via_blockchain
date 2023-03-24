@@ -48,6 +48,10 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 	if genState.TaxesInfo != nil {
 		k.SetTaxesInfo(ctx, *genState.TaxesInfo)
 	}
+	// Set if defined
+	if genState.ErasmusContribution != nil {
+		k.SetErasmusContribution(ctx, *genState.ErasmusContribution)
+	}
 	// this line is used by starport scaffolding # genesis/module/init
 	k.SetPort(ctx, genState.PortId)
 	// Only try to bind to port if it is not already bound, since we may already own
@@ -102,6 +106,11 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 	taxesInfo, found := k.GetTaxesInfo(ctx)
 	if found {
 		genesis.TaxesInfo = &taxesInfo
+	}
+	// Get all erasmusContribution
+	erasmusContribution, found := k.GetErasmusContribution(ctx)
+	if found {
+		genesis.ErasmusContribution = &erasmusContribution
 	}
 	// this line is used by starport scaffolding # genesis/module/export
 

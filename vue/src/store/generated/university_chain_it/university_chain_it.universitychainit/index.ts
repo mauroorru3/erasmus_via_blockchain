@@ -2,6 +2,7 @@ import { txClient, queryClient, MissingWalletError , registry} from './module'
 
 import { AnnualTaxes } from "./module/types/universitychainit/annual_taxes"
 import { ContactInfo } from "./module/types/universitychainit/contact_info"
+import { ErasmusContribution } from "./module/types/universitychainit/erasmus_contribution"
 import { ExamsInfo } from "./module/types/universitychainit/exams_info"
 import { UniversitychainitPacketData } from "./module/types/universitychainit/packet"
 import { NoData } from "./module/types/universitychainit/packet"
@@ -14,7 +15,7 @@ import { TaxesInfo } from "./module/types/universitychainit/taxes_info"
 import { TranscriptOfRecords } from "./module/types/universitychainit/transcript_of_records"
 
 
-export { AnnualTaxes, ContactInfo, ExamsInfo, UniversitychainitPacketData, NoData, Params, PersonalInfo, ProfessorsExams, ResidenceInfo, StudentInfo, TaxesInfo, TranscriptOfRecords };
+export { AnnualTaxes, ContactInfo, ErasmusContribution, ExamsInfo, UniversitychainitPacketData, NoData, Params, PersonalInfo, ProfessorsExams, ResidenceInfo, StudentInfo, TaxesInfo, TranscriptOfRecords };
 
 async function initTxClient(vuexGetters) {
 	return await txClient(vuexGetters['common/wallet/signer'], {
@@ -65,10 +66,12 @@ const getDefaultState = () => {
 				AnnualTaxes: {},
 				AnnualTaxesAll: {},
 				TaxesInfo: {},
+				ErasmusContribution: {},
 				
 				_Structure: {
 						AnnualTaxes: getStructure(AnnualTaxes.fromPartial({})),
 						ContactInfo: getStructure(ContactInfo.fromPartial({})),
+						ErasmusContribution: getStructure(ErasmusContribution.fromPartial({})),
 						ExamsInfo: getStructure(ExamsInfo.fromPartial({})),
 						UniversitychainitPacketData: getStructure(UniversitychainitPacketData.fromPartial({})),
 						NoData: getStructure(NoData.fromPartial({})),
@@ -184,6 +187,12 @@ export default {
 						(<any> params).query=null
 					}
 			return state.TaxesInfo[JSON.stringify(params)] ?? {}
+		},
+				getErasmusContribution: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.ErasmusContribution[JSON.stringify(params)] ?? {}
 		},
 				
 		getTypeStructure: (state) => (type) => {
@@ -512,6 +521,28 @@ export default {
 				return getters['getTaxesInfo']( { params: {...key}, query}) ?? {}
 			} catch (e) {
 				throw new Error('QueryClient:QueryTaxesInfo API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryErasmusContribution({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryErasmusContribution()).data
+				
+					
+				commit('QUERY', { query: 'ErasmusContribution', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryErasmusContribution', payload: { options: { all }, params: {...key},query }})
+				return getters['getErasmusContribution']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryErasmusContribution API Node Unavailable. Could not perform query: ' + e.message)
 				
 			}
 		},

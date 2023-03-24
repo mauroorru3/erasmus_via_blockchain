@@ -93,6 +93,12 @@ func TestGenesisState_Validate(t *testing.T) {
 					TotalAmount:  63,
 					TaxesHistory: new(types.TaxesHistory),
 				},
+				ErasmusContribution: &types.ErasmusContribution{
+					Amount:        59,
+					IncomeBracket: 74,
+					PaymentMade:   false,
+					DateOfPayment: "10",
+				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,

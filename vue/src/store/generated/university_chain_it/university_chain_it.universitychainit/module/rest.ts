@@ -42,6 +42,16 @@ export interface UniversitychainitContactInfo {
   mobilePhone?: string;
 }
 
+export interface UniversitychainitErasmusContribution {
+  /** @format uint64 */
+  amount?: string;
+
+  /** @format uint64 */
+  incomeBracket?: string;
+  paymentMade?: boolean;
+  dateOfPayment?: string;
+}
+
 export interface UniversitychainitExamsInfo {
   examName?: string;
   examLabel?: string;
@@ -139,6 +149,10 @@ export interface UniversitychainitQueryGetAnnualTaxesResponse {
 
 export interface UniversitychainitQueryGetContactInfoResponse {
   ContactInfo?: UniversitychainitContactInfo;
+}
+
+export interface UniversitychainitQueryGetErasmusContributionResponse {
+  ErasmusContribution?: UniversitychainitErasmusContribution;
 }
 
 export interface UniversitychainitQueryGetExamsInfoResponse {
@@ -543,6 +557,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryContactInfo = (params: RequestParams = {}) =>
     this.request<UniversitychainitQueryGetContactInfoResponse, RpcStatus>({
       path: `/university_chain_it/universitychainit/contact_info`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryErasmusContribution
+   * @summary Queries a ErasmusContribution by index.
+   * @request GET:/university_chain_it/universitychainit/erasmus_contribution
+   */
+  queryErasmusContribution = (params: RequestParams = {}) =>
+    this.request<UniversitychainitQueryGetErasmusContributionResponse, RpcStatus>({
+      path: `/university_chain_it/universitychainit/erasmus_contribution`,
       method: "GET",
       format: "json",
       ...params,
