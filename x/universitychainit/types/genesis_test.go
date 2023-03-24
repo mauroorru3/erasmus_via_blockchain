@@ -107,6 +107,15 @@ func TestGenesisState_Validate(t *testing.T) {
 						ExamName: "1",
 					},
 				},
+				ErasmusCareerList: []types.ErasmusCareer{
+					{
+						Id: 0,
+					},
+					{
+						Id: 1,
+					},
+				},
+				ErasmusCareerCount: 2,
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
@@ -176,6 +185,32 @@ func TestGenesisState_Validate(t *testing.T) {
 						ExamName: "0",
 					},
 				},
+			},
+			valid: false,
+		},
+		{
+			desc: "duplicated erasmusCareer",
+			genState: &types.GenesisState{
+				ErasmusCareerList: []types.ErasmusCareer{
+					{
+						Id: 0,
+					},
+					{
+						Id: 0,
+					},
+				},
+			},
+			valid: false,
+		},
+		{
+			desc: "invalid erasmusCareer count",
+			genState: &types.GenesisState{
+				ErasmusCareerList: []types.ErasmusCareer{
+					{
+						Id: 1,
+					},
+				},
+				ErasmusCareerCount: 0,
 			},
 			valid: false,
 		},

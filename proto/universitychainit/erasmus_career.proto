@@ -1,0 +1,25 @@
+syntax = "proto3";
+package university_chain_it.universitychainit;
+
+option go_package = "university_chain_it/x/universitychainit/types";
+import "universitychainit/erasmus_contribution.proto"; 
+import "universitychainit/erasmus_exams.proto"; 
+
+message ErasmusCareer {
+  uint64 id = 1;
+  uint64 durationInMonths = 2; 
+  string startDate = 3; 
+  string endDate = 4; 
+  uint64 erasmusType = 5; 
+  uint64 totalCredits = 6; 
+  uint64 achievedCredits = 7; 
+  uint64 totalExams = 8; 
+  uint64 examsPassed = 9; 
+  string foreignUniversityName = 10; 
+  string foreignUniversityCountry = 11; 
+  string foreignUniversityStudentId = 12; 
+  string status = 13; 
+  ErasmusContribution contribution = 14; 
+  ErasmusExams examsData = 15; 
+  
+}

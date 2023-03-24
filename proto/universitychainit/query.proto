@@ -16,6 +16,7 @@ import "universitychainit/annual_taxes.proto";
 import "universitychainit/taxes_info.proto";
 import "universitychainit/erasmus_contribution.proto";
 import "universitychainit/erasmus_exams.proto";
+import "universitychainit/erasmus_career.proto";
 // this line is used by starport scaffolding # 1
 
 option go_package = "university_chain_it/x/universitychainit/types";
@@ -92,6 +93,16 @@ service Query {
 	// Queries a list of ErasmusExams items.
 	rpc ErasmusExamsAll(QueryAllErasmusExamsRequest) returns (QueryAllErasmusExamsResponse) {
 		option (google.api.http).get = "/university_chain_it/universitychainit/erasmus_exams";
+	}
+
+// Queries a ErasmusCareer by id.
+	rpc ErasmusCareer(QueryGetErasmusCareerRequest) returns (QueryGetErasmusCareerResponse) {
+		option (google.api.http).get = "/university_chain_it/universitychainit/erasmus_career/{id}";
+	}
+
+	// Queries a list of ErasmusCareer items.
+	rpc ErasmusCareerAll(QueryAllErasmusCareerRequest) returns (QueryAllErasmusCareerResponse) {
+		option (google.api.http).get = "/university_chain_it/universitychainit/erasmus_career";
 	}
 
 // this line is used by starport scaffolding # 2
@@ -209,6 +220,23 @@ message QueryAllErasmusExamsRequest {
 
 message QueryAllErasmusExamsResponse {
 	repeated ErasmusExams erasmusExams = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetErasmusCareerRequest {
+	uint64 id = 1;
+}
+
+message QueryGetErasmusCareerResponse {
+	ErasmusCareer ErasmusCareer = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllErasmusCareerRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllErasmusCareerResponse {
+	repeated ErasmusCareer ErasmusCareer = 1 [(gogoproto.nullable) = false];
 	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 

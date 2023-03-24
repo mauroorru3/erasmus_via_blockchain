@@ -2,6 +2,7 @@ import { txClient, queryClient, MissingWalletError , registry} from './module'
 
 import { AnnualTaxes } from "./module/types/universitychainit/annual_taxes"
 import { ContactInfo } from "./module/types/universitychainit/contact_info"
+import { ErasmusCareer } from "./module/types/universitychainit/erasmus_career"
 import { ErasmusContribution } from "./module/types/universitychainit/erasmus_contribution"
 import { ErasmusExams } from "./module/types/universitychainit/erasmus_exams"
 import { ExamsInfo } from "./module/types/universitychainit/exams_info"
@@ -16,7 +17,7 @@ import { TaxesInfo } from "./module/types/universitychainit/taxes_info"
 import { TranscriptOfRecords } from "./module/types/universitychainit/transcript_of_records"
 
 
-export { AnnualTaxes, ContactInfo, ErasmusContribution, ErasmusExams, ExamsInfo, UniversitychainitPacketData, NoData, Params, PersonalInfo, ProfessorsExams, ResidenceInfo, StudentInfo, TaxesInfo, TranscriptOfRecords };
+export { AnnualTaxes, ContactInfo, ErasmusCareer, ErasmusContribution, ErasmusExams, ExamsInfo, UniversitychainitPacketData, NoData, Params, PersonalInfo, ProfessorsExams, ResidenceInfo, StudentInfo, TaxesInfo, TranscriptOfRecords };
 
 async function initTxClient(vuexGetters) {
 	return await txClient(vuexGetters['common/wallet/signer'], {
@@ -70,10 +71,13 @@ const getDefaultState = () => {
 				ErasmusContribution: {},
 				ErasmusExams: {},
 				ErasmusExamsAll: {},
+				ErasmusCareer: {},
+				ErasmusCareerAll: {},
 				
 				_Structure: {
 						AnnualTaxes: getStructure(AnnualTaxes.fromPartial({})),
 						ContactInfo: getStructure(ContactInfo.fromPartial({})),
+						ErasmusCareer: getStructure(ErasmusCareer.fromPartial({})),
 						ErasmusContribution: getStructure(ErasmusContribution.fromPartial({})),
 						ErasmusExams: getStructure(ErasmusExams.fromPartial({})),
 						ExamsInfo: getStructure(ExamsInfo.fromPartial({})),
@@ -209,6 +213,18 @@ export default {
 						(<any> params).query=null
 					}
 			return state.ErasmusExamsAll[JSON.stringify(params)] ?? {}
+		},
+				getErasmusCareer: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.ErasmusCareer[JSON.stringify(params)] ?? {}
+		},
+				getErasmusCareerAll: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.ErasmusCareerAll[JSON.stringify(params)] ?? {}
 		},
 				
 		getTypeStructure: (state) => (type) => {
@@ -607,6 +623,54 @@ export default {
 				return getters['getErasmusExamsAll']( { params: {...key}, query}) ?? {}
 			} catch (e) {
 				throw new Error('QueryClient:QueryErasmusExamsAll API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryErasmusCareer({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryErasmusCareer( key.id)).data
+				
+					
+				commit('QUERY', { query: 'ErasmusCareer', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryErasmusCareer', payload: { options: { all }, params: {...key},query }})
+				return getters['getErasmusCareer']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryErasmusCareer API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryErasmusCareerAll({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryErasmusCareerAll(query)).data
+				
+					
+				while (all && (<any> value).pagination && (<any> value).pagination.next_key!=null) {
+					let next_values=(await queryClient.queryErasmusCareerAll({...query, 'pagination.key':(<any> value).pagination.next_key})).data
+					value = mergeResults(value, next_values);
+				}
+				commit('QUERY', { query: 'ErasmusCareerAll', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryErasmusCareerAll', payload: { options: { all }, params: {...key},query }})
+				return getters['getErasmusCareerAll']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryErasmusCareerAll API Node Unavailable. Could not perform query: ' + e.message)
 				
 			}
 		},

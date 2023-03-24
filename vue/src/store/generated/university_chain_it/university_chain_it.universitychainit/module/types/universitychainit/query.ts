@@ -17,6 +17,7 @@ import { AnnualTaxes } from "../universitychainit/annual_taxes";
 import { TaxesInfo } from "../universitychainit/taxes_info";
 import { ErasmusContribution } from "../universitychainit/erasmus_contribution";
 import { ErasmusExams } from "../universitychainit/erasmus_exams";
+import { ErasmusCareer } from "../universitychainit/erasmus_career";
 
 export const protobufPackage = "university_chain_it.universitychainit";
 
@@ -136,6 +137,23 @@ export interface QueryAllErasmusExamsRequest {
 
 export interface QueryAllErasmusExamsResponse {
   erasmusExams: ErasmusExams[];
+  pagination: PageResponse | undefined;
+}
+
+export interface QueryGetErasmusCareerRequest {
+  id: number;
+}
+
+export interface QueryGetErasmusCareerResponse {
+  ErasmusCareer: ErasmusCareer | undefined;
+}
+
+export interface QueryAllErasmusCareerRequest {
+  pagination: PageRequest | undefined;
+}
+
+export interface QueryAllErasmusCareerResponse {
+  ErasmusCareer: ErasmusCareer[];
   pagination: PageResponse | undefined;
 }
 
@@ -2436,6 +2454,325 @@ export const QueryAllErasmusExamsResponse = {
   },
 };
 
+const baseQueryGetErasmusCareerRequest: object = { id: 0 };
+
+export const QueryGetErasmusCareerRequest = {
+  encode(
+    message: QueryGetErasmusCareerRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.id !== 0) {
+      writer.uint32(8).uint64(message.id);
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetErasmusCareerRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetErasmusCareerRequest,
+    } as QueryGetErasmusCareerRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.id = longToNumber(reader.uint64() as Long);
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetErasmusCareerRequest {
+    const message = {
+      ...baseQueryGetErasmusCareerRequest,
+    } as QueryGetErasmusCareerRequest;
+    if (object.id !== undefined && object.id !== null) {
+      message.id = Number(object.id);
+    } else {
+      message.id = 0;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetErasmusCareerRequest): unknown {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetErasmusCareerRequest>
+  ): QueryGetErasmusCareerRequest {
+    const message = {
+      ...baseQueryGetErasmusCareerRequest,
+    } as QueryGetErasmusCareerRequest;
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    } else {
+      message.id = 0;
+    }
+    return message;
+  },
+};
+
+const baseQueryGetErasmusCareerResponse: object = {};
+
+export const QueryGetErasmusCareerResponse = {
+  encode(
+    message: QueryGetErasmusCareerResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.ErasmusCareer !== undefined) {
+      ErasmusCareer.encode(
+        message.ErasmusCareer,
+        writer.uint32(10).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetErasmusCareerResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetErasmusCareerResponse,
+    } as QueryGetErasmusCareerResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.ErasmusCareer = ErasmusCareer.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetErasmusCareerResponse {
+    const message = {
+      ...baseQueryGetErasmusCareerResponse,
+    } as QueryGetErasmusCareerResponse;
+    if (object.ErasmusCareer !== undefined && object.ErasmusCareer !== null) {
+      message.ErasmusCareer = ErasmusCareer.fromJSON(object.ErasmusCareer);
+    } else {
+      message.ErasmusCareer = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetErasmusCareerResponse): unknown {
+    const obj: any = {};
+    message.ErasmusCareer !== undefined &&
+      (obj.ErasmusCareer = message.ErasmusCareer
+        ? ErasmusCareer.toJSON(message.ErasmusCareer)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetErasmusCareerResponse>
+  ): QueryGetErasmusCareerResponse {
+    const message = {
+      ...baseQueryGetErasmusCareerResponse,
+    } as QueryGetErasmusCareerResponse;
+    if (object.ErasmusCareer !== undefined && object.ErasmusCareer !== null) {
+      message.ErasmusCareer = ErasmusCareer.fromPartial(object.ErasmusCareer);
+    } else {
+      message.ErasmusCareer = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllErasmusCareerRequest: object = {};
+
+export const QueryAllErasmusCareerRequest = {
+  encode(
+    message: QueryAllErasmusCareerRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllErasmusCareerRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllErasmusCareerRequest,
+    } as QueryAllErasmusCareerRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllErasmusCareerRequest {
+    const message = {
+      ...baseQueryAllErasmusCareerRequest,
+    } as QueryAllErasmusCareerRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllErasmusCareerRequest): unknown {
+    const obj: any = {};
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageRequest.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllErasmusCareerRequest>
+  ): QueryAllErasmusCareerRequest {
+    const message = {
+      ...baseQueryAllErasmusCareerRequest,
+    } as QueryAllErasmusCareerRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllErasmusCareerResponse: object = {};
+
+export const QueryAllErasmusCareerResponse = {
+  encode(
+    message: QueryAllErasmusCareerResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    for (const v of message.ErasmusCareer) {
+      ErasmusCareer.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(
+        message.pagination,
+        writer.uint32(18).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllErasmusCareerResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllErasmusCareerResponse,
+    } as QueryAllErasmusCareerResponse;
+    message.ErasmusCareer = [];
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.ErasmusCareer.push(
+            ErasmusCareer.decode(reader, reader.uint32())
+          );
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllErasmusCareerResponse {
+    const message = {
+      ...baseQueryAllErasmusCareerResponse,
+    } as QueryAllErasmusCareerResponse;
+    message.ErasmusCareer = [];
+    if (object.ErasmusCareer !== undefined && object.ErasmusCareer !== null) {
+      for (const e of object.ErasmusCareer) {
+        message.ErasmusCareer.push(ErasmusCareer.fromJSON(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllErasmusCareerResponse): unknown {
+    const obj: any = {};
+    if (message.ErasmusCareer) {
+      obj.ErasmusCareer = message.ErasmusCareer.map((e) =>
+        e ? ErasmusCareer.toJSON(e) : undefined
+      );
+    } else {
+      obj.ErasmusCareer = [];
+    }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageResponse.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllErasmusCareerResponse>
+  ): QueryAllErasmusCareerResponse {
+    const message = {
+      ...baseQueryAllErasmusCareerResponse,
+    } as QueryAllErasmusCareerResponse;
+    message.ErasmusCareer = [];
+    if (object.ErasmusCareer !== undefined && object.ErasmusCareer !== null) {
+      for (const e of object.ErasmusCareer) {
+        message.ErasmusCareer.push(ErasmusCareer.fromPartial(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Parameters queries the parameters of the module. */
@@ -2500,6 +2837,14 @@ export interface Query {
   ErasmusExamsAll(
     request: QueryAllErasmusExamsRequest
   ): Promise<QueryAllErasmusExamsResponse>;
+  /** Queries a ErasmusCareer by id. */
+  ErasmusCareer(
+    request: QueryGetErasmusCareerRequest
+  ): Promise<QueryGetErasmusCareerResponse>;
+  /** Queries a list of ErasmusCareer items. */
+  ErasmusCareerAll(
+    request: QueryAllErasmusCareerRequest
+  ): Promise<QueryAllErasmusCareerResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -2724,6 +3069,34 @@ export class QueryClientImpl implements Query {
     );
     return promise.then((data) =>
       QueryAllErasmusExamsResponse.decode(new Reader(data))
+    );
+  }
+
+  ErasmusCareer(
+    request: QueryGetErasmusCareerRequest
+  ): Promise<QueryGetErasmusCareerResponse> {
+    const data = QueryGetErasmusCareerRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "university_chain_it.universitychainit.Query",
+      "ErasmusCareer",
+      data
+    );
+    return promise.then((data) =>
+      QueryGetErasmusCareerResponse.decode(new Reader(data))
+    );
+  }
+
+  ErasmusCareerAll(
+    request: QueryAllErasmusCareerRequest
+  ): Promise<QueryAllErasmusCareerResponse> {
+    const data = QueryAllErasmusCareerRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "university_chain_it.universitychainit.Query",
+      "ErasmusCareerAll",
+      data
+    );
+    return promise.then((data) =>
+      QueryAllErasmusCareerResponse.decode(new Reader(data))
     );
   }
 }

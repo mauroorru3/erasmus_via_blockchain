@@ -42,6 +42,37 @@ export interface UniversitychainitContactInfo {
   mobilePhone?: string;
 }
 
+export interface UniversitychainitErasmusCareer {
+  /** @format uint64 */
+  id?: string;
+
+  /** @format uint64 */
+  durationInMonths?: string;
+  startDate?: string;
+  endDate?: string;
+
+  /** @format uint64 */
+  erasmusType?: string;
+
+  /** @format uint64 */
+  totalCredits?: string;
+
+  /** @format uint64 */
+  achievedCredits?: string;
+
+  /** @format uint64 */
+  totalExams?: string;
+
+  /** @format uint64 */
+  examsPassed?: string;
+  foreignUniversityName?: string;
+  foreignUniversityCountry?: string;
+  foreignUniversityStudentId?: string;
+  status?: string;
+  contribution?: UniversitychainitErasmusContribution;
+  examsData?: UniversitychainitErasmusExams;
+}
+
 export interface UniversitychainitErasmusContribution {
   /** @format uint64 */
   amount?: string;
@@ -137,6 +168,21 @@ export interface UniversitychainitQueryAllAnnualTaxesResponse {
   pagination?: V1Beta1PageResponse;
 }
 
+export interface UniversitychainitQueryAllErasmusCareerResponse {
+  ErasmusCareer?: UniversitychainitErasmusCareer[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
+
 export interface UniversitychainitQueryAllErasmusExamsResponse {
   erasmusExams?: UniversitychainitErasmusExams[];
 
@@ -188,6 +234,10 @@ export interface UniversitychainitQueryGetAnnualTaxesResponse {
 
 export interface UniversitychainitQueryGetContactInfoResponse {
   ContactInfo?: UniversitychainitContactInfo;
+}
+
+export interface UniversitychainitQueryGetErasmusCareerResponse {
+  ErasmusCareer?: UniversitychainitErasmusCareer;
 }
 
 export interface UniversitychainitQueryGetErasmusContributionResponse {
@@ -600,6 +650,48 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryContactInfo = (params: RequestParams = {}) =>
     this.request<UniversitychainitQueryGetContactInfoResponse, RpcStatus>({
       path: `/university_chain_it/universitychainit/contact_info`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryErasmusCareerAll
+   * @summary Queries a list of ErasmusCareer items.
+   * @request GET:/university_chain_it/universitychainit/erasmus_career
+   */
+  queryErasmusCareerAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<UniversitychainitQueryAllErasmusCareerResponse, RpcStatus>({
+      path: `/university_chain_it/universitychainit/erasmus_career`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryErasmusCareer
+   * @summary Queries a ErasmusCareer by id.
+   * @request GET:/university_chain_it/universitychainit/erasmus_career/{id}
+   */
+  queryErasmusCareer = (id: string, params: RequestParams = {}) =>
+    this.request<UniversitychainitQueryGetErasmusCareerResponse, RpcStatus>({
+      path: `/university_chain_it/universitychainit/erasmus_career/${id}`,
       method: "GET",
       format: "json",
       ...params,

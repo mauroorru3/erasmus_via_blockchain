@@ -64,3 +64,8 @@ const (
 const (
 	ErasmusContributionKey = "ErasmusContribution-value-"
 )
+
+const (
+	ErasmusCareerKey      = "ErasmusCareer-value-"
+	ErasmusCareerCountKey = "ErasmusCareer-count-"
+)
