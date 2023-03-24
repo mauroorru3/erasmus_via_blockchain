@@ -71,6 +71,15 @@ func TestGenesis(t *testing.T) {
 			Email:          "17",
 			MobilePhone:    "83",
 		},
+		AnnualTaxesList: []types.AnnualTaxes{
+			{
+				Id: 0,
+			},
+			{
+				Id: 1,
+			},
+		},
+		AnnualTaxesCount: 2,
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
@@ -91,5 +100,7 @@ func TestGenesis(t *testing.T) {
 	require.Equal(t, genesisState.PersonalInfo, got.PersonalInfo)
 	require.Equal(t, genesisState.ResidenceInfo, got.ResidenceInfo)
 	require.Equal(t, genesisState.ContactInfo, got.ContactInfo)
+	require.ElementsMatch(t, genesisState.AnnualTaxesList, got.AnnualTaxesList)
+	require.Equal(t, genesisState.AnnualTaxesCount, got.AnnualTaxesCount)
 	// this line is used by starport scaffolding # genesis/test/assert
 }

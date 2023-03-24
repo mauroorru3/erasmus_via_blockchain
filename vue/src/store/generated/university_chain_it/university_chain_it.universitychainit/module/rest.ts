@@ -20,6 +20,22 @@ export interface RpcStatus {
   details?: ProtobufAny[];
 }
 
+export interface UniversitychainitAnnualTaxes {
+  /** @format uint64 */
+  id?: string;
+
+  /** @format uint64 */
+  year?: string;
+
+  /** @format uint64 */
+  amount?: string;
+
+  /** @format uint64 */
+  incomeBracket?: string;
+  paymentMade?: boolean;
+  dateOfPayment?: string;
+}
+
 export interface UniversitychainitContactInfo {
   contactAddress?: string;
   email?: string;
@@ -72,6 +88,21 @@ export interface UniversitychainitProfessorsExams {
   professorKey?: string;
 }
 
+export interface UniversitychainitQueryAllAnnualTaxesResponse {
+  AnnualTaxes?: UniversitychainitAnnualTaxes[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
+
 export interface UniversitychainitQueryAllExamsInfoResponse {
   examsInfo?: UniversitychainitExamsInfo[];
 
@@ -100,6 +131,10 @@ export interface UniversitychainitQueryAllProfessorsExamsResponse {
    *  }
    */
   pagination?: V1Beta1PageResponse;
+}
+
+export interface UniversitychainitQueryGetAnnualTaxesResponse {
+  AnnualTaxes?: UniversitychainitAnnualTaxes;
 }
 
 export interface UniversitychainitQueryGetContactInfoResponse {
@@ -439,10 +474,52 @@ export class HttpClient<SecurityDataType = unknown> {
 }
 
 /**
- * @title universitychainit/contact_info.proto
+ * @title universitychainit/annual_taxes.proto
  * @version version not set
  */
 export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryAnnualTaxesAll
+   * @summary Queries a list of AnnualTaxes items.
+   * @request GET:/university_chain_it/universitychainit/annual_taxes
+   */
+  queryAnnualTaxesAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<UniversitychainitQueryAllAnnualTaxesResponse, RpcStatus>({
+      path: `/university_chain_it/universitychainit/annual_taxes`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryAnnualTaxes
+   * @summary Queries a AnnualTaxes by id.
+   * @request GET:/university_chain_it/universitychainit/annual_taxes/{id}
+   */
+  queryAnnualTaxes = (id: string, params: RequestParams = {}) =>
+    this.request<UniversitychainitQueryGetAnnualTaxesResponse, RpcStatus>({
+      path: `/university_chain_it/universitychainit/annual_taxes/${id}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
   /**
    * No description
    *

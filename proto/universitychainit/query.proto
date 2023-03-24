@@ -12,6 +12,7 @@ import "universitychainit/transcript_of_records.proto";
 import "universitychainit/personal_info.proto";
 import "universitychainit/residence_info.proto";
 import "universitychainit/contact_info.proto";
+import "universitychainit/annual_taxes.proto";
 // this line is used by starport scaffolding # 1
 
 option go_package = "university_chain_it/x/universitychainit/types";
@@ -62,6 +63,16 @@ service Query {
 	rpc ContactInfo(QueryGetContactInfoRequest) returns (QueryGetContactInfoResponse) {
 		option (google.api.http).get = "/university_chain_it/universitychainit/contact_info";
 	}
+// Queries a AnnualTaxes by id.
+	rpc AnnualTaxes(QueryGetAnnualTaxesRequest) returns (QueryGetAnnualTaxesResponse) {
+		option (google.api.http).get = "/university_chain_it/universitychainit/annual_taxes/{id}";
+	}
+
+	// Queries a list of AnnualTaxes items.
+	rpc AnnualTaxesAll(QueryAllAnnualTaxesRequest) returns (QueryAllAnnualTaxesResponse) {
+		option (google.api.http).get = "/university_chain_it/universitychainit/annual_taxes";
+	}
+
 // this line is used by starport scaffolding # 2
 }
 
@@ -135,4 +146,21 @@ message QueryGetContactInfoRequest {}
 message QueryGetContactInfoResponse {
 	ContactInfo ContactInfo = 1 [(gogoproto.nullable) = false];
 }
+message QueryGetAnnualTaxesRequest {
+	uint64 id = 1;
+}
+
+message QueryGetAnnualTaxesResponse {
+	AnnualTaxes AnnualTaxes = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllAnnualTaxesRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllAnnualTaxesResponse {
+	repeated AnnualTaxes AnnualTaxes = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
 // this line is used by starport scaffolding # 3

@@ -51,3 +51,8 @@ const (
 const (
 	ContactInfoKey = "ContactInfo-value-"
 )
+
+const (
+	AnnualTaxesKey      = "AnnualTaxes-value-"
+	AnnualTaxesCountKey = "AnnualTaxes-count-"
+)

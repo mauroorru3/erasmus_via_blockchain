@@ -1,5 +1,6 @@
 import { txClient, queryClient, MissingWalletError , registry} from './module'
 
+import { AnnualTaxes } from "./module/types/universitychainit/annual_taxes"
 import { ContactInfo } from "./module/types/universitychainit/contact_info"
 import { ExamsInfo } from "./module/types/universitychainit/exams_info"
 import { UniversitychainitPacketData } from "./module/types/universitychainit/packet"
@@ -12,7 +13,7 @@ import { StudentInfo } from "./module/types/universitychainit/student_info"
 import { TranscriptOfRecords } from "./module/types/universitychainit/transcript_of_records"
 
 
-export { ContactInfo, ExamsInfo, UniversitychainitPacketData, NoData, Params, PersonalInfo, ProfessorsExams, ResidenceInfo, StudentInfo, TranscriptOfRecords };
+export { AnnualTaxes, ContactInfo, ExamsInfo, UniversitychainitPacketData, NoData, Params, PersonalInfo, ProfessorsExams, ResidenceInfo, StudentInfo, TranscriptOfRecords };
 
 async function initTxClient(vuexGetters) {
 	return await txClient(vuexGetters['common/wallet/signer'], {
@@ -60,8 +61,11 @@ const getDefaultState = () => {
 				PersonalInfo: {},
 				ResidenceInfo: {},
 				ContactInfo: {},
+				AnnualTaxes: {},
+				AnnualTaxesAll: {},
 				
 				_Structure: {
+						AnnualTaxes: getStructure(AnnualTaxes.fromPartial({})),
 						ContactInfo: getStructure(ContactInfo.fromPartial({})),
 						ExamsInfo: getStructure(ExamsInfo.fromPartial({})),
 						UniversitychainitPacketData: getStructure(UniversitychainitPacketData.fromPartial({})),
@@ -159,6 +163,18 @@ export default {
 						(<any> params).query=null
 					}
 			return state.ContactInfo[JSON.stringify(params)] ?? {}
+		},
+				getAnnualTaxes: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.AnnualTaxes[JSON.stringify(params)] ?? {}
+		},
+				getAnnualTaxesAll: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.AnnualTaxesAll[JSON.stringify(params)] ?? {}
 		},
 				
 		getTypeStructure: (state) => (type) => {
@@ -417,6 +433,54 @@ export default {
 				return getters['getContactInfo']( { params: {...key}, query}) ?? {}
 			} catch (e) {
 				throw new Error('QueryClient:QueryContactInfo API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryAnnualTaxes({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryAnnualTaxes( key.id)).data
+				
+					
+				commit('QUERY', { query: 'AnnualTaxes', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryAnnualTaxes', payload: { options: { all }, params: {...key},query }})
+				return getters['getAnnualTaxes']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryAnnualTaxes API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryAnnualTaxesAll({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryAnnualTaxesAll(query)).data
+				
+					
+				while (all && (<any> value).pagination && (<any> value).pagination.next_key!=null) {
+					let next_values=(await queryClient.queryAnnualTaxesAll({...query, 'pagination.key':(<any> value).pagination.next_key})).data
+					value = mergeResults(value, next_values);
+				}
+				commit('QUERY', { query: 'AnnualTaxesAll', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryAnnualTaxesAll', payload: { options: { all }, params: {...key},query }})
+				return getters['getAnnualTaxesAll']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryAnnualTaxesAll API Node Unavailable. Could not perform query: ' + e.message)
 				
 			}
 		},

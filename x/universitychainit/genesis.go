@@ -37,6 +37,13 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 	if genState.ContactInfo != nil {
 		k.SetContactInfo(ctx, *genState.ContactInfo)
 	}
+	// Set all the annualTaxes
+	for _, elem := range genState.AnnualTaxesList {
+		k.SetAnnualTaxes(ctx, elem)
+	}
+
+	// Set annualTaxes count
+	k.SetAnnualTaxesCount(ctx, genState.AnnualTaxesCount)
 	// this line is used by starport scaffolding # genesis/module/init
 	k.SetPort(ctx, genState.PortId)
 	// Only try to bind to port if it is not already bound, since we may already own
@@ -85,6 +92,8 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 	if found {
 		genesis.ContactInfo = &contactInfo
 	}
+	genesis.AnnualTaxesList = k.GetAllAnnualTaxes(ctx)
+	genesis.AnnualTaxesCount = k.GetAnnualTaxesCount(ctx)
 	// this line is used by starport scaffolding # genesis/module/export
 
 	return genesis

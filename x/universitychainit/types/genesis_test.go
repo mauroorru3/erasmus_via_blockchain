@@ -79,6 +79,15 @@ func TestGenesisState_Validate(t *testing.T) {
 					Email:          "6",
 					MobilePhone:    "63",
 				},
+				AnnualTaxesList: []types.AnnualTaxes{
+					{
+						Id: 0,
+					},
+					{
+						Id: 1,
+					},
+				},
+				AnnualTaxesCount: 2,
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
@@ -108,6 +117,32 @@ func TestGenesisState_Validate(t *testing.T) {
 						ExamName: "0",
 					},
 				},
+			},
+			valid: false,
+		},
+		{
+			desc: "duplicated annualTaxes",
+			genState: &types.GenesisState{
+				AnnualTaxesList: []types.AnnualTaxes{
+					{
+						Id: 0,
+					},
+					{
+						Id: 0,
+					},
+				},
+			},
+			valid: false,
+		},
+		{
+			desc: "invalid annualTaxes count",
+			genState: &types.GenesisState{
+				AnnualTaxesList: []types.AnnualTaxes{
+					{
+						Id: 1,
+					},
+				},
+				AnnualTaxesCount: 0,
 			},
 			valid: false,
 		},

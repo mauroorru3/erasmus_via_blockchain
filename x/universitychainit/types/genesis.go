@@ -19,6 +19,7 @@ func DefaultGenesis() *GenesisState {
 		PersonalInfo:        nil,
 		ResidenceInfo:       nil,
 		ContactInfo:         nil,
+		AnnualTaxesList:     []AnnualTaxes{},
 		// this line is used by starport scaffolding # genesis/types/default
 		Params: DefaultParams(),
 	}
@@ -49,6 +50,18 @@ func (gs GenesisState) Validate() error {
 			return fmt.Errorf("duplicated index for examsInfo")
 		}
 		examsInfoIndexMap[index] = struct{}{}
+	}
+	// Check for duplicated ID in annualTaxes
+	annualTaxesIdMap := make(map[uint64]bool)
+	annualTaxesCount := gs.GetAnnualTaxesCount()
+	for _, elem := range gs.AnnualTaxesList {
+		if _, ok := annualTaxesIdMap[elem.Id]; ok {
+			return fmt.Errorf("duplicated id for annualTaxes")
+		}
+		if elem.Id >= annualTaxesCount {
+			return fmt.Errorf("annualTaxes id should be lower or equal than the last id")
+		}
+		annualTaxesIdMap[elem.Id] = true
 	}
 	// this line is used by starport scaffolding # genesis/types/validate
 
