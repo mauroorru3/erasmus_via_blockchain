@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { Params } from "../universitychainit/params";
 import { ProfessorsExams } from "../universitychainit/professors_exams";
+import { StudentInfo } from "../universitychainit/student_info";
 import { Writer, Reader } from "protobufjs/minimal";
 
 export const protobufPackage = "university_chain_it.universitychainit";
@@ -9,8 +10,9 @@ export const protobufPackage = "university_chain_it.universitychainit";
 export interface GenesisState {
   params: Params | undefined;
   port_id: string;
-  /** this line is used by starport scaffolding # genesis/proto/state */
   professorsExamsList: ProfessorsExams[];
+  /** this line is used by starport scaffolding # genesis/proto/state */
+  studentInfo: StudentInfo | undefined;
 }
 
 const baseGenesisState: object = { port_id: "" };
@@ -25,6 +27,12 @@ export const GenesisState = {
     }
     for (const v of message.professorsExamsList) {
       ProfessorsExams.encode(v!, writer.uint32(26).fork()).ldelim();
+    }
+    if (message.studentInfo !== undefined) {
+      StudentInfo.encode(
+        message.studentInfo,
+        writer.uint32(34).fork()
+      ).ldelim();
     }
     return writer;
   },
@@ -47,6 +55,9 @@ export const GenesisState = {
           message.professorsExamsList.push(
             ProfessorsExams.decode(reader, reader.uint32())
           );
+          break;
+        case 4:
+          message.studentInfo = StudentInfo.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -77,6 +88,11 @@ export const GenesisState = {
         message.professorsExamsList.push(ProfessorsExams.fromJSON(e));
       }
     }
+    if (object.studentInfo !== undefined && object.studentInfo !== null) {
+      message.studentInfo = StudentInfo.fromJSON(object.studentInfo);
+    } else {
+      message.studentInfo = undefined;
+    }
     return message;
   },
 
@@ -92,6 +108,10 @@ export const GenesisState = {
     } else {
       obj.professorsExamsList = [];
     }
+    message.studentInfo !== undefined &&
+      (obj.studentInfo = message.studentInfo
+        ? StudentInfo.toJSON(message.studentInfo)
+        : undefined);
     return obj;
   },
 
@@ -115,6 +135,11 @@ export const GenesisState = {
       for (const e of object.professorsExamsList) {
         message.professorsExamsList.push(ProfessorsExams.fromPartial(e));
       }
+    }
+    if (object.studentInfo !== undefined && object.studentInfo !== null) {
+      message.studentInfo = StudentInfo.fromPartial(object.studentInfo);
+    } else {
+      message.studentInfo = undefined;
     }
     return message;
   },

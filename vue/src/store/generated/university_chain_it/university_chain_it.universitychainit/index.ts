@@ -4,9 +4,10 @@ import { UniversitychainitPacketData } from "./module/types/universitychainit/pa
 import { NoData } from "./module/types/universitychainit/packet"
 import { Params } from "./module/types/universitychainit/params"
 import { ProfessorsExams } from "./module/types/universitychainit/professors_exams"
+import { StudentInfo } from "./module/types/universitychainit/student_info"
 
 
-export { UniversitychainitPacketData, NoData, Params, ProfessorsExams };
+export { UniversitychainitPacketData, NoData, Params, ProfessorsExams, StudentInfo };
 
 async function initTxClient(vuexGetters) {
 	return await txClient(vuexGetters['common/wallet/signer'], {
@@ -47,12 +48,14 @@ const getDefaultState = () => {
 				Params: {},
 				ProfessorsExams: {},
 				ProfessorsExamsAll: {},
+				StudentInfo: {},
 				
 				_Structure: {
 						UniversitychainitPacketData: getStructure(UniversitychainitPacketData.fromPartial({})),
 						NoData: getStructure(NoData.fromPartial({})),
 						Params: getStructure(Params.fromPartial({})),
 						ProfessorsExams: getStructure(ProfessorsExams.fromPartial({})),
+						StudentInfo: getStructure(StudentInfo.fromPartial({})),
 						
 		},
 		_Registry: registry,
@@ -98,6 +101,12 @@ export default {
 						(<any> params).query=null
 					}
 			return state.ProfessorsExamsAll[JSON.stringify(params)] ?? {}
+		},
+				getStudentInfo: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.StudentInfo[JSON.stringify(params)] ?? {}
 		},
 				
 		getTypeStructure: (state) => (type) => {
@@ -198,6 +207,28 @@ export default {
 				return getters['getProfessorsExamsAll']( { params: {...key}, query}) ?? {}
 			} catch (e) {
 				throw new Error('QueryClient:QueryProfessorsExamsAll API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryStudentInfo({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryStudentInfo()).data
+				
+					
+				commit('QUERY', { query: 'StudentInfo', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryStudentInfo', payload: { options: { all }, params: {...key},query }})
+				return getters['getStudentInfo']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryStudentInfo API Node Unavailable. Could not perform query: ' + e.message)
 				
 			}
 		},

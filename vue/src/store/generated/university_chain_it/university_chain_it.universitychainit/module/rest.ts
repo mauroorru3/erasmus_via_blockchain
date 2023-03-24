@@ -51,12 +51,36 @@ export interface UniversitychainitQueryGetProfessorsExamsResponse {
   professorsExams?: UniversitychainitProfessorsExams;
 }
 
+export interface UniversitychainitQueryGetStudentInfoResponse {
+  StudentInfo?: UniversitychainitStudentInfo;
+}
+
 /**
  * QueryParamsResponse is response type for the Query/Params RPC method.
  */
 export interface UniversitychainitQueryParamsResponse {
   /** params holds all the parameters of this module. */
   params?: UniversitychainitParams;
+}
+
+export interface UniversitychainitStudentInfo {
+  name?: string;
+  surname?: string;
+
+  /** @format uint64 */
+  courseType?: string;
+  courseOfStudy?: string;
+
+  /** @format uint64 */
+  status?: string;
+
+  /** @format uint64 */
+  currentYearOfStudy?: string;
+  outOfCourse?: boolean;
+
+  /** @format uint64 */
+  numberOfYearsOutOfCourse?: string;
+  studentKey?: string;
 }
 
 /**
@@ -371,6 +395,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryProfessorsExams = (examName: string, params: RequestParams = {}) =>
     this.request<UniversitychainitQueryGetProfessorsExamsResponse, RpcStatus>({
       path: `/university_chain_it/universitychainit/professors_exams/${examName}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryStudentInfo
+   * @summary Queries a StudentInfo by index.
+   * @request GET:/university_chain_it/universitychainit/student_info
+   */
+  queryStudentInfo = (params: RequestParams = {}) =>
+    this.request<UniversitychainitQueryGetStudentInfoResponse, RpcStatus>({
+      path: `/university_chain_it/universitychainit/student_info`,
       method: "GET",
       format: "json",
       ...params,

@@ -6,6 +6,7 @@ import {
   PageRequest,
   PageResponse,
 } from "../cosmos/base/query/v1beta1/pagination";
+import { StudentInfo } from "../universitychainit/student_info";
 
 export const protobufPackage = "university_chain_it.universitychainit";
 
@@ -33,6 +34,12 @@ export interface QueryAllProfessorsExamsRequest {
 export interface QueryAllProfessorsExamsResponse {
   professorsExams: ProfessorsExams[];
   pagination: PageResponse | undefined;
+}
+
+export interface QueryGetStudentInfoRequest {}
+
+export interface QueryGetStudentInfoResponse {
+  StudentInfo: StudentInfo | undefined;
 }
 
 const baseQueryParamsRequest: object = {};
@@ -470,6 +477,133 @@ export const QueryAllProfessorsExamsResponse = {
   },
 };
 
+const baseQueryGetStudentInfoRequest: object = {};
+
+export const QueryGetStudentInfoRequest = {
+  encode(
+    _: QueryGetStudentInfoRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetStudentInfoRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetStudentInfoRequest,
+    } as QueryGetStudentInfoRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): QueryGetStudentInfoRequest {
+    const message = {
+      ...baseQueryGetStudentInfoRequest,
+    } as QueryGetStudentInfoRequest;
+    return message;
+  },
+
+  toJSON(_: QueryGetStudentInfoRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial(
+    _: DeepPartial<QueryGetStudentInfoRequest>
+  ): QueryGetStudentInfoRequest {
+    const message = {
+      ...baseQueryGetStudentInfoRequest,
+    } as QueryGetStudentInfoRequest;
+    return message;
+  },
+};
+
+const baseQueryGetStudentInfoResponse: object = {};
+
+export const QueryGetStudentInfoResponse = {
+  encode(
+    message: QueryGetStudentInfoResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.StudentInfo !== undefined) {
+      StudentInfo.encode(
+        message.StudentInfo,
+        writer.uint32(10).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetStudentInfoResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetStudentInfoResponse,
+    } as QueryGetStudentInfoResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.StudentInfo = StudentInfo.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetStudentInfoResponse {
+    const message = {
+      ...baseQueryGetStudentInfoResponse,
+    } as QueryGetStudentInfoResponse;
+    if (object.StudentInfo !== undefined && object.StudentInfo !== null) {
+      message.StudentInfo = StudentInfo.fromJSON(object.StudentInfo);
+    } else {
+      message.StudentInfo = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetStudentInfoResponse): unknown {
+    const obj: any = {};
+    message.StudentInfo !== undefined &&
+      (obj.StudentInfo = message.StudentInfo
+        ? StudentInfo.toJSON(message.StudentInfo)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetStudentInfoResponse>
+  ): QueryGetStudentInfoResponse {
+    const message = {
+      ...baseQueryGetStudentInfoResponse,
+    } as QueryGetStudentInfoResponse;
+    if (object.StudentInfo !== undefined && object.StudentInfo !== null) {
+      message.StudentInfo = StudentInfo.fromPartial(object.StudentInfo);
+    } else {
+      message.StudentInfo = undefined;
+    }
+    return message;
+  },
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Parameters queries the parameters of the module. */
@@ -482,6 +616,10 @@ export interface Query {
   ProfessorsExamsAll(
     request: QueryAllProfessorsExamsRequest
   ): Promise<QueryAllProfessorsExamsResponse>;
+  /** Queries a StudentInfo by index. */
+  StudentInfo(
+    request: QueryGetStudentInfoRequest
+  ): Promise<QueryGetStudentInfoResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -524,6 +662,20 @@ export class QueryClientImpl implements Query {
     );
     return promise.then((data) =>
       QueryAllProfessorsExamsResponse.decode(new Reader(data))
+    );
+  }
+
+  StudentInfo(
+    request: QueryGetStudentInfoRequest
+  ): Promise<QueryGetStudentInfoResponse> {
+    const data = QueryGetStudentInfoRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "university_chain_it.universitychainit.Query",
+      "StudentInfo",
+      data
+    );
+    return promise.then((data) =>
+      QueryGetStudentInfoResponse.decode(new Reader(data))
     );
   }
 }

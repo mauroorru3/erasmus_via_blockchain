@@ -13,6 +13,7 @@ func DefaultGenesis() *GenesisState {
 	return &GenesisState{
 		PortId:              PortID,
 		ProfessorsExamsList: []ProfessorsExams{},
+		StudentInfo:         nil,
 		// this line is used by starport scaffolding # genesis/types/default
 		Params: DefaultParams(),
 	}

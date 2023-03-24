@@ -30719,6 +30719,61 @@ paths:
           type: string
       tags:
         - Query
+  /university_chain_it/universitychainit/student_info:
+    get:
+      summary: Queries a StudentInfo by index.
+      operationId: UniversityChainItUniversitychainitStudentInfo
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              StudentInfo:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  surname:
+                    type: string
+                  courseType:
+                    type: string
+                    format: uint64
+                  courseOfStudy:
+                    type: string
+                  status:
+                    type: string
+                    format: uint64
+                  currentYearOfStudy:
+                    type: string
+                    format: uint64
+                  outOfCourse:
+                    type: boolean
+                  numberOfYearsOutOfCourse:
+                    type: string
+                    format: uint64
+                  studentKey:
+                    type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Query
 definitions:
   cosmos.auth.v1beta1.Params:
     type: object
@@ -52454,6 +52509,34 @@ definitions:
             type: string
           professorKey:
             type: string
+  university_chain_it.universitychainit.QueryGetStudentInfoResponse:
+    type: object
+    properties:
+      StudentInfo:
+        type: object
+        properties:
+          name:
+            type: string
+          surname:
+            type: string
+          courseType:
+            type: string
+            format: uint64
+          courseOfStudy:
+            type: string
+          status:
+            type: string
+            format: uint64
+          currentYearOfStudy:
+            type: string
+            format: uint64
+          outOfCourse:
+            type: boolean
+          numberOfYearsOutOfCourse:
+            type: string
+            format: uint64
+          studentKey:
+            type: string
   university_chain_it.universitychainit.QueryParamsResponse:
     type: object
     properties:
@@ -52461,3 +52544,28 @@ definitions:
         description: params holds all the parameters of this module.
         type: object
     description: QueryParamsResponse is response type for the Query/Params RPC method.
+  university_chain_it.universitychainit.StudentInfo:
+    type: object
+    properties:
+      name:
+        type: string
+      surname:
+        type: string
+      courseType:
+        type: string
+        format: uint64
+      courseOfStudy:
+        type: string
+      status:
+        type: string
+        format: uint64
+      currentYearOfStudy:
+        type: string
+        format: uint64
+      outOfCourse:
+        type: boolean
+      numberOfYearsOutOfCourse:
+        type: string
+        format: uint64
+      studentKey:
+        type: string

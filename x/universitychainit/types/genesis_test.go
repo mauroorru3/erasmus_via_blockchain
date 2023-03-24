@@ -30,6 +30,17 @@ func TestGenesisState_Validate(t *testing.T) {
 						ExamName: "1",
 					},
 				},
+				StudentInfo: &types.StudentInfo{
+					Name:                     "69",
+					Surname:                  "71",
+					CourseType:               7,
+					CourseOfStudy:            "10",
+					Status:                   14,
+					CurrentYearOfStudy:       67,
+					OutOfCourse:              true,
+					NumberOfYearsOutOfCourse: 25,
+					StudentKey:               "3",
+				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
