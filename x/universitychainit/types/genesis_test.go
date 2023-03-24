@@ -128,6 +128,14 @@ func TestGenesisState_Validate(t *testing.T) {
 					PreviousStudentFifo: "42",
 					NextStudentFifo:     "21",
 				},
+				StoredStudentList: []types.StoredStudent{
+					{
+						Index: "0",
+					},
+					{
+						Index: "1",
+					},
+				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
@@ -223,6 +231,20 @@ func TestGenesisState_Validate(t *testing.T) {
 					},
 				},
 				ErasmusCareerCount: 0,
+			},
+			valid: false,
+		},
+		{
+			desc: "duplicated storedStudent",
+			genState: &types.GenesisState{
+				StoredStudentList: []types.StoredStudent{
+					{
+						Index: "0",
+					},
+					{
+						Index: "0",
+					},
+				},
 			},
 			valid: false,
 		},

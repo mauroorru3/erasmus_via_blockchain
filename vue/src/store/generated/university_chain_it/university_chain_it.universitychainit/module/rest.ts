@@ -253,6 +253,21 @@ export interface UniversitychainitQueryAllProfessorsExamsResponse {
   pagination?: V1Beta1PageResponse;
 }
 
+export interface UniversitychainitQueryAllStoredStudentResponse {
+  storedStudent?: UniversitychainitStoredStudent[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
+
 export interface UniversitychainitQueryGetAnnualTaxesResponse {
   AnnualTaxes?: UniversitychainitAnnualTaxes;
 }
@@ -293,6 +308,10 @@ export interface UniversitychainitQueryGetResidenceInfoResponse {
   ResidenceInfo?: UniversitychainitResidenceInfo;
 }
 
+export interface UniversitychainitQueryGetStoredStudentResponse {
+  storedStudent?: UniversitychainitStoredStudent;
+}
+
 export interface UniversitychainitQueryGetStudentInfoResponse {
   StudentInfo?: UniversitychainitStudentInfo;
 }
@@ -321,6 +340,17 @@ export interface UniversitychainitResidenceInfo {
   address?: string;
   houseNumber?: string;
   homePhone?: string;
+}
+
+export interface UniversitychainitStoredStudent {
+  index?: string;
+  studentData?: UniversitychainitStudentInfo;
+  transcriptData?: UniversitychainitTranscriptOfRecords;
+  personalData?: UniversitychainitPersonalInfo;
+  residenceData?: UniversitychainitResidenceInfo;
+  contactData?: UniversitychainitContactInfo;
+  taxesData?: UniversitychainitTaxesInfo;
+  erasmusData?: UniversitychainitErasmusInfo;
 }
 
 export interface UniversitychainitStudentInfo {
@@ -927,6 +957,48 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryResidenceInfo = (params: RequestParams = {}) =>
     this.request<UniversitychainitQueryGetResidenceInfoResponse, RpcStatus>({
       path: `/university_chain_it/universitychainit/residence_info`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryStoredStudentAll
+   * @summary Queries a list of StoredStudent items.
+   * @request GET:/university_chain_it/universitychainit/stored_student
+   */
+  queryStoredStudentAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<UniversitychainitQueryAllStoredStudentResponse, RpcStatus>({
+      path: `/university_chain_it/universitychainit/stored_student`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryStoredStudent
+   * @summary Queries a StoredStudent by index.
+   * @request GET:/university_chain_it/universitychainit/stored_student/{index}
+   */
+  queryStoredStudent = (index: string, params: RequestParams = {}) =>
+    this.request<UniversitychainitQueryGetStoredStudentResponse, RpcStatus>({
+      path: `/university_chain_it/universitychainit/stored_student/${index}`,
       method: "GET",
       format: "json",
       ...params,

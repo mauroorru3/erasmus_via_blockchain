@@ -25,6 +25,7 @@ func DefaultGenesis() *GenesisState {
 		ErasmusExamsList:    []ErasmusExams{},
 		ErasmusCareerList:   []ErasmusCareer{},
 		ErasmusInfo:         nil,
+		StoredStudentList:   []StoredStudent{},
 		// this line is used by starport scaffolding # genesis/types/default
 		Params: DefaultParams(),
 	}
@@ -89,6 +90,16 @@ func (gs GenesisState) Validate() error {
 			return fmt.Errorf("erasmusCareer id should be lower or equal than the last id")
 		}
 		erasmusCareerIdMap[elem.Id] = true
+	}
+	// Check for duplicated index in storedStudent
+	storedStudentIndexMap := make(map[string]struct{})
+
+	for _, elem := range gs.StoredStudentList {
+		index := string(StoredStudentKey(elem.Index))
+		if _, ok := storedStudentIndexMap[index]; ok {
+			return fmt.Errorf("duplicated index for storedStudent")
+		}
+		storedStudentIndexMap[index] = struct{}{}
 	}
 	// this line is used by starport scaffolding # genesis/types/validate
 

@@ -19,6 +19,7 @@ import { ErasmusContribution } from "../universitychainit/erasmus_contribution";
 import { ErasmusExams } from "../universitychainit/erasmus_exams";
 import { ErasmusCareer } from "../universitychainit/erasmus_career";
 import { ErasmusInfo } from "../universitychainit/erasmus_info";
+import { StoredStudent } from "../universitychainit/stored_student";
 
 export const protobufPackage = "university_chain_it.universitychainit";
 
@@ -162,6 +163,23 @@ export interface QueryGetErasmusInfoRequest {}
 
 export interface QueryGetErasmusInfoResponse {
   ErasmusInfo: ErasmusInfo | undefined;
+}
+
+export interface QueryGetStoredStudentRequest {
+  index: string;
+}
+
+export interface QueryGetStoredStudentResponse {
+  storedStudent: StoredStudent | undefined;
+}
+
+export interface QueryAllStoredStudentRequest {
+  pagination: PageRequest | undefined;
+}
+
+export interface QueryAllStoredStudentResponse {
+  storedStudent: StoredStudent[];
+  pagination: PageResponse | undefined;
 }
 
 const baseQueryParamsRequest: object = {};
@@ -2907,6 +2925,325 @@ export const QueryGetErasmusInfoResponse = {
   },
 };
 
+const baseQueryGetStoredStudentRequest: object = { index: "" };
+
+export const QueryGetStoredStudentRequest = {
+  encode(
+    message: QueryGetStoredStudentRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.index !== "") {
+      writer.uint32(10).string(message.index);
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetStoredStudentRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetStoredStudentRequest,
+    } as QueryGetStoredStudentRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.index = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetStoredStudentRequest {
+    const message = {
+      ...baseQueryGetStoredStudentRequest,
+    } as QueryGetStoredStudentRequest;
+    if (object.index !== undefined && object.index !== null) {
+      message.index = String(object.index);
+    } else {
+      message.index = "";
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetStoredStudentRequest): unknown {
+    const obj: any = {};
+    message.index !== undefined && (obj.index = message.index);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetStoredStudentRequest>
+  ): QueryGetStoredStudentRequest {
+    const message = {
+      ...baseQueryGetStoredStudentRequest,
+    } as QueryGetStoredStudentRequest;
+    if (object.index !== undefined && object.index !== null) {
+      message.index = object.index;
+    } else {
+      message.index = "";
+    }
+    return message;
+  },
+};
+
+const baseQueryGetStoredStudentResponse: object = {};
+
+export const QueryGetStoredStudentResponse = {
+  encode(
+    message: QueryGetStoredStudentResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.storedStudent !== undefined) {
+      StoredStudent.encode(
+        message.storedStudent,
+        writer.uint32(10).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetStoredStudentResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetStoredStudentResponse,
+    } as QueryGetStoredStudentResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.storedStudent = StoredStudent.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetStoredStudentResponse {
+    const message = {
+      ...baseQueryGetStoredStudentResponse,
+    } as QueryGetStoredStudentResponse;
+    if (object.storedStudent !== undefined && object.storedStudent !== null) {
+      message.storedStudent = StoredStudent.fromJSON(object.storedStudent);
+    } else {
+      message.storedStudent = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetStoredStudentResponse): unknown {
+    const obj: any = {};
+    message.storedStudent !== undefined &&
+      (obj.storedStudent = message.storedStudent
+        ? StoredStudent.toJSON(message.storedStudent)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetStoredStudentResponse>
+  ): QueryGetStoredStudentResponse {
+    const message = {
+      ...baseQueryGetStoredStudentResponse,
+    } as QueryGetStoredStudentResponse;
+    if (object.storedStudent !== undefined && object.storedStudent !== null) {
+      message.storedStudent = StoredStudent.fromPartial(object.storedStudent);
+    } else {
+      message.storedStudent = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllStoredStudentRequest: object = {};
+
+export const QueryAllStoredStudentRequest = {
+  encode(
+    message: QueryAllStoredStudentRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllStoredStudentRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllStoredStudentRequest,
+    } as QueryAllStoredStudentRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllStoredStudentRequest {
+    const message = {
+      ...baseQueryAllStoredStudentRequest,
+    } as QueryAllStoredStudentRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllStoredStudentRequest): unknown {
+    const obj: any = {};
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageRequest.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllStoredStudentRequest>
+  ): QueryAllStoredStudentRequest {
+    const message = {
+      ...baseQueryAllStoredStudentRequest,
+    } as QueryAllStoredStudentRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllStoredStudentResponse: object = {};
+
+export const QueryAllStoredStudentResponse = {
+  encode(
+    message: QueryAllStoredStudentResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    for (const v of message.storedStudent) {
+      StoredStudent.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(
+        message.pagination,
+        writer.uint32(18).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllStoredStudentResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllStoredStudentResponse,
+    } as QueryAllStoredStudentResponse;
+    message.storedStudent = [];
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.storedStudent.push(
+            StoredStudent.decode(reader, reader.uint32())
+          );
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllStoredStudentResponse {
+    const message = {
+      ...baseQueryAllStoredStudentResponse,
+    } as QueryAllStoredStudentResponse;
+    message.storedStudent = [];
+    if (object.storedStudent !== undefined && object.storedStudent !== null) {
+      for (const e of object.storedStudent) {
+        message.storedStudent.push(StoredStudent.fromJSON(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllStoredStudentResponse): unknown {
+    const obj: any = {};
+    if (message.storedStudent) {
+      obj.storedStudent = message.storedStudent.map((e) =>
+        e ? StoredStudent.toJSON(e) : undefined
+      );
+    } else {
+      obj.storedStudent = [];
+    }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageResponse.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllStoredStudentResponse>
+  ): QueryAllStoredStudentResponse {
+    const message = {
+      ...baseQueryAllStoredStudentResponse,
+    } as QueryAllStoredStudentResponse;
+    message.storedStudent = [];
+    if (object.storedStudent !== undefined && object.storedStudent !== null) {
+      for (const e of object.storedStudent) {
+        message.storedStudent.push(StoredStudent.fromPartial(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Parameters queries the parameters of the module. */
@@ -2983,6 +3320,14 @@ export interface Query {
   ErasmusInfo(
     request: QueryGetErasmusInfoRequest
   ): Promise<QueryGetErasmusInfoResponse>;
+  /** Queries a StoredStudent by index. */
+  StoredStudent(
+    request: QueryGetStoredStudentRequest
+  ): Promise<QueryGetStoredStudentResponse>;
+  /** Queries a list of StoredStudent items. */
+  StoredStudentAll(
+    request: QueryAllStoredStudentRequest
+  ): Promise<QueryAllStoredStudentResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -3249,6 +3594,34 @@ export class QueryClientImpl implements Query {
     );
     return promise.then((data) =>
       QueryGetErasmusInfoResponse.decode(new Reader(data))
+    );
+  }
+
+  StoredStudent(
+    request: QueryGetStoredStudentRequest
+  ): Promise<QueryGetStoredStudentResponse> {
+    const data = QueryGetStoredStudentRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "university_chain_it.universitychainit.Query",
+      "StoredStudent",
+      data
+    );
+    return promise.then((data) =>
+      QueryGetStoredStudentResponse.decode(new Reader(data))
+    );
+  }
+
+  StoredStudentAll(
+    request: QueryAllStoredStudentRequest
+  ): Promise<QueryAllStoredStudentResponse> {
+    const data = QueryAllStoredStudentRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "university_chain_it.universitychainit.Query",
+      "StoredStudentAll",
+      data
+    );
+    return promise.then((data) =>
+      QueryAllStoredStudentResponse.decode(new Reader(data))
     );
   }
 }

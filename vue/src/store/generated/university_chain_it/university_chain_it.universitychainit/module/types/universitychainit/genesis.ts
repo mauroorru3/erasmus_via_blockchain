@@ -15,6 +15,7 @@ import { ErasmusContribution } from "../universitychainit/erasmus_contribution";
 import { ErasmusExams } from "../universitychainit/erasmus_exams";
 import { ErasmusCareer } from "../universitychainit/erasmus_career";
 import { ErasmusInfo } from "../universitychainit/erasmus_info";
+import { StoredStudent } from "../universitychainit/stored_student";
 
 export const protobufPackage = "university_chain_it.universitychainit";
 
@@ -36,8 +37,9 @@ export interface GenesisState {
   erasmusExamsList: ErasmusExams[];
   erasmusCareerList: ErasmusCareer[];
   erasmusCareerCount: number;
-  /** this line is used by starport scaffolding # genesis/proto/state */
   erasmusInfo: ErasmusInfo | undefined;
+  /** this line is used by starport scaffolding # genesis/proto/state */
+  storedStudentList: StoredStudent[];
 }
 
 const baseGenesisState: object = {
@@ -120,6 +122,9 @@ export const GenesisState = {
         writer.uint32(138).fork()
       ).ldelim();
     }
+    for (const v of message.storedStudentList) {
+      StoredStudent.encode(v!, writer.uint32(146).fork()).ldelim();
+    }
     return writer;
   },
 
@@ -132,6 +137,7 @@ export const GenesisState = {
     message.annualTaxesList = [];
     message.erasmusExamsList = [];
     message.erasmusCareerList = [];
+    message.storedStudentList = [];
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -200,6 +206,11 @@ export const GenesisState = {
         case 17:
           message.erasmusInfo = ErasmusInfo.decode(reader, reader.uint32());
           break;
+        case 18:
+          message.storedStudentList.push(
+            StoredStudent.decode(reader, reader.uint32())
+          );
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -215,6 +226,7 @@ export const GenesisState = {
     message.annualTaxesList = [];
     message.erasmusExamsList = [];
     message.erasmusCareerList = [];
+    message.storedStudentList = [];
     if (object.params !== undefined && object.params !== null) {
       message.params = Params.fromJSON(object.params);
     } else {
@@ -328,6 +340,14 @@ export const GenesisState = {
     } else {
       message.erasmusInfo = undefined;
     }
+    if (
+      object.storedStudentList !== undefined &&
+      object.storedStudentList !== null
+    ) {
+      for (const e of object.storedStudentList) {
+        message.storedStudentList.push(StoredStudent.fromJSON(e));
+      }
+    }
     return message;
   },
 
@@ -407,6 +427,13 @@ export const GenesisState = {
       (obj.erasmusInfo = message.erasmusInfo
         ? ErasmusInfo.toJSON(message.erasmusInfo)
         : undefined);
+    if (message.storedStudentList) {
+      obj.storedStudentList = message.storedStudentList.map((e) =>
+        e ? StoredStudent.toJSON(e) : undefined
+      );
+    } else {
+      obj.storedStudentList = [];
+    }
     return obj;
   },
 
@@ -417,6 +444,7 @@ export const GenesisState = {
     message.annualTaxesList = [];
     message.erasmusExamsList = [];
     message.erasmusCareerList = [];
+    message.storedStudentList = [];
     if (object.params !== undefined && object.params !== null) {
       message.params = Params.fromPartial(object.params);
     } else {
@@ -529,6 +557,14 @@ export const GenesisState = {
       message.erasmusInfo = ErasmusInfo.fromPartial(object.erasmusInfo);
     } else {
       message.erasmusInfo = undefined;
+    }
+    if (
+      object.storedStudentList !== undefined &&
+      object.storedStudentList !== null
+    ) {
+      for (const e of object.storedStudentList) {
+        message.storedStudentList.push(StoredStudent.fromPartial(e));
+      }
     }
     return message;
   },

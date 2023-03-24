@@ -6,19 +6,20 @@ import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "universitychainit/params.proto";
 import "universitychainit/professors_exams.proto";
-import "universitychainit/student_info.proto";
 import "universitychainit/exams_info.proto";
-import "universitychainit/transcript_of_records.proto";
-import "universitychainit/personal_info.proto";
-import "universitychainit/residence_info.proto";
-import "universitychainit/contact_info.proto";
 import "universitychainit/annual_taxes.proto";
-import "universitychainit/taxes_info.proto";
 import "universitychainit/erasmus_contribution.proto";
 import "universitychainit/erasmus_exams.proto";
 import "universitychainit/erasmus_career.proto";
-import "universitychainit/erasmus_info.proto";
+import "universitychainit/stored_student.proto";
 // this line is used by starport scaffolding # 1
+import "universitychainit/erasmus_info.proto";
+import "universitychainit/taxes_info.proto";
+import "universitychainit/contact_info.proto";
+import "universitychainit/residence_info.proto";
+import "universitychainit/personal_info.proto";
+import "universitychainit/transcript_of_records.proto";
+import "universitychainit/student_info.proto";
 
 option go_package = "university_chain_it/x/universitychainit/types";
 
@@ -110,6 +111,16 @@ service Query {
 	rpc ErasmusInfo(QueryGetErasmusInfoRequest) returns (QueryGetErasmusInfoResponse) {
 		option (google.api.http).get = "/university_chain_it/universitychainit/erasmus_info";
 	}
+// Queries a StoredStudent by index.
+	rpc StoredStudent(QueryGetStoredStudentRequest) returns (QueryGetStoredStudentResponse) {
+		option (google.api.http).get = "/university_chain_it/universitychainit/stored_student/{index}";
+	}
+
+	// Queries a list of StoredStudent items.
+	rpc StoredStudentAll(QueryAllStoredStudentRequest) returns (QueryAllStoredStudentResponse) {
+		option (google.api.http).get = "/university_chain_it/universitychainit/stored_student";
+	}
+
 // this line is used by starport scaffolding # 2
 }
 
@@ -250,4 +261,22 @@ message QueryGetErasmusInfoRequest {}
 message QueryGetErasmusInfoResponse {
 	ErasmusInfo ErasmusInfo = 1 [(gogoproto.nullable) = false];
 }
+message QueryGetStoredStudentRequest {
+	  string index = 1;
+
+}
+
+message QueryGetStoredStudentResponse {
+	StoredStudent storedStudent = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllStoredStudentRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllStoredStudentResponse {
+	repeated StoredStudent storedStudent = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
 // this line is used by starport scaffolding # 3

@@ -120,6 +120,14 @@ func TestGenesis(t *testing.T) {
 			PreviousStudentFifo: "83",
 			NextStudentFifo:     "26",
 		},
+		StoredStudentList: []types.StoredStudent{
+			{
+				Index: "0",
+			},
+			{
+				Index: "1",
+			},
+		},
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
@@ -148,5 +156,6 @@ func TestGenesis(t *testing.T) {
 	require.ElementsMatch(t, genesisState.ErasmusCareerList, got.ErasmusCareerList)
 	require.Equal(t, genesisState.ErasmusCareerCount, got.ErasmusCareerCount)
 	require.Equal(t, genesisState.ErasmusInfo, got.ErasmusInfo)
+	require.ElementsMatch(t, genesisState.StoredStudentList, got.StoredStudentList)
 	// this line is used by starport scaffolding # genesis/test/assert
 }
