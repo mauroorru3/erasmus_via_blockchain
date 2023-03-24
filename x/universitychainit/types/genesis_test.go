@@ -49,6 +49,13 @@ func TestGenesisState_Validate(t *testing.T) {
 						ExamName: "1",
 					},
 				},
+				TranscriptOfRecords: &types.TranscriptOfRecords{
+					ExamsData:       new(types.ExamsData),
+					TotalExams:      55,
+					ExamsPassed:     53,
+					TotalCredits:    39,
+					AchievedCredits: 32,
+				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,

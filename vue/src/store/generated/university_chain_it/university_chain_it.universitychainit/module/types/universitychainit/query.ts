@@ -8,6 +8,7 @@ import {
 } from "../cosmos/base/query/v1beta1/pagination";
 import { StudentInfo } from "../universitychainit/student_info";
 import { ExamsInfo } from "../universitychainit/exams_info";
+import { TranscriptOfRecords } from "../universitychainit/transcript_of_records";
 
 export const protobufPackage = "university_chain_it.universitychainit";
 
@@ -58,6 +59,12 @@ export interface QueryAllExamsInfoRequest {
 export interface QueryAllExamsInfoResponse {
   examsInfo: ExamsInfo[];
   pagination: PageResponse | undefined;
+}
+
+export interface QueryGetTranscriptOfRecordsRequest {}
+
+export interface QueryGetTranscriptOfRecordsResponse {
+  TranscriptOfRecords: TranscriptOfRecords | undefined;
 }
 
 const baseQueryParamsRequest: object = {};
@@ -936,6 +943,146 @@ export const QueryAllExamsInfoResponse = {
   },
 };
 
+const baseQueryGetTranscriptOfRecordsRequest: object = {};
+
+export const QueryGetTranscriptOfRecordsRequest = {
+  encode(
+    _: QueryGetTranscriptOfRecordsRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetTranscriptOfRecordsRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetTranscriptOfRecordsRequest,
+    } as QueryGetTranscriptOfRecordsRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): QueryGetTranscriptOfRecordsRequest {
+    const message = {
+      ...baseQueryGetTranscriptOfRecordsRequest,
+    } as QueryGetTranscriptOfRecordsRequest;
+    return message;
+  },
+
+  toJSON(_: QueryGetTranscriptOfRecordsRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial(
+    _: DeepPartial<QueryGetTranscriptOfRecordsRequest>
+  ): QueryGetTranscriptOfRecordsRequest {
+    const message = {
+      ...baseQueryGetTranscriptOfRecordsRequest,
+    } as QueryGetTranscriptOfRecordsRequest;
+    return message;
+  },
+};
+
+const baseQueryGetTranscriptOfRecordsResponse: object = {};
+
+export const QueryGetTranscriptOfRecordsResponse = {
+  encode(
+    message: QueryGetTranscriptOfRecordsResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.TranscriptOfRecords !== undefined) {
+      TranscriptOfRecords.encode(
+        message.TranscriptOfRecords,
+        writer.uint32(10).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetTranscriptOfRecordsResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetTranscriptOfRecordsResponse,
+    } as QueryGetTranscriptOfRecordsResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.TranscriptOfRecords = TranscriptOfRecords.decode(
+            reader,
+            reader.uint32()
+          );
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetTranscriptOfRecordsResponse {
+    const message = {
+      ...baseQueryGetTranscriptOfRecordsResponse,
+    } as QueryGetTranscriptOfRecordsResponse;
+    if (
+      object.TranscriptOfRecords !== undefined &&
+      object.TranscriptOfRecords !== null
+    ) {
+      message.TranscriptOfRecords = TranscriptOfRecords.fromJSON(
+        object.TranscriptOfRecords
+      );
+    } else {
+      message.TranscriptOfRecords = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetTranscriptOfRecordsResponse): unknown {
+    const obj: any = {};
+    message.TranscriptOfRecords !== undefined &&
+      (obj.TranscriptOfRecords = message.TranscriptOfRecords
+        ? TranscriptOfRecords.toJSON(message.TranscriptOfRecords)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetTranscriptOfRecordsResponse>
+  ): QueryGetTranscriptOfRecordsResponse {
+    const message = {
+      ...baseQueryGetTranscriptOfRecordsResponse,
+    } as QueryGetTranscriptOfRecordsResponse;
+    if (
+      object.TranscriptOfRecords !== undefined &&
+      object.TranscriptOfRecords !== null
+    ) {
+      message.TranscriptOfRecords = TranscriptOfRecords.fromPartial(
+        object.TranscriptOfRecords
+      );
+    } else {
+      message.TranscriptOfRecords = undefined;
+    }
+    return message;
+  },
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Parameters queries the parameters of the module. */
@@ -960,6 +1107,10 @@ export interface Query {
   ExamsInfoAll(
     request: QueryAllExamsInfoRequest
   ): Promise<QueryAllExamsInfoResponse>;
+  /** Queries a TranscriptOfRecords by index. */
+  TranscriptOfRecords(
+    request: QueryGetTranscriptOfRecordsRequest
+  ): Promise<QueryGetTranscriptOfRecordsResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -1044,6 +1195,20 @@ export class QueryClientImpl implements Query {
     );
     return promise.then((data) =>
       QueryAllExamsInfoResponse.decode(new Reader(data))
+    );
+  }
+
+  TranscriptOfRecords(
+    request: QueryGetTranscriptOfRecordsRequest
+  ): Promise<QueryGetTranscriptOfRecordsResponse> {
+    const data = QueryGetTranscriptOfRecordsRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "university_chain_it.universitychainit.Query",
+      "TranscriptOfRecords",
+      data
+    );
+    return promise.then((data) =>
+      QueryGetTranscriptOfRecordsResponse.decode(new Reader(data))
     );
   }
 }

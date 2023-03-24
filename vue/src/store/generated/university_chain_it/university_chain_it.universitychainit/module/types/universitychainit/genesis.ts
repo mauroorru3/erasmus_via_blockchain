@@ -3,6 +3,7 @@ import { Params } from "../universitychainit/params";
 import { ProfessorsExams } from "../universitychainit/professors_exams";
 import { StudentInfo } from "../universitychainit/student_info";
 import { ExamsInfo } from "../universitychainit/exams_info";
+import { TranscriptOfRecords } from "../universitychainit/transcript_of_records";
 import { Writer, Reader } from "protobufjs/minimal";
 
 export const protobufPackage = "university_chain_it.universitychainit";
@@ -13,8 +14,9 @@ export interface GenesisState {
   port_id: string;
   professorsExamsList: ProfessorsExams[];
   studentInfo: StudentInfo | undefined;
-  /** this line is used by starport scaffolding # genesis/proto/state */
   examsInfoList: ExamsInfo[];
+  /** this line is used by starport scaffolding # genesis/proto/state */
+  transcriptOfRecords: TranscriptOfRecords | undefined;
 }
 
 const baseGenesisState: object = { port_id: "" };
@@ -38,6 +40,12 @@ export const GenesisState = {
     }
     for (const v of message.examsInfoList) {
       ExamsInfo.encode(v!, writer.uint32(42).fork()).ldelim();
+    }
+    if (message.transcriptOfRecords !== undefined) {
+      TranscriptOfRecords.encode(
+        message.transcriptOfRecords,
+        writer.uint32(50).fork()
+      ).ldelim();
     }
     return writer;
   },
@@ -67,6 +75,12 @@ export const GenesisState = {
           break;
         case 5:
           message.examsInfoList.push(ExamsInfo.decode(reader, reader.uint32()));
+          break;
+        case 6:
+          message.transcriptOfRecords = TranscriptOfRecords.decode(
+            reader,
+            reader.uint32()
+          );
           break;
         default:
           reader.skipType(tag & 7);
@@ -108,6 +122,16 @@ export const GenesisState = {
         message.examsInfoList.push(ExamsInfo.fromJSON(e));
       }
     }
+    if (
+      object.transcriptOfRecords !== undefined &&
+      object.transcriptOfRecords !== null
+    ) {
+      message.transcriptOfRecords = TranscriptOfRecords.fromJSON(
+        object.transcriptOfRecords
+      );
+    } else {
+      message.transcriptOfRecords = undefined;
+    }
     return message;
   },
 
@@ -134,6 +158,10 @@ export const GenesisState = {
     } else {
       obj.examsInfoList = [];
     }
+    message.transcriptOfRecords !== undefined &&
+      (obj.transcriptOfRecords = message.transcriptOfRecords
+        ? TranscriptOfRecords.toJSON(message.transcriptOfRecords)
+        : undefined);
     return obj;
   },
 
@@ -168,6 +196,16 @@ export const GenesisState = {
       for (const e of object.examsInfoList) {
         message.examsInfoList.push(ExamsInfo.fromPartial(e));
       }
+    }
+    if (
+      object.transcriptOfRecords !== undefined &&
+      object.transcriptOfRecords !== null
+    ) {
+      message.transcriptOfRecords = TranscriptOfRecords.fromPartial(
+        object.transcriptOfRecords
+      );
+    } else {
+      message.transcriptOfRecords = undefined;
     }
     return message;
   },

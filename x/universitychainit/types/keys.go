@@ -35,3 +35,7 @@ func KeyPrefix(p string) []byte {
 const (
 	StudentInfoKey = "StudentInfo-value-"
 )
+
+const (
+	TranscriptOfRecordsKey = "TranscriptOfRecords-value-"
+)

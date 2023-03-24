@@ -8,6 +8,7 @@ import "universitychainit/params.proto";
 import "universitychainit/professors_exams.proto";
 import "universitychainit/student_info.proto";
 import "universitychainit/exams_info.proto";
+import "universitychainit/transcript_of_records.proto";
 // this line is used by starport scaffolding # 1
 
 option go_package = "university_chain_it/x/universitychainit/types";
@@ -42,6 +43,10 @@ service Query {
 		option (google.api.http).get = "/university_chain_it/universitychainit/exams_info";
 	}
 
+// Queries a TranscriptOfRecords by index.
+	rpc TranscriptOfRecords(QueryGetTranscriptOfRecordsRequest) returns (QueryGetTranscriptOfRecordsResponse) {
+		option (google.api.http).get = "/university_chain_it/universitychainit/transcript_of_records";
+	}
 // this line is used by starport scaffolding # 2
 }
 
@@ -95,4 +100,9 @@ message QueryAllExamsInfoResponse {
 	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
+message QueryGetTranscriptOfRecordsRequest {}
+
+message QueryGetTranscriptOfRecordsResponse {
+	TranscriptOfRecords TranscriptOfRecords = 1 [(gogoproto.nullable) = false];
+}
 // this line is used by starport scaffolding # 3

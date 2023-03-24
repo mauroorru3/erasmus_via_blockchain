@@ -6,9 +6,10 @@ import { NoData } from "./module/types/universitychainit/packet"
 import { Params } from "./module/types/universitychainit/params"
 import { ProfessorsExams } from "./module/types/universitychainit/professors_exams"
 import { StudentInfo } from "./module/types/universitychainit/student_info"
+import { TranscriptOfRecords } from "./module/types/universitychainit/transcript_of_records"
 
 
-export { ExamsInfo, UniversitychainitPacketData, NoData, Params, ProfessorsExams, StudentInfo };
+export { ExamsInfo, UniversitychainitPacketData, NoData, Params, ProfessorsExams, StudentInfo, TranscriptOfRecords };
 
 async function initTxClient(vuexGetters) {
 	return await txClient(vuexGetters['common/wallet/signer'], {
@@ -52,6 +53,7 @@ const getDefaultState = () => {
 				StudentInfo: {},
 				ExamsInfo: {},
 				ExamsInfoAll: {},
+				TranscriptOfRecords: {},
 				
 				_Structure: {
 						ExamsInfo: getStructure(ExamsInfo.fromPartial({})),
@@ -60,6 +62,7 @@ const getDefaultState = () => {
 						Params: getStructure(Params.fromPartial({})),
 						ProfessorsExams: getStructure(ProfessorsExams.fromPartial({})),
 						StudentInfo: getStructure(StudentInfo.fromPartial({})),
+						TranscriptOfRecords: getStructure(TranscriptOfRecords.fromPartial({})),
 						
 		},
 		_Registry: registry,
@@ -123,6 +126,12 @@ export default {
 						(<any> params).query=null
 					}
 			return state.ExamsInfoAll[JSON.stringify(params)] ?? {}
+		},
+				getTranscriptOfRecords: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.TranscriptOfRecords[JSON.stringify(params)] ?? {}
 		},
 				
 		getTypeStructure: (state) => (type) => {
@@ -293,6 +302,28 @@ export default {
 				return getters['getExamsInfoAll']( { params: {...key}, query}) ?? {}
 			} catch (e) {
 				throw new Error('QueryClient:QueryExamsInfoAll API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryTranscriptOfRecords({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryTranscriptOfRecords()).data
+				
+					
+				commit('QUERY', { query: 'TranscriptOfRecords', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryTranscriptOfRecords', payload: { options: { all }, params: {...key},query }})
+				return getters['getTranscriptOfRecords']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryTranscriptOfRecords API Node Unavailable. Could not perform query: ' + e.message)
 				
 			}
 		},
