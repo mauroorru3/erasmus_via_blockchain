@@ -16,6 +16,7 @@ import { ErasmusExams } from "../universitychainit/erasmus_exams";
 import { ErasmusCareer } from "../universitychainit/erasmus_career";
 import { ErasmusInfo } from "../universitychainit/erasmus_info";
 import { StoredStudent } from "../universitychainit/stored_student";
+import { UniversityInfo } from "../universitychainit/university_info";
 
 export const protobufPackage = "university_chain_it.universitychainit";
 
@@ -38,8 +39,9 @@ export interface GenesisState {
   erasmusCareerList: ErasmusCareer[];
   erasmusCareerCount: number;
   erasmusInfo: ErasmusInfo | undefined;
-  /** this line is used by starport scaffolding # genesis/proto/state */
   storedStudentList: StoredStudent[];
+  /** this line is used by starport scaffolding # genesis/proto/state */
+  universityInfo: UniversityInfo | undefined;
 }
 
 const baseGenesisState: object = {
@@ -125,6 +127,12 @@ export const GenesisState = {
     for (const v of message.storedStudentList) {
       StoredStudent.encode(v!, writer.uint32(146).fork()).ldelim();
     }
+    if (message.universityInfo !== undefined) {
+      UniversityInfo.encode(
+        message.universityInfo,
+        writer.uint32(154).fork()
+      ).ldelim();
+    }
     return writer;
   },
 
@@ -209,6 +217,12 @@ export const GenesisState = {
         case 18:
           message.storedStudentList.push(
             StoredStudent.decode(reader, reader.uint32())
+          );
+          break;
+        case 19:
+          message.universityInfo = UniversityInfo.decode(
+            reader,
+            reader.uint32()
           );
           break;
         default:
@@ -348,6 +362,11 @@ export const GenesisState = {
         message.storedStudentList.push(StoredStudent.fromJSON(e));
       }
     }
+    if (object.universityInfo !== undefined && object.universityInfo !== null) {
+      message.universityInfo = UniversityInfo.fromJSON(object.universityInfo);
+    } else {
+      message.universityInfo = undefined;
+    }
     return message;
   },
 
@@ -434,6 +453,10 @@ export const GenesisState = {
     } else {
       obj.storedStudentList = [];
     }
+    message.universityInfo !== undefined &&
+      (obj.universityInfo = message.universityInfo
+        ? UniversityInfo.toJSON(message.universityInfo)
+        : undefined);
     return obj;
   },
 
@@ -565,6 +588,13 @@ export const GenesisState = {
       for (const e of object.storedStudentList) {
         message.storedStudentList.push(StoredStudent.fromPartial(e));
       }
+    }
+    if (object.universityInfo !== undefined && object.universityInfo !== null) {
+      message.universityInfo = UniversityInfo.fromPartial(
+        object.universityInfo
+      );
+    } else {
+      message.universityInfo = undefined;
     }
     return message;
   },

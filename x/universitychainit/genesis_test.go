@@ -128,6 +128,16 @@ func TestGenesis(t *testing.T) {
 				Index: "1",
 			},
 		},
+		UniversityInfo: &types.UniversityInfo{
+			NextStudentId:   43,
+			SecretariatKey:  "96",
+			UniversityKey:   "16",
+			CaiKey:          "18",
+			FifoHeadErasmus: "70",
+			FifoTailErasmus: "98",
+			DeadlineTaxes:   "23",
+			DeadlineErasmus: "46",
+		},
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
@@ -157,5 +167,6 @@ func TestGenesis(t *testing.T) {
 	require.Equal(t, genesisState.ErasmusCareerCount, got.ErasmusCareerCount)
 	require.Equal(t, genesisState.ErasmusInfo, got.ErasmusInfo)
 	require.ElementsMatch(t, genesisState.StoredStudentList, got.StoredStudentList)
+	require.Equal(t, genesisState.UniversityInfo, got.UniversityInfo)
 	// this line is used by starport scaffolding # genesis/test/assert
 }

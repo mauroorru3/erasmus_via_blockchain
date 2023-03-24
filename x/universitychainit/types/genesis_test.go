@@ -136,6 +136,16 @@ func TestGenesisState_Validate(t *testing.T) {
 						Index: "1",
 					},
 				},
+				UniversityInfo: &types.UniversityInfo{
+					NextStudentId:   3,
+					SecretariatKey:  "91",
+					UniversityKey:   "4",
+					CaiKey:          "51",
+					FifoHeadErasmus: "27",
+					FifoTailErasmus: "70",
+					DeadlineTaxes:   "89",
+					DeadlineErasmus: "99",
+				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,

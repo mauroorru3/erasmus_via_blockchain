@@ -26,6 +26,7 @@ func DefaultGenesis() *GenesisState {
 		ErasmusCareerList:   []ErasmusCareer{},
 		ErasmusInfo:         nil,
 		StoredStudentList:   []StoredStudent{},
+		UniversityInfo:      nil,
 		// this line is used by starport scaffolding # genesis/types/default
 		Params: DefaultParams(),
 	}

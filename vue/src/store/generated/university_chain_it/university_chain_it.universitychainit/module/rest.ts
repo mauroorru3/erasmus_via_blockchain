@@ -324,6 +324,10 @@ export interface UniversitychainitQueryGetTranscriptOfRecordsResponse {
   TranscriptOfRecords?: UniversitychainitTranscriptOfRecords;
 }
 
+export interface UniversitychainitQueryGetUniversityInfoResponse {
+  UniversityInfo?: UniversitychainitUniversityInfo;
+}
+
 /**
  * QueryParamsResponse is response type for the Query/Params RPC method.
  */
@@ -395,6 +399,18 @@ export interface UniversitychainitTranscriptOfRecords {
 
   /** @format uint64 */
   achievedCredits?: string;
+}
+
+export interface UniversitychainitUniversityInfo {
+  /** @format uint64 */
+  nextStudentId?: string;
+  secretariatKey?: string;
+  universityKey?: string;
+  caiKey?: string;
+  fifoHeadErasmus?: string;
+  fifoTailErasmus?: string;
+  deadlineTaxes?: string;
+  deadlineErasmus?: string;
 }
 
 /**
@@ -1047,6 +1063,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryTranscriptOfRecords = (params: RequestParams = {}) =>
     this.request<UniversitychainitQueryGetTranscriptOfRecordsResponse, RpcStatus>({
       path: `/university_chain_it/universitychainit/transcript_of_records`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryUniversityInfo
+   * @summary Queries a UniversityInfo by index.
+   * @request GET:/university_chain_it/universitychainit/university_info
+   */
+  queryUniversityInfo = (params: RequestParams = {}) =>
+    this.request<UniversitychainitQueryGetUniversityInfoResponse, RpcStatus>({
+      path: `/university_chain_it/universitychainit/university_info`,
       method: "GET",
       format: "json",
       ...params,

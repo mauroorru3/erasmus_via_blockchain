@@ -32786,6 +32786,56 @@ paths:
                   additionalProperties: {}
       tags:
         - Query
+  /university_chain_it/universitychainit/university_info:
+    get:
+      summary: Queries a UniversityInfo by index.
+      operationId: UniversityChainItUniversitychainitUniversityInfo
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              UniversityInfo:
+                type: object
+                properties:
+                  nextStudentId:
+                    type: string
+                    format: uint64
+                  secretariatKey:
+                    type: string
+                  universityKey:
+                    type: string
+                  caiKey:
+                    type: string
+                  fifoHeadErasmus:
+                    type: string
+                  fifoTailErasmus:
+                    type: string
+                  deadlineTaxes:
+                    type: string
+                  deadlineErasmus:
+                    type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Query
 definitions:
   cosmos.auth.v1beta1.Params:
     type: object
@@ -56082,6 +56132,29 @@ definitions:
           achievedCredits:
             type: string
             format: uint64
+  university_chain_it.universitychainit.QueryGetUniversityInfoResponse:
+    type: object
+    properties:
+      UniversityInfo:
+        type: object
+        properties:
+          nextStudentId:
+            type: string
+            format: uint64
+          secretariatKey:
+            type: string
+          universityKey:
+            type: string
+          caiKey:
+            type: string
+          fifoHeadErasmus:
+            type: string
+          fifoTailErasmus:
+            type: string
+          deadlineTaxes:
+            type: string
+          deadlineErasmus:
+            type: string
   university_chain_it.universitychainit.QueryParamsResponse:
     type: object
     properties:
@@ -56451,3 +56524,23 @@ definitions:
       achievedCredits:
         type: string
         format: uint64
+  university_chain_it.universitychainit.UniversityInfo:
+    type: object
+    properties:
+      nextStudentId:
+        type: string
+        format: uint64
+      secretariatKey:
+        type: string
+      universityKey:
+        type: string
+      caiKey:
+        type: string
+      fifoHeadErasmus:
+        type: string
+      fifoTailErasmus:
+        type: string
+      deadlineTaxes:
+        type: string
+      deadlineErasmus:
+        type: string

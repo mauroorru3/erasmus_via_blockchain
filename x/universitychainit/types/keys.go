@@ -73,3 +73,7 @@ const (
 const (
 	ErasmusInfoKey = "ErasmusInfo-value-"
 )
+
+const (
+	UniversityInfoKey = "UniversityInfo-value-"
+)
