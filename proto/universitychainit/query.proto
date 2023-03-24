@@ -11,6 +11,7 @@ import "universitychainit/erasmus_contribution.proto";
 import "universitychainit/erasmus_exams.proto";
 import "universitychainit/erasmus_career.proto";
 import "universitychainit/university_details.proto";
+import "universitychainit/chain_info.proto";
 // this line is used by starport scaffolding # 1
 import "universitychainit/stored_student.proto";
 import "universitychainit/university_info.proto";
@@ -137,6 +138,10 @@ service Query {
 		option (google.api.http).get = "/university_chain_it/universitychainit/university_details";
 	}
 
+// Queries a ChainInfo by index.
+	rpc ChainInfo(QueryGetChainInfoRequest) returns (QueryGetChainInfoResponse) {
+		option (google.api.http).get = "/university_chain_it/universitychainit/chain_info";
+	}
 // this line is used by starport scaffolding # 2
 }
 
@@ -318,4 +323,9 @@ message QueryAllUniversityDetailsResponse {
 	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
+message QueryGetChainInfoRequest {}
+
+message QueryGetChainInfoResponse {
+	ChainInfo ChainInfo = 1 [(gogoproto.nullable) = false];
+}
 // this line is used by starport scaffolding # 3

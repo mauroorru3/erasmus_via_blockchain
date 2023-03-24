@@ -154,6 +154,11 @@ func TestGenesisState_Validate(t *testing.T) {
 						UniversityName: "1",
 					},
 				},
+				ChainInfo: &types.ChainInfo{
+					HubKey:   "96",
+					ChainKey: "54",
+					Country:  "27",
+				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,

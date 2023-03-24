@@ -30700,6 +30700,45 @@ paths:
           format: uint64
       tags:
         - Query
+  /university_chain_it/universitychainit/chain_info:
+    get:
+      summary: Queries a ChainInfo by index.
+      operationId: UniversityChainItUniversitychainitChainInfo
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              ChainInfo:
+                type: object
+                properties:
+                  hubKey:
+                    type: string
+                  chainKey:
+                    type: string
+                  country:
+                    type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Query
   /university_chain_it/universitychainit/contact_info:
     get:
       summary: Queries a ContactInfo by index.
@@ -55244,6 +55283,15 @@ definitions:
         type: boolean
       dateOfPayment:
         type: string
+  university_chain_it.universitychainit.ChainInfo:
+    type: object
+    properties:
+      hubKey:
+        type: string
+      chainKey:
+        type: string
+      country:
+        type: string
   university_chain_it.universitychainit.ContactInfo:
     type: object
     properties:
@@ -56475,6 +56523,18 @@ definitions:
           paymentMade:
             type: boolean
           dateOfPayment:
+            type: string
+  university_chain_it.universitychainit.QueryGetChainInfoResponse:
+    type: object
+    properties:
+      ChainInfo:
+        type: object
+        properties:
+          hubKey:
+            type: string
+          chainKey:
+            type: string
+          country:
             type: string
   university_chain_it.universitychainit.QueryGetContactInfoResponse:
     type: object

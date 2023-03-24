@@ -18,6 +18,7 @@ import { ErasmusInfo } from "../universitychainit/erasmus_info";
 import { StoredStudent } from "../universitychainit/stored_student";
 import { UniversityInfo } from "../universitychainit/university_info";
 import { UniversityDetails } from "../universitychainit/university_details";
+import { ChainInfo } from "../universitychainit/chain_info";
 
 export const protobufPackage = "university_chain_it.universitychainit";
 
@@ -42,8 +43,9 @@ export interface GenesisState {
   erasmusInfo: ErasmusInfo | undefined;
   storedStudentList: StoredStudent[];
   universityInfo: UniversityInfo | undefined;
-  /** this line is used by starport scaffolding # genesis/proto/state */
   universityDetailsList: UniversityDetails[];
+  /** this line is used by starport scaffolding # genesis/proto/state */
+  chainInfo: ChainInfo | undefined;
 }
 
 const baseGenesisState: object = {
@@ -137,6 +139,9 @@ export const GenesisState = {
     }
     for (const v of message.universityDetailsList) {
       UniversityDetails.encode(v!, writer.uint32(162).fork()).ldelim();
+    }
+    if (message.chainInfo !== undefined) {
+      ChainInfo.encode(message.chainInfo, writer.uint32(170).fork()).ldelim();
     }
     return writer;
   },
@@ -235,6 +240,9 @@ export const GenesisState = {
           message.universityDetailsList.push(
             UniversityDetails.decode(reader, reader.uint32())
           );
+          break;
+        case 21:
+          message.chainInfo = ChainInfo.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -387,6 +395,11 @@ export const GenesisState = {
         message.universityDetailsList.push(UniversityDetails.fromJSON(e));
       }
     }
+    if (object.chainInfo !== undefined && object.chainInfo !== null) {
+      message.chainInfo = ChainInfo.fromJSON(object.chainInfo);
+    } else {
+      message.chainInfo = undefined;
+    }
     return message;
   },
 
@@ -484,6 +497,10 @@ export const GenesisState = {
     } else {
       obj.universityDetailsList = [];
     }
+    message.chainInfo !== undefined &&
+      (obj.chainInfo = message.chainInfo
+        ? ChainInfo.toJSON(message.chainInfo)
+        : undefined);
     return obj;
   },
 
@@ -631,6 +648,11 @@ export const GenesisState = {
       for (const e of object.universityDetailsList) {
         message.universityDetailsList.push(UniversityDetails.fromPartial(e));
       }
+    }
+    if (object.chainInfo !== undefined && object.chainInfo !== null) {
+      message.chainInfo = ChainInfo.fromPartial(object.chainInfo);
+    } else {
+      message.chainInfo = undefined;
     }
     return message;
   },

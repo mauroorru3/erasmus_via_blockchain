@@ -36,6 +36,12 @@ export interface UniversitychainitAnnualTaxes {
   dateOfPayment?: string;
 }
 
+export interface UniversitychainitChainInfo {
+  hubKey?: string;
+  chainKey?: string;
+  country?: string;
+}
+
 export interface UniversitychainitContactInfo {
   contactAddress?: string;
   email?: string;
@@ -285,6 +291,10 @@ export interface UniversitychainitQueryAllUniversityDetailsResponse {
 
 export interface UniversitychainitQueryGetAnnualTaxesResponse {
   AnnualTaxes?: UniversitychainitAnnualTaxes;
+}
+
+export interface UniversitychainitQueryGetChainInfoResponse {
+  ChainInfo?: UniversitychainitChainInfo;
 }
 
 export interface UniversitychainitQueryGetContactInfoResponse {
@@ -735,6 +745,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryAnnualTaxes = (id: string, params: RequestParams = {}) =>
     this.request<UniversitychainitQueryGetAnnualTaxesResponse, RpcStatus>({
       path: `/university_chain_it/universitychainit/annual_taxes/${id}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryChainInfo
+   * @summary Queries a ChainInfo by index.
+   * @request GET:/university_chain_it/universitychainit/chain_info
+   */
+  queryChainInfo = (params: RequestParams = {}) =>
+    this.request<UniversitychainitQueryGetChainInfoResponse, RpcStatus>({
+      path: `/university_chain_it/universitychainit/chain_info`,
       method: "GET",
       format: "json",
       ...params,

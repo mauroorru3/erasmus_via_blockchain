@@ -77,3 +77,7 @@ const (
 const (
 	UniversityInfoKey = "UniversityInfo-value-"
 )
+
+const (
+	ChainInfoKey = "ChainInfo-value-"
+)

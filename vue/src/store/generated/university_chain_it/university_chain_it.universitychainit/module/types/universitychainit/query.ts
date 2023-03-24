@@ -22,6 +22,7 @@ import { ErasmusInfo } from "../universitychainit/erasmus_info";
 import { StoredStudent } from "../universitychainit/stored_student";
 import { UniversityInfo } from "../universitychainit/university_info";
 import { UniversityDetails } from "../universitychainit/university_details";
+import { ChainInfo } from "../universitychainit/chain_info";
 
 export const protobufPackage = "university_chain_it.universitychainit";
 
@@ -205,6 +206,12 @@ export interface QueryAllUniversityDetailsRequest {
 export interface QueryAllUniversityDetailsResponse {
   universityDetails: UniversityDetails[];
   pagination: PageResponse | undefined;
+}
+
+export interface QueryGetChainInfoRequest {}
+
+export interface QueryGetChainInfoResponse {
+  ChainInfo: ChainInfo | undefined;
 }
 
 const baseQueryParamsRequest: object = {};
@@ -3740,6 +3747,130 @@ export const QueryAllUniversityDetailsResponse = {
   },
 };
 
+const baseQueryGetChainInfoRequest: object = {};
+
+export const QueryGetChainInfoRequest = {
+  encode(
+    _: QueryGetChainInfoRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetChainInfoRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetChainInfoRequest,
+    } as QueryGetChainInfoRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): QueryGetChainInfoRequest {
+    const message = {
+      ...baseQueryGetChainInfoRequest,
+    } as QueryGetChainInfoRequest;
+    return message;
+  },
+
+  toJSON(_: QueryGetChainInfoRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial(
+    _: DeepPartial<QueryGetChainInfoRequest>
+  ): QueryGetChainInfoRequest {
+    const message = {
+      ...baseQueryGetChainInfoRequest,
+    } as QueryGetChainInfoRequest;
+    return message;
+  },
+};
+
+const baseQueryGetChainInfoResponse: object = {};
+
+export const QueryGetChainInfoResponse = {
+  encode(
+    message: QueryGetChainInfoResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.ChainInfo !== undefined) {
+      ChainInfo.encode(message.ChainInfo, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetChainInfoResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetChainInfoResponse,
+    } as QueryGetChainInfoResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.ChainInfo = ChainInfo.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetChainInfoResponse {
+    const message = {
+      ...baseQueryGetChainInfoResponse,
+    } as QueryGetChainInfoResponse;
+    if (object.ChainInfo !== undefined && object.ChainInfo !== null) {
+      message.ChainInfo = ChainInfo.fromJSON(object.ChainInfo);
+    } else {
+      message.ChainInfo = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetChainInfoResponse): unknown {
+    const obj: any = {};
+    message.ChainInfo !== undefined &&
+      (obj.ChainInfo = message.ChainInfo
+        ? ChainInfo.toJSON(message.ChainInfo)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetChainInfoResponse>
+  ): QueryGetChainInfoResponse {
+    const message = {
+      ...baseQueryGetChainInfoResponse,
+    } as QueryGetChainInfoResponse;
+    if (object.ChainInfo !== undefined && object.ChainInfo !== null) {
+      message.ChainInfo = ChainInfo.fromPartial(object.ChainInfo);
+    } else {
+      message.ChainInfo = undefined;
+    }
+    return message;
+  },
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Parameters queries the parameters of the module. */
@@ -3836,6 +3967,10 @@ export interface Query {
   UniversityDetailsAll(
     request: QueryAllUniversityDetailsRequest
   ): Promise<QueryAllUniversityDetailsResponse>;
+  /** Queries a ChainInfo by index. */
+  ChainInfo(
+    request: QueryGetChainInfoRequest
+  ): Promise<QueryGetChainInfoResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -4172,6 +4307,20 @@ export class QueryClientImpl implements Query {
     );
     return promise.then((data) =>
       QueryAllUniversityDetailsResponse.decode(new Reader(data))
+    );
+  }
+
+  ChainInfo(
+    request: QueryGetChainInfoRequest
+  ): Promise<QueryGetChainInfoResponse> {
+    const data = QueryGetChainInfoRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "university_chain_it.universitychainit.Query",
+      "ChainInfo",
+      data
+    );
+    return promise.then((data) =>
+      QueryGetChainInfoResponse.decode(new Reader(data))
     );
   }
 }

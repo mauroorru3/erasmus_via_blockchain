@@ -1,6 +1,7 @@
 import { txClient, queryClient, MissingWalletError , registry} from './module'
 
 import { AnnualTaxes } from "./module/types/universitychainit/annual_taxes"
+import { ChainInfo } from "./module/types/universitychainit/chain_info"
 import { ContactInfo } from "./module/types/universitychainit/contact_info"
 import { ErasmusCareer } from "./module/types/universitychainit/erasmus_career"
 import { ErasmusContribution } from "./module/types/universitychainit/erasmus_contribution"
@@ -21,7 +22,7 @@ import { UniversityDetails } from "./module/types/universitychainit/university_d
 import { UniversityInfo } from "./module/types/universitychainit/university_info"
 
 
-export { AnnualTaxes, ContactInfo, ErasmusCareer, ErasmusContribution, ErasmusExams, ErasmusInfo, ExamsInfo, UniversitychainitPacketData, NoData, Params, PersonalInfo, ProfessorsExams, ResidenceInfo, StoredStudent, StudentInfo, TaxesInfo, TranscriptOfRecords, UniversityDetails, UniversityInfo };
+export { AnnualTaxes, ChainInfo, ContactInfo, ErasmusCareer, ErasmusContribution, ErasmusExams, ErasmusInfo, ExamsInfo, UniversitychainitPacketData, NoData, Params, PersonalInfo, ProfessorsExams, ResidenceInfo, StoredStudent, StudentInfo, TaxesInfo, TranscriptOfRecords, UniversityDetails, UniversityInfo };
 
 async function initTxClient(vuexGetters) {
 	return await txClient(vuexGetters['common/wallet/signer'], {
@@ -83,9 +84,11 @@ const getDefaultState = () => {
 				UniversityInfo: {},
 				UniversityDetails: {},
 				UniversityDetailsAll: {},
+				ChainInfo: {},
 				
 				_Structure: {
 						AnnualTaxes: getStructure(AnnualTaxes.fromPartial({})),
+						ChainInfo: getStructure(ChainInfo.fromPartial({})),
 						ContactInfo: getStructure(ContactInfo.fromPartial({})),
 						ErasmusCareer: getStructure(ErasmusCareer.fromPartial({})),
 						ErasmusContribution: getStructure(ErasmusContribution.fromPartial({})),
@@ -275,6 +278,12 @@ export default {
 						(<any> params).query=null
 					}
 			return state.UniversityDetailsAll[JSON.stringify(params)] ?? {}
+		},
+				getChainInfo: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.ChainInfo[JSON.stringify(params)] ?? {}
 		},
 				
 		getTypeStructure: (state) => (type) => {
@@ -861,6 +870,28 @@ export default {
 				return getters['getUniversityDetailsAll']( { params: {...key}, query}) ?? {}
 			} catch (e) {
 				throw new Error('QueryClient:QueryUniversityDetailsAll API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryChainInfo({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryChainInfo()).data
+				
+					
+				commit('QUERY', { query: 'ChainInfo', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryChainInfo', payload: { options: { all }, params: {...key},query }})
+				return getters['getChainInfo']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryChainInfo API Node Unavailable. Could not perform query: ' + e.message)
 				
 			}
 		},
