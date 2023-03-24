@@ -74,6 +74,11 @@ func TestGenesisState_Validate(t *testing.T) {
 					HouseNumber: "77",
 					HomePhone:   "77",
 				},
+				ContactInfo: &types.ContactInfo{
+					ContactAddress: "89",
+					Email:          "6",
+					MobilePhone:    "63",
+				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,

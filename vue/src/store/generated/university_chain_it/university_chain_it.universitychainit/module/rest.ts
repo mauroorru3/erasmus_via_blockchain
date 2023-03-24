@@ -20,6 +20,12 @@ export interface RpcStatus {
   details?: ProtobufAny[];
 }
 
+export interface UniversitychainitContactInfo {
+  contactAddress?: string;
+  email?: string;
+  mobilePhone?: string;
+}
+
 export interface UniversitychainitExamsInfo {
   examName?: string;
   examLabel?: string;
@@ -94,6 +100,10 @@ export interface UniversitychainitQueryAllProfessorsExamsResponse {
    *  }
    */
   pagination?: V1Beta1PageResponse;
+}
+
+export interface UniversitychainitQueryGetContactInfoResponse {
+  ContactInfo?: UniversitychainitContactInfo;
 }
 
 export interface UniversitychainitQueryGetExamsInfoResponse {
@@ -429,10 +439,26 @@ export class HttpClient<SecurityDataType = unknown> {
 }
 
 /**
- * @title universitychainit/exams_info.proto
+ * @title universitychainit/contact_info.proto
  * @version version not set
  */
 export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryContactInfo
+   * @summary Queries a ContactInfo by index.
+   * @request GET:/university_chain_it/universitychainit/contact_info
+   */
+  queryContactInfo = (params: RequestParams = {}) =>
+    this.request<UniversitychainitQueryGetContactInfoResponse, RpcStatus>({
+      path: `/university_chain_it/universitychainit/contact_info`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
   /**
    * No description
    *

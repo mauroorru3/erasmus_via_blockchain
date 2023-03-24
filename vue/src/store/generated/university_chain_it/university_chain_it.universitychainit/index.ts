@@ -1,5 +1,6 @@
 import { txClient, queryClient, MissingWalletError , registry} from './module'
 
+import { ContactInfo } from "./module/types/universitychainit/contact_info"
 import { ExamsInfo } from "./module/types/universitychainit/exams_info"
 import { UniversitychainitPacketData } from "./module/types/universitychainit/packet"
 import { NoData } from "./module/types/universitychainit/packet"
@@ -11,7 +12,7 @@ import { StudentInfo } from "./module/types/universitychainit/student_info"
 import { TranscriptOfRecords } from "./module/types/universitychainit/transcript_of_records"
 
 
-export { ExamsInfo, UniversitychainitPacketData, NoData, Params, PersonalInfo, ProfessorsExams, ResidenceInfo, StudentInfo, TranscriptOfRecords };
+export { ContactInfo, ExamsInfo, UniversitychainitPacketData, NoData, Params, PersonalInfo, ProfessorsExams, ResidenceInfo, StudentInfo, TranscriptOfRecords };
 
 async function initTxClient(vuexGetters) {
 	return await txClient(vuexGetters['common/wallet/signer'], {
@@ -58,8 +59,10 @@ const getDefaultState = () => {
 				TranscriptOfRecords: {},
 				PersonalInfo: {},
 				ResidenceInfo: {},
+				ContactInfo: {},
 				
 				_Structure: {
+						ContactInfo: getStructure(ContactInfo.fromPartial({})),
 						ExamsInfo: getStructure(ExamsInfo.fromPartial({})),
 						UniversitychainitPacketData: getStructure(UniversitychainitPacketData.fromPartial({})),
 						NoData: getStructure(NoData.fromPartial({})),
@@ -150,6 +153,12 @@ export default {
 						(<any> params).query=null
 					}
 			return state.ResidenceInfo[JSON.stringify(params)] ?? {}
+		},
+				getContactInfo: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.ContactInfo[JSON.stringify(params)] ?? {}
 		},
 				
 		getTypeStructure: (state) => (type) => {
@@ -386,6 +395,28 @@ export default {
 				return getters['getResidenceInfo']( { params: {...key}, query}) ?? {}
 			} catch (e) {
 				throw new Error('QueryClient:QueryResidenceInfo API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryContactInfo({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryContactInfo()).data
+				
+					
+				commit('QUERY', { query: 'ContactInfo', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryContactInfo', payload: { options: { all }, params: {...key},query }})
+				return getters['getContactInfo']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryContactInfo API Node Unavailable. Could not perform query: ' + e.message)
 				
 			}
 		},

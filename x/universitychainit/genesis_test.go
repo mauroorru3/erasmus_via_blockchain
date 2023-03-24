@@ -66,6 +66,11 @@ func TestGenesis(t *testing.T) {
 			HouseNumber: "58",
 			HomePhone:   "89",
 		},
+		ContactInfo: &types.ContactInfo{
+			ContactAddress: "5",
+			Email:          "17",
+			MobilePhone:    "83",
+		},
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
@@ -85,5 +90,6 @@ func TestGenesis(t *testing.T) {
 	require.Equal(t, genesisState.TranscriptOfRecords, got.TranscriptOfRecords)
 	require.Equal(t, genesisState.PersonalInfo, got.PersonalInfo)
 	require.Equal(t, genesisState.ResidenceInfo, got.ResidenceInfo)
+	require.Equal(t, genesisState.ContactInfo, got.ContactInfo)
 	// this line is used by starport scaffolding # genesis/test/assert
 }

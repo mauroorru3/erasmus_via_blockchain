@@ -11,6 +11,7 @@ import { ExamsInfo } from "../universitychainit/exams_info";
 import { TranscriptOfRecords } from "../universitychainit/transcript_of_records";
 import { PersonalInfo } from "../universitychainit/personal_info";
 import { ResidenceInfo } from "../universitychainit/residence_info";
+import { ContactInfo } from "../universitychainit/contact_info";
 
 export const protobufPackage = "university_chain_it.universitychainit";
 
@@ -79,6 +80,12 @@ export interface QueryGetResidenceInfoRequest {}
 
 export interface QueryGetResidenceInfoResponse {
   ResidenceInfo: ResidenceInfo | undefined;
+}
+
+export interface QueryGetContactInfoRequest {}
+
+export interface QueryGetContactInfoResponse {
+  ContactInfo: ContactInfo | undefined;
 }
 
 const baseQueryParamsRequest: object = {};
@@ -1351,6 +1358,133 @@ export const QueryGetResidenceInfoResponse = {
   },
 };
 
+const baseQueryGetContactInfoRequest: object = {};
+
+export const QueryGetContactInfoRequest = {
+  encode(
+    _: QueryGetContactInfoRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetContactInfoRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetContactInfoRequest,
+    } as QueryGetContactInfoRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): QueryGetContactInfoRequest {
+    const message = {
+      ...baseQueryGetContactInfoRequest,
+    } as QueryGetContactInfoRequest;
+    return message;
+  },
+
+  toJSON(_: QueryGetContactInfoRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial(
+    _: DeepPartial<QueryGetContactInfoRequest>
+  ): QueryGetContactInfoRequest {
+    const message = {
+      ...baseQueryGetContactInfoRequest,
+    } as QueryGetContactInfoRequest;
+    return message;
+  },
+};
+
+const baseQueryGetContactInfoResponse: object = {};
+
+export const QueryGetContactInfoResponse = {
+  encode(
+    message: QueryGetContactInfoResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.ContactInfo !== undefined) {
+      ContactInfo.encode(
+        message.ContactInfo,
+        writer.uint32(10).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetContactInfoResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetContactInfoResponse,
+    } as QueryGetContactInfoResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.ContactInfo = ContactInfo.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetContactInfoResponse {
+    const message = {
+      ...baseQueryGetContactInfoResponse,
+    } as QueryGetContactInfoResponse;
+    if (object.ContactInfo !== undefined && object.ContactInfo !== null) {
+      message.ContactInfo = ContactInfo.fromJSON(object.ContactInfo);
+    } else {
+      message.ContactInfo = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetContactInfoResponse): unknown {
+    const obj: any = {};
+    message.ContactInfo !== undefined &&
+      (obj.ContactInfo = message.ContactInfo
+        ? ContactInfo.toJSON(message.ContactInfo)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetContactInfoResponse>
+  ): QueryGetContactInfoResponse {
+    const message = {
+      ...baseQueryGetContactInfoResponse,
+    } as QueryGetContactInfoResponse;
+    if (object.ContactInfo !== undefined && object.ContactInfo !== null) {
+      message.ContactInfo = ContactInfo.fromPartial(object.ContactInfo);
+    } else {
+      message.ContactInfo = undefined;
+    }
+    return message;
+  },
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Parameters queries the parameters of the module. */
@@ -1387,6 +1521,10 @@ export interface Query {
   ResidenceInfo(
     request: QueryGetResidenceInfoRequest
   ): Promise<QueryGetResidenceInfoResponse>;
+  /** Queries a ContactInfo by index. */
+  ContactInfo(
+    request: QueryGetContactInfoRequest
+  ): Promise<QueryGetContactInfoResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -1513,6 +1651,20 @@ export class QueryClientImpl implements Query {
     );
     return promise.then((data) =>
       QueryGetResidenceInfoResponse.decode(new Reader(data))
+    );
+  }
+
+  ContactInfo(
+    request: QueryGetContactInfoRequest
+  ): Promise<QueryGetContactInfoResponse> {
+    const data = QueryGetContactInfoRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "university_chain_it.universitychainit.Query",
+      "ContactInfo",
+      data
+    );
+    return promise.then((data) =>
+      QueryGetContactInfoResponse.decode(new Reader(data))
     );
   }
 }

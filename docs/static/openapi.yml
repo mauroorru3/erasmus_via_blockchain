@@ -30510,6 +30510,45 @@ paths:
                   additionalProperties: {}
       tags:
         - Query
+  /university_chain_it/universitychainit/contact_info:
+    get:
+      summary: Queries a ContactInfo by index.
+      operationId: UniversityChainItUniversitychainitContactInfo
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              ContactInfo:
+                type: object
+                properties:
+                  contactAddress:
+                    type: string
+                  email:
+                    type: string
+                  mobilePhone:
+                    type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Query
   /university_chain_it/universitychainit/exams_info:
     get:
       summary: Queries a list of ExamsInfo items.
@@ -52815,6 +52854,15 @@ definitions:
     title: >-
       SignatureCounts contains information about signature reporting for a
       number of blocks
+  university_chain_it.universitychainit.ContactInfo:
+    type: object
+    properties:
+      contactAddress:
+        type: string
+      email:
+        type: string
+      mobilePhone:
+        type: string
   university_chain_it.universitychainit.ExamsInfo:
     type: object
     properties:
@@ -52974,6 +53022,18 @@ definitions:
                    repeated Bar results = 1;
                    PageResponse page = 2;
            }
+  university_chain_it.universitychainit.QueryGetContactInfoResponse:
+    type: object
+    properties:
+      ContactInfo:
+        type: object
+        properties:
+          contactAddress:
+            type: string
+          email:
+            type: string
+          mobilePhone:
+            type: string
   university_chain_it.universitychainit.QueryGetExamsInfoResponse:
     type: object
     properties:

@@ -6,6 +6,7 @@ import { ExamsInfo } from "../universitychainit/exams_info";
 import { TranscriptOfRecords } from "../universitychainit/transcript_of_records";
 import { PersonalInfo } from "../universitychainit/personal_info";
 import { ResidenceInfo } from "../universitychainit/residence_info";
+import { ContactInfo } from "../universitychainit/contact_info";
 import { Writer, Reader } from "protobufjs/minimal";
 
 export const protobufPackage = "university_chain_it.universitychainit";
@@ -19,8 +20,9 @@ export interface GenesisState {
   examsInfoList: ExamsInfo[];
   transcriptOfRecords: TranscriptOfRecords | undefined;
   personalInfo: PersonalInfo | undefined;
-  /** this line is used by starport scaffolding # genesis/proto/state */
   residenceInfo: ResidenceInfo | undefined;
+  /** this line is used by starport scaffolding # genesis/proto/state */
+  contactInfo: ContactInfo | undefined;
 }
 
 const baseGenesisState: object = { port_id: "" };
@@ -63,6 +65,12 @@ export const GenesisState = {
         writer.uint32(66).fork()
       ).ldelim();
     }
+    if (message.contactInfo !== undefined) {
+      ContactInfo.encode(
+        message.contactInfo,
+        writer.uint32(74).fork()
+      ).ldelim();
+    }
     return writer;
   },
 
@@ -103,6 +111,9 @@ export const GenesisState = {
           break;
         case 8:
           message.residenceInfo = ResidenceInfo.decode(reader, reader.uint32());
+          break;
+        case 9:
+          message.contactInfo = ContactInfo.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -164,6 +175,11 @@ export const GenesisState = {
     } else {
       message.residenceInfo = undefined;
     }
+    if (object.contactInfo !== undefined && object.contactInfo !== null) {
+      message.contactInfo = ContactInfo.fromJSON(object.contactInfo);
+    } else {
+      message.contactInfo = undefined;
+    }
     return message;
   },
 
@@ -201,6 +217,10 @@ export const GenesisState = {
     message.residenceInfo !== undefined &&
       (obj.residenceInfo = message.residenceInfo
         ? ResidenceInfo.toJSON(message.residenceInfo)
+        : undefined);
+    message.contactInfo !== undefined &&
+      (obj.contactInfo = message.contactInfo
+        ? ContactInfo.toJSON(message.contactInfo)
         : undefined);
     return obj;
   },
@@ -256,6 +276,11 @@ export const GenesisState = {
       message.residenceInfo = ResidenceInfo.fromPartial(object.residenceInfo);
     } else {
       message.residenceInfo = undefined;
+    }
+    if (object.contactInfo !== undefined && object.contactInfo !== null) {
+      message.contactInfo = ContactInfo.fromPartial(object.contactInfo);
+    } else {
+      message.contactInfo = undefined;
     }
     return message;
   },

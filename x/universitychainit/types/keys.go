@@ -47,3 +47,7 @@ const (
 const (
 	ResidenceInfoKey = "ResidenceInfo-value-"
 )
+
+const (
+	ContactInfoKey = "ContactInfo-value-"
+)

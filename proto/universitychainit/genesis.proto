@@ -9,6 +9,7 @@ import "universitychainit/exams_info.proto";
 import "universitychainit/transcript_of_records.proto";
 import "universitychainit/personal_info.proto";
 import "universitychainit/residence_info.proto";
+import "universitychainit/contact_info.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 
 option go_package = "university_chain_it/x/universitychainit/types";
@@ -23,5 +24,6 @@ message GenesisState {
   TranscriptOfRecords transcriptOfRecords = 6;
   PersonalInfo personalInfo = 7;
   ResidenceInfo residenceInfo = 8;
+  ContactInfo contactInfo = 9;
   // this line is used by starport scaffolding # genesis/proto/state
 }
