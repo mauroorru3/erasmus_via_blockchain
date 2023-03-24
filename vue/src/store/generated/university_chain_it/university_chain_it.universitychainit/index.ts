@@ -5,6 +5,7 @@ import { ContactInfo } from "./module/types/universitychainit/contact_info"
 import { ErasmusCareer } from "./module/types/universitychainit/erasmus_career"
 import { ErasmusContribution } from "./module/types/universitychainit/erasmus_contribution"
 import { ErasmusExams } from "./module/types/universitychainit/erasmus_exams"
+import { ErasmusInfo } from "./module/types/universitychainit/erasmus_info"
 import { ExamsInfo } from "./module/types/universitychainit/exams_info"
 import { UniversitychainitPacketData } from "./module/types/universitychainit/packet"
 import { NoData } from "./module/types/universitychainit/packet"
@@ -17,7 +18,7 @@ import { TaxesInfo } from "./module/types/universitychainit/taxes_info"
 import { TranscriptOfRecords } from "./module/types/universitychainit/transcript_of_records"
 
 
-export { AnnualTaxes, ContactInfo, ErasmusCareer, ErasmusContribution, ErasmusExams, ExamsInfo, UniversitychainitPacketData, NoData, Params, PersonalInfo, ProfessorsExams, ResidenceInfo, StudentInfo, TaxesInfo, TranscriptOfRecords };
+export { AnnualTaxes, ContactInfo, ErasmusCareer, ErasmusContribution, ErasmusExams, ErasmusInfo, ExamsInfo, UniversitychainitPacketData, NoData, Params, PersonalInfo, ProfessorsExams, ResidenceInfo, StudentInfo, TaxesInfo, TranscriptOfRecords };
 
 async function initTxClient(vuexGetters) {
 	return await txClient(vuexGetters['common/wallet/signer'], {
@@ -73,6 +74,7 @@ const getDefaultState = () => {
 				ErasmusExamsAll: {},
 				ErasmusCareer: {},
 				ErasmusCareerAll: {},
+				ErasmusInfo: {},
 				
 				_Structure: {
 						AnnualTaxes: getStructure(AnnualTaxes.fromPartial({})),
@@ -80,6 +82,7 @@ const getDefaultState = () => {
 						ErasmusCareer: getStructure(ErasmusCareer.fromPartial({})),
 						ErasmusContribution: getStructure(ErasmusContribution.fromPartial({})),
 						ErasmusExams: getStructure(ErasmusExams.fromPartial({})),
+						ErasmusInfo: getStructure(ErasmusInfo.fromPartial({})),
 						ExamsInfo: getStructure(ExamsInfo.fromPartial({})),
 						UniversitychainitPacketData: getStructure(UniversitychainitPacketData.fromPartial({})),
 						NoData: getStructure(NoData.fromPartial({})),
@@ -225,6 +228,12 @@ export default {
 						(<any> params).query=null
 					}
 			return state.ErasmusCareerAll[JSON.stringify(params)] ?? {}
+		},
+				getErasmusInfo: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.ErasmusInfo[JSON.stringify(params)] ?? {}
 		},
 				
 		getTypeStructure: (state) => (type) => {
@@ -671,6 +680,28 @@ export default {
 				return getters['getErasmusCareerAll']( { params: {...key}, query}) ?? {}
 			} catch (e) {
 				throw new Error('QueryClient:QueryErasmusCareerAll API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryErasmusInfo({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryErasmusInfo()).data
+				
+					
+				commit('QUERY', { query: 'ErasmusInfo', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryErasmusInfo', payload: { options: { all }, params: {...key},query }})
+				return getters['getErasmusInfo']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryErasmusInfo API Node Unavailable. Could not perform query: ' + e.message)
 				
 			}
 		},

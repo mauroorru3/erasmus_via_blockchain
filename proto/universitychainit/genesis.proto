@@ -15,6 +15,7 @@ import "universitychainit/taxes_info.proto";
 import "universitychainit/erasmus_contribution.proto";
 import "universitychainit/erasmus_exams.proto";
 import "universitychainit/erasmus_career.proto";
+import "universitychainit/erasmus_info.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 
 option go_package = "university_chain_it/x/universitychainit/types";
@@ -37,5 +38,6 @@ message GenesisState {
   repeated ErasmusExams erasmusExamsList = 14 [(gogoproto.nullable) = false];
   repeated ErasmusCareer erasmusCareerList = 15 [(gogoproto.nullable) = false];
   uint64 erasmusCareerCount = 16;
+  ErasmusInfo erasmusInfo = 17;
   // this line is used by starport scaffolding # genesis/proto/state
 }

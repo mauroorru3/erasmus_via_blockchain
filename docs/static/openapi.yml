@@ -31303,6 +31303,142 @@ paths:
           type: string
       tags:
         - Query
+  /university_chain_it/universitychainit/erasmus_info:
+    get:
+      summary: Queries a ErasmusInfo by index.
+      operationId: UniversityChainItUniversitychainitErasmusInfo
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              ErasmusInfo:
+                type: object
+                properties:
+                  erasmusStudent:
+                    type: string
+                  numberTimes:
+                    type: string
+                    format: uint64
+                  numberMonths:
+                    type: string
+                    format: uint64
+                  totalExams:
+                    type: string
+                    format: uint64
+                  examsPassed:
+                    type: string
+                    format: uint64
+                  totalCredits:
+                    type: string
+                    format: uint64
+                  achievedCredits:
+                    type: string
+                    format: uint64
+                  career:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uint64
+                      durationInMonths:
+                        type: string
+                        format: uint64
+                      startDate:
+                        type: string
+                      endDate:
+                        type: string
+                      erasmusType:
+                        type: string
+                        format: uint64
+                      totalCredits:
+                        type: string
+                        format: uint64
+                      achievedCredits:
+                        type: string
+                        format: uint64
+                      totalExams:
+                        type: string
+                        format: uint64
+                      examsPassed:
+                        type: string
+                        format: uint64
+                      foreignUniversityName:
+                        type: string
+                      foreignUniversityCountry:
+                        type: string
+                      foreignUniversityStudentId:
+                        type: string
+                      status:
+                        type: string
+                      contribution:
+                        type: object
+                        properties:
+                          amount:
+                            type: string
+                            format: uint64
+                          incomeBracket:
+                            type: string
+                            format: uint64
+                          paymentMade:
+                            type: boolean
+                          dateOfPayment:
+                            type: string
+                      examsData:
+                        type: object
+                        properties:
+                          examName:
+                            type: string
+                          examLabel:
+                            type: string
+                          examDate:
+                            type: string
+                          credits:
+                            type: string
+                            format: uint64
+                          marks:
+                            type: string
+                            format: uint64
+                          courseYear:
+                            type: string
+                            format: uint64
+                          status:
+                            type: boolean
+                          attendanceYear:
+                            type: string
+                            format: uint64
+                          examType:
+                            type: string
+                            format: uint64
+                          courseOfStudy:
+                            type: string
+                          homeUniversityId:
+                            type: string
+                  previousStudentFifo:
+                    type: string
+                  nextStudentFifo:
+                    type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Query
   /university_chain_it/universitychainit/exams_info:
     get:
       summary: Queries a list of ExamsInfo items.
@@ -53815,6 +53951,112 @@ definitions:
         type: string
       homeUniversityId:
         type: string
+  university_chain_it.universitychainit.ErasmusInfo:
+    type: object
+    properties:
+      erasmusStudent:
+        type: string
+      numberTimes:
+        type: string
+        format: uint64
+      numberMonths:
+        type: string
+        format: uint64
+      totalExams:
+        type: string
+        format: uint64
+      examsPassed:
+        type: string
+        format: uint64
+      totalCredits:
+        type: string
+        format: uint64
+      achievedCredits:
+        type: string
+        format: uint64
+      career:
+        type: object
+        properties:
+          id:
+            type: string
+            format: uint64
+          durationInMonths:
+            type: string
+            format: uint64
+          startDate:
+            type: string
+          endDate:
+            type: string
+          erasmusType:
+            type: string
+            format: uint64
+          totalCredits:
+            type: string
+            format: uint64
+          achievedCredits:
+            type: string
+            format: uint64
+          totalExams:
+            type: string
+            format: uint64
+          examsPassed:
+            type: string
+            format: uint64
+          foreignUniversityName:
+            type: string
+          foreignUniversityCountry:
+            type: string
+          foreignUniversityStudentId:
+            type: string
+          status:
+            type: string
+          contribution:
+            type: object
+            properties:
+              amount:
+                type: string
+                format: uint64
+              incomeBracket:
+                type: string
+                format: uint64
+              paymentMade:
+                type: boolean
+              dateOfPayment:
+                type: string
+          examsData:
+            type: object
+            properties:
+              examName:
+                type: string
+              examLabel:
+                type: string
+              examDate:
+                type: string
+              credits:
+                type: string
+                format: uint64
+              marks:
+                type: string
+                format: uint64
+              courseYear:
+                type: string
+                format: uint64
+              status:
+                type: boolean
+              attendanceYear:
+                type: string
+                format: uint64
+              examType:
+                type: string
+                format: uint64
+              courseOfStudy:
+                type: string
+              homeUniversityId:
+                type: string
+      previousStudentFifo:
+        type: string
+      nextStudentFifo:
+        type: string
   university_chain_it.universitychainit.ExamsInfo:
     type: object
     properties:
@@ -54356,6 +54598,115 @@ definitions:
           courseOfStudy:
             type: string
           homeUniversityId:
+            type: string
+  university_chain_it.universitychainit.QueryGetErasmusInfoResponse:
+    type: object
+    properties:
+      ErasmusInfo:
+        type: object
+        properties:
+          erasmusStudent:
+            type: string
+          numberTimes:
+            type: string
+            format: uint64
+          numberMonths:
+            type: string
+            format: uint64
+          totalExams:
+            type: string
+            format: uint64
+          examsPassed:
+            type: string
+            format: uint64
+          totalCredits:
+            type: string
+            format: uint64
+          achievedCredits:
+            type: string
+            format: uint64
+          career:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uint64
+              durationInMonths:
+                type: string
+                format: uint64
+              startDate:
+                type: string
+              endDate:
+                type: string
+              erasmusType:
+                type: string
+                format: uint64
+              totalCredits:
+                type: string
+                format: uint64
+              achievedCredits:
+                type: string
+                format: uint64
+              totalExams:
+                type: string
+                format: uint64
+              examsPassed:
+                type: string
+                format: uint64
+              foreignUniversityName:
+                type: string
+              foreignUniversityCountry:
+                type: string
+              foreignUniversityStudentId:
+                type: string
+              status:
+                type: string
+              contribution:
+                type: object
+                properties:
+                  amount:
+                    type: string
+                    format: uint64
+                  incomeBracket:
+                    type: string
+                    format: uint64
+                  paymentMade:
+                    type: boolean
+                  dateOfPayment:
+                    type: string
+              examsData:
+                type: object
+                properties:
+                  examName:
+                    type: string
+                  examLabel:
+                    type: string
+                  examDate:
+                    type: string
+                  credits:
+                    type: string
+                    format: uint64
+                  marks:
+                    type: string
+                    format: uint64
+                  courseYear:
+                    type: string
+                    format: uint64
+                  status:
+                    type: boolean
+                  attendanceYear:
+                    type: string
+                    format: uint64
+                  examType:
+                    type: string
+                    format: uint64
+                  courseOfStudy:
+                    type: string
+                  homeUniversityId:
+                    type: string
+          previousStudentFifo:
+            type: string
+          nextStudentFifo:
             type: string
   university_chain_it.universitychainit.QueryGetExamsInfoResponse:
     type: object

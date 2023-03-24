@@ -14,6 +14,7 @@ import { TaxesInfo } from "../universitychainit/taxes_info";
 import { ErasmusContribution } from "../universitychainit/erasmus_contribution";
 import { ErasmusExams } from "../universitychainit/erasmus_exams";
 import { ErasmusCareer } from "../universitychainit/erasmus_career";
+import { ErasmusInfo } from "../universitychainit/erasmus_info";
 
 export const protobufPackage = "university_chain_it.universitychainit";
 
@@ -34,8 +35,9 @@ export interface GenesisState {
   erasmusContribution: ErasmusContribution | undefined;
   erasmusExamsList: ErasmusExams[];
   erasmusCareerList: ErasmusCareer[];
-  /** this line is used by starport scaffolding # genesis/proto/state */
   erasmusCareerCount: number;
+  /** this line is used by starport scaffolding # genesis/proto/state */
+  erasmusInfo: ErasmusInfo | undefined;
 }
 
 const baseGenesisState: object = {
@@ -111,6 +113,12 @@ export const GenesisState = {
     }
     if (message.erasmusCareerCount !== 0) {
       writer.uint32(128).uint64(message.erasmusCareerCount);
+    }
+    if (message.erasmusInfo !== undefined) {
+      ErasmusInfo.encode(
+        message.erasmusInfo,
+        writer.uint32(138).fork()
+      ).ldelim();
     }
     return writer;
   },
@@ -188,6 +196,9 @@ export const GenesisState = {
           break;
         case 16:
           message.erasmusCareerCount = longToNumber(reader.uint64() as Long);
+          break;
+        case 17:
+          message.erasmusInfo = ErasmusInfo.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -312,6 +323,11 @@ export const GenesisState = {
     } else {
       message.erasmusCareerCount = 0;
     }
+    if (object.erasmusInfo !== undefined && object.erasmusInfo !== null) {
+      message.erasmusInfo = ErasmusInfo.fromJSON(object.erasmusInfo);
+    } else {
+      message.erasmusInfo = undefined;
+    }
     return message;
   },
 
@@ -387,6 +403,10 @@ export const GenesisState = {
     }
     message.erasmusCareerCount !== undefined &&
       (obj.erasmusCareerCount = message.erasmusCareerCount);
+    message.erasmusInfo !== undefined &&
+      (obj.erasmusInfo = message.erasmusInfo
+        ? ErasmusInfo.toJSON(message.erasmusInfo)
+        : undefined);
     return obj;
   },
 
@@ -504,6 +524,11 @@ export const GenesisState = {
       message.erasmusCareerCount = object.erasmusCareerCount;
     } else {
       message.erasmusCareerCount = 0;
+    }
+    if (object.erasmusInfo !== undefined && object.erasmusInfo !== null) {
+      message.erasmusInfo = ErasmusInfo.fromPartial(object.erasmusInfo);
+    } else {
+      message.erasmusInfo = undefined;
     }
     return message;
   },

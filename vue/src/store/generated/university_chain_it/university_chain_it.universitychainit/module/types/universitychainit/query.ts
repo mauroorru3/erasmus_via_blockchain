@@ -18,6 +18,7 @@ import { TaxesInfo } from "../universitychainit/taxes_info";
 import { ErasmusContribution } from "../universitychainit/erasmus_contribution";
 import { ErasmusExams } from "../universitychainit/erasmus_exams";
 import { ErasmusCareer } from "../universitychainit/erasmus_career";
+import { ErasmusInfo } from "../universitychainit/erasmus_info";
 
 export const protobufPackage = "university_chain_it.universitychainit";
 
@@ -155,6 +156,12 @@ export interface QueryAllErasmusCareerRequest {
 export interface QueryAllErasmusCareerResponse {
   ErasmusCareer: ErasmusCareer[];
   pagination: PageResponse | undefined;
+}
+
+export interface QueryGetErasmusInfoRequest {}
+
+export interface QueryGetErasmusInfoResponse {
+  ErasmusInfo: ErasmusInfo | undefined;
 }
 
 const baseQueryParamsRequest: object = {};
@@ -2773,6 +2780,133 @@ export const QueryAllErasmusCareerResponse = {
   },
 };
 
+const baseQueryGetErasmusInfoRequest: object = {};
+
+export const QueryGetErasmusInfoRequest = {
+  encode(
+    _: QueryGetErasmusInfoRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetErasmusInfoRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetErasmusInfoRequest,
+    } as QueryGetErasmusInfoRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): QueryGetErasmusInfoRequest {
+    const message = {
+      ...baseQueryGetErasmusInfoRequest,
+    } as QueryGetErasmusInfoRequest;
+    return message;
+  },
+
+  toJSON(_: QueryGetErasmusInfoRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial(
+    _: DeepPartial<QueryGetErasmusInfoRequest>
+  ): QueryGetErasmusInfoRequest {
+    const message = {
+      ...baseQueryGetErasmusInfoRequest,
+    } as QueryGetErasmusInfoRequest;
+    return message;
+  },
+};
+
+const baseQueryGetErasmusInfoResponse: object = {};
+
+export const QueryGetErasmusInfoResponse = {
+  encode(
+    message: QueryGetErasmusInfoResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.ErasmusInfo !== undefined) {
+      ErasmusInfo.encode(
+        message.ErasmusInfo,
+        writer.uint32(10).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetErasmusInfoResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetErasmusInfoResponse,
+    } as QueryGetErasmusInfoResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.ErasmusInfo = ErasmusInfo.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetErasmusInfoResponse {
+    const message = {
+      ...baseQueryGetErasmusInfoResponse,
+    } as QueryGetErasmusInfoResponse;
+    if (object.ErasmusInfo !== undefined && object.ErasmusInfo !== null) {
+      message.ErasmusInfo = ErasmusInfo.fromJSON(object.ErasmusInfo);
+    } else {
+      message.ErasmusInfo = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetErasmusInfoResponse): unknown {
+    const obj: any = {};
+    message.ErasmusInfo !== undefined &&
+      (obj.ErasmusInfo = message.ErasmusInfo
+        ? ErasmusInfo.toJSON(message.ErasmusInfo)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetErasmusInfoResponse>
+  ): QueryGetErasmusInfoResponse {
+    const message = {
+      ...baseQueryGetErasmusInfoResponse,
+    } as QueryGetErasmusInfoResponse;
+    if (object.ErasmusInfo !== undefined && object.ErasmusInfo !== null) {
+      message.ErasmusInfo = ErasmusInfo.fromPartial(object.ErasmusInfo);
+    } else {
+      message.ErasmusInfo = undefined;
+    }
+    return message;
+  },
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Parameters queries the parameters of the module. */
@@ -2845,6 +2979,10 @@ export interface Query {
   ErasmusCareerAll(
     request: QueryAllErasmusCareerRequest
   ): Promise<QueryAllErasmusCareerResponse>;
+  /** Queries a ErasmusInfo by index. */
+  ErasmusInfo(
+    request: QueryGetErasmusInfoRequest
+  ): Promise<QueryGetErasmusInfoResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -3097,6 +3235,20 @@ export class QueryClientImpl implements Query {
     );
     return promise.then((data) =>
       QueryAllErasmusCareerResponse.decode(new Reader(data))
+    );
+  }
+
+  ErasmusInfo(
+    request: QueryGetErasmusInfoRequest
+  ): Promise<QueryGetErasmusInfoResponse> {
+    const data = QueryGetErasmusInfoRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "university_chain_it.universitychainit.Query",
+      "ErasmusInfo",
+      data
+    );
+    return promise.then((data) =>
+      QueryGetErasmusInfoResponse.decode(new Reader(data))
     );
   }
 }

@@ -116,6 +116,18 @@ func TestGenesisState_Validate(t *testing.T) {
 					},
 				},
 				ErasmusCareerCount: 2,
+				ErasmusInfo: &types.ErasmusInfo{
+					ErasmusStudent:      "57",
+					NumberTimes:         69,
+					NumberMonths:        57,
+					TotalExams:          87,
+					ExamsPassed:         51,
+					TotalCredits:        7,
+					AchievedCredits:     36,
+					Career:              new(types.Career),
+					PreviousStudentFifo: "42",
+					NextStudentFifo:     "21",
+				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,

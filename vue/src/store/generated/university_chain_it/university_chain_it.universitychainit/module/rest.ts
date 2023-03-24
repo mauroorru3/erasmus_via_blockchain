@@ -107,6 +107,31 @@ export interface UniversitychainitErasmusExams {
   homeUniversityId?: string;
 }
 
+export interface UniversitychainitErasmusInfo {
+  erasmusStudent?: string;
+
+  /** @format uint64 */
+  numberTimes?: string;
+
+  /** @format uint64 */
+  numberMonths?: string;
+
+  /** @format uint64 */
+  totalExams?: string;
+
+  /** @format uint64 */
+  examsPassed?: string;
+
+  /** @format uint64 */
+  totalCredits?: string;
+
+  /** @format uint64 */
+  achievedCredits?: string;
+  career?: UniversitychainitErasmusCareer;
+  previousStudentFifo?: string;
+  nextStudentFifo?: string;
+}
+
 export interface UniversitychainitExamsInfo {
   examName?: string;
   examLabel?: string;
@@ -246,6 +271,10 @@ export interface UniversitychainitQueryGetErasmusContributionResponse {
 
 export interface UniversitychainitQueryGetErasmusExamsResponse {
   erasmusExams?: UniversitychainitErasmusExams;
+}
+
+export interface UniversitychainitQueryGetErasmusInfoResponse {
+  ErasmusInfo?: UniversitychainitErasmusInfo;
 }
 
 export interface UniversitychainitQueryGetExamsInfoResponse {
@@ -750,6 +779,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryErasmusExams = (examName: string, params: RequestParams = {}) =>
     this.request<UniversitychainitQueryGetErasmusExamsResponse, RpcStatus>({
       path: `/university_chain_it/universitychainit/erasmus_exams/${examName}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryErasmusInfo
+   * @summary Queries a ErasmusInfo by index.
+   * @request GET:/university_chain_it/universitychainit/erasmus_info
+   */
+  queryErasmusInfo = (params: RequestParams = {}) =>
+    this.request<UniversitychainitQueryGetErasmusInfoResponse, RpcStatus>({
+      path: `/university_chain_it/universitychainit/erasmus_info`,
       method: "GET",
       format: "json",
       ...params,
