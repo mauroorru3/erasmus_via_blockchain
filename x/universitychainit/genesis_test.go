@@ -91,6 +91,14 @@ func TestGenesis(t *testing.T) {
 			PaymentMade:   true,
 			DateOfPayment: "33",
 		},
+		ErasmusExamsList: []types.ErasmusExams{
+			{
+				ExamName: "0",
+			},
+			{
+				ExamName: "1",
+			},
+		},
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
@@ -115,5 +123,6 @@ func TestGenesis(t *testing.T) {
 	require.Equal(t, genesisState.AnnualTaxesCount, got.AnnualTaxesCount)
 	require.Equal(t, genesisState.TaxesInfo, got.TaxesInfo)
 	require.Equal(t, genesisState.ErasmusContribution, got.ErasmusContribution)
+	require.ElementsMatch(t, genesisState.ErasmusExamsList, got.ErasmusExamsList)
 	// this line is used by starport scaffolding # genesis/test/assert
 }

@@ -3,6 +3,7 @@ import { txClient, queryClient, MissingWalletError , registry} from './module'
 import { AnnualTaxes } from "./module/types/universitychainit/annual_taxes"
 import { ContactInfo } from "./module/types/universitychainit/contact_info"
 import { ErasmusContribution } from "./module/types/universitychainit/erasmus_contribution"
+import { ErasmusExams } from "./module/types/universitychainit/erasmus_exams"
 import { ExamsInfo } from "./module/types/universitychainit/exams_info"
 import { UniversitychainitPacketData } from "./module/types/universitychainit/packet"
 import { NoData } from "./module/types/universitychainit/packet"
@@ -15,7 +16,7 @@ import { TaxesInfo } from "./module/types/universitychainit/taxes_info"
 import { TranscriptOfRecords } from "./module/types/universitychainit/transcript_of_records"
 
 
-export { AnnualTaxes, ContactInfo, ErasmusContribution, ExamsInfo, UniversitychainitPacketData, NoData, Params, PersonalInfo, ProfessorsExams, ResidenceInfo, StudentInfo, TaxesInfo, TranscriptOfRecords };
+export { AnnualTaxes, ContactInfo, ErasmusContribution, ErasmusExams, ExamsInfo, UniversitychainitPacketData, NoData, Params, PersonalInfo, ProfessorsExams, ResidenceInfo, StudentInfo, TaxesInfo, TranscriptOfRecords };
 
 async function initTxClient(vuexGetters) {
 	return await txClient(vuexGetters['common/wallet/signer'], {
@@ -67,11 +68,14 @@ const getDefaultState = () => {
 				AnnualTaxesAll: {},
 				TaxesInfo: {},
 				ErasmusContribution: {},
+				ErasmusExams: {},
+				ErasmusExamsAll: {},
 				
 				_Structure: {
 						AnnualTaxes: getStructure(AnnualTaxes.fromPartial({})),
 						ContactInfo: getStructure(ContactInfo.fromPartial({})),
 						ErasmusContribution: getStructure(ErasmusContribution.fromPartial({})),
+						ErasmusExams: getStructure(ErasmusExams.fromPartial({})),
 						ExamsInfo: getStructure(ExamsInfo.fromPartial({})),
 						UniversitychainitPacketData: getStructure(UniversitychainitPacketData.fromPartial({})),
 						NoData: getStructure(NoData.fromPartial({})),
@@ -193,6 +197,18 @@ export default {
 						(<any> params).query=null
 					}
 			return state.ErasmusContribution[JSON.stringify(params)] ?? {}
+		},
+				getErasmusExams: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.ErasmusExams[JSON.stringify(params)] ?? {}
+		},
+				getErasmusExamsAll: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.ErasmusExamsAll[JSON.stringify(params)] ?? {}
 		},
 				
 		getTypeStructure: (state) => (type) => {
@@ -543,6 +559,54 @@ export default {
 				return getters['getErasmusContribution']( { params: {...key}, query}) ?? {}
 			} catch (e) {
 				throw new Error('QueryClient:QueryErasmusContribution API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryErasmusExams({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryErasmusExams( key.examName)).data
+				
+					
+				commit('QUERY', { query: 'ErasmusExams', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryErasmusExams', payload: { options: { all }, params: {...key},query }})
+				return getters['getErasmusExams']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryErasmusExams API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryErasmusExamsAll({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryErasmusExamsAll(query)).data
+				
+					
+				while (all && (<any> value).pagination && (<any> value).pagination.next_key!=null) {
+					let next_values=(await queryClient.queryErasmusExamsAll({...query, 'pagination.key':(<any> value).pagination.next_key})).data
+					value = mergeResults(value, next_values);
+				}
+				commit('QUERY', { query: 'ErasmusExamsAll', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryErasmusExamsAll', payload: { options: { all }, params: {...key},query }})
+				return getters['getErasmusExamsAll']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryErasmusExamsAll API Node Unavailable. Could not perform query: ' + e.message)
 				
 			}
 		},

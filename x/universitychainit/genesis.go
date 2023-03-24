@@ -52,6 +52,10 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 	if genState.ErasmusContribution != nil {
 		k.SetErasmusContribution(ctx, *genState.ErasmusContribution)
 	}
+	// Set all the erasmusExams
+	for _, elem := range genState.ErasmusExamsList {
+		k.SetErasmusExams(ctx, elem)
+	}
 	// this line is used by starport scaffolding # genesis/module/init
 	k.SetPort(ctx, genState.PortId)
 	// Only try to bind to port if it is not already bound, since we may already own
@@ -112,6 +116,7 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 	if found {
 		genesis.ErasmusContribution = &erasmusContribution
 	}
+	genesis.ErasmusExamsList = k.GetAllErasmusExams(ctx)
 	// this line is used by starport scaffolding # genesis/module/export
 
 	return genesis

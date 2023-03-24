@@ -16,6 +16,7 @@ import { ContactInfo } from "../universitychainit/contact_info";
 import { AnnualTaxes } from "../universitychainit/annual_taxes";
 import { TaxesInfo } from "../universitychainit/taxes_info";
 import { ErasmusContribution } from "../universitychainit/erasmus_contribution";
+import { ErasmusExams } from "../universitychainit/erasmus_exams";
 
 export const protobufPackage = "university_chain_it.universitychainit";
 
@@ -119,6 +120,23 @@ export interface QueryGetErasmusContributionRequest {}
 
 export interface QueryGetErasmusContributionResponse {
   ErasmusContribution: ErasmusContribution | undefined;
+}
+
+export interface QueryGetErasmusExamsRequest {
+  examName: string;
+}
+
+export interface QueryGetErasmusExamsResponse {
+  erasmusExams: ErasmusExams | undefined;
+}
+
+export interface QueryAllErasmusExamsRequest {
+  pagination: PageRequest | undefined;
+}
+
+export interface QueryAllErasmusExamsResponse {
+  erasmusExams: ErasmusExams[];
+  pagination: PageResponse | undefined;
 }
 
 const baseQueryParamsRequest: object = {};
@@ -2099,6 +2117,325 @@ export const QueryGetErasmusContributionResponse = {
   },
 };
 
+const baseQueryGetErasmusExamsRequest: object = { examName: "" };
+
+export const QueryGetErasmusExamsRequest = {
+  encode(
+    message: QueryGetErasmusExamsRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.examName !== "") {
+      writer.uint32(10).string(message.examName);
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetErasmusExamsRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetErasmusExamsRequest,
+    } as QueryGetErasmusExamsRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.examName = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetErasmusExamsRequest {
+    const message = {
+      ...baseQueryGetErasmusExamsRequest,
+    } as QueryGetErasmusExamsRequest;
+    if (object.examName !== undefined && object.examName !== null) {
+      message.examName = String(object.examName);
+    } else {
+      message.examName = "";
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetErasmusExamsRequest): unknown {
+    const obj: any = {};
+    message.examName !== undefined && (obj.examName = message.examName);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetErasmusExamsRequest>
+  ): QueryGetErasmusExamsRequest {
+    const message = {
+      ...baseQueryGetErasmusExamsRequest,
+    } as QueryGetErasmusExamsRequest;
+    if (object.examName !== undefined && object.examName !== null) {
+      message.examName = object.examName;
+    } else {
+      message.examName = "";
+    }
+    return message;
+  },
+};
+
+const baseQueryGetErasmusExamsResponse: object = {};
+
+export const QueryGetErasmusExamsResponse = {
+  encode(
+    message: QueryGetErasmusExamsResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.erasmusExams !== undefined) {
+      ErasmusExams.encode(
+        message.erasmusExams,
+        writer.uint32(10).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetErasmusExamsResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetErasmusExamsResponse,
+    } as QueryGetErasmusExamsResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.erasmusExams = ErasmusExams.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetErasmusExamsResponse {
+    const message = {
+      ...baseQueryGetErasmusExamsResponse,
+    } as QueryGetErasmusExamsResponse;
+    if (object.erasmusExams !== undefined && object.erasmusExams !== null) {
+      message.erasmusExams = ErasmusExams.fromJSON(object.erasmusExams);
+    } else {
+      message.erasmusExams = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetErasmusExamsResponse): unknown {
+    const obj: any = {};
+    message.erasmusExams !== undefined &&
+      (obj.erasmusExams = message.erasmusExams
+        ? ErasmusExams.toJSON(message.erasmusExams)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetErasmusExamsResponse>
+  ): QueryGetErasmusExamsResponse {
+    const message = {
+      ...baseQueryGetErasmusExamsResponse,
+    } as QueryGetErasmusExamsResponse;
+    if (object.erasmusExams !== undefined && object.erasmusExams !== null) {
+      message.erasmusExams = ErasmusExams.fromPartial(object.erasmusExams);
+    } else {
+      message.erasmusExams = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllErasmusExamsRequest: object = {};
+
+export const QueryAllErasmusExamsRequest = {
+  encode(
+    message: QueryAllErasmusExamsRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllErasmusExamsRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllErasmusExamsRequest,
+    } as QueryAllErasmusExamsRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllErasmusExamsRequest {
+    const message = {
+      ...baseQueryAllErasmusExamsRequest,
+    } as QueryAllErasmusExamsRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllErasmusExamsRequest): unknown {
+    const obj: any = {};
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageRequest.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllErasmusExamsRequest>
+  ): QueryAllErasmusExamsRequest {
+    const message = {
+      ...baseQueryAllErasmusExamsRequest,
+    } as QueryAllErasmusExamsRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllErasmusExamsResponse: object = {};
+
+export const QueryAllErasmusExamsResponse = {
+  encode(
+    message: QueryAllErasmusExamsResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    for (const v of message.erasmusExams) {
+      ErasmusExams.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(
+        message.pagination,
+        writer.uint32(18).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllErasmusExamsResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllErasmusExamsResponse,
+    } as QueryAllErasmusExamsResponse;
+    message.erasmusExams = [];
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.erasmusExams.push(
+            ErasmusExams.decode(reader, reader.uint32())
+          );
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllErasmusExamsResponse {
+    const message = {
+      ...baseQueryAllErasmusExamsResponse,
+    } as QueryAllErasmusExamsResponse;
+    message.erasmusExams = [];
+    if (object.erasmusExams !== undefined && object.erasmusExams !== null) {
+      for (const e of object.erasmusExams) {
+        message.erasmusExams.push(ErasmusExams.fromJSON(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllErasmusExamsResponse): unknown {
+    const obj: any = {};
+    if (message.erasmusExams) {
+      obj.erasmusExams = message.erasmusExams.map((e) =>
+        e ? ErasmusExams.toJSON(e) : undefined
+      );
+    } else {
+      obj.erasmusExams = [];
+    }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageResponse.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllErasmusExamsResponse>
+  ): QueryAllErasmusExamsResponse {
+    const message = {
+      ...baseQueryAllErasmusExamsResponse,
+    } as QueryAllErasmusExamsResponse;
+    message.erasmusExams = [];
+    if (object.erasmusExams !== undefined && object.erasmusExams !== null) {
+      for (const e of object.erasmusExams) {
+        message.erasmusExams.push(ErasmusExams.fromPartial(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Parameters queries the parameters of the module. */
@@ -2155,6 +2492,14 @@ export interface Query {
   ErasmusContribution(
     request: QueryGetErasmusContributionRequest
   ): Promise<QueryGetErasmusContributionResponse>;
+  /** Queries a ErasmusExams by index. */
+  ErasmusExams(
+    request: QueryGetErasmusExamsRequest
+  ): Promise<QueryGetErasmusExamsResponse>;
+  /** Queries a list of ErasmusExams items. */
+  ErasmusExamsAll(
+    request: QueryAllErasmusExamsRequest
+  ): Promise<QueryAllErasmusExamsResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -2351,6 +2696,34 @@ export class QueryClientImpl implements Query {
     );
     return promise.then((data) =>
       QueryGetErasmusContributionResponse.decode(new Reader(data))
+    );
+  }
+
+  ErasmusExams(
+    request: QueryGetErasmusExamsRequest
+  ): Promise<QueryGetErasmusExamsResponse> {
+    const data = QueryGetErasmusExamsRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "university_chain_it.universitychainit.Query",
+      "ErasmusExams",
+      data
+    );
+    return promise.then((data) =>
+      QueryGetErasmusExamsResponse.decode(new Reader(data))
+    );
+  }
+
+  ErasmusExamsAll(
+    request: QueryAllErasmusExamsRequest
+  ): Promise<QueryAllErasmusExamsResponse> {
+    const data = QueryAllErasmusExamsRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "university_chain_it.universitychainit.Query",
+      "ErasmusExamsAll",
+      data
+    );
+    return promise.then((data) =>
+      QueryAllErasmusExamsResponse.decode(new Reader(data))
     );
   }
 }

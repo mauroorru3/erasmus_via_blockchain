@@ -99,6 +99,14 @@ func TestGenesisState_Validate(t *testing.T) {
 					PaymentMade:   false,
 					DateOfPayment: "10",
 				},
+				ErasmusExamsList: []types.ErasmusExams{
+					{
+						ExamName: "0",
+					},
+					{
+						ExamName: "1",
+					},
+				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
@@ -154,6 +162,20 @@ func TestGenesisState_Validate(t *testing.T) {
 					},
 				},
 				AnnualTaxesCount: 0,
+			},
+			valid: false,
+		},
+		{
+			desc: "duplicated erasmusExams",
+			genState: &types.GenesisState{
+				ErasmusExamsList: []types.ErasmusExams{
+					{
+						ExamName: "0",
+					},
+					{
+						ExamName: "0",
+					},
+				},
 			},
 			valid: false,
 		},

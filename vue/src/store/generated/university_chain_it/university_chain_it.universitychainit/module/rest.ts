@@ -52,6 +52,30 @@ export interface UniversitychainitErasmusContribution {
   dateOfPayment?: string;
 }
 
+export interface UniversitychainitErasmusExams {
+  examName?: string;
+  examLabel?: string;
+  examDate?: string;
+
+  /** @format uint64 */
+  credits?: string;
+
+  /** @format uint64 */
+  marks?: string;
+
+  /** @format uint64 */
+  courseYear?: string;
+  status?: boolean;
+
+  /** @format uint64 */
+  attendanceYear?: string;
+
+  /** @format uint64 */
+  examType?: string;
+  courseOfStudy?: string;
+  homeUniversityId?: string;
+}
+
 export interface UniversitychainitExamsInfo {
   examName?: string;
   examLabel?: string;
@@ -113,6 +137,21 @@ export interface UniversitychainitQueryAllAnnualTaxesResponse {
   pagination?: V1Beta1PageResponse;
 }
 
+export interface UniversitychainitQueryAllErasmusExamsResponse {
+  erasmusExams?: UniversitychainitErasmusExams[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
+
 export interface UniversitychainitQueryAllExamsInfoResponse {
   examsInfo?: UniversitychainitExamsInfo[];
 
@@ -153,6 +192,10 @@ export interface UniversitychainitQueryGetContactInfoResponse {
 
 export interface UniversitychainitQueryGetErasmusContributionResponse {
   ErasmusContribution?: UniversitychainitErasmusContribution;
+}
+
+export interface UniversitychainitQueryGetErasmusExamsResponse {
+  erasmusExams?: UniversitychainitErasmusExams;
 }
 
 export interface UniversitychainitQueryGetExamsInfoResponse {
@@ -573,6 +616,48 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryErasmusContribution = (params: RequestParams = {}) =>
     this.request<UniversitychainitQueryGetErasmusContributionResponse, RpcStatus>({
       path: `/university_chain_it/universitychainit/erasmus_contribution`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryErasmusExamsAll
+   * @summary Queries a list of ErasmusExams items.
+   * @request GET:/university_chain_it/universitychainit/erasmus_exams
+   */
+  queryErasmusExamsAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<UniversitychainitQueryAllErasmusExamsResponse, RpcStatus>({
+      path: `/university_chain_it/universitychainit/erasmus_exams`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryErasmusExams
+   * @summary Queries a ErasmusExams by index.
+   * @request GET:/university_chain_it/universitychainit/erasmus_exams/{examName}
+   */
+  queryErasmusExams = (examName: string, params: RequestParams = {}) =>
+    this.request<UniversitychainitQueryGetErasmusExamsResponse, RpcStatus>({
+      path: `/university_chain_it/universitychainit/erasmus_exams/${examName}`,
       method: "GET",
       format: "json",
       ...params,
