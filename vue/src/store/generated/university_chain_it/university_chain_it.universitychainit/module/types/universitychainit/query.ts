@@ -9,6 +9,7 @@ import {
 import { StudentInfo } from "../universitychainit/student_info";
 import { ExamsInfo } from "../universitychainit/exams_info";
 import { TranscriptOfRecords } from "../universitychainit/transcript_of_records";
+import { PersonalInfo } from "../universitychainit/personal_info";
 
 export const protobufPackage = "university_chain_it.universitychainit";
 
@@ -65,6 +66,12 @@ export interface QueryGetTranscriptOfRecordsRequest {}
 
 export interface QueryGetTranscriptOfRecordsResponse {
   TranscriptOfRecords: TranscriptOfRecords | undefined;
+}
+
+export interface QueryGetPersonalInfoRequest {}
+
+export interface QueryGetPersonalInfoResponse {
+  PersonalInfo: PersonalInfo | undefined;
 }
 
 const baseQueryParamsRequest: object = {};
@@ -1083,6 +1090,133 @@ export const QueryGetTranscriptOfRecordsResponse = {
   },
 };
 
+const baseQueryGetPersonalInfoRequest: object = {};
+
+export const QueryGetPersonalInfoRequest = {
+  encode(
+    _: QueryGetPersonalInfoRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetPersonalInfoRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetPersonalInfoRequest,
+    } as QueryGetPersonalInfoRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): QueryGetPersonalInfoRequest {
+    const message = {
+      ...baseQueryGetPersonalInfoRequest,
+    } as QueryGetPersonalInfoRequest;
+    return message;
+  },
+
+  toJSON(_: QueryGetPersonalInfoRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial(
+    _: DeepPartial<QueryGetPersonalInfoRequest>
+  ): QueryGetPersonalInfoRequest {
+    const message = {
+      ...baseQueryGetPersonalInfoRequest,
+    } as QueryGetPersonalInfoRequest;
+    return message;
+  },
+};
+
+const baseQueryGetPersonalInfoResponse: object = {};
+
+export const QueryGetPersonalInfoResponse = {
+  encode(
+    message: QueryGetPersonalInfoResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.PersonalInfo !== undefined) {
+      PersonalInfo.encode(
+        message.PersonalInfo,
+        writer.uint32(10).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetPersonalInfoResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetPersonalInfoResponse,
+    } as QueryGetPersonalInfoResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.PersonalInfo = PersonalInfo.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetPersonalInfoResponse {
+    const message = {
+      ...baseQueryGetPersonalInfoResponse,
+    } as QueryGetPersonalInfoResponse;
+    if (object.PersonalInfo !== undefined && object.PersonalInfo !== null) {
+      message.PersonalInfo = PersonalInfo.fromJSON(object.PersonalInfo);
+    } else {
+      message.PersonalInfo = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetPersonalInfoResponse): unknown {
+    const obj: any = {};
+    message.PersonalInfo !== undefined &&
+      (obj.PersonalInfo = message.PersonalInfo
+        ? PersonalInfo.toJSON(message.PersonalInfo)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetPersonalInfoResponse>
+  ): QueryGetPersonalInfoResponse {
+    const message = {
+      ...baseQueryGetPersonalInfoResponse,
+    } as QueryGetPersonalInfoResponse;
+    if (object.PersonalInfo !== undefined && object.PersonalInfo !== null) {
+      message.PersonalInfo = PersonalInfo.fromPartial(object.PersonalInfo);
+    } else {
+      message.PersonalInfo = undefined;
+    }
+    return message;
+  },
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Parameters queries the parameters of the module. */
@@ -1111,6 +1245,10 @@ export interface Query {
   TranscriptOfRecords(
     request: QueryGetTranscriptOfRecordsRequest
   ): Promise<QueryGetTranscriptOfRecordsResponse>;
+  /** Queries a PersonalInfo by index. */
+  PersonalInfo(
+    request: QueryGetPersonalInfoRequest
+  ): Promise<QueryGetPersonalInfoResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -1209,6 +1347,20 @@ export class QueryClientImpl implements Query {
     );
     return promise.then((data) =>
       QueryGetTranscriptOfRecordsResponse.decode(new Reader(data))
+    );
+  }
+
+  PersonalInfo(
+    request: QueryGetPersonalInfoRequest
+  ): Promise<QueryGetPersonalInfoResponse> {
+    const data = QueryGetPersonalInfoRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "university_chain_it.universitychainit.Query",
+      "PersonalInfo",
+      data
+    );
+    return promise.then((data) =>
+      QueryGetPersonalInfoResponse.decode(new Reader(data))
     );
   }
 }

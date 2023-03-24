@@ -4,6 +4,7 @@ import { ProfessorsExams } from "../universitychainit/professors_exams";
 import { StudentInfo } from "../universitychainit/student_info";
 import { ExamsInfo } from "../universitychainit/exams_info";
 import { TranscriptOfRecords } from "../universitychainit/transcript_of_records";
+import { PersonalInfo } from "../universitychainit/personal_info";
 import { Writer, Reader } from "protobufjs/minimal";
 
 export const protobufPackage = "university_chain_it.universitychainit";
@@ -15,8 +16,9 @@ export interface GenesisState {
   professorsExamsList: ProfessorsExams[];
   studentInfo: StudentInfo | undefined;
   examsInfoList: ExamsInfo[];
-  /** this line is used by starport scaffolding # genesis/proto/state */
   transcriptOfRecords: TranscriptOfRecords | undefined;
+  /** this line is used by starport scaffolding # genesis/proto/state */
+  personalInfo: PersonalInfo | undefined;
 }
 
 const baseGenesisState: object = { port_id: "" };
@@ -45,6 +47,12 @@ export const GenesisState = {
       TranscriptOfRecords.encode(
         message.transcriptOfRecords,
         writer.uint32(50).fork()
+      ).ldelim();
+    }
+    if (message.personalInfo !== undefined) {
+      PersonalInfo.encode(
+        message.personalInfo,
+        writer.uint32(58).fork()
       ).ldelim();
     }
     return writer;
@@ -81,6 +89,9 @@ export const GenesisState = {
             reader,
             reader.uint32()
           );
+          break;
+        case 7:
+          message.personalInfo = PersonalInfo.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -132,6 +143,11 @@ export const GenesisState = {
     } else {
       message.transcriptOfRecords = undefined;
     }
+    if (object.personalInfo !== undefined && object.personalInfo !== null) {
+      message.personalInfo = PersonalInfo.fromJSON(object.personalInfo);
+    } else {
+      message.personalInfo = undefined;
+    }
     return message;
   },
 
@@ -161,6 +177,10 @@ export const GenesisState = {
     message.transcriptOfRecords !== undefined &&
       (obj.transcriptOfRecords = message.transcriptOfRecords
         ? TranscriptOfRecords.toJSON(message.transcriptOfRecords)
+        : undefined);
+    message.personalInfo !== undefined &&
+      (obj.personalInfo = message.personalInfo
+        ? PersonalInfo.toJSON(message.personalInfo)
         : undefined);
     return obj;
   },
@@ -206,6 +226,11 @@ export const GenesisState = {
       );
     } else {
       message.transcriptOfRecords = undefined;
+    }
+    if (object.personalInfo !== undefined && object.personalInfo !== null) {
+      message.personalInfo = PersonalInfo.fromPartial(object.personalInfo);
+    } else {
+      message.personalInfo = undefined;
     }
     return message;
   },

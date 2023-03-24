@@ -48,6 +48,15 @@ func TestGenesis(t *testing.T) {
 			TotalCredits:    65,
 			AchievedCredits: 71,
 		},
+		PersonalInfo: &types.PersonalInfo{
+			Gender:             4,
+			DateOfBirth:        "52",
+			PrimaryNationality: "85",
+			CountryOfBirth:     "7",
+			ProvinceOfBirth:    "13",
+			TownOfBirth:        "49",
+			TaxCode:            "95",
+		},
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
@@ -65,5 +74,6 @@ func TestGenesis(t *testing.T) {
 	require.Equal(t, genesisState.StudentInfo, got.StudentInfo)
 	require.ElementsMatch(t, genesisState.ExamsInfoList, got.ExamsInfoList)
 	require.Equal(t, genesisState.TranscriptOfRecords, got.TranscriptOfRecords)
+	require.Equal(t, genesisState.PersonalInfo, got.PersonalInfo)
 	// this line is used by starport scaffolding # genesis/test/assert
 }

@@ -56,6 +56,15 @@ func TestGenesisState_Validate(t *testing.T) {
 					TotalCredits:    39,
 					AchievedCredits: 32,
 				},
+				PersonalInfo: &types.PersonalInfo{
+					Gender:             18,
+					DateOfBirth:        "58",
+					PrimaryNationality: "73",
+					CountryOfBirth:     "97",
+					ProvinceOfBirth:    "53",
+					TownOfBirth:        "7",
+					TaxCode:            "83",
+				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,

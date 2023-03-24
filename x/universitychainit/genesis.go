@@ -25,6 +25,10 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 	if genState.TranscriptOfRecords != nil {
 		k.SetTranscriptOfRecords(ctx, *genState.TranscriptOfRecords)
 	}
+	// Set if defined
+	if genState.PersonalInfo != nil {
+		k.SetPersonalInfo(ctx, *genState.PersonalInfo)
+	}
 	// this line is used by starport scaffolding # genesis/module/init
 	k.SetPort(ctx, genState.PortId)
 	// Only try to bind to port if it is not already bound, since we may already own
@@ -57,6 +61,11 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 	transcriptOfRecords, found := k.GetTranscriptOfRecords(ctx)
 	if found {
 		genesis.TranscriptOfRecords = &transcriptOfRecords
+	}
+	// Get all personalInfo
+	personalInfo, found := k.GetPersonalInfo(ctx)
+	if found {
+		genesis.PersonalInfo = &personalInfo
 	}
 	// this line is used by starport scaffolding # genesis/module/export
 

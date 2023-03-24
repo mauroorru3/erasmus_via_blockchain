@@ -48,6 +48,17 @@ export interface UniversitychainitExamsInfo {
  */
 export type UniversitychainitParams = object;
 
+export interface UniversitychainitPersonalInfo {
+  /** @format uint64 */
+  gender?: string;
+  dateOfBirth?: string;
+  primaryNationality?: string;
+  countryOfBirth?: string;
+  provinceOfBirth?: string;
+  townOfBirth?: string;
+  taxCode?: string;
+}
+
 export interface UniversitychainitProfessorsExams {
   examName?: string;
   professorName?: string;
@@ -87,6 +98,10 @@ export interface UniversitychainitQueryAllProfessorsExamsResponse {
 
 export interface UniversitychainitQueryGetExamsInfoResponse {
   examsInfo?: UniversitychainitExamsInfo;
+}
+
+export interface UniversitychainitQueryGetPersonalInfoResponse {
+  PersonalInfo?: UniversitychainitPersonalInfo;
 }
 
 export interface UniversitychainitQueryGetProfessorsExamsResponse {
@@ -457,6 +472,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryParams = (params: RequestParams = {}) =>
     this.request<UniversitychainitQueryParamsResponse, RpcStatus>({
       path: `/university_chain_it/universitychainit/params`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryPersonalInfo
+   * @summary Queries a PersonalInfo by index.
+   * @request GET:/university_chain_it/universitychainit/personal_info
+   */
+  queryPersonalInfo = (params: RequestParams = {}) =>
+    this.request<UniversitychainitQueryGetPersonalInfoResponse, RpcStatus>({
+      path: `/university_chain_it/universitychainit/personal_info`,
       method: "GET",
       format: "json",
       ...params,

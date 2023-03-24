@@ -39,3 +39,7 @@ const (
 const (
 	TranscriptOfRecordsKey = "TranscriptOfRecords-value-"
 )
+
+const (
+	PersonalInfoKey = "PersonalInfo-value-"
+)

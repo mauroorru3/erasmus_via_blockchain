@@ -4,12 +4,13 @@ import { ExamsInfo } from "./module/types/universitychainit/exams_info"
 import { UniversitychainitPacketData } from "./module/types/universitychainit/packet"
 import { NoData } from "./module/types/universitychainit/packet"
 import { Params } from "./module/types/universitychainit/params"
+import { PersonalInfo } from "./module/types/universitychainit/personal_info"
 import { ProfessorsExams } from "./module/types/universitychainit/professors_exams"
 import { StudentInfo } from "./module/types/universitychainit/student_info"
 import { TranscriptOfRecords } from "./module/types/universitychainit/transcript_of_records"
 
 
-export { ExamsInfo, UniversitychainitPacketData, NoData, Params, ProfessorsExams, StudentInfo, TranscriptOfRecords };
+export { ExamsInfo, UniversitychainitPacketData, NoData, Params, PersonalInfo, ProfessorsExams, StudentInfo, TranscriptOfRecords };
 
 async function initTxClient(vuexGetters) {
 	return await txClient(vuexGetters['common/wallet/signer'], {
@@ -54,12 +55,14 @@ const getDefaultState = () => {
 				ExamsInfo: {},
 				ExamsInfoAll: {},
 				TranscriptOfRecords: {},
+				PersonalInfo: {},
 				
 				_Structure: {
 						ExamsInfo: getStructure(ExamsInfo.fromPartial({})),
 						UniversitychainitPacketData: getStructure(UniversitychainitPacketData.fromPartial({})),
 						NoData: getStructure(NoData.fromPartial({})),
 						Params: getStructure(Params.fromPartial({})),
+						PersonalInfo: getStructure(PersonalInfo.fromPartial({})),
 						ProfessorsExams: getStructure(ProfessorsExams.fromPartial({})),
 						StudentInfo: getStructure(StudentInfo.fromPartial({})),
 						TranscriptOfRecords: getStructure(TranscriptOfRecords.fromPartial({})),
@@ -132,6 +135,12 @@ export default {
 						(<any> params).query=null
 					}
 			return state.TranscriptOfRecords[JSON.stringify(params)] ?? {}
+		},
+				getPersonalInfo: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.PersonalInfo[JSON.stringify(params)] ?? {}
 		},
 				
 		getTypeStructure: (state) => (type) => {
@@ -324,6 +333,28 @@ export default {
 				return getters['getTranscriptOfRecords']( { params: {...key}, query}) ?? {}
 			} catch (e) {
 				throw new Error('QueryClient:QueryTranscriptOfRecords API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryPersonalInfo({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryPersonalInfo()).data
+				
+					
+				commit('QUERY', { query: 'PersonalInfo', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryPersonalInfo', payload: { options: { all }, params: {...key},query }})
+				return getters['getPersonalInfo']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryPersonalInfo API Node Unavailable. Could not perform query: ' + e.message)
 				
 			}
 		},
