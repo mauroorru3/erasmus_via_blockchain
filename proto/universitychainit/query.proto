@@ -7,6 +7,7 @@ import "cosmos/base/query/v1beta1/pagination.proto";
 import "universitychainit/params.proto";
 import "universitychainit/professors_exams.proto";
 import "universitychainit/student_info.proto";
+import "universitychainit/exams_info.proto";
 // this line is used by starport scaffolding # 1
 
 option go_package = "university_chain_it/x/universitychainit/types";
@@ -31,6 +32,16 @@ service Query {
 	rpc StudentInfo(QueryGetStudentInfoRequest) returns (QueryGetStudentInfoResponse) {
 		option (google.api.http).get = "/university_chain_it/universitychainit/student_info";
 	}
+// Queries a ExamsInfo by index.
+	rpc ExamsInfo(QueryGetExamsInfoRequest) returns (QueryGetExamsInfoResponse) {
+		option (google.api.http).get = "/university_chain_it/universitychainit/exams_info/{examName}";
+	}
+
+	// Queries a list of ExamsInfo items.
+	rpc ExamsInfoAll(QueryAllExamsInfoRequest) returns (QueryAllExamsInfoResponse) {
+		option (google.api.http).get = "/university_chain_it/universitychainit/exams_info";
+	}
+
 // this line is used by starport scaffolding # 2
 }
 
@@ -66,4 +77,22 @@ message QueryGetStudentInfoRequest {}
 message QueryGetStudentInfoResponse {
 	StudentInfo StudentInfo = 1 [(gogoproto.nullable) = false];
 }
+message QueryGetExamsInfoRequest {
+	  string examName = 1;
+
+}
+
+message QueryGetExamsInfoResponse {
+	ExamsInfo examsInfo = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllExamsInfoRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllExamsInfoResponse {
+	repeated ExamsInfo examsInfo = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
 // this line is used by starport scaffolding # 3

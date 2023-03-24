@@ -20,6 +20,29 @@ export interface RpcStatus {
   details?: ProtobufAny[];
 }
 
+export interface UniversitychainitExamsInfo {
+  examName?: string;
+  examLabel?: string;
+  examDate?: string;
+
+  /** @format uint64 */
+  credits?: string;
+
+  /** @format uint64 */
+  marks?: string;
+
+  /** @format uint64 */
+  courseYear?: string;
+  status?: boolean;
+
+  /** @format uint64 */
+  attendanceYear?: string;
+
+  /** @format uint64 */
+  examType?: string;
+  courseOfStudy?: string;
+}
+
 /**
  * Params defines the parameters for the module.
  */
@@ -30,6 +53,21 @@ export interface UniversitychainitProfessorsExams {
   professorName?: string;
   professorId?: string;
   professorKey?: string;
+}
+
+export interface UniversitychainitQueryAllExamsInfoResponse {
+  examsInfo?: UniversitychainitExamsInfo[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
 }
 
 export interface UniversitychainitQueryAllProfessorsExamsResponse {
@@ -45,6 +83,10 @@ export interface UniversitychainitQueryAllProfessorsExamsResponse {
    *  }
    */
   pagination?: V1Beta1PageResponse;
+}
+
+export interface UniversitychainitQueryGetExamsInfoResponse {
+  examsInfo?: UniversitychainitExamsInfo;
 }
 
 export interface UniversitychainitQueryGetProfessorsExamsResponse {
@@ -338,10 +380,52 @@ export class HttpClient<SecurityDataType = unknown> {
 }
 
 /**
- * @title universitychainit/genesis.proto
+ * @title universitychainit/exams_info.proto
  * @version version not set
  */
 export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryExamsInfoAll
+   * @summary Queries a list of ExamsInfo items.
+   * @request GET:/university_chain_it/universitychainit/exams_info
+   */
+  queryExamsInfoAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<UniversitychainitQueryAllExamsInfoResponse, RpcStatus>({
+      path: `/university_chain_it/universitychainit/exams_info`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryExamsInfo
+   * @summary Queries a ExamsInfo by index.
+   * @request GET:/university_chain_it/universitychainit/exams_info/{examName}
+   */
+  queryExamsInfo = (examName: string, params: RequestParams = {}) =>
+    this.request<UniversitychainitQueryGetExamsInfoResponse, RpcStatus>({
+      path: `/university_chain_it/universitychainit/exams_info/${examName}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
   /**
    * No description
    *

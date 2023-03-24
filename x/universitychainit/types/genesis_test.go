@@ -41,6 +41,14 @@ func TestGenesisState_Validate(t *testing.T) {
 					NumberOfYearsOutOfCourse: 25,
 					StudentKey:               "3",
 				},
+				ExamsInfoList: []types.ExamsInfo{
+					{
+						ExamName: "0",
+					},
+					{
+						ExamName: "1",
+					},
+				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
@@ -49,6 +57,20 @@ func TestGenesisState_Validate(t *testing.T) {
 			desc: "duplicated professorsExams",
 			genState: &types.GenesisState{
 				ProfessorsExamsList: []types.ProfessorsExams{
+					{
+						ExamName: "0",
+					},
+					{
+						ExamName: "0",
+					},
+				},
+			},
+			valid: false,
+		},
+		{
+			desc: "duplicated examsInfo",
+			genState: &types.GenesisState{
+				ExamsInfoList: []types.ExamsInfo{
 					{
 						ExamName: "0",
 					},

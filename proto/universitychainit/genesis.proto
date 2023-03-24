@@ -5,6 +5,7 @@ import "gogoproto/gogo.proto";
 import "universitychainit/params.proto";
 import "universitychainit/professors_exams.proto";
 import "universitychainit/student_info.proto";
+import "universitychainit/exams_info.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 
 option go_package = "university_chain_it/x/universitychainit/types";
@@ -15,5 +16,6 @@ message GenesisState {
   string port_id = 2;
   repeated ProfessorsExams professorsExamsList = 3 [(gogoproto.nullable) = false];
   StudentInfo studentInfo = 4;
+  repeated ExamsInfo examsInfoList = 5 [(gogoproto.nullable) = false];
   // this line is used by starport scaffolding # genesis/proto/state
 }

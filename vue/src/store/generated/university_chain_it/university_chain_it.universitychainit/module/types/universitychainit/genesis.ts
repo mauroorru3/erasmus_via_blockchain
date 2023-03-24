@@ -2,6 +2,7 @@
 import { Params } from "../universitychainit/params";
 import { ProfessorsExams } from "../universitychainit/professors_exams";
 import { StudentInfo } from "../universitychainit/student_info";
+import { ExamsInfo } from "../universitychainit/exams_info";
 import { Writer, Reader } from "protobufjs/minimal";
 
 export const protobufPackage = "university_chain_it.universitychainit";
@@ -11,8 +12,9 @@ export interface GenesisState {
   params: Params | undefined;
   port_id: string;
   professorsExamsList: ProfessorsExams[];
-  /** this line is used by starport scaffolding # genesis/proto/state */
   studentInfo: StudentInfo | undefined;
+  /** this line is used by starport scaffolding # genesis/proto/state */
+  examsInfoList: ExamsInfo[];
 }
 
 const baseGenesisState: object = { port_id: "" };
@@ -34,6 +36,9 @@ export const GenesisState = {
         writer.uint32(34).fork()
       ).ldelim();
     }
+    for (const v of message.examsInfoList) {
+      ExamsInfo.encode(v!, writer.uint32(42).fork()).ldelim();
+    }
     return writer;
   },
 
@@ -42,6 +47,7 @@ export const GenesisState = {
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = { ...baseGenesisState } as GenesisState;
     message.professorsExamsList = [];
+    message.examsInfoList = [];
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -59,6 +65,9 @@ export const GenesisState = {
         case 4:
           message.studentInfo = StudentInfo.decode(reader, reader.uint32());
           break;
+        case 5:
+          message.examsInfoList.push(ExamsInfo.decode(reader, reader.uint32()));
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -70,6 +79,7 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     const message = { ...baseGenesisState } as GenesisState;
     message.professorsExamsList = [];
+    message.examsInfoList = [];
     if (object.params !== undefined && object.params !== null) {
       message.params = Params.fromJSON(object.params);
     } else {
@@ -93,6 +103,11 @@ export const GenesisState = {
     } else {
       message.studentInfo = undefined;
     }
+    if (object.examsInfoList !== undefined && object.examsInfoList !== null) {
+      for (const e of object.examsInfoList) {
+        message.examsInfoList.push(ExamsInfo.fromJSON(e));
+      }
+    }
     return message;
   },
 
@@ -112,12 +127,20 @@ export const GenesisState = {
       (obj.studentInfo = message.studentInfo
         ? StudentInfo.toJSON(message.studentInfo)
         : undefined);
+    if (message.examsInfoList) {
+      obj.examsInfoList = message.examsInfoList.map((e) =>
+        e ? ExamsInfo.toJSON(e) : undefined
+      );
+    } else {
+      obj.examsInfoList = [];
+    }
     return obj;
   },
 
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = { ...baseGenesisState } as GenesisState;
     message.professorsExamsList = [];
+    message.examsInfoList = [];
     if (object.params !== undefined && object.params !== null) {
       message.params = Params.fromPartial(object.params);
     } else {
@@ -140,6 +163,11 @@ export const GenesisState = {
       message.studentInfo = StudentInfo.fromPartial(object.studentInfo);
     } else {
       message.studentInfo = undefined;
+    }
+    if (object.examsInfoList !== undefined && object.examsInfoList !== null) {
+      for (const e of object.examsInfoList) {
+        message.examsInfoList.push(ExamsInfo.fromPartial(e));
+      }
     }
     return message;
   },

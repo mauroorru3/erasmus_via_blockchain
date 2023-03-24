@@ -7,6 +7,7 @@ import {
   PageResponse,
 } from "../cosmos/base/query/v1beta1/pagination";
 import { StudentInfo } from "../universitychainit/student_info";
+import { ExamsInfo } from "../universitychainit/exams_info";
 
 export const protobufPackage = "university_chain_it.universitychainit";
 
@@ -40,6 +41,23 @@ export interface QueryGetStudentInfoRequest {}
 
 export interface QueryGetStudentInfoResponse {
   StudentInfo: StudentInfo | undefined;
+}
+
+export interface QueryGetExamsInfoRequest {
+  examName: string;
+}
+
+export interface QueryGetExamsInfoResponse {
+  examsInfo: ExamsInfo | undefined;
+}
+
+export interface QueryAllExamsInfoRequest {
+  pagination: PageRequest | undefined;
+}
+
+export interface QueryAllExamsInfoResponse {
+  examsInfo: ExamsInfo[];
+  pagination: PageResponse | undefined;
 }
 
 const baseQueryParamsRequest: object = {};
@@ -604,6 +622,320 @@ export const QueryGetStudentInfoResponse = {
   },
 };
 
+const baseQueryGetExamsInfoRequest: object = { examName: "" };
+
+export const QueryGetExamsInfoRequest = {
+  encode(
+    message: QueryGetExamsInfoRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.examName !== "") {
+      writer.uint32(10).string(message.examName);
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetExamsInfoRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetExamsInfoRequest,
+    } as QueryGetExamsInfoRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.examName = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetExamsInfoRequest {
+    const message = {
+      ...baseQueryGetExamsInfoRequest,
+    } as QueryGetExamsInfoRequest;
+    if (object.examName !== undefined && object.examName !== null) {
+      message.examName = String(object.examName);
+    } else {
+      message.examName = "";
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetExamsInfoRequest): unknown {
+    const obj: any = {};
+    message.examName !== undefined && (obj.examName = message.examName);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetExamsInfoRequest>
+  ): QueryGetExamsInfoRequest {
+    const message = {
+      ...baseQueryGetExamsInfoRequest,
+    } as QueryGetExamsInfoRequest;
+    if (object.examName !== undefined && object.examName !== null) {
+      message.examName = object.examName;
+    } else {
+      message.examName = "";
+    }
+    return message;
+  },
+};
+
+const baseQueryGetExamsInfoResponse: object = {};
+
+export const QueryGetExamsInfoResponse = {
+  encode(
+    message: QueryGetExamsInfoResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.examsInfo !== undefined) {
+      ExamsInfo.encode(message.examsInfo, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetExamsInfoResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetExamsInfoResponse,
+    } as QueryGetExamsInfoResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.examsInfo = ExamsInfo.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetExamsInfoResponse {
+    const message = {
+      ...baseQueryGetExamsInfoResponse,
+    } as QueryGetExamsInfoResponse;
+    if (object.examsInfo !== undefined && object.examsInfo !== null) {
+      message.examsInfo = ExamsInfo.fromJSON(object.examsInfo);
+    } else {
+      message.examsInfo = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetExamsInfoResponse): unknown {
+    const obj: any = {};
+    message.examsInfo !== undefined &&
+      (obj.examsInfo = message.examsInfo
+        ? ExamsInfo.toJSON(message.examsInfo)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetExamsInfoResponse>
+  ): QueryGetExamsInfoResponse {
+    const message = {
+      ...baseQueryGetExamsInfoResponse,
+    } as QueryGetExamsInfoResponse;
+    if (object.examsInfo !== undefined && object.examsInfo !== null) {
+      message.examsInfo = ExamsInfo.fromPartial(object.examsInfo);
+    } else {
+      message.examsInfo = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllExamsInfoRequest: object = {};
+
+export const QueryAllExamsInfoRequest = {
+  encode(
+    message: QueryAllExamsInfoRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllExamsInfoRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllExamsInfoRequest,
+    } as QueryAllExamsInfoRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllExamsInfoRequest {
+    const message = {
+      ...baseQueryAllExamsInfoRequest,
+    } as QueryAllExamsInfoRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllExamsInfoRequest): unknown {
+    const obj: any = {};
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageRequest.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllExamsInfoRequest>
+  ): QueryAllExamsInfoRequest {
+    const message = {
+      ...baseQueryAllExamsInfoRequest,
+    } as QueryAllExamsInfoRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllExamsInfoResponse: object = {};
+
+export const QueryAllExamsInfoResponse = {
+  encode(
+    message: QueryAllExamsInfoResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    for (const v of message.examsInfo) {
+      ExamsInfo.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(
+        message.pagination,
+        writer.uint32(18).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllExamsInfoResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllExamsInfoResponse,
+    } as QueryAllExamsInfoResponse;
+    message.examsInfo = [];
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.examsInfo.push(ExamsInfo.decode(reader, reader.uint32()));
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllExamsInfoResponse {
+    const message = {
+      ...baseQueryAllExamsInfoResponse,
+    } as QueryAllExamsInfoResponse;
+    message.examsInfo = [];
+    if (object.examsInfo !== undefined && object.examsInfo !== null) {
+      for (const e of object.examsInfo) {
+        message.examsInfo.push(ExamsInfo.fromJSON(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllExamsInfoResponse): unknown {
+    const obj: any = {};
+    if (message.examsInfo) {
+      obj.examsInfo = message.examsInfo.map((e) =>
+        e ? ExamsInfo.toJSON(e) : undefined
+      );
+    } else {
+      obj.examsInfo = [];
+    }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageResponse.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllExamsInfoResponse>
+  ): QueryAllExamsInfoResponse {
+    const message = {
+      ...baseQueryAllExamsInfoResponse,
+    } as QueryAllExamsInfoResponse;
+    message.examsInfo = [];
+    if (object.examsInfo !== undefined && object.examsInfo !== null) {
+      for (const e of object.examsInfo) {
+        message.examsInfo.push(ExamsInfo.fromPartial(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Parameters queries the parameters of the module. */
@@ -620,6 +952,14 @@ export interface Query {
   StudentInfo(
     request: QueryGetStudentInfoRequest
   ): Promise<QueryGetStudentInfoResponse>;
+  /** Queries a ExamsInfo by index. */
+  ExamsInfo(
+    request: QueryGetExamsInfoRequest
+  ): Promise<QueryGetExamsInfoResponse>;
+  /** Queries a list of ExamsInfo items. */
+  ExamsInfoAll(
+    request: QueryAllExamsInfoRequest
+  ): Promise<QueryAllExamsInfoResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -676,6 +1016,34 @@ export class QueryClientImpl implements Query {
     );
     return promise.then((data) =>
       QueryGetStudentInfoResponse.decode(new Reader(data))
+    );
+  }
+
+  ExamsInfo(
+    request: QueryGetExamsInfoRequest
+  ): Promise<QueryGetExamsInfoResponse> {
+    const data = QueryGetExamsInfoRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "university_chain_it.universitychainit.Query",
+      "ExamsInfo",
+      data
+    );
+    return promise.then((data) =>
+      QueryGetExamsInfoResponse.decode(new Reader(data))
+    );
+  }
+
+  ExamsInfoAll(
+    request: QueryAllExamsInfoRequest
+  ): Promise<QueryAllExamsInfoResponse> {
+    const data = QueryAllExamsInfoRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "university_chain_it.universitychainit.Query",
+      "ExamsInfoAll",
+      data
+    );
+    return promise.then((data) =>
+      QueryAllExamsInfoResponse.decode(new Reader(data))
     );
   }
 }

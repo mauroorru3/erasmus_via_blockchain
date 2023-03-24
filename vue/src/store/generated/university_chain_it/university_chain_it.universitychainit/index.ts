@@ -1,5 +1,6 @@
 import { txClient, queryClient, MissingWalletError , registry} from './module'
 
+import { ExamsInfo } from "./module/types/universitychainit/exams_info"
 import { UniversitychainitPacketData } from "./module/types/universitychainit/packet"
 import { NoData } from "./module/types/universitychainit/packet"
 import { Params } from "./module/types/universitychainit/params"
@@ -7,7 +8,7 @@ import { ProfessorsExams } from "./module/types/universitychainit/professors_exa
 import { StudentInfo } from "./module/types/universitychainit/student_info"
 
 
-export { UniversitychainitPacketData, NoData, Params, ProfessorsExams, StudentInfo };
+export { ExamsInfo, UniversitychainitPacketData, NoData, Params, ProfessorsExams, StudentInfo };
 
 async function initTxClient(vuexGetters) {
 	return await txClient(vuexGetters['common/wallet/signer'], {
@@ -49,8 +50,11 @@ const getDefaultState = () => {
 				ProfessorsExams: {},
 				ProfessorsExamsAll: {},
 				StudentInfo: {},
+				ExamsInfo: {},
+				ExamsInfoAll: {},
 				
 				_Structure: {
+						ExamsInfo: getStructure(ExamsInfo.fromPartial({})),
 						UniversitychainitPacketData: getStructure(UniversitychainitPacketData.fromPartial({})),
 						NoData: getStructure(NoData.fromPartial({})),
 						Params: getStructure(Params.fromPartial({})),
@@ -107,6 +111,18 @@ export default {
 						(<any> params).query=null
 					}
 			return state.StudentInfo[JSON.stringify(params)] ?? {}
+		},
+				getExamsInfo: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.ExamsInfo[JSON.stringify(params)] ?? {}
+		},
+				getExamsInfoAll: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.ExamsInfoAll[JSON.stringify(params)] ?? {}
 		},
 				
 		getTypeStructure: (state) => (type) => {
@@ -229,6 +245,54 @@ export default {
 				return getters['getStudentInfo']( { params: {...key}, query}) ?? {}
 			} catch (e) {
 				throw new Error('QueryClient:QueryStudentInfo API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryExamsInfo({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryExamsInfo( key.examName)).data
+				
+					
+				commit('QUERY', { query: 'ExamsInfo', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryExamsInfo', payload: { options: { all }, params: {...key},query }})
+				return getters['getExamsInfo']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryExamsInfo API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryExamsInfoAll({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryExamsInfoAll(query)).data
+				
+					
+				while (all && (<any> value).pagination && (<any> value).pagination.next_key!=null) {
+					let next_values=(await queryClient.queryExamsInfoAll({...query, 'pagination.key':(<any> value).pagination.next_key})).data
+					value = mergeResults(value, next_values);
+				}
+				commit('QUERY', { query: 'ExamsInfoAll', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryExamsInfoAll', payload: { options: { all }, params: {...key},query }})
+				return getters['getExamsInfoAll']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryExamsInfoAll API Node Unavailable. Could not perform query: ' + e.message)
 				
 			}
 		},

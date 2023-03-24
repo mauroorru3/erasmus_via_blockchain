@@ -33,6 +33,14 @@ func TestGenesis(t *testing.T) {
 			NumberOfYearsOutOfCourse: 69,
 			StudentKey:               "57",
 		},
+		ExamsInfoList: []types.ExamsInfo{
+			{
+				ExamName: "0",
+			},
+			{
+				ExamName: "1",
+			},
+		},
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
@@ -48,5 +56,6 @@ func TestGenesis(t *testing.T) {
 
 	require.ElementsMatch(t, genesisState.ProfessorsExamsList, got.ProfessorsExamsList)
 	require.Equal(t, genesisState.StudentInfo, got.StudentInfo)
+	require.ElementsMatch(t, genesisState.ExamsInfoList, got.ExamsInfoList)
 	// this line is used by starport scaffolding # genesis/test/assert
 }
