@@ -5,6 +5,7 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "universitychainit/params.proto";
+import "universitychainit/professors_exams.proto";
 // this line is used by starport scaffolding # 1
 
 option go_package = "university_chain_it/x/universitychainit/types";
@@ -15,7 +16,17 @@ service Query {
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/university_chain_it/universitychainit/params";
   }
-  // this line is used by starport scaffolding # 2
+  // Queries a ProfessorsExams by index.
+	rpc ProfessorsExams(QueryGetProfessorsExamsRequest) returns (QueryGetProfessorsExamsResponse) {
+		option (google.api.http).get = "/university_chain_it/universitychainit/professors_exams/{examName}";
+	}
+
+	// Queries a list of ProfessorsExams items.
+	rpc ProfessorsExamsAll(QueryAllProfessorsExamsRequest) returns (QueryAllProfessorsExamsResponse) {
+		option (google.api.http).get = "/university_chain_it/universitychainit/professors_exams";
+	}
+
+// this line is used by starport scaffolding # 2
 }
 
 // QueryParamsRequest is request type for the Query/Params RPC method.
@@ -25,6 +36,24 @@ message QueryParamsRequest {}
 message QueryParamsResponse {
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetProfessorsExamsRequest {
+	  string examName = 1;
+
+}
+
+message QueryGetProfessorsExamsResponse {
+	ProfessorsExams professorsExams = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllProfessorsExamsRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllProfessorsExamsResponse {
+	repeated ProfessorsExams professorsExams = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 // this line is used by starport scaffolding # 3

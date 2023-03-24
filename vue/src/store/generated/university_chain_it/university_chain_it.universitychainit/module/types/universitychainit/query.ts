@@ -1,6 +1,11 @@
 /* eslint-disable */
 import { Reader, Writer } from "protobufjs/minimal";
 import { Params } from "../universitychainit/params";
+import { ProfessorsExams } from "../universitychainit/professors_exams";
+import {
+  PageRequest,
+  PageResponse,
+} from "../cosmos/base/query/v1beta1/pagination";
 
 export const protobufPackage = "university_chain_it.universitychainit";
 
@@ -11,6 +16,23 @@ export interface QueryParamsRequest {}
 export interface QueryParamsResponse {
   /** params holds all the parameters of this module. */
   params: Params | undefined;
+}
+
+export interface QueryGetProfessorsExamsRequest {
+  examName: string;
+}
+
+export interface QueryGetProfessorsExamsResponse {
+  professorsExams: ProfessorsExams | undefined;
+}
+
+export interface QueryAllProfessorsExamsRequest {
+  pagination: PageRequest | undefined;
+}
+
+export interface QueryAllProfessorsExamsResponse {
+  professorsExams: ProfessorsExams[];
+  pagination: PageResponse | undefined;
 }
 
 const baseQueryParamsRequest: object = {};
@@ -110,10 +132,356 @@ export const QueryParamsResponse = {
   },
 };
 
+const baseQueryGetProfessorsExamsRequest: object = { examName: "" };
+
+export const QueryGetProfessorsExamsRequest = {
+  encode(
+    message: QueryGetProfessorsExamsRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.examName !== "") {
+      writer.uint32(10).string(message.examName);
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetProfessorsExamsRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetProfessorsExamsRequest,
+    } as QueryGetProfessorsExamsRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.examName = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetProfessorsExamsRequest {
+    const message = {
+      ...baseQueryGetProfessorsExamsRequest,
+    } as QueryGetProfessorsExamsRequest;
+    if (object.examName !== undefined && object.examName !== null) {
+      message.examName = String(object.examName);
+    } else {
+      message.examName = "";
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetProfessorsExamsRequest): unknown {
+    const obj: any = {};
+    message.examName !== undefined && (obj.examName = message.examName);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetProfessorsExamsRequest>
+  ): QueryGetProfessorsExamsRequest {
+    const message = {
+      ...baseQueryGetProfessorsExamsRequest,
+    } as QueryGetProfessorsExamsRequest;
+    if (object.examName !== undefined && object.examName !== null) {
+      message.examName = object.examName;
+    } else {
+      message.examName = "";
+    }
+    return message;
+  },
+};
+
+const baseQueryGetProfessorsExamsResponse: object = {};
+
+export const QueryGetProfessorsExamsResponse = {
+  encode(
+    message: QueryGetProfessorsExamsResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.professorsExams !== undefined) {
+      ProfessorsExams.encode(
+        message.professorsExams,
+        writer.uint32(10).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetProfessorsExamsResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetProfessorsExamsResponse,
+    } as QueryGetProfessorsExamsResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.professorsExams = ProfessorsExams.decode(
+            reader,
+            reader.uint32()
+          );
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetProfessorsExamsResponse {
+    const message = {
+      ...baseQueryGetProfessorsExamsResponse,
+    } as QueryGetProfessorsExamsResponse;
+    if (
+      object.professorsExams !== undefined &&
+      object.professorsExams !== null
+    ) {
+      message.professorsExams = ProfessorsExams.fromJSON(
+        object.professorsExams
+      );
+    } else {
+      message.professorsExams = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetProfessorsExamsResponse): unknown {
+    const obj: any = {};
+    message.professorsExams !== undefined &&
+      (obj.professorsExams = message.professorsExams
+        ? ProfessorsExams.toJSON(message.professorsExams)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetProfessorsExamsResponse>
+  ): QueryGetProfessorsExamsResponse {
+    const message = {
+      ...baseQueryGetProfessorsExamsResponse,
+    } as QueryGetProfessorsExamsResponse;
+    if (
+      object.professorsExams !== undefined &&
+      object.professorsExams !== null
+    ) {
+      message.professorsExams = ProfessorsExams.fromPartial(
+        object.professorsExams
+      );
+    } else {
+      message.professorsExams = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllProfessorsExamsRequest: object = {};
+
+export const QueryAllProfessorsExamsRequest = {
+  encode(
+    message: QueryAllProfessorsExamsRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllProfessorsExamsRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllProfessorsExamsRequest,
+    } as QueryAllProfessorsExamsRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllProfessorsExamsRequest {
+    const message = {
+      ...baseQueryAllProfessorsExamsRequest,
+    } as QueryAllProfessorsExamsRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllProfessorsExamsRequest): unknown {
+    const obj: any = {};
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageRequest.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllProfessorsExamsRequest>
+  ): QueryAllProfessorsExamsRequest {
+    const message = {
+      ...baseQueryAllProfessorsExamsRequest,
+    } as QueryAllProfessorsExamsRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllProfessorsExamsResponse: object = {};
+
+export const QueryAllProfessorsExamsResponse = {
+  encode(
+    message: QueryAllProfessorsExamsResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    for (const v of message.professorsExams) {
+      ProfessorsExams.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(
+        message.pagination,
+        writer.uint32(18).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllProfessorsExamsResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllProfessorsExamsResponse,
+    } as QueryAllProfessorsExamsResponse;
+    message.professorsExams = [];
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.professorsExams.push(
+            ProfessorsExams.decode(reader, reader.uint32())
+          );
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllProfessorsExamsResponse {
+    const message = {
+      ...baseQueryAllProfessorsExamsResponse,
+    } as QueryAllProfessorsExamsResponse;
+    message.professorsExams = [];
+    if (
+      object.professorsExams !== undefined &&
+      object.professorsExams !== null
+    ) {
+      for (const e of object.professorsExams) {
+        message.professorsExams.push(ProfessorsExams.fromJSON(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllProfessorsExamsResponse): unknown {
+    const obj: any = {};
+    if (message.professorsExams) {
+      obj.professorsExams = message.professorsExams.map((e) =>
+        e ? ProfessorsExams.toJSON(e) : undefined
+      );
+    } else {
+      obj.professorsExams = [];
+    }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageResponse.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllProfessorsExamsResponse>
+  ): QueryAllProfessorsExamsResponse {
+    const message = {
+      ...baseQueryAllProfessorsExamsResponse,
+    } as QueryAllProfessorsExamsResponse;
+    message.professorsExams = [];
+    if (
+      object.professorsExams !== undefined &&
+      object.professorsExams !== null
+    ) {
+      for (const e of object.professorsExams) {
+        message.professorsExams.push(ProfessorsExams.fromPartial(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Parameters queries the parameters of the module. */
   Params(request: QueryParamsRequest): Promise<QueryParamsResponse>;
+  /** Queries a ProfessorsExams by index. */
+  ProfessorsExams(
+    request: QueryGetProfessorsExamsRequest
+  ): Promise<QueryGetProfessorsExamsResponse>;
+  /** Queries a list of ProfessorsExams items. */
+  ProfessorsExamsAll(
+    request: QueryAllProfessorsExamsRequest
+  ): Promise<QueryAllProfessorsExamsResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -129,6 +497,34 @@ export class QueryClientImpl implements Query {
       data
     );
     return promise.then((data) => QueryParamsResponse.decode(new Reader(data)));
+  }
+
+  ProfessorsExams(
+    request: QueryGetProfessorsExamsRequest
+  ): Promise<QueryGetProfessorsExamsResponse> {
+    const data = QueryGetProfessorsExamsRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "university_chain_it.universitychainit.Query",
+      "ProfessorsExams",
+      data
+    );
+    return promise.then((data) =>
+      QueryGetProfessorsExamsResponse.decode(new Reader(data))
+    );
+  }
+
+  ProfessorsExamsAll(
+    request: QueryAllProfessorsExamsRequest
+  ): Promise<QueryAllProfessorsExamsResponse> {
+    const data = QueryAllProfessorsExamsRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "university_chain_it.universitychainit.Query",
+      "ProfessorsExamsAll",
+      data
+    );
+    return promise.then((data) =>
+      QueryAllProfessorsExamsResponse.decode(new Reader(data))
+    );
   }
 }
 
