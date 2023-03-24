@@ -30974,6 +30974,53 @@ paths:
           type: string
       tags:
         - Query
+  /university_chain_it/universitychainit/residence_info:
+    get:
+      summary: Queries a ResidenceInfo by index.
+      operationId: UniversityChainItUniversitychainitResidenceInfo
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              ResidenceInfo:
+                type: object
+                properties:
+                  country:
+                    type: string
+                  province:
+                    type: string
+                  town:
+                    type: string
+                  postCode:
+                    type: string
+                  address:
+                    type: string
+                  houseNumber:
+                    type: string
+                  homePhone:
+                    type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Query
   /university_chain_it/universitychainit/student_info:
     get:
       summary: Queries a StudentInfo by index.
@@ -52993,6 +53040,26 @@ definitions:
             type: string
           professorKey:
             type: string
+  university_chain_it.universitychainit.QueryGetResidenceInfoResponse:
+    type: object
+    properties:
+      ResidenceInfo:
+        type: object
+        properties:
+          country:
+            type: string
+          province:
+            type: string
+          town:
+            type: string
+          postCode:
+            type: string
+          address:
+            type: string
+          houseNumber:
+            type: string
+          homePhone:
+            type: string
   university_chain_it.universitychainit.QueryGetStudentInfoResponse:
     type: object
     properties:
@@ -53074,6 +53141,23 @@ definitions:
         description: params holds all the parameters of this module.
         type: object
     description: QueryParamsResponse is response type for the Query/Params RPC method.
+  university_chain_it.universitychainit.ResidenceInfo:
+    type: object
+    properties:
+      country:
+        type: string
+      province:
+        type: string
+      town:
+        type: string
+      postCode:
+        type: string
+      address:
+        type: string
+      houseNumber:
+        type: string
+      homePhone:
+        type: string
   university_chain_it.universitychainit.StudentInfo:
     type: object
     properties:

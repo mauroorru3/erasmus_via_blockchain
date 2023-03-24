@@ -65,6 +65,15 @@ func TestGenesisState_Validate(t *testing.T) {
 					TownOfBirth:        "7",
 					TaxCode:            "83",
 				},
+				ResidenceInfo: &types.ResidenceInfo{
+					Country:     "84",
+					Province:    "11",
+					Town:        "61",
+					PostCode:    "30",
+					Address:     "13",
+					HouseNumber: "77",
+					HomePhone:   "77",
+				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,

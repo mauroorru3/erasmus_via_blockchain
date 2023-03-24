@@ -57,6 +57,15 @@ func TestGenesis(t *testing.T) {
 			TownOfBirth:        "49",
 			TaxCode:            "95",
 		},
+		ResidenceInfo: &types.ResidenceInfo{
+			Country:     "38",
+			Province:    "45",
+			Town:        "84",
+			PostCode:    "18",
+			Address:     "65",
+			HouseNumber: "58",
+			HomePhone:   "89",
+		},
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
@@ -75,5 +84,6 @@ func TestGenesis(t *testing.T) {
 	require.ElementsMatch(t, genesisState.ExamsInfoList, got.ExamsInfoList)
 	require.Equal(t, genesisState.TranscriptOfRecords, got.TranscriptOfRecords)
 	require.Equal(t, genesisState.PersonalInfo, got.PersonalInfo)
+	require.Equal(t, genesisState.ResidenceInfo, got.ResidenceInfo)
 	// this line is used by starport scaffolding # genesis/test/assert
 }

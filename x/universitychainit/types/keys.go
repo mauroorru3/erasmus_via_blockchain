@@ -43,3 +43,7 @@ const (
 const (
 	PersonalInfoKey = "PersonalInfo-value-"
 )
+
+const (
+	ResidenceInfoKey = "ResidenceInfo-value-"
+)

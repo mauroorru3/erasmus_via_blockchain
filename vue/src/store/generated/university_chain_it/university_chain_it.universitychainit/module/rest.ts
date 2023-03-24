@@ -108,6 +108,10 @@ export interface UniversitychainitQueryGetProfessorsExamsResponse {
   professorsExams?: UniversitychainitProfessorsExams;
 }
 
+export interface UniversitychainitQueryGetResidenceInfoResponse {
+  ResidenceInfo?: UniversitychainitResidenceInfo;
+}
+
 export interface UniversitychainitQueryGetStudentInfoResponse {
   StudentInfo?: UniversitychainitStudentInfo;
 }
@@ -122,6 +126,16 @@ export interface UniversitychainitQueryGetTranscriptOfRecordsResponse {
 export interface UniversitychainitQueryParamsResponse {
   /** params holds all the parameters of this module. */
   params?: UniversitychainitParams;
+}
+
+export interface UniversitychainitResidenceInfo {
+  country?: string;
+  province?: string;
+  town?: string;
+  postCode?: string;
+  address?: string;
+  houseNumber?: string;
+  homePhone?: string;
 }
 
 export interface UniversitychainitStudentInfo {
@@ -530,6 +544,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryProfessorsExams = (examName: string, params: RequestParams = {}) =>
     this.request<UniversitychainitQueryGetProfessorsExamsResponse, RpcStatus>({
       path: `/university_chain_it/universitychainit/professors_exams/${examName}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryResidenceInfo
+   * @summary Queries a ResidenceInfo by index.
+   * @request GET:/university_chain_it/universitychainit/residence_info
+   */
+  queryResidenceInfo = (params: RequestParams = {}) =>
+    this.request<UniversitychainitQueryGetResidenceInfoResponse, RpcStatus>({
+      path: `/university_chain_it/universitychainit/residence_info`,
       method: "GET",
       format: "json",
       ...params,

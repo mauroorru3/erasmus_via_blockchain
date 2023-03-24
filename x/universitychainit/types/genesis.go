@@ -17,6 +17,7 @@ func DefaultGenesis() *GenesisState {
 		ExamsInfoList:       []ExamsInfo{},
 		TranscriptOfRecords: nil,
 		PersonalInfo:        nil,
+		ResidenceInfo:       nil,
 		// this line is used by starport scaffolding # genesis/types/default
 		Params: DefaultParams(),
 	}
