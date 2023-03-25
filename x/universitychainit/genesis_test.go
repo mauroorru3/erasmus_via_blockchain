@@ -3,11 +3,12 @@ package universitychainit_test
 import (
 	"testing"
 
-	"github.com/stretchr/testify/require"
 	keepertest "university_chain_it/testutil/keeper"
 	"university_chain_it/testutil/nullify"
 	"university_chain_it/x/universitychainit"
 	"university_chain_it/x/universitychainit/types"
+
+	"github.com/stretchr/testify/require"
 )
 
 func TestGenesis(t *testing.T) {
@@ -42,7 +43,7 @@ func TestGenesis(t *testing.T) {
 			},
 		},
 		TranscriptOfRecords: &types.TranscriptOfRecords{
-			ExamsData:       new(types.ExamsData),
+			ExamsData:       new(types.ExamsInfo),
 			TotalExams:      44,
 			ExamsPassed:     43,
 			TotalCredits:    65,
@@ -83,7 +84,7 @@ func TestGenesis(t *testing.T) {
 		TaxesInfo: &types.TaxesInfo{
 			Status:       false,
 			TotalAmount:  73,
-			TaxesHistory: new(types.TaxesHistory),
+			TaxesHistory: new(types.AnnualTaxes),
 		},
 		ErasmusContribution: &types.ErasmusContribution{
 			Amount:        86,
@@ -116,7 +117,7 @@ func TestGenesis(t *testing.T) {
 			ExamsPassed:         45,
 			TotalCredits:        1,
 			AchievedCredits:     10,
-			Career:              new(types.Career),
+			Career:              new(types.ErasmusCareer),
 			PreviousStudentFifo: "83",
 			NextStudentFifo:     "26",
 		},

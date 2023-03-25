@@ -3,8 +3,9 @@ package types_test
 import (
 	"testing"
 
-	"github.com/stretchr/testify/require"
 	"university_chain_it/x/universitychainit/types"
+
+	"github.com/stretchr/testify/require"
 )
 
 func TestGenesisState_Validate(t *testing.T) {
@@ -50,7 +51,7 @@ func TestGenesisState_Validate(t *testing.T) {
 					},
 				},
 				TranscriptOfRecords: &types.TranscriptOfRecords{
-					ExamsData:       new(types.ExamsData),
+					ExamsData:       new(types.ExamsInfo),
 					TotalExams:      55,
 					ExamsPassed:     53,
 					TotalCredits:    39,
@@ -91,7 +92,7 @@ func TestGenesisState_Validate(t *testing.T) {
 				TaxesInfo: &types.TaxesInfo{
 					Status:       false,
 					TotalAmount:  63,
-					TaxesHistory: new(types.TaxesHistory),
+					TaxesHistory: new(types.AnnualTaxes),
 				},
 				ErasmusContribution: &types.ErasmusContribution{
 					Amount:        59,
@@ -124,7 +125,7 @@ func TestGenesisState_Validate(t *testing.T) {
 					ExamsPassed:         51,
 					TotalCredits:        7,
 					AchievedCredits:     36,
-					Career:              new(types.Career),
+					Career:              new(types.ErasmusCareer),
 					PreviousStudentFifo: "42",
 					NextStudentFifo:     "21",
 				},
