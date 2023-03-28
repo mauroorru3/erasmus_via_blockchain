@@ -320,3 +320,35 @@ func TestGenesisState_Validate(t *testing.T) {
 		})
 	}
 }
+
+func TestDefaultGenesisState_ExpectedInitialValues(t *testing.T) {
+	require.EqualValues(t,
+		&types.GenesisState{
+			PortId:                "universitychainit",
+			ProfessorsExamsList:   []types.ProfessorsExams{},
+			StudentInfo:           nil,
+			ExamsInfoList:         []types.ExamsInfo{},
+			TranscriptOfRecords:   nil,
+			PersonalInfo:          nil,
+			ResidenceInfo:         nil,
+			ContactInfo:           nil,
+			AnnualTaxesList:       []types.AnnualTaxes{},
+			TaxesInfo:             nil,
+			ErasmusContribution:   nil,
+			ErasmusExamsList:      []types.ErasmusExams{},
+			ErasmusCareerList:     []types.ErasmusCareer{},
+			ErasmusInfo:           nil,
+			StoredStudentList:     []types.StoredStudent{},
+			UniversityInfo:        nil,
+			UniversityDetailsList: []types.UniversityDetails{},
+			ChainInfo: types.ChainInfo{
+				HubKey:     "",
+				ChainKey:   "",
+				Country:    "",
+				InitStatus: false,
+			},
+			ForeignUniversitiesList: []types.ForeignUniversities{},
+			Params:                  types.DefaultParams(),
+		},
+		types.DefaultGenesis())
+}
