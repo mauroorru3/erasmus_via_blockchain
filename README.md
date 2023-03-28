@@ -9,6 +9,7 @@ The chain enables several possibilities. The main ones are as follows:
 - assignment of an exam grade by a professor to a student;
 - Erasmus+ programme request of a student to another university in a foreign chain.
 
+N.B. the names, surnames and addresses present are fictitious.
 
 ## Installation
 
