@@ -1,0 +1,24 @@
+
+{
+    "CAIList" : [
+        {
+            "department": "Computer Science",
+            "Name and Surname": "Graziella Sabatini",
+            "address": "cosmos1zwf5j033nczy7t6vclckdlrlml2mqhnjfy9d66",
+            "mnemonic": "letter anchor zoo aware boat auto market code holiday sibling awesome angle mad father reveal pyramid bicycle add lake liberty tissue mean any exotic"
+        },
+        {
+            "department": "Physics",
+            "Name and Surname": "Serena Foletti",
+            "address": "cosmos1jechjp84nls9cdulwswy350m3jah4r0c59wnjq",
+            "mnemonic": "equip myself clog baby sport fringe swift together manual birth pass cliff century ship awake pumpkin beef snap maple meat dinner leg polar can"
+        },
+        {
+            "department": "Law",
+            "Name and Surname": "Leonardo Folliero",
+            "address": "cosmos12qn9qgrw4qa2yu3fthzdyreyk3srcs8q2y00ap",
+            "mnemonic": "cage voice fire aware rule awkward route shine liberty fortune patrol rabbit lava lamp wage hammer beef pet tank grief zone snake differ brother"    
+        }
+    ]
+}   
+

@@ -1,9 +1,10 @@
 package universitychainit
 
 import (
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"university_chain_it/x/universitychainit/keeper"
 	"university_chain_it/x/universitychainit/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 // InitGenesis initializes the capability module's state from a provided genesis
@@ -80,9 +81,7 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 		k.SetUniversityDetails(ctx, elem)
 	}
 	// Set if defined
-	if genState.ChainInfo != nil {
-		k.SetChainInfo(ctx, *genState.ChainInfo)
-	}
+	k.SetChainInfo(ctx, genState.ChainInfo)
 	// Set all the foreignUniversities
 	for _, elem := range genState.ForeignUniversitiesList {
 		k.SetForeignUniversities(ctx, elem)
@@ -165,7 +164,7 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 	// Get all chainInfo
 	chainInfo, found := k.GetChainInfo(ctx)
 	if found {
-		genesis.ChainInfo = &chainInfo
+		genesis.ChainInfo = chainInfo
 	}
 	genesis.ForeignUniversitiesList = k.GetAllForeignUniversities(ctx)
 	// this line is used by starport scaffolding # genesis/module/export

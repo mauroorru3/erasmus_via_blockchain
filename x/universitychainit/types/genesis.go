@@ -2,33 +2,44 @@ package types
 
 import (
 	"fmt"
+
 	host "github.com/cosmos/ibc-go/v3/modules/core/24-host"
 )
 
-// DefaultIndex is the default capability global index
-const DefaultIndex uint64 = 1
-
 // DefaultGenesis returns the default Capability genesis state
 func DefaultGenesis() *GenesisState {
+
+	/*
+		uniInfo, err := utilfunc.ReadUniversityInfo()
+		if err != nil {
+			os.Exit(-1)
+		}
+	*/
+
 	return &GenesisState{
-		PortId:                  PortID,
-		ProfessorsExamsList:     []ProfessorsExams{},
-		StudentInfo:             nil,
-		ExamsInfoList:           []ExamsInfo{},
-		TranscriptOfRecords:     nil,
-		PersonalInfo:            nil,
-		ResidenceInfo:           nil,
-		ContactInfo:             nil,
-		AnnualTaxesList:         []AnnualTaxes{},
-		TaxesInfo:               nil,
-		ErasmusContribution:     nil,
-		ErasmusExamsList:        []ErasmusExams{},
-		ErasmusCareerList:       []ErasmusCareer{},
-		ErasmusInfo:             nil,
-		StoredStudentList:       []StoredStudent{},
-		UniversityInfo:          nil,
-		UniversityDetailsList:   []UniversityDetails{},
-		ChainInfo:               nil,
+		PortId:                PortID,
+		ProfessorsExamsList:   []ProfessorsExams{},
+		StudentInfo:           nil,
+		ExamsInfoList:         []ExamsInfo{},
+		TranscriptOfRecords:   nil,
+		PersonalInfo:          nil,
+		ResidenceInfo:         nil,
+		ContactInfo:           nil,
+		AnnualTaxesList:       []AnnualTaxes{},
+		TaxesInfo:             nil,
+		ErasmusContribution:   nil,
+		ErasmusExamsList:      []ErasmusExams{},
+		ErasmusCareerList:     []ErasmusCareer{},
+		ErasmusInfo:           nil,
+		StoredStudentList:     []StoredStudent{},
+		UniversityInfo:        nil,
+		UniversityDetailsList: []UniversityDetails{},
+		ChainInfo: ChainInfo{
+			HubKey:     "",
+			ChainKey:   "",
+			Country:    "",
+			InitStatus: false,
+		},
 		ForeignUniversitiesList: []ForeignUniversities{},
 		// this line is used by starport scaffolding # genesis/types/default
 		Params: DefaultParams(),

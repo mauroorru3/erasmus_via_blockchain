@@ -40,6 +40,7 @@ export interface UniversitychainitChainInfo {
   hubKey?: string;
   chainKey?: string;
   country?: string;
+  initStatus?: boolean;
 }
 
 export interface UniversitychainitContactInfo {

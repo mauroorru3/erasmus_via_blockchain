@@ -7,9 +7,15 @@ export interface ChainInfo {
   hubKey: string;
   chainKey: string;
   country: string;
+  initStatus: boolean;
 }
 
-const baseChainInfo: object = { hubKey: "", chainKey: "", country: "" };
+const baseChainInfo: object = {
+  hubKey: "",
+  chainKey: "",
+  country: "",
+  initStatus: false,
+};
 
 export const ChainInfo = {
   encode(message: ChainInfo, writer: Writer = Writer.create()): Writer {
@@ -21,6 +27,9 @@ export const ChainInfo = {
     }
     if (message.country !== "") {
       writer.uint32(26).string(message.country);
+    }
+    if (message.initStatus === true) {
+      writer.uint32(32).bool(message.initStatus);
     }
     return writer;
   },
@@ -40,6 +49,9 @@ export const ChainInfo = {
           break;
         case 3:
           message.country = reader.string();
+          break;
+        case 4:
+          message.initStatus = reader.bool();
           break;
         default:
           reader.skipType(tag & 7);
@@ -66,6 +78,11 @@ export const ChainInfo = {
     } else {
       message.country = "";
     }
+    if (object.initStatus !== undefined && object.initStatus !== null) {
+      message.initStatus = Boolean(object.initStatus);
+    } else {
+      message.initStatus = false;
+    }
     return message;
   },
 
@@ -74,6 +91,7 @@ export const ChainInfo = {
     message.hubKey !== undefined && (obj.hubKey = message.hubKey);
     message.chainKey !== undefined && (obj.chainKey = message.chainKey);
     message.country !== undefined && (obj.country = message.country);
+    message.initStatus !== undefined && (obj.initStatus = message.initStatus);
     return obj;
   },
 
@@ -93,6 +111,11 @@ export const ChainInfo = {
       message.country = object.country;
     } else {
       message.country = "";
+    }
+    if (object.initStatus !== undefined && object.initStatus !== null) {
+      message.initStatus = object.initStatus;
+    } else {
+      message.initStatus = false;
     }
     return message;
   },

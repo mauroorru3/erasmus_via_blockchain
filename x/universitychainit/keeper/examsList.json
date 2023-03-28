@@ -1,0 +1,129 @@
+
+{
+    "universitiesList" : [
+        {
+        "name": "unipi",
+        "country": "Italy",
+        "courseTypeList": [
+                    {
+                        "name": "master",
+                        "courses": [
+                            {
+                                "courseOfStudy": "CS - BDT - Big Data Technologies",
+                                "exams": [
+                                    {
+                                        "examName": "Algorithm engineering",
+                                        "credits": 9,
+                                        "examType": ""
+                                    },
+                                    {
+                                        "examName": "Advanced databases",
+                                        "credits": 9,
+                                        "examType": ""
+                                    },
+                                    {
+                                        "examName": "Bioinformatics",
+                                        "credits": 6,
+                                        "examType": ""
+                                    },
+                                    {
+                                        "examName": "Information Retrieval",
+                                        "credits": 6,
+                                        "examType": ""
+                                    },
+                                    {
+                                        "examName": "Parallel and Distributed Systems paradigms and models",
+                                        "credits": 9,
+                                        "examType": ""
+                                    },
+                                    {
+                                        "examName": "Data Mining",
+                                        "credits": 9,
+                                        "examType": ""
+                                    },
+                                    {
+                                        "examName": "Data Mining",
+                                        "credits": 9,
+                                        "examType": ""
+                                    },
+                                    {
+                                        "examName": "Computational mathematics for learning and data analysis",
+                                        "credits": 9,
+                                        "examType": ""
+                                    }
+                                ]
+                            }
+                        ]      
+                    },
+                    {
+                        "name": "bachelor",
+                        "courses": []
+                    },
+                    {
+                        "name": "single_cycle_degree",
+                        "courses": []
+                    }
+                ]
+            },
+            {
+            "name": "humboldt_university",
+            "country": "Germany",
+            "courseTypeList": [
+                        {
+                            "name": "master",
+                            "courses": [
+                                {
+                                    "courseOfStudy": "CS - BDT - Big Data Technologies",
+                                    "exams": [
+                                        {
+                                            "examName": "Algorithm engineering",
+                                            "credits": 9,
+                                            "examType": ""
+                                        },
+                                        {
+                                            "examName": "Advanced databases",
+                                            "credits": 9,
+                                            "examType": ""
+                                        },
+                                        {
+                                            "examName": "Bioinformatics",
+                                            "credits": 6,
+                                            "examType": ""
+                                        },
+                                        {
+                                            "examName": "Information Retrieval",
+                                            "credits": 6,
+                                            "examType": ""
+                                        },
+                                        {
+                                            "examName": "Parallel and Distributed Systems paradigms and models",
+                                            "credits": 9,
+                                            "examType": ""
+                                        },
+                                        {
+                                            "examName": "Data Mining",
+                                            "credits": 9,
+                                            "examType": ""
+                                        },
+                                        {
+                                            "examName": "Data Mining",
+                                            "credits": 9,
+                                            "examType": ""
+                                        },
+                                        {
+                                            "examName": "Computational mathematics for learning and data analysis",
+                                            "credits": 9,
+                                            "examType": ""
+                                        }
+                                    ]
+                                }
+                            ]      
+                        },
+                        {
+                            "name": "bachelor",
+                            "courses": []
+                        }
+                    ]
+                }
+        ]
+}   

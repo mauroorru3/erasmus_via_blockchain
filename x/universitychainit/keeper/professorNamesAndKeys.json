@@ -1,0 +1,78 @@
+
+{
+    "universitiesList" : [
+        {
+        "name": "unipi",
+        "courseTypeList": [
+                    {
+                        "name": "master",
+                        "courses": [
+                            {
+                                "courseOfStudy": "CS - BDT - Big Data Technologies",
+                                "exams": [
+                                    {
+                                        "examName": "Algorithm engineering",
+                                        "Name and Surname": "Domenico Asprucci",
+                                        "Address": "cosmos1m0qq4aecd58j4pvjt042hmzpldzxl4s4njm03y",
+                                        "Mnemonic":"before improve find primary reduce reject depth gym scare bind swarm version chaos obscure equal immense shop fire pulp change plastic song lamp report"
+                                    },
+                                    {
+                                        "examName": "Advanced databases",
+                                        "Name and Surname": "Ermanno Naccari",
+                                        "Address": "cosmos16amnmlz2e8tzlwxdd9nu3ugvau5ccnn0k2wac6",
+                                        "Mnemonic":"still among sick switch snack chat foam nice bone island relief quit attack liar melody reward hurry swallow wheel race prefer knee gate prosper"
+                                    },
+                                    {
+                                        "examName": "Bioinformatics",
+                                        "Name and Surname": "Dino Torricelli",
+                                        "Address": "cosmos15wfy4s39h7fwt3g344lnelz8khfghm8992fdzq",
+                                        "Mnemonic":"deal today ticket pulse fringe purity pool maple noble fortune old tackle flame steel bar woman puzzle hamster corn slam drip blind act dizzy" 
+                                    },
+                                    {
+                                        "examName": "Information Retrieval",
+                                        "Name and Surname": "Lucia Longhena",
+                                        "Address": "cosmos1g0jqe0clngq9dz6rknqdzy2r9vxp8cmaq8hel8",
+                                        "Mnemonic":"adapt asset loud choice soccer lucky sign sand super census relax divide phrase abstract advice disagree gain process shock valve evidence family relax shy"  
+                                    },
+                                    {
+                                        "examName": "Parallel and Distributed Systems paradigms and models",
+                                        "Name and Surname": "Tatiana Roncalli",
+                                        "Address": "cosmos1uzk8jta4094ll7tng62w0qwjlwwk4sa5qq6vy3",
+                                        "Mnemonic":"penalty web change siren path monitor raccoon lock skate thing credit shy mercy fine rubber crash author inner animal dilemma window zebra exercise juice" 
+                                    },
+                                    {
+                                        "examName": "Data Mining",
+                                        "Name and Surname": "Graziella Vergerio",
+                                        "Address": "cosmos1kdjwe98x39gzeq3k9dh4hxz6sexawfx2fhxhx3",
+                                        "Mnemonic":"repair pause ask few warm miss betray various exile educate practice average business canvas topple home travel lucky skate girl huge hen improve muffin" 
+                                    },
+                                    {
+                                        "examName": "Data Mining",
+                                        "Name and Surname": "Rosa Asprucci",
+                                        "Address": "cosmos1p2aj6wmh3u2yqcxsx3j3cgl5duwwmdagqln0ye",
+                                        "Mnemonic":"what skin offer lyrics require modify burden luggage sing palm ability photo student interest bachelor acquire annual hedgehog away awesome flush reveal economy depart" 
+                                    },
+                                    {
+                                        "examName": "Computational mathematics for learning and data analysis",
+                                        "Name and Surname": "Enrico Comboni",
+                                        "Address": "cosmos1958ghdu4dwv657m2t7cv4cs8p69eaxspvs3lef",
+                                        "Mnemonic":"hurt system climb morning spoil scrap vague used comfort buffalo faculty roast share sunny still gorilla hello chuckle impulse cash space price permit science"
+                                    }
+                                ]
+                            }
+                        ]      
+                    },
+                    {
+                        "name": "bachelor",
+                        "courses": []
+                    },
+                    {
+                        "name": "single_cycle_degree",
+                        "courses": []
+                    }
+                ]
+            }
+        ]
+}   
+
+

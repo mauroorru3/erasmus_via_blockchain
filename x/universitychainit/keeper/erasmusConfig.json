@@ -1,0 +1,89 @@
+
+{
+    "minMonths": "2",
+    "maxMonths": "12",
+    "minCFU": 6,
+    "contributionGroups": [
+            {
+                "group1": {
+                    "countries": "Denmark Finland Ireland Iceland Liechtenstein Luxembourg Norway Sweden",
+                    "contribution_study": "350",
+                    "contribution_traineeship": "500"
+                },
+                "group2": {
+                    "countries": "Austria Belgium Cyprus France Germany Greece Malta Netherlands Portugal Spain",
+                    "contribution_study": "300",
+                    "contribution_traineeship": "450"
+                },
+                "group3": {
+                    "countries": "Bulgaria Czech Republic Croatia Estonia Latvia Lithuania North Macedonia Poland Romania Serbia Slovakia Slovenia Turkey Hungary",
+                    "contribution_study": "250",
+                    "contribution_traineeship": "400"
+                },
+                "unipiContribution": "100",
+                "unipiContributionDuration": "3",
+                "MURContribution": {
+                    "outOfCourse": 1,
+                    "13000": 400,
+                    "13000-21000": 350,
+                    "21000-26000": 300,
+                    "26000-30000": 250,
+                    "30000-40000": 200,
+                    "40000-50000": 150,
+                    "50000": 0
+                } 
+            }
+        ],
+    "courseTypeList":  [
+                            {
+                                "name": "master",
+                                "courses": [
+                                    {
+                                        "courseOfStudy": "CS",
+                                        "availablePlaces": "20",
+                                        "erasmusTypelist": [
+                                            {
+                                                "name": "study"
+                                            },
+                                            {
+                                                "name": "traineeship"
+                                            }
+                                        ]
+                                        
+                                    }
+                                ]      
+                            },
+                            {
+                                "name": "bachelor",
+                                "courses": [
+                                    {
+                                        "courseOfStudy": "CS",
+                                        "availablePlaces": "20",
+                                        "erasmusTypelist": [
+                                            {
+                                                "name": "study",
+                                                "cfu_first_year": 9,
+                                                "cfu_other_years": 36 
+                                            },
+                                            {
+                                                "name": "traineeship",
+                                                "year": "3",
+                                                "cfu_left": "18"
+                                            }
+                                        ]
+                                        
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "single_cycle",
+                                "courses": []
+                            }
+                        ],
+    "universitiesPlacesList" : [
+        {
+        "name": "humboldt_university",
+        "availablePlaces": "2"
+        }
+    ]
+}   

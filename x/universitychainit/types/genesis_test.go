@@ -155,7 +155,7 @@ func TestGenesisState_Validate(t *testing.T) {
 						UniversityName: "1",
 					},
 				},
-				ChainInfo: &types.ChainInfo{
+				ChainInfo: types.ChainInfo{
 					HubKey:   "96",
 					ChainKey: "54",
 					Country:  "27",

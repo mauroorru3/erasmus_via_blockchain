@@ -147,7 +147,7 @@ func TestGenesis(t *testing.T) {
 				UniversityName: "1",
 			},
 		},
-		ChainInfo: &types.ChainInfo{
+		ChainInfo: types.ChainInfo{
 			HubKey:   "21",
 			ChainKey: "47",
 			Country:  "82",
