@@ -9,7 +9,7 @@ import (
 
 // UniversityKeys.json
 
-const JSONuniversityInfo string = "UniversityKeys.json"
+const foreignUniversityInfoJSON string = "UniversityKeys.json"
 
 type UniversityKeys struct {
 	Name    string `json:"name"`
@@ -22,9 +22,9 @@ type UniListKey struct {
 }
 
 //--------------------------------------------------
-// examsList.json
+// university_info.json
 
-const JSONFile string = "examsList.json"
+const universityInfoJSON string = "university_info.json"
 
 type Exam struct {
 	ExamName         string `json:"examName"`
@@ -73,13 +73,13 @@ type UniList struct {
 func ReadForeignUniversityInfo() (universityInfo []UniversityKeys, err error) {
 
 	// Open our jsonFile
-	jsonFile, err := os.OpenFile(JSONuniversityInfo, os.O_RDONLY, 0444)
+	jsonFile, err := os.OpenFile("data/"+foreignUniversityInfoJSON, os.O_RDONLY, 0444)
 	// if we os.Open returns an error then handle it
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "Error "+err.Error())
 		return universityInfo, err
 	}
-	fmt.Println("Successfully Opened " + JSONuniversityInfo)
+	fmt.Println("Successfully Opened " + foreignUniversityInfoJSON)
 	// defer the closing of our jsonFile so that we can parse it later on
 	defer jsonFile.Close()
 
@@ -92,7 +92,7 @@ func ReadForeignUniversityInfo() (universityInfo []UniversityKeys, err error) {
 	var uniK UniListKey
 
 	err = json.Unmarshal([]byte(byteValue), &uniK)
-	fmt.Println("Successfully Unmarshalled " + JSONuniversityInfo)
+	fmt.Println("Successfully Unmarshalled " + foreignUniversityInfoJSON)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "Error "+err.Error())
 		return universityInfo, err
@@ -107,13 +107,13 @@ func ReadForeignUniversityInfo() (universityInfo []UniversityKeys, err error) {
 func ReadCourseExams(NameUniversity string, departmentName string, courseType int, courseName string) (exams []Exam, err error) {
 
 	// Open our jsonFile
-	jsonFile, err := os.OpenFile(JSONFile, os.O_RDONLY, 0444)
+	jsonFile, err := os.OpenFile("data/"+universityInfoJSON, os.O_RDONLY, 0444)
 	// if we os.Open returns an error then handle it
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "Error "+err.Error())
 		return exams, err
 	}
-	fmt.Println("Successfully Opened " + JSONFile)
+	fmt.Println("Successfully Opened " + universityInfoJSON)
 	// defer the closing of our jsonFile so that we can parse it later on
 	defer jsonFile.Close()
 
@@ -125,7 +125,7 @@ func ReadCourseExams(NameUniversity string, departmentName string, courseType in
 
 	var uList UniList
 	err = json.Unmarshal([]byte(byteValue), &uList)
-	fmt.Println("Successfully Unmarshalled " + JSONFile)
+	fmt.Println("Successfully Unmarshalled " + universityInfoJSON)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "Error "+err.Error())
 		return exams, err
@@ -178,13 +178,13 @@ func ReadCourseExams(NameUniversity string, departmentName string, courseType in
 func ReadUniversitiesInfo() (universitiesInfo []University, err error) {
 
 	// Open our jsonFile
-	jsonFile, err := os.OpenFile(JSONFile, os.O_RDONLY, 0444)
+	jsonFile, err := os.OpenFile("data/"+universityInfoJSON, os.O_RDONLY, 0444)
 	// if we os.Open returns an error then handle it
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "Error "+err.Error())
 		return universitiesInfo, err
 	}
-	fmt.Println("Successfully Opened " + JSONFile)
+	fmt.Println("Successfully Opened " + universityInfoJSON)
 	// defer the closing of our jsonFile so that we can parse it later on
 	defer jsonFile.Close()
 
@@ -197,7 +197,7 @@ func ReadUniversitiesInfo() (universitiesInfo []University, err error) {
 	var uList UniList
 
 	err = json.Unmarshal([]byte(byteValue), &uList)
-	fmt.Println("Successfully Unmarshalled " + JSONFile)
+	fmt.Println("Successfully Unmarshalled " + universityInfoJSON)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "Error "+err.Error())
 		return universitiesInfo, err

@@ -45,15 +45,15 @@ func (k msgServer) ConfigureChain(goCtx context.Context, msg *types.MsgConfigure
 					k.Keeper.SetForeignUniversities(ctx, foreignUniversity)
 				}
 			}
-			/*
-				universityInfoList, err := utilfunc.ReadUniversitiesInfo()
-				if err != nil {
-					return &types.MsgConfigureChainResponse{
-						Status: -1,
-					}, err
-				}
-				fmt.Println(universityInfoList[0])
-			*/
+
+			universityInfoList, err := utilfunc.ReadUniversitiesInfo()
+			if err != nil {
+				return &types.MsgConfigureChainResponse{
+					Status: -1,
+				}, err
+			}
+			fmt.Println(universityInfoList[0])
+
 			/*
 				k.Keeper.SetUniversityDetails(ctx, types.UniversityDetails{
 					UniversityName: "Unipi",
