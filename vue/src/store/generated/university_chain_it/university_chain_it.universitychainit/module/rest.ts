@@ -167,6 +167,10 @@ export interface UniversitychainitForeignUniversities {
   foreignUniversitiesKey?: string;
 }
 
+export interface UniversitychainitMsgConfigureChainResponse {
+  status?: string;
+}
+
 /**
  * Params defines the parameters for the module.
  */

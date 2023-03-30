@@ -7,7 +7,16 @@ option go_package = "university_chain_it/x/universitychainit/types";
 
 // Msg defines the Msg service.
 service Msg {
-    // this line is used by starport scaffolding # proto/tx/rpc
+      rpc ConfigureChain(MsgConfigureChain) returns (MsgConfigureChainResponse);
+// this line is used by starport scaffolding # proto/tx/rpc
+}
+
+message MsgConfigureChain {
+  string creator = 1;
+}
+
+message MsgConfigureChainResponse {
+  uint64 status = 1;
 }
 
 // this line is used by starport scaffolding # proto/tx/message
