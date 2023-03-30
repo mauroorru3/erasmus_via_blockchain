@@ -27,9 +27,11 @@ type UniListKey struct {
 const JSONFile string = "examsList.json"
 
 type Exam struct {
-	ExamName string `json:"examName"`
-	Credits  uint   `json:"credits"`
-	ExamType string `json:"examType"`
+	ExamName         string `json:"examName"`
+	Credits          uint   `json:"credits"`
+	ExamType         string `json:"examType"`
+	ProfessorName    string `json:"Name and Surname"`
+	ProfessorAddress string `json:"Address"`
 }
 
 type Course struct {
@@ -38,26 +40,43 @@ type Course struct {
 }
 
 type CourseList struct {
-	Name    string   `json:"courseOfStudy"`
+	Name    string   `json:"name"`
 	Courses []Course `json:"courses"`
 }
 
+type CAI_struct struct {
+	Department string `json:"department"`
+	Name       string `json:"Name and Surname"`
+	Address    string `json:"address"`
+}
+
+type DepartmentList struct {
+	Name            string       `json:"name"`
+	CAI             CAI_struct   `json:"CAI"`
+	CoursesTypeList []CourseList `json:"courseTypeList"`
+}
+
 type University struct {
-	Name           string       `json:"name"`
-	CourseTypeList []CourseList `json:"courseTypeList"`
+	Name             string           `json:"name"`
+	Country          string           `json:"country"`
+	Secretariat_key  string           `json:"secretariat_key"`
+	University_key   string           `json:"university_key"`
+	Deadline_taxes   string           `json:"deadline_taxes"`
+	Deadline_erasmus string           `json:"deadline_erasmus"`
+	DepartmentList   []DepartmentList `json:"departmentList"`
 }
 
 type UniList struct {
 	UniversityList []University `json:"universitiesList"`
 }
 
-func ReadUniversityInfo() (universityInfo []UniversityKeys, err error) {
+func ReadForeignUniversityInfo() (universityInfo []UniversityKeys, err error) {
 
 	// Open our jsonFile
 	jsonFile, err := os.OpenFile(JSONuniversityInfo, os.O_RDONLY, 0444)
 	// if we os.Open returns an error then handle it
 	if err != nil {
-		fmt.Println(err)
+		fmt.Fprintln(os.Stderr, "Error "+err.Error())
 		return universityInfo, err
 	}
 	fmt.Println("Successfully Opened " + JSONuniversityInfo)
@@ -66,28 +85,32 @@ func ReadUniversityInfo() (universityInfo []UniversityKeys, err error) {
 
 	byteValue, err := io.ReadAll(jsonFile)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Fprintln(os.Stderr, "Error "+err.Error())
 		return universityInfo, err
 	}
 
-	err = json.Unmarshal([]byte(byteValue), &universityInfo)
+	var uniK UniListKey
+
+	err = json.Unmarshal([]byte(byteValue), &uniK)
 	fmt.Println("Successfully Unmarshalled " + JSONuniversityInfo)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Fprintln(os.Stderr, "Error "+err.Error())
 		return universityInfo, err
 	}
+
+	universityInfo = uniK.UniversityListKey
 
 	return universityInfo, err
 
 }
 
-func ReadCourseExams(NameUniversity string, courseType int, courseName string) (exams []Exam, err error) {
+func ReadCourseExams(NameUniversity string, departmentName string, courseType int, courseName string) (exams []Exam, err error) {
 
 	// Open our jsonFile
 	jsonFile, err := os.OpenFile(JSONFile, os.O_RDONLY, 0444)
 	// if we os.Open returns an error then handle it
 	if err != nil {
-		fmt.Println(err)
+		fmt.Fprintln(os.Stderr, "Error "+err.Error())
 		return exams, err
 	}
 	fmt.Println("Successfully Opened " + JSONFile)
@@ -96,7 +119,7 @@ func ReadCourseExams(NameUniversity string, courseType int, courseName string) (
 
 	byteValue, err := io.ReadAll(jsonFile)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Fprintln(os.Stderr, "Error "+err.Error())
 		return exams, err
 	}
 
@@ -104,7 +127,7 @@ func ReadCourseExams(NameUniversity string, courseType int, courseName string) (
 	err = json.Unmarshal([]byte(byteValue), &uList)
 	fmt.Println("Successfully Unmarshalled " + JSONFile)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Fprintln(os.Stderr, "Error "+err.Error())
 		return exams, err
 	}
 
@@ -124,21 +147,64 @@ func ReadCourseExams(NameUniversity string, courseType int, courseName string) (
 
 	j := 0
 	found = false
-	for j < len(uList.UniversityList[i].CourseTypeList[courseType].Courses) && !found {
-		if uList.UniversityList[i].CourseTypeList[courseType].Courses[j].CourseOfStudy == courseName {
+	for i < len(uList.UniversityList[i].DepartmentList) && !found {
+		if uList.UniversityList[i].DepartmentList[j].Name == departmentName {
 			found = true
 		} else {
 			j++
 		}
 	}
+	k := 0
+	found = false
+	for j < len(uList.UniversityList[i].DepartmentList[j].CoursesTypeList[courseType].Courses) && !found {
+		if uList.UniversityList[i].DepartmentList[j].CoursesTypeList[courseType].Courses[k].CourseOfStudy == courseName {
+			found = true
+		} else {
+			k++
+		}
+	}
 	if !found {
-		fmt.Printf("Course %s not found", courseName)
+		fmt.Fprintln(os.Stderr, "Course "+courseName+" not found")
 		return exams, err
 	}
 
-	exams = uList.UniversityList[i].CourseTypeList[courseType].Courses[j].Exams
+	exams = uList.UniversityList[i].DepartmentList[j].CoursesTypeList[courseType].Courses[k].Exams
 
 	err = nil
 	return exams, err
+
+}
+
+func ReadUniversitiesInfo() (universitiesInfo []University, err error) {
+
+	// Open our jsonFile
+	jsonFile, err := os.OpenFile(JSONFile, os.O_RDONLY, 0444)
+	// if we os.Open returns an error then handle it
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "Error "+err.Error())
+		return universitiesInfo, err
+	}
+	fmt.Println("Successfully Opened " + JSONFile)
+	// defer the closing of our jsonFile so that we can parse it later on
+	defer jsonFile.Close()
+
+	byteValue, err := io.ReadAll(jsonFile)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "Error "+err.Error())
+		return universitiesInfo, err
+	}
+
+	var uList UniList
+
+	err = json.Unmarshal([]byte(byteValue), &uList)
+	fmt.Println("Successfully Unmarshalled " + JSONFile)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "Error "+err.Error())
+		return universitiesInfo, err
+	}
+
+	universitiesInfo = uList.UniversityList
+
+	return universitiesInfo, err
 
 }

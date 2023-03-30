@@ -7,6 +7,7 @@ export interface ChainInfo {
   hubKey: string;
   chainKey: string;
   country: string;
+  chainAdministratorKey: string;
   initStatus: boolean;
 }
 
@@ -14,6 +15,7 @@ const baseChainInfo: object = {
   hubKey: "",
   chainKey: "",
   country: "",
+  chainAdministratorKey: "",
   initStatus: false,
 };
 
@@ -28,8 +30,11 @@ export const ChainInfo = {
     if (message.country !== "") {
       writer.uint32(26).string(message.country);
     }
+    if (message.chainAdministratorKey !== "") {
+      writer.uint32(34).string(message.chainAdministratorKey);
+    }
     if (message.initStatus === true) {
-      writer.uint32(32).bool(message.initStatus);
+      writer.uint32(40).bool(message.initStatus);
     }
     return writer;
   },
@@ -51,6 +56,9 @@ export const ChainInfo = {
           message.country = reader.string();
           break;
         case 4:
+          message.chainAdministratorKey = reader.string();
+          break;
+        case 5:
           message.initStatus = reader.bool();
           break;
         default:
@@ -78,6 +86,14 @@ export const ChainInfo = {
     } else {
       message.country = "";
     }
+    if (
+      object.chainAdministratorKey !== undefined &&
+      object.chainAdministratorKey !== null
+    ) {
+      message.chainAdministratorKey = String(object.chainAdministratorKey);
+    } else {
+      message.chainAdministratorKey = "";
+    }
     if (object.initStatus !== undefined && object.initStatus !== null) {
       message.initStatus = Boolean(object.initStatus);
     } else {
@@ -91,6 +107,8 @@ export const ChainInfo = {
     message.hubKey !== undefined && (obj.hubKey = message.hubKey);
     message.chainKey !== undefined && (obj.chainKey = message.chainKey);
     message.country !== undefined && (obj.country = message.country);
+    message.chainAdministratorKey !== undefined &&
+      (obj.chainAdministratorKey = message.chainAdministratorKey);
     message.initStatus !== undefined && (obj.initStatus = message.initStatus);
     return obj;
   },
@@ -111,6 +129,14 @@ export const ChainInfo = {
       message.country = object.country;
     } else {
       message.country = "";
+    }
+    if (
+      object.chainAdministratorKey !== undefined &&
+      object.chainAdministratorKey !== null
+    ) {
+      message.chainAdministratorKey = object.chainAdministratorKey;
+    } else {
+      message.chainAdministratorKey = "";
     }
     if (object.initStatus !== undefined && object.initStatus !== null) {
       message.initStatus = object.initStatus;

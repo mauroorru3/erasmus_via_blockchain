@@ -36,7 +36,7 @@ func DefaultGenesis() *GenesisState {
 		UniversityDetailsList: []UniversityDetails{},
 		ChainInfo: ChainInfo{
 			HubKey:                "",
-			ChainAdministratorKey: "cosmos1xyxs3skf3f4jfqeuv89yyaqvjc6lffavxqhc8g", // to change
+			ChainAdministratorKey: "cosmos1ga559f4vhx98u0exa5cvtxr4vxnk00tqfc0rlc", // bob address, to change
 			ChainKey:              "",
 			Country:               "",
 			InitStatus:            false,

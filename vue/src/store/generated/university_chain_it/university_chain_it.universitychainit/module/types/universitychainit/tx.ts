@@ -8,7 +8,7 @@ export interface MsgConfigureChain {
 }
 
 export interface MsgConfigureChainResponse {
-  status: string;
+  status: number;
 }
 
 const baseMsgConfigureChain: object = { creator: "" };
@@ -66,15 +66,15 @@ export const MsgConfigureChain = {
   },
 };
 
-const baseMsgConfigureChainResponse: object = { status: "" };
+const baseMsgConfigureChainResponse: object = { status: 0 };
 
 export const MsgConfigureChainResponse = {
   encode(
     message: MsgConfigureChainResponse,
     writer: Writer = Writer.create()
   ): Writer {
-    if (message.status !== "") {
-      writer.uint32(10).string(message.status);
+    if (message.status !== 0) {
+      writer.uint32(8).int32(message.status);
     }
     return writer;
   },
@@ -92,7 +92,7 @@ export const MsgConfigureChainResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.status = reader.string();
+          message.status = reader.int32();
           break;
         default:
           reader.skipType(tag & 7);
@@ -107,9 +107,9 @@ export const MsgConfigureChainResponse = {
       ...baseMsgConfigureChainResponse,
     } as MsgConfigureChainResponse;
     if (object.status !== undefined && object.status !== null) {
-      message.status = String(object.status);
+      message.status = Number(object.status);
     } else {
-      message.status = "";
+      message.status = 0;
     }
     return message;
   },
@@ -129,7 +129,7 @@ export const MsgConfigureChainResponse = {
     if (object.status !== undefined && object.status !== null) {
       message.status = object.status;
     } else {
-      message.status = "";
+      message.status = 0;
     }
     return message;
   },

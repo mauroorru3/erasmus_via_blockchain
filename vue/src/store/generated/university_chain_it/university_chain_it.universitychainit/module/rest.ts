@@ -40,6 +40,7 @@ export interface UniversitychainitChainInfo {
   hubKey?: string;
   chainKey?: string;
   country?: string;
+  chainAdministratorKey?: string;
   initStatus?: boolean;
 }
 
@@ -168,7 +169,8 @@ export interface UniversitychainitForeignUniversities {
 }
 
 export interface UniversitychainitMsgConfigureChainResponse {
-  status?: string;
+  /** @format int32 */
+  status?: number;
 }
 
 /**

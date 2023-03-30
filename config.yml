@@ -1,8 +1,10 @@
 accounts:
   - name: alice
     coins: ["20000token", "200000000stake"]
+    mnemonic: "afraid kid engine kingdom neck still pave fragile wink vast clay close trim rotate morning cage mutual today defense tobacco issue knock earn result"
   - name: bob
     coins: ["10000token", "100000000stake"]
+    mnemonic: "pond sport hold enter develop turkey home close debris noodle kick orbit layer habit win love monster foil woman town govern truly effort gesture"
 validator:
   name: alice
   staked: "100000000stake"

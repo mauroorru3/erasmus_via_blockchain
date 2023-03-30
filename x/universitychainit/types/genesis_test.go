@@ -344,7 +344,7 @@ func TestDefaultGenesisState_ExpectedInitialValues(t *testing.T) {
 			ChainInfo: types.ChainInfo{
 				HubKey:                "",
 				ChainKey:              "",
-				ChainAdministratorKey: "cosmos1xyxs3skf3f4jfqeuv89yyaqvjc6lffavxqhc8g",
+				ChainAdministratorKey: "cosmos1ga559f4vhx98u0exa5cvtxr4vxnk00tqfc0rlc",
 				Country:               "",
 				InitStatus:            false,
 			},
