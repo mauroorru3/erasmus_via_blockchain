@@ -35,11 +35,11 @@ func DefaultGenesis() *GenesisState {
 		UniversityInfo:        nil,
 		UniversityDetailsList: []UniversityDetails{},
 		ChainInfo: ChainInfo{
-			HubKey:              "",
-			HubAdministratorKey: "cosmos1xyxs3skf3f4jfqeuv89yyaqvjc6lffavxqhc8g", // to change
-			ChainKey:            "",
-			Country:             "",
-			InitStatus:          false,
+			HubKey:                "",
+			ChainAdministratorKey: "cosmos1xyxs3skf3f4jfqeuv89yyaqvjc6lffavxqhc8g", // to change
+			ChainKey:              "",
+			Country:               "",
+			InitStatus:            false,
 		},
 		ForeignUniversitiesList: []ForeignUniversities{},
 		// this line is used by starport scaffolding # genesis/types/default
