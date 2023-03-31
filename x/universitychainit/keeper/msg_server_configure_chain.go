@@ -30,7 +30,8 @@ func (k msgServer) ConfigureChain(goCtx context.Context, msg *types.MsgConfigure
 					Status: -1,
 				}, err
 			}
-			for i := 0; i < len(foreignUniversitiesList); i++ {
+			i := 0
+			for i = 0; i < len(foreignUniversitiesList); i++ {
 
 				foreignUniversity := types.ForeignUniversities{
 					UniversityName:         foreignUniversitiesList[i].Name,
@@ -52,16 +53,50 @@ func (k msgServer) ConfigureChain(goCtx context.Context, msg *types.MsgConfigure
 					Status: -1,
 				}, err
 			}
-			fmt.Println(universityInfoList[0])
+			for i = 0; i < len(universityInfoList); i++ {
+				universityData := types.UniversityInfo{
+					NextStudentId:   1,
+					SecretariatKey:  universityInfoList[i].Secretariat_key,
+					UniversityKey:   universityInfoList[i].University_key,
+					CaiKey:          "",
+					FifoHeadErasmus: "-1",
+					FifoTailErasmus: "-1",
+					DeadlineTaxes:   universityInfoList[i].Deadline_taxes,
+					DeadlineErasmus: universityInfoList[i].Deadline_erasmus,
+				}
 
-			/*
+				j := 0
+
+				for j = 0; j < len(universityInfoList[i].DepartmentList); j++ {
+					q := 0
+					for q = 0; q < len(universityInfoList[i].DepartmentList[j].CoursesTypeList); q++ {
+						w := 0
+						for w = 0; w < len(universityInfoList[i].DepartmentList[j].CoursesTypeList[q].Courses); w++ {
+							z := 0
+							for z = 0; z < len(universityInfoList[i].DepartmentList[j].CoursesTypeList[q].Courses[w].Exams); z++ {
+
+								k.Keeper.SetProfessorsExams(ctx, types.ProfessorsExams{
+									ExamName:      universityInfoList[i].DepartmentList[j].CoursesTypeList[q].Courses[w].Exams[z].ExamName,
+									ProfessorName: universityInfoList[i].DepartmentList[j].CoursesTypeList[q].Courses[w].Exams[z].ProfessorName,
+									ProfessorId:   "",
+									ProfessorKey:  universityInfoList[i].DepartmentList[j].CoursesTypeList[q].Courses[w].Exams[z].ProfessorAddress,
+								})
+							}
+
+						}
+
+					}
+
+				}
+
 				k.Keeper.SetUniversityDetails(ctx, types.UniversityDetails{
-					UniversityName: "Unipi",
-					ProfessorsInfo,
-					UniversityData,
-					StudentDetails:
+					UniversityName: universityInfoList[i].Name,
+					ProfessorsInfo: &types.ProfessorsExams{},
+					UniversityData: &universityData,
+					StudentDetails: &types.StoredStudent{},
 				})
-			*/
+
+			}
 
 		} else {
 			fmt.Fprintln(os.Stderr, "The key entered does not match the chain administrator's key.")
