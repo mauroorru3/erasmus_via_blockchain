@@ -21,27 +21,27 @@ import (
 // Prevent strconv unused error
 var _ = strconv.IntSize
 
-func networkWithStoredStudentObjects(t *testing.T, n int) (*network.Network, []types.StoredStudent) {
+func networkWithStoredStudentUnipiObjects(t *testing.T, n int) (*network.Network, []types.StoredStudentUnipi) {
 	t.Helper()
 	cfg := network.DefaultConfig()
 	state := types.GenesisState{}
 	require.NoError(t, cfg.Codec.UnmarshalJSON(cfg.GenesisState[types.ModuleName], &state))
 
 	for i := 0; i < n; i++ {
-		storedStudent := types.StoredStudent{
+		storedStudentUnipi := types.StoredStudentUnipi{
 			Index: strconv.Itoa(i),
 		}
-		nullify.Fill(&storedStudent)
-		state.StoredStudentList = append(state.StoredStudentList, storedStudent)
+		nullify.Fill(&storedStudentUnipi)
+		state.StoredStudentUnipiList = append(state.StoredStudentUnipiList, storedStudentUnipi)
 	}
 	buf, err := cfg.Codec.MarshalJSON(&state)
 	require.NoError(t, err)
 	cfg.GenesisState[types.ModuleName] = buf
-	return network.New(t, cfg), state.StoredStudentList
+	return network.New(t, cfg), state.StoredStudentUnipiList
 }
 
-func TestShowStoredStudent(t *testing.T) {
-	net, objs := networkWithStoredStudentObjects(t, 2)
+func TestShowStoredStudentUnipi(t *testing.T) {
+	net, objs := networkWithStoredStudentUnipiObjects(t, 2)
 
 	ctx := net.Validators[0].ClientCtx
 	common := []string{
@@ -53,7 +53,7 @@ func TestShowStoredStudent(t *testing.T) {
 
 		args []string
 		err  error
-		obj  types.StoredStudent
+		obj  types.StoredStudentUnipi
 	}{
 		{
 			desc:    "found",
@@ -75,27 +75,27 @@ func TestShowStoredStudent(t *testing.T) {
 				tc.idIndex,
 			}
 			args = append(args, tc.args...)
-			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdShowStoredStudent(), args)
+			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdShowStoredStudentUnipi(), args)
 			if tc.err != nil {
 				stat, ok := status.FromError(tc.err)
 				require.True(t, ok)
 				require.ErrorIs(t, stat.Err(), tc.err)
 			} else {
 				require.NoError(t, err)
-				var resp types.QueryGetStoredStudentResponse
+				var resp types.QueryGetStoredStudentUnipiResponse
 				require.NoError(t, net.Config.Codec.UnmarshalJSON(out.Bytes(), &resp))
-				require.NotNil(t, resp.StoredStudent)
+				require.NotNil(t, resp.StoredStudentUnipi)
 				require.Equal(t,
 					nullify.Fill(&tc.obj),
-					nullify.Fill(&resp.StoredStudent),
+					nullify.Fill(&resp.StoredStudentUnipi),
 				)
 			}
 		})
 	}
 }
 
-func TestListStoredStudent(t *testing.T) {
-	net, objs := networkWithStoredStudentObjects(t, 5)
+func TestListStoredStudentUnipi(t *testing.T) {
+	net, objs := networkWithStoredStudentUnipiObjects(t, 5)
 
 	ctx := net.Validators[0].ClientCtx
 	request := func(next []byte, offset, limit uint64, total bool) []string {
@@ -117,14 +117,14 @@ func TestListStoredStudent(t *testing.T) {
 		step := 2
 		for i := 0; i < len(objs); i += step {
 			args := request(nil, uint64(i), uint64(step), false)
-			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdListStoredStudent(), args)
+			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdListStoredStudentUnipi(), args)
 			require.NoError(t, err)
-			var resp types.QueryAllStoredStudentResponse
+			var resp types.QueryAllStoredStudentUnipiResponse
 			require.NoError(t, net.Config.Codec.UnmarshalJSON(out.Bytes(), &resp))
-			require.LessOrEqual(t, len(resp.StoredStudent), step)
+			require.LessOrEqual(t, len(resp.StoredStudentUnipi), step)
 			require.Subset(t,
 				nullify.Fill(objs),
-				nullify.Fill(resp.StoredStudent),
+				nullify.Fill(resp.StoredStudentUnipi),
 			)
 		}
 	})
@@ -133,29 +133,29 @@ func TestListStoredStudent(t *testing.T) {
 		var next []byte
 		for i := 0; i < len(objs); i += step {
 			args := request(next, 0, uint64(step), false)
-			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdListStoredStudent(), args)
+			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdListStoredStudentUnipi(), args)
 			require.NoError(t, err)
-			var resp types.QueryAllStoredStudentResponse
+			var resp types.QueryAllStoredStudentUnipiResponse
 			require.NoError(t, net.Config.Codec.UnmarshalJSON(out.Bytes(), &resp))
-			require.LessOrEqual(t, len(resp.StoredStudent), step)
+			require.LessOrEqual(t, len(resp.StoredStudentUnipi), step)
 			require.Subset(t,
 				nullify.Fill(objs),
-				nullify.Fill(resp.StoredStudent),
+				nullify.Fill(resp.StoredStudentUnipi),
 			)
 			next = resp.Pagination.NextKey
 		}
 	})
 	t.Run("Total", func(t *testing.T) {
 		args := request(nil, 0, uint64(len(objs)), true)
-		out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdListStoredStudent(), args)
+		out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdListStoredStudentUnipi(), args)
 		require.NoError(t, err)
-		var resp types.QueryAllStoredStudentResponse
+		var resp types.QueryAllStoredStudentUnipiResponse
 		require.NoError(t, net.Config.Codec.UnmarshalJSON(out.Bytes(), &resp))
 		require.NoError(t, err)
 		require.Equal(t, len(objs), int(resp.Pagination.Total))
 		require.ElementsMatch(t,
 			nullify.Fill(objs),
-			nullify.Fill(resp.StoredStudent),
+			nullify.Fill(resp.StoredStudentUnipi),
 		)
 	})
 }

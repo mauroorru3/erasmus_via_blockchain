@@ -18,34 +18,34 @@ import (
 // Prevent strconv unused error
 var _ = strconv.IntSize
 
-func TestStoredStudentQuerySingle(t *testing.T) {
+func TestProfessorsExamsUnipiQuerySingle(t *testing.T) {
 	keeper, ctx := keepertest.UniversitychainitKeeper(t)
 	wctx := sdk.WrapSDKContext(ctx)
-	msgs := createNStoredStudent(keeper, ctx, 2)
+	msgs := createNProfessorsExamsUnipi(keeper, ctx, 2)
 	for _, tc := range []struct {
 		desc     string
-		request  *types.QueryGetStoredStudentRequest
-		response *types.QueryGetStoredStudentResponse
+		request  *types.QueryGetProfessorsExamsUnipiRequest
+		response *types.QueryGetProfessorsExamsUnipiResponse
 		err      error
 	}{
 		{
 			desc: "First",
-			request: &types.QueryGetStoredStudentRequest{
-				Index: msgs[0].Index,
+			request: &types.QueryGetProfessorsExamsUnipiRequest{
+				ExamName: msgs[0].ExamName,
 			},
-			response: &types.QueryGetStoredStudentResponse{StoredStudent: msgs[0]},
+			response: &types.QueryGetProfessorsExamsUnipiResponse{ProfessorsExamsUnipi: msgs[0]},
 		},
 		{
 			desc: "Second",
-			request: &types.QueryGetStoredStudentRequest{
-				Index: msgs[1].Index,
+			request: &types.QueryGetProfessorsExamsUnipiRequest{
+				ExamName: msgs[1].ExamName,
 			},
-			response: &types.QueryGetStoredStudentResponse{StoredStudent: msgs[1]},
+			response: &types.QueryGetProfessorsExamsUnipiResponse{ProfessorsExamsUnipi: msgs[1]},
 		},
 		{
 			desc: "KeyNotFound",
-			request: &types.QueryGetStoredStudentRequest{
-				Index: strconv.Itoa(100000),
+			request: &types.QueryGetProfessorsExamsUnipiRequest{
+				ExamName: strconv.Itoa(100000),
 			},
 			err: status.Error(codes.NotFound, "not found"),
 		},
@@ -55,7 +55,7 @@ func TestStoredStudentQuerySingle(t *testing.T) {
 		},
 	} {
 		t.Run(tc.desc, func(t *testing.T) {
-			response, err := keeper.StoredStudent(wctx, tc.request)
+			response, err := keeper.ProfessorsExamsUnipi(wctx, tc.request)
 			if tc.err != nil {
 				require.ErrorIs(t, err, tc.err)
 			} else {
@@ -69,13 +69,13 @@ func TestStoredStudentQuerySingle(t *testing.T) {
 	}
 }
 
-func TestStoredStudentQueryPaginated(t *testing.T) {
+func TestProfessorsExamsUnipiQueryPaginated(t *testing.T) {
 	keeper, ctx := keepertest.UniversitychainitKeeper(t)
 	wctx := sdk.WrapSDKContext(ctx)
-	msgs := createNStoredStudent(keeper, ctx, 5)
+	msgs := createNProfessorsExamsUnipi(keeper, ctx, 5)
 
-	request := func(next []byte, offset, limit uint64, total bool) *types.QueryAllStoredStudentRequest {
-		return &types.QueryAllStoredStudentRequest{
+	request := func(next []byte, offset, limit uint64, total bool) *types.QueryAllProfessorsExamsUnipiRequest {
+		return &types.QueryAllProfessorsExamsUnipiRequest{
 			Pagination: &query.PageRequest{
 				Key:        next,
 				Offset:     offset,
@@ -87,12 +87,12 @@ func TestStoredStudentQueryPaginated(t *testing.T) {
 	t.Run("ByOffset", func(t *testing.T) {
 		step := 2
 		for i := 0; i < len(msgs); i += step {
-			resp, err := keeper.StoredStudentAll(wctx, request(nil, uint64(i), uint64(step), false))
+			resp, err := keeper.ProfessorsExamsUnipiAll(wctx, request(nil, uint64(i), uint64(step), false))
 			require.NoError(t, err)
-			require.LessOrEqual(t, len(resp.StoredStudent), step)
+			require.LessOrEqual(t, len(resp.ProfessorsExamsUnipi), step)
 			require.Subset(t,
 				nullify.Fill(msgs),
-				nullify.Fill(resp.StoredStudent),
+				nullify.Fill(resp.ProfessorsExamsUnipi),
 			)
 		}
 	})
@@ -100,27 +100,27 @@ func TestStoredStudentQueryPaginated(t *testing.T) {
 		step := 2
 		var next []byte
 		for i := 0; i < len(msgs); i += step {
-			resp, err := keeper.StoredStudentAll(wctx, request(next, 0, uint64(step), false))
+			resp, err := keeper.ProfessorsExamsUnipiAll(wctx, request(next, 0, uint64(step), false))
 			require.NoError(t, err)
-			require.LessOrEqual(t, len(resp.StoredStudent), step)
+			require.LessOrEqual(t, len(resp.ProfessorsExamsUnipi), step)
 			require.Subset(t,
 				nullify.Fill(msgs),
-				nullify.Fill(resp.StoredStudent),
+				nullify.Fill(resp.ProfessorsExamsUnipi),
 			)
 			next = resp.Pagination.NextKey
 		}
 	})
 	t.Run("Total", func(t *testing.T) {
-		resp, err := keeper.StoredStudentAll(wctx, request(nil, 0, 0, true))
+		resp, err := keeper.ProfessorsExamsUnipiAll(wctx, request(nil, 0, 0, true))
 		require.NoError(t, err)
 		require.Equal(t, len(msgs), int(resp.Pagination.Total))
 		require.ElementsMatch(t,
 			nullify.Fill(msgs),
-			nullify.Fill(resp.StoredStudent),
+			nullify.Fill(resp.ProfessorsExamsUnipi),
 		)
 	})
 	t.Run("InvalidRequest", func(t *testing.T) {
-		_, err := keeper.StoredStudentAll(wctx, nil)
+		_, err := keeper.ProfessorsExamsUnipiAll(wctx, nil)
 		require.ErrorIs(t, err, status.Error(codes.InvalidArgument, "invalid request"))
 	})
 }

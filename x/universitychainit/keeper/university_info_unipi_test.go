@@ -12,16 +12,16 @@ import (
 	"university_chain_it/x/universitychainit/types"
 )
 
-func createTestUniversityInfo(keeper *keeper.Keeper, ctx sdk.Context) types.UniversityInfo {
-	item := types.UniversityInfo{}
-	keeper.SetUniversityInfo(ctx, item)
+func createTestUniversityInfoUnipi(keeper *keeper.Keeper, ctx sdk.Context) types.UniversityInfoUnipi {
+	item := types.UniversityInfoUnipi{}
+	keeper.SetUniversityInfoUnipi(ctx, item)
 	return item
 }
 
-func TestUniversityInfoGet(t *testing.T) {
+func TestUniversityInfoUnipiGet(t *testing.T) {
 	keeper, ctx := keepertest.UniversitychainitKeeper(t)
-	item := createTestUniversityInfo(keeper, ctx)
-	rst, found := keeper.GetUniversityInfo(ctx)
+	item := createTestUniversityInfoUnipi(keeper, ctx)
+	rst, found := keeper.GetUniversityInfoUnipi(ctx)
 	require.True(t, found)
 	require.Equal(t,
 		nullify.Fill(&item),
@@ -29,10 +29,10 @@ func TestUniversityInfoGet(t *testing.T) {
 	)
 }
 
-func TestUniversityInfoRemove(t *testing.T) {
+func TestUniversityInfoUnipiRemove(t *testing.T) {
 	keeper, ctx := keepertest.UniversitychainitKeeper(t)
-	createTestUniversityInfo(keeper, ctx)
-	keeper.RemoveUniversityInfo(ctx)
-	_, found := keeper.GetUniversityInfo(ctx)
+	createTestUniversityInfoUnipi(keeper, ctx)
+	keeper.RemoveUniversityInfoUnipi(ctx)
+	_, found := keeper.GetUniversityInfoUnipi(ctx)
 	require.False(t, found)
 }

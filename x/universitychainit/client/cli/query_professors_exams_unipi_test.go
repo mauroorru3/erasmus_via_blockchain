@@ -21,27 +21,27 @@ import (
 // Prevent strconv unused error
 var _ = strconv.IntSize
 
-func networkWithProfessorsExamsObjects(t *testing.T, n int) (*network.Network, []types.ProfessorsExams) {
+func networkWithProfessorsExamsUnipiObjects(t *testing.T, n int) (*network.Network, []types.ProfessorsExamsUnipi) {
 	t.Helper()
 	cfg := network.DefaultConfig()
 	state := types.GenesisState{}
 	require.NoError(t, cfg.Codec.UnmarshalJSON(cfg.GenesisState[types.ModuleName], &state))
 
 	for i := 0; i < n; i++ {
-		professorsExams := types.ProfessorsExams{
+		professorsExamsUnipi := types.ProfessorsExamsUnipi{
 			ExamName: strconv.Itoa(i),
 		}
-		nullify.Fill(&professorsExams)
-		state.ProfessorsExamsList = append(state.ProfessorsExamsList, professorsExams)
+		nullify.Fill(&professorsExamsUnipi)
+		state.ProfessorsExamsUnipiList = append(state.ProfessorsExamsUnipiList, professorsExamsUnipi)
 	}
 	buf, err := cfg.Codec.MarshalJSON(&state)
 	require.NoError(t, err)
 	cfg.GenesisState[types.ModuleName] = buf
-	return network.New(t, cfg), state.ProfessorsExamsList
+	return network.New(t, cfg), state.ProfessorsExamsUnipiList
 }
 
-func TestShowProfessorsExams(t *testing.T) {
-	net, objs := networkWithProfessorsExamsObjects(t, 2)
+func TestShowProfessorsExamsUnipi(t *testing.T) {
+	net, objs := networkWithProfessorsExamsUnipiObjects(t, 2)
 
 	ctx := net.Validators[0].ClientCtx
 	common := []string{
@@ -53,7 +53,7 @@ func TestShowProfessorsExams(t *testing.T) {
 
 		args []string
 		err  error
-		obj  types.ProfessorsExams
+		obj  types.ProfessorsExamsUnipi
 	}{
 		{
 			desc:       "found",
@@ -75,27 +75,27 @@ func TestShowProfessorsExams(t *testing.T) {
 				tc.idExamName,
 			}
 			args = append(args, tc.args...)
-			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdShowProfessorsExams(), args)
+			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdShowProfessorsExamsUnipi(), args)
 			if tc.err != nil {
 				stat, ok := status.FromError(tc.err)
 				require.True(t, ok)
 				require.ErrorIs(t, stat.Err(), tc.err)
 			} else {
 				require.NoError(t, err)
-				var resp types.QueryGetProfessorsExamsResponse
+				var resp types.QueryGetProfessorsExamsUnipiResponse
 				require.NoError(t, net.Config.Codec.UnmarshalJSON(out.Bytes(), &resp))
-				require.NotNil(t, resp.ProfessorsExams)
+				require.NotNil(t, resp.ProfessorsExamsUnipi)
 				require.Equal(t,
 					nullify.Fill(&tc.obj),
-					nullify.Fill(&resp.ProfessorsExams),
+					nullify.Fill(&resp.ProfessorsExamsUnipi),
 				)
 			}
 		})
 	}
 }
 
-func TestListProfessorsExams(t *testing.T) {
-	net, objs := networkWithProfessorsExamsObjects(t, 5)
+func TestListProfessorsExamsUnipi(t *testing.T) {
+	net, objs := networkWithProfessorsExamsUnipiObjects(t, 5)
 
 	ctx := net.Validators[0].ClientCtx
 	request := func(next []byte, offset, limit uint64, total bool) []string {
@@ -117,14 +117,14 @@ func TestListProfessorsExams(t *testing.T) {
 		step := 2
 		for i := 0; i < len(objs); i += step {
 			args := request(nil, uint64(i), uint64(step), false)
-			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdListProfessorsExams(), args)
+			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdListProfessorsExamsUnipi(), args)
 			require.NoError(t, err)
-			var resp types.QueryAllProfessorsExamsResponse
+			var resp types.QueryAllProfessorsExamsUnipiResponse
 			require.NoError(t, net.Config.Codec.UnmarshalJSON(out.Bytes(), &resp))
-			require.LessOrEqual(t, len(resp.ProfessorsExams), step)
+			require.LessOrEqual(t, len(resp.ProfessorsExamsUnipi), step)
 			require.Subset(t,
 				nullify.Fill(objs),
-				nullify.Fill(resp.ProfessorsExams),
+				nullify.Fill(resp.ProfessorsExamsUnipi),
 			)
 		}
 	})
@@ -133,29 +133,29 @@ func TestListProfessorsExams(t *testing.T) {
 		var next []byte
 		for i := 0; i < len(objs); i += step {
 			args := request(next, 0, uint64(step), false)
-			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdListProfessorsExams(), args)
+			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdListProfessorsExamsUnipi(), args)
 			require.NoError(t, err)
-			var resp types.QueryAllProfessorsExamsResponse
+			var resp types.QueryAllProfessorsExamsUnipiResponse
 			require.NoError(t, net.Config.Codec.UnmarshalJSON(out.Bytes(), &resp))
-			require.LessOrEqual(t, len(resp.ProfessorsExams), step)
+			require.LessOrEqual(t, len(resp.ProfessorsExamsUnipi), step)
 			require.Subset(t,
 				nullify.Fill(objs),
-				nullify.Fill(resp.ProfessorsExams),
+				nullify.Fill(resp.ProfessorsExamsUnipi),
 			)
 			next = resp.Pagination.NextKey
 		}
 	})
 	t.Run("Total", func(t *testing.T) {
 		args := request(nil, 0, uint64(len(objs)), true)
-		out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdListProfessorsExams(), args)
+		out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdListProfessorsExamsUnipi(), args)
 		require.NoError(t, err)
-		var resp types.QueryAllProfessorsExamsResponse
+		var resp types.QueryAllProfessorsExamsUnipiResponse
 		require.NoError(t, net.Config.Codec.UnmarshalJSON(out.Bytes(), &resp))
 		require.NoError(t, err)
 		require.Equal(t, len(objs), int(resp.Pagination.Total))
 		require.ElementsMatch(t,
 			nullify.Fill(objs),
-			nullify.Fill(resp.ProfessorsExams),
+			nullify.Fill(resp.ProfessorsExamsUnipi),
 		)
 	})
 }

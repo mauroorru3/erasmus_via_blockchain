@@ -9,10 +9,10 @@ import (
 	"university_chain_it/x/universitychainit/types"
 )
 
-func CmdListStoredStudent() *cobra.Command {
+func CmdListStoredStudentUnipi() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "list-stored-student",
-		Short: "list all stored_student",
+		Use:   "list-stored-student-unipi",
+		Short: "list all stored_student_unipi",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx := client.GetClientContextFromCmd(cmd)
 
@@ -23,11 +23,11 @@ func CmdListStoredStudent() *cobra.Command {
 
 			queryClient := types.NewQueryClient(clientCtx)
 
-			params := &types.QueryAllStoredStudentRequest{
+			params := &types.QueryAllStoredStudentUnipiRequest{
 				Pagination: pageReq,
 			}
 
-			res, err := queryClient.StoredStudentAll(context.Background(), params)
+			res, err := queryClient.StoredStudentUnipiAll(context.Background(), params)
 			if err != nil {
 				return err
 			}
@@ -42,10 +42,10 @@ func CmdListStoredStudent() *cobra.Command {
 	return cmd
 }
 
-func CmdShowStoredStudent() *cobra.Command {
+func CmdShowStoredStudentUnipi() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "show-stored-student [index]",
-		Short: "shows a stored_student",
+		Use:   "show-stored-student-unipi [index]",
+		Short: "shows a stored_student_unipi",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 			clientCtx := client.GetClientContextFromCmd(cmd)
@@ -54,11 +54,11 @@ func CmdShowStoredStudent() *cobra.Command {
 
 			argIndex := args[0]
 
-			params := &types.QueryGetStoredStudentRequest{
+			params := &types.QueryGetStoredStudentUnipiRequest{
 				Index: argIndex,
 			}
 
-			res, err := queryClient.StoredStudent(context.Background(), params)
+			res, err := queryClient.StoredStudentUnipi(context.Background(), params)
 			if err != nil {
 				return err
 			}

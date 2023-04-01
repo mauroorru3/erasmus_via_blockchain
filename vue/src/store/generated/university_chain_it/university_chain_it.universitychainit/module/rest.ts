@@ -85,7 +85,7 @@ export interface UniversitychainitPersonalInfo {
   taxCode?: string;
 }
 
-export interface UniversitychainitProfessorsExams {
+export interface UniversitychainitProfessorsExamsUnipi {
   examName?: string;
   professorName?: string;
   professorId?: string;
@@ -114,8 +114,8 @@ export interface UniversitychainitQueryAllForeignUniversitiesResponse {
   pagination?: V1Beta1PageResponse;
 }
 
-export interface UniversitychainitQueryAllProfessorsExamsResponse {
-  professorsExams?: UniversitychainitProfessorsExams[];
+export interface UniversitychainitQueryAllProfessorsExamsUnipiResponse {
+  professorsExamsUnipi?: UniversitychainitProfessorsExamsUnipi[];
 
   /**
    * PageResponse is to be embedded in gRPC response messages where the
@@ -144,8 +144,8 @@ export interface UniversitychainitQueryAllProfessorsExamsUniroma1Response {
   pagination?: V1Beta1PageResponse;
 }
 
-export interface UniversitychainitQueryAllStoredStudentResponse {
-  storedStudent?: UniversitychainitStoredStudent[];
+export interface UniversitychainitQueryAllStoredStudentUnipiResponse {
+  storedStudentUnipi?: UniversitychainitStoredStudentUnipi[];
 
   /**
    * PageResponse is to be embedded in gRPC response messages where the
@@ -194,8 +194,8 @@ export interface UniversitychainitQueryGetPersonalInfoResponse {
   PersonalInfo?: UniversitychainitPersonalInfo;
 }
 
-export interface UniversitychainitQueryGetProfessorsExamsResponse {
-  professorsExams?: UniversitychainitProfessorsExams;
+export interface UniversitychainitQueryGetProfessorsExamsUnipiResponse {
+  professorsExamsUnipi?: UniversitychainitProfessorsExamsUnipi;
 }
 
 export interface UniversitychainitQueryGetProfessorsExamsUniroma1Response {
@@ -206,8 +206,8 @@ export interface UniversitychainitQueryGetResidenceInfoResponse {
   ResidenceInfo?: UniversitychainitResidenceInfo;
 }
 
-export interface UniversitychainitQueryGetStoredStudentResponse {
-  storedStudent?: UniversitychainitStoredStudent;
+export interface UniversitychainitQueryGetStoredStudentUnipiResponse {
+  storedStudentUnipi?: UniversitychainitStoredStudentUnipi;
 }
 
 export interface UniversitychainitQueryGetStoredStudentUniroma1Response {
@@ -226,8 +226,8 @@ export interface UniversitychainitQueryGetTranscriptOfRecordsResponse {
   TranscriptOfRecords?: UniversitychainitTranscriptOfRecords;
 }
 
-export interface UniversitychainitQueryGetUniversityInfoResponse {
-  UniversityInfo?: UniversitychainitUniversityInfo;
+export interface UniversitychainitQueryGetUniversityInfoUnipiResponse {
+  UniversityInfoUnipi?: UniversitychainitUniversityInfoUnipi;
 }
 
 export interface UniversitychainitQueryGetUniversityInfoUniroma1Response {
@@ -252,7 +252,7 @@ export interface UniversitychainitResidenceInfo {
   homePhone?: string;
 }
 
-export interface UniversitychainitStoredStudent {
+export interface UniversitychainitStoredStudentUnipi {
   index?: string;
   studentData?: UniversitychainitStudentInfo;
   transcriptData?: UniversitychainitTranscriptOfRecords;
@@ -318,7 +318,7 @@ export interface UniversitychainitTranscriptOfRecords {
   achievedCredits?: string;
 }
 
-export interface UniversitychainitUniversityInfo {
+export interface UniversitychainitUniversityInfoUnipi {
   /** @format uint64 */
   nextStudentId?: string;
   secretariatKey?: string;
@@ -727,11 +727,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    * No description
    *
    * @tags Query
-   * @name QueryProfessorsExamsAll
-   * @summary Queries a list of ProfessorsExams items.
-   * @request GET:/university_chain_it/universitychainit/professors_exams
+   * @name QueryProfessorsExamsUnipiAll
+   * @summary Queries a list of ProfessorsExamsUnipi items.
+   * @request GET:/university_chain_it/universitychainit/professors_exams_unipi
    */
-  queryProfessorsExamsAll = (
+  queryProfessorsExamsUnipiAll = (
     query?: {
       "pagination.key"?: string;
       "pagination.offset"?: string;
@@ -741,8 +741,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     },
     params: RequestParams = {},
   ) =>
-    this.request<UniversitychainitQueryAllProfessorsExamsResponse, RpcStatus>({
-      path: `/university_chain_it/universitychainit/professors_exams`,
+    this.request<UniversitychainitQueryAllProfessorsExamsUnipiResponse, RpcStatus>({
+      path: `/university_chain_it/universitychainit/professors_exams_unipi`,
       method: "GET",
       query: query,
       format: "json",
@@ -753,13 +753,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    * No description
    *
    * @tags Query
-   * @name QueryProfessorsExams
-   * @summary Queries a ProfessorsExams by index.
-   * @request GET:/university_chain_it/universitychainit/professors_exams/{examName}
+   * @name QueryProfessorsExamsUnipi
+   * @summary Queries a ProfessorsExamsUnipi by index.
+   * @request GET:/university_chain_it/universitychainit/professors_exams_unipi/{examName}
    */
-  queryProfessorsExams = (examName: string, params: RequestParams = {}) =>
-    this.request<UniversitychainitQueryGetProfessorsExamsResponse, RpcStatus>({
-      path: `/university_chain_it/universitychainit/professors_exams/${examName}`,
+  queryProfessorsExamsUnipi = (examName: string, params: RequestParams = {}) =>
+    this.request<UniversitychainitQueryGetProfessorsExamsUnipiResponse, RpcStatus>({
+      path: `/university_chain_it/universitychainit/professors_exams_unipi/${examName}`,
       method: "GET",
       format: "json",
       ...params,
@@ -827,11 +827,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    * No description
    *
    * @tags Query
-   * @name QueryStoredStudentAll
-   * @summary Queries a list of StoredStudent items.
-   * @request GET:/university_chain_it/universitychainit/stored_student
+   * @name QueryStoredStudentUnipiAll
+   * @summary Queries a list of StoredStudentUnipi items.
+   * @request GET:/university_chain_it/universitychainit/stored_student_unipi
    */
-  queryStoredStudentAll = (
+  queryStoredStudentUnipiAll = (
     query?: {
       "pagination.key"?: string;
       "pagination.offset"?: string;
@@ -841,8 +841,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     },
     params: RequestParams = {},
   ) =>
-    this.request<UniversitychainitQueryAllStoredStudentResponse, RpcStatus>({
-      path: `/university_chain_it/universitychainit/stored_student`,
+    this.request<UniversitychainitQueryAllStoredStudentUnipiResponse, RpcStatus>({
+      path: `/university_chain_it/universitychainit/stored_student_unipi`,
       method: "GET",
       query: query,
       format: "json",
@@ -853,13 +853,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    * No description
    *
    * @tags Query
-   * @name QueryStoredStudent
-   * @summary Queries a StoredStudent by index.
-   * @request GET:/university_chain_it/universitychainit/stored_student/{index}
+   * @name QueryStoredStudentUnipi
+   * @summary Queries a StoredStudentUnipi by index.
+   * @request GET:/university_chain_it/universitychainit/stored_student_unipi/{index}
    */
-  queryStoredStudent = (index: string, params: RequestParams = {}) =>
-    this.request<UniversitychainitQueryGetStoredStudentResponse, RpcStatus>({
-      path: `/university_chain_it/universitychainit/stored_student/${index}`,
+  queryStoredStudentUnipi = (index: string, params: RequestParams = {}) =>
+    this.request<UniversitychainitQueryGetStoredStudentUnipiResponse, RpcStatus>({
+      path: `/university_chain_it/universitychainit/stored_student_unipi/${index}`,
       method: "GET",
       format: "json",
       ...params,
@@ -959,13 +959,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    * No description
    *
    * @tags Query
-   * @name QueryUniversityInfo
-   * @summary Queries a UniversityInfo by index.
-   * @request GET:/university_chain_it/universitychainit/university_info
+   * @name QueryUniversityInfoUnipi
+   * @summary Queries a UniversityInfoUnipi by index.
+   * @request GET:/university_chain_it/universitychainit/university_info_unipi
    */
-  queryUniversityInfo = (params: RequestParams = {}) =>
-    this.request<UniversitychainitQueryGetUniversityInfoResponse, RpcStatus>({
-      path: `/university_chain_it/universitychainit/university_info`,
+  queryUniversityInfoUnipi = (params: RequestParams = {}) =>
+    this.request<UniversitychainitQueryGetUniversityInfoUnipiResponse, RpcStatus>({
+      path: `/university_chain_it/universitychainit/university_info_unipi`,
       method: "GET",
       format: "json",
       ...params,

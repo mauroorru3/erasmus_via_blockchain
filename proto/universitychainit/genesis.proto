@@ -3,7 +3,6 @@ package university_chain_it.universitychainit;
 
 import "gogoproto/gogo.proto";
 import "universitychainit/params.proto";
-import "universitychainit/professors_exams.proto";
 import "universitychainit/student_info.proto";
 import "universitychainit/transcript_of_records.proto";
 import "universitychainit/personal_info.proto";
@@ -11,13 +10,14 @@ import "universitychainit/residence_info.proto";
 import "universitychainit/contact_info.proto";
 import "universitychainit/taxes_info.proto";
 import "universitychainit/erasmus_info.proto";
-import "universitychainit/stored_student.proto";
-import "universitychainit/university_info.proto";
 import "universitychainit/chain_info.proto";
 import "universitychainit/foreign_universities.proto";
 import "universitychainit/professors_exams_uniroma_1.proto";
 import "universitychainit/stored_student_uniroma_1.proto";
 import "universitychainit/university_info_uniroma_1.proto";
+import "universitychainit/professors_exams_unipi.proto";
+import "universitychainit/stored_student_unipi.proto";
+import "universitychainit/university_info_unipi.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 
 option go_package = "university_chain_it/x/universitychainit/types";
@@ -26,20 +26,20 @@ option go_package = "university_chain_it/x/universitychainit/types";
 message GenesisState {
   Params params = 1 [(gogoproto.nullable) = false];
   string port_id = 2;
-  repeated ProfessorsExams professorsExamsList = 3 [(gogoproto.nullable) = false];
-  StudentInfo studentInfo = 4;
-  TranscriptOfRecords transcriptOfRecords = 5;
-  PersonalInfo personalInfo = 6;
-  ResidenceInfo residenceInfo = 7;
-  ContactInfo contactInfo = 8;
-  TaxesInfo taxesInfo = 9;
-  ErasmusInfo erasmusInfo = 10;
-  repeated StoredStudent storedStudentList = 11 [(gogoproto.nullable) = false];
-  UniversityInfo universityInfo = 12;
-  ChainInfo chainInfo = 13 [(gogoproto.nullable) = false];
-  repeated ForeignUniversities foreignUniversitiesList = 14 [(gogoproto.nullable) = false];
-  repeated ProfessorsExamsUniroma1 professorsExamsUniroma1List = 15 [(gogoproto.nullable) = false];
-  repeated StoredStudentUniroma1 storedStudentUniroma1List = 16 [(gogoproto.nullable) = false];
-  UniversityInfoUniroma1 universityInfoUniroma1 = 17;
+  StudentInfo studentInfo = 3;
+  TranscriptOfRecords transcriptOfRecords = 4;
+  PersonalInfo personalInfo = 5;
+  ResidenceInfo residenceInfo = 6;
+  ContactInfo contactInfo = 7;
+  TaxesInfo taxesInfo = 8;
+  ErasmusInfo erasmusInfo = 9;
+  ChainInfo chainInfo = 10 [(gogoproto.nullable) = false];
+  repeated ForeignUniversities foreignUniversitiesList = 11 [(gogoproto.nullable) = false];
+  repeated ProfessorsExamsUniroma1 professorsExamsUniroma1List = 12 [(gogoproto.nullable) = false];
+  repeated StoredStudentUniroma1 storedStudentUniroma1List = 13 [(gogoproto.nullable) = false];
+  UniversityInfoUniroma1 universityInfoUniroma1 = 14;
+  repeated ProfessorsExamsUnipi professorsExamsUnipiList = 15 [(gogoproto.nullable) = false];
+  repeated StoredStudentUnipi storedStudentUnipiList = 16 [(gogoproto.nullable) = false];
+  UniversityInfoUnipi universityInfoUnipi = 17;
   // this line is used by starport scaffolding # genesis/proto/state
 }

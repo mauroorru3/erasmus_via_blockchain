@@ -15,22 +15,22 @@ import (
 // Prevent strconv unused error
 var _ = strconv.IntSize
 
-func createNProfessorsExams(keeper *keeper.Keeper, ctx sdk.Context, n int) []types.ProfessorsExams {
-	items := make([]types.ProfessorsExams, n)
+func createNStoredStudentUnipi(keeper *keeper.Keeper, ctx sdk.Context, n int) []types.StoredStudentUnipi {
+	items := make([]types.StoredStudentUnipi, n)
 	for i := range items {
-		items[i].ExamName = strconv.Itoa(i)
+		items[i].Index = strconv.Itoa(i)
 
-		keeper.SetProfessorsExams(ctx, items[i])
+		keeper.SetStoredStudentUnipi(ctx, items[i])
 	}
 	return items
 }
 
-func TestProfessorsExamsGet(t *testing.T) {
+func TestStoredStudentUnipiGet(t *testing.T) {
 	keeper, ctx := keepertest.UniversitychainitKeeper(t)
-	items := createNProfessorsExams(keeper, ctx, 10)
+	items := createNStoredStudentUnipi(keeper, ctx, 10)
 	for _, item := range items {
-		rst, found := keeper.GetProfessorsExams(ctx,
-			item.ExamName,
+		rst, found := keeper.GetStoredStudentUnipi(ctx,
+			item.Index,
 		)
 		require.True(t, found)
 		require.Equal(t,
@@ -39,25 +39,25 @@ func TestProfessorsExamsGet(t *testing.T) {
 		)
 	}
 }
-func TestProfessorsExamsRemove(t *testing.T) {
+func TestStoredStudentUnipiRemove(t *testing.T) {
 	keeper, ctx := keepertest.UniversitychainitKeeper(t)
-	items := createNProfessorsExams(keeper, ctx, 10)
+	items := createNStoredStudentUnipi(keeper, ctx, 10)
 	for _, item := range items {
-		keeper.RemoveProfessorsExams(ctx,
-			item.ExamName,
+		keeper.RemoveStoredStudentUnipi(ctx,
+			item.Index,
 		)
-		_, found := keeper.GetProfessorsExams(ctx,
-			item.ExamName,
+		_, found := keeper.GetStoredStudentUnipi(ctx,
+			item.Index,
 		)
 		require.False(t, found)
 	}
 }
 
-func TestProfessorsExamsGetAll(t *testing.T) {
+func TestStoredStudentUnipiGetAll(t *testing.T) {
 	keeper, ctx := keepertest.UniversitychainitKeeper(t)
-	items := createNProfessorsExams(keeper, ctx, 10)
+	items := createNStoredStudentUnipi(keeper, ctx, 10)
 	require.ElementsMatch(t,
 		nullify.Fill(items),
-		nullify.Fill(keeper.GetAllProfessorsExams(ctx)),
+		nullify.Fill(keeper.GetAllStoredStudentUnipi(ctx)),
 	)
 }

@@ -10,10 +10,6 @@ import (
 // InitGenesis initializes the capability module's state from a provided genesis
 // state.
 func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) {
-	// Set all the professorsExams
-	for _, elem := range genState.ProfessorsExamsList {
-		k.SetProfessorsExams(ctx, elem)
-	}
 	// Set if defined
 	if genState.StudentInfo != nil {
 		k.SetStudentInfo(ctx, *genState.StudentInfo)
@@ -42,14 +38,6 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 	if genState.ErasmusInfo != nil {
 		k.SetErasmusInfo(ctx, *genState.ErasmusInfo)
 	}
-	// Set all the storedStudent
-	for _, elem := range genState.StoredStudentList {
-		k.SetStoredStudent(ctx, elem)
-	}
-	// Set if defined
-	if genState.UniversityInfo != nil {
-		k.SetUniversityInfo(ctx, *genState.UniversityInfo)
-	}
 	// Set if defined
 	k.SetChainInfo(ctx, genState.ChainInfo)
 	// Set all the foreignUniversities
@@ -67,6 +55,18 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 	// Set if defined
 	if genState.UniversityInfoUniroma1 != nil {
 		k.SetUniversityInfoUniroma1(ctx, *genState.UniversityInfoUniroma1)
+	}
+	// Set all the professorsExamsUnipi
+	for _, elem := range genState.ProfessorsExamsUnipiList {
+		k.SetProfessorsExamsUnipi(ctx, elem)
+	}
+	// Set all the storedStudentUnipi
+	for _, elem := range genState.StoredStudentUnipiList {
+		k.SetStoredStudentUnipi(ctx, elem)
+	}
+	// Set if defined
+	if genState.UniversityInfoUnipi != nil {
+		k.SetUniversityInfoUnipi(ctx, *genState.UniversityInfoUnipi)
 	}
 	// this line is used by starport scaffolding # genesis/module/init
 	k.SetPort(ctx, genState.PortId)
@@ -89,7 +89,6 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 	genesis.Params = k.GetParams(ctx)
 
 	genesis.PortId = k.GetPort(ctx)
-	genesis.ProfessorsExamsList = k.GetAllProfessorsExams(ctx)
 	// Get all studentInfo
 	studentInfo, found := k.GetStudentInfo(ctx)
 	if found {
@@ -125,12 +124,6 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 	if found {
 		genesis.ErasmusInfo = &erasmusInfo
 	}
-	genesis.StoredStudentList = k.GetAllStoredStudent(ctx)
-	// Get all universityInfo
-	universityInfo, found := k.GetUniversityInfo(ctx)
-	if found {
-		genesis.UniversityInfo = &universityInfo
-	}
 	// Get all chainInfo
 	chainInfo, found := k.GetChainInfo(ctx)
 	if found {
@@ -143,6 +136,13 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 	universityInfoUniroma1, found := k.GetUniversityInfoUniroma1(ctx)
 	if found {
 		genesis.UniversityInfoUniroma1 = &universityInfoUniroma1
+	}
+	genesis.ProfessorsExamsUnipiList = k.GetAllProfessorsExamsUnipi(ctx)
+	genesis.StoredStudentUnipiList = k.GetAllStoredStudentUnipi(ctx)
+	// Get all universityInfoUnipi
+	universityInfoUnipi, found := k.GetUniversityInfoUnipi(ctx)
+	if found {
+		genesis.UniversityInfoUnipi = &universityInfoUnipi
 	}
 	// this line is used by starport scaffolding # genesis/module/export
 

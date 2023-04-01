@@ -53,11 +53,12 @@ func (k msgServer) ConfigureChain(goCtx context.Context, msg *types.MsgConfigure
 					Status: -1,
 				}, err
 			}
+
 			for i = 0; i < len(universityInfoList); i++ {
 
 				switch universityInfoList[i].Name {
 				case "unipi":
-					k.Keeper.SetUniversityInfo(ctx, types.UniversityInfo{
+					k.Keeper.SetUniversityInfoUnipi(ctx, types.UniversityInfoUnipi{
 						NextStudentId:   1,
 						SecretariatKey:  universityInfoList[i].Secretariat_key,
 						UniversityKey:   universityInfoList[i].University_key,
@@ -79,7 +80,6 @@ func (k msgServer) ConfigureChain(goCtx context.Context, msg *types.MsgConfigure
 								for z = 0; z < len(universityInfoList[i].DepartmentList[j].CoursesTypeList[q].Courses[w].Exams); z++ {
 
 									/*
-
 										data := map[string]interface{}{
 											"intValue":    1234,
 											"boolValue":   true,
@@ -95,7 +95,7 @@ func (k msgServer) ConfigureChain(goCtx context.Context, msg *types.MsgConfigure
 
 									*/
 
-									k.Keeper.SetProfessorsExams(ctx, types.ProfessorsExams{
+									k.Keeper.SetProfessorsExamsUnipi(ctx, types.ProfessorsExamsUnipi{
 										ExamName:      universityInfoList[i].DepartmentList[j].CoursesTypeList[q].Courses[w].Exams[z].ExamName,
 										ProfessorName: universityInfoList[i].DepartmentList[j].CoursesTypeList[q].Courses[w].Exams[z].ProfessorName,
 										ProfessorId:   "",

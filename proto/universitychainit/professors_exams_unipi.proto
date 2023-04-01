@@ -3,7 +3,7 @@ package university_chain_it.universitychainit;
 
 option go_package = "university_chain_it/x/universitychainit/types";
 
-message ProfessorsExams{
+message ProfessorsExamsUnipi {
   string examName = 1; 
   string professorName = 2; 
   string professorId = 3; 

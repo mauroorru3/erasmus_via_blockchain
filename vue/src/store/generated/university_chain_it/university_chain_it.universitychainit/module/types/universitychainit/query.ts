@@ -1,11 +1,6 @@
 /* eslint-disable */
 import { Reader, Writer } from "protobufjs/minimal";
 import { Params } from "../universitychainit/params";
-import { ProfessorsExams } from "../universitychainit/professors_exams";
-import {
-  PageRequest,
-  PageResponse,
-} from "../cosmos/base/query/v1beta1/pagination";
 import { StudentInfo } from "../universitychainit/student_info";
 import { TranscriptOfRecords } from "../universitychainit/transcript_of_records";
 import { PersonalInfo } from "../universitychainit/personal_info";
@@ -13,13 +8,18 @@ import { ResidenceInfo } from "../universitychainit/residence_info";
 import { ContactInfo } from "../universitychainit/contact_info";
 import { TaxesInfo } from "../universitychainit/taxes_info";
 import { ErasmusInfo } from "../universitychainit/erasmus_info";
-import { StoredStudent } from "../universitychainit/stored_student";
-import { UniversityInfo } from "../universitychainit/university_info";
 import { ChainInfo } from "../universitychainit/chain_info";
 import { ForeignUniversities } from "../universitychainit/foreign_universities";
+import {
+  PageRequest,
+  PageResponse,
+} from "../cosmos/base/query/v1beta1/pagination";
 import { ProfessorsExamsUniroma1 } from "../universitychainit/professors_exams_uniroma_1";
 import { StoredStudentUniroma1 } from "../universitychainit/stored_student_uniroma_1";
 import { UniversityInfoUniroma1 } from "../universitychainit/university_info_uniroma_1";
+import { ProfessorsExamsUnipi } from "../universitychainit/professors_exams_unipi";
+import { StoredStudentUnipi } from "../universitychainit/stored_student_unipi";
+import { UniversityInfoUnipi } from "../universitychainit/university_info_unipi";
 
 export const protobufPackage = "university_chain_it.universitychainit";
 
@@ -34,19 +34,6 @@ export interface QueryParamsResponse {
 
 export interface QueryGetProfessorsExamsRequest {
   examName: string;
-}
-
-export interface QueryGetProfessorsExamsResponse {
-  professorsExams: ProfessorsExams | undefined;
-}
-
-export interface QueryAllProfessorsExamsRequest {
-  pagination: PageRequest | undefined;
-}
-
-export interface QueryAllProfessorsExamsResponse {
-  professorsExams: ProfessorsExams[];
-  pagination: PageResponse | undefined;
 }
 
 export interface QueryGetStudentInfoRequest {}
@@ -89,29 +76,6 @@ export interface QueryGetErasmusInfoRequest {}
 
 export interface QueryGetErasmusInfoResponse {
   ErasmusInfo: ErasmusInfo | undefined;
-}
-
-export interface QueryGetStoredStudentRequest {
-  index: string;
-}
-
-export interface QueryGetStoredStudentResponse {
-  storedStudent: StoredStudent | undefined;
-}
-
-export interface QueryAllStoredStudentRequest {
-  pagination: PageRequest | undefined;
-}
-
-export interface QueryAllStoredStudentResponse {
-  storedStudent: StoredStudent[];
-  pagination: PageResponse | undefined;
-}
-
-export interface QueryGetUniversityInfoRequest {}
-
-export interface QueryGetUniversityInfoResponse {
-  UniversityInfo: UniversityInfo | undefined;
 }
 
 export interface QueryGetChainInfoRequest {}
@@ -175,6 +139,46 @@ export interface QueryGetUniversityInfoUniroma1Request {}
 
 export interface QueryGetUniversityInfoUniroma1Response {
   UniversityInfoUniroma1: UniversityInfoUniroma1 | undefined;
+}
+
+export interface QueryGetProfessorsExamsUnipiRequest {
+  examName: string;
+}
+
+export interface QueryGetProfessorsExamsUnipiResponse {
+  professorsExamsUnipi: ProfessorsExamsUnipi | undefined;
+}
+
+export interface QueryAllProfessorsExamsUnipiRequest {
+  pagination: PageRequest | undefined;
+}
+
+export interface QueryAllProfessorsExamsUnipiResponse {
+  professorsExamsUnipi: ProfessorsExamsUnipi[];
+  pagination: PageResponse | undefined;
+}
+
+export interface QueryGetStoredStudentUnipiRequest {
+  index: string;
+}
+
+export interface QueryGetStoredStudentUnipiResponse {
+  storedStudentUnipi: StoredStudentUnipi | undefined;
+}
+
+export interface QueryAllStoredStudentUnipiRequest {
+  pagination: PageRequest | undefined;
+}
+
+export interface QueryAllStoredStudentUnipiResponse {
+  storedStudentUnipi: StoredStudentUnipi[];
+  pagination: PageResponse | undefined;
+}
+
+export interface QueryGetUniversityInfoUnipiRequest {}
+
+export interface QueryGetUniversityInfoUnipiResponse {
+  UniversityInfoUnipi: UniversityInfoUnipi | undefined;
 }
 
 const baseQueryParamsRequest: object = {};
@@ -338,275 +342,6 @@ export const QueryGetProfessorsExamsRequest = {
       message.examName = object.examName;
     } else {
       message.examName = "";
-    }
-    return message;
-  },
-};
-
-const baseQueryGetProfessorsExamsResponse: object = {};
-
-export const QueryGetProfessorsExamsResponse = {
-  encode(
-    message: QueryGetProfessorsExamsResponse,
-    writer: Writer = Writer.create()
-  ): Writer {
-    if (message.professorsExams !== undefined) {
-      ProfessorsExams.encode(
-        message.professorsExams,
-        writer.uint32(10).fork()
-      ).ldelim();
-    }
-    return writer;
-  },
-
-  decode(
-    input: Reader | Uint8Array,
-    length?: number
-  ): QueryGetProfessorsExamsResponse {
-    const reader = input instanceof Uint8Array ? new Reader(input) : input;
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseQueryGetProfessorsExamsResponse,
-    } as QueryGetProfessorsExamsResponse;
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          message.professorsExams = ProfessorsExams.decode(
-            reader,
-            reader.uint32()
-          );
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-
-  fromJSON(object: any): QueryGetProfessorsExamsResponse {
-    const message = {
-      ...baseQueryGetProfessorsExamsResponse,
-    } as QueryGetProfessorsExamsResponse;
-    if (
-      object.professorsExams !== undefined &&
-      object.professorsExams !== null
-    ) {
-      message.professorsExams = ProfessorsExams.fromJSON(
-        object.professorsExams
-      );
-    } else {
-      message.professorsExams = undefined;
-    }
-    return message;
-  },
-
-  toJSON(message: QueryGetProfessorsExamsResponse): unknown {
-    const obj: any = {};
-    message.professorsExams !== undefined &&
-      (obj.professorsExams = message.professorsExams
-        ? ProfessorsExams.toJSON(message.professorsExams)
-        : undefined);
-    return obj;
-  },
-
-  fromPartial(
-    object: DeepPartial<QueryGetProfessorsExamsResponse>
-  ): QueryGetProfessorsExamsResponse {
-    const message = {
-      ...baseQueryGetProfessorsExamsResponse,
-    } as QueryGetProfessorsExamsResponse;
-    if (
-      object.professorsExams !== undefined &&
-      object.professorsExams !== null
-    ) {
-      message.professorsExams = ProfessorsExams.fromPartial(
-        object.professorsExams
-      );
-    } else {
-      message.professorsExams = undefined;
-    }
-    return message;
-  },
-};
-
-const baseQueryAllProfessorsExamsRequest: object = {};
-
-export const QueryAllProfessorsExamsRequest = {
-  encode(
-    message: QueryAllProfessorsExamsRequest,
-    writer: Writer = Writer.create()
-  ): Writer {
-    if (message.pagination !== undefined) {
-      PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
-    }
-    return writer;
-  },
-
-  decode(
-    input: Reader | Uint8Array,
-    length?: number
-  ): QueryAllProfessorsExamsRequest {
-    const reader = input instanceof Uint8Array ? new Reader(input) : input;
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseQueryAllProfessorsExamsRequest,
-    } as QueryAllProfessorsExamsRequest;
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          message.pagination = PageRequest.decode(reader, reader.uint32());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-
-  fromJSON(object: any): QueryAllProfessorsExamsRequest {
-    const message = {
-      ...baseQueryAllProfessorsExamsRequest,
-    } as QueryAllProfessorsExamsRequest;
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromJSON(object.pagination);
-    } else {
-      message.pagination = undefined;
-    }
-    return message;
-  },
-
-  toJSON(message: QueryAllProfessorsExamsRequest): unknown {
-    const obj: any = {};
-    message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageRequest.toJSON(message.pagination)
-        : undefined);
-    return obj;
-  },
-
-  fromPartial(
-    object: DeepPartial<QueryAllProfessorsExamsRequest>
-  ): QueryAllProfessorsExamsRequest {
-    const message = {
-      ...baseQueryAllProfessorsExamsRequest,
-    } as QueryAllProfessorsExamsRequest;
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    } else {
-      message.pagination = undefined;
-    }
-    return message;
-  },
-};
-
-const baseQueryAllProfessorsExamsResponse: object = {};
-
-export const QueryAllProfessorsExamsResponse = {
-  encode(
-    message: QueryAllProfessorsExamsResponse,
-    writer: Writer = Writer.create()
-  ): Writer {
-    for (const v of message.professorsExams) {
-      ProfessorsExams.encode(v!, writer.uint32(10).fork()).ldelim();
-    }
-    if (message.pagination !== undefined) {
-      PageResponse.encode(
-        message.pagination,
-        writer.uint32(18).fork()
-      ).ldelim();
-    }
-    return writer;
-  },
-
-  decode(
-    input: Reader | Uint8Array,
-    length?: number
-  ): QueryAllProfessorsExamsResponse {
-    const reader = input instanceof Uint8Array ? new Reader(input) : input;
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseQueryAllProfessorsExamsResponse,
-    } as QueryAllProfessorsExamsResponse;
-    message.professorsExams = [];
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          message.professorsExams.push(
-            ProfessorsExams.decode(reader, reader.uint32())
-          );
-          break;
-        case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-
-  fromJSON(object: any): QueryAllProfessorsExamsResponse {
-    const message = {
-      ...baseQueryAllProfessorsExamsResponse,
-    } as QueryAllProfessorsExamsResponse;
-    message.professorsExams = [];
-    if (
-      object.professorsExams !== undefined &&
-      object.professorsExams !== null
-    ) {
-      for (const e of object.professorsExams) {
-        message.professorsExams.push(ProfessorsExams.fromJSON(e));
-      }
-    }
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromJSON(object.pagination);
-    } else {
-      message.pagination = undefined;
-    }
-    return message;
-  },
-
-  toJSON(message: QueryAllProfessorsExamsResponse): unknown {
-    const obj: any = {};
-    if (message.professorsExams) {
-      obj.professorsExams = message.professorsExams.map((e) =>
-        e ? ProfessorsExams.toJSON(e) : undefined
-      );
-    } else {
-      obj.professorsExams = [];
-    }
-    message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageResponse.toJSON(message.pagination)
-        : undefined);
-    return obj;
-  },
-
-  fromPartial(
-    object: DeepPartial<QueryAllProfessorsExamsResponse>
-  ): QueryAllProfessorsExamsResponse {
-    const message = {
-      ...baseQueryAllProfessorsExamsResponse,
-    } as QueryAllProfessorsExamsResponse;
-    message.professorsExams = [];
-    if (
-      object.professorsExams !== undefined &&
-      object.professorsExams !== null
-    ) {
-      for (const e of object.professorsExams) {
-        message.professorsExams.push(ProfessorsExams.fromPartial(e));
-      }
-    }
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    } else {
-      message.pagination = undefined;
     }
     return message;
   },
@@ -1506,457 +1241,6 @@ export const QueryGetErasmusInfoResponse = {
       message.ErasmusInfo = ErasmusInfo.fromPartial(object.ErasmusInfo);
     } else {
       message.ErasmusInfo = undefined;
-    }
-    return message;
-  },
-};
-
-const baseQueryGetStoredStudentRequest: object = { index: "" };
-
-export const QueryGetStoredStudentRequest = {
-  encode(
-    message: QueryGetStoredStudentRequest,
-    writer: Writer = Writer.create()
-  ): Writer {
-    if (message.index !== "") {
-      writer.uint32(10).string(message.index);
-    }
-    return writer;
-  },
-
-  decode(
-    input: Reader | Uint8Array,
-    length?: number
-  ): QueryGetStoredStudentRequest {
-    const reader = input instanceof Uint8Array ? new Reader(input) : input;
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseQueryGetStoredStudentRequest,
-    } as QueryGetStoredStudentRequest;
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          message.index = reader.string();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-
-  fromJSON(object: any): QueryGetStoredStudentRequest {
-    const message = {
-      ...baseQueryGetStoredStudentRequest,
-    } as QueryGetStoredStudentRequest;
-    if (object.index !== undefined && object.index !== null) {
-      message.index = String(object.index);
-    } else {
-      message.index = "";
-    }
-    return message;
-  },
-
-  toJSON(message: QueryGetStoredStudentRequest): unknown {
-    const obj: any = {};
-    message.index !== undefined && (obj.index = message.index);
-    return obj;
-  },
-
-  fromPartial(
-    object: DeepPartial<QueryGetStoredStudentRequest>
-  ): QueryGetStoredStudentRequest {
-    const message = {
-      ...baseQueryGetStoredStudentRequest,
-    } as QueryGetStoredStudentRequest;
-    if (object.index !== undefined && object.index !== null) {
-      message.index = object.index;
-    } else {
-      message.index = "";
-    }
-    return message;
-  },
-};
-
-const baseQueryGetStoredStudentResponse: object = {};
-
-export const QueryGetStoredStudentResponse = {
-  encode(
-    message: QueryGetStoredStudentResponse,
-    writer: Writer = Writer.create()
-  ): Writer {
-    if (message.storedStudent !== undefined) {
-      StoredStudent.encode(
-        message.storedStudent,
-        writer.uint32(10).fork()
-      ).ldelim();
-    }
-    return writer;
-  },
-
-  decode(
-    input: Reader | Uint8Array,
-    length?: number
-  ): QueryGetStoredStudentResponse {
-    const reader = input instanceof Uint8Array ? new Reader(input) : input;
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseQueryGetStoredStudentResponse,
-    } as QueryGetStoredStudentResponse;
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          message.storedStudent = StoredStudent.decode(reader, reader.uint32());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-
-  fromJSON(object: any): QueryGetStoredStudentResponse {
-    const message = {
-      ...baseQueryGetStoredStudentResponse,
-    } as QueryGetStoredStudentResponse;
-    if (object.storedStudent !== undefined && object.storedStudent !== null) {
-      message.storedStudent = StoredStudent.fromJSON(object.storedStudent);
-    } else {
-      message.storedStudent = undefined;
-    }
-    return message;
-  },
-
-  toJSON(message: QueryGetStoredStudentResponse): unknown {
-    const obj: any = {};
-    message.storedStudent !== undefined &&
-      (obj.storedStudent = message.storedStudent
-        ? StoredStudent.toJSON(message.storedStudent)
-        : undefined);
-    return obj;
-  },
-
-  fromPartial(
-    object: DeepPartial<QueryGetStoredStudentResponse>
-  ): QueryGetStoredStudentResponse {
-    const message = {
-      ...baseQueryGetStoredStudentResponse,
-    } as QueryGetStoredStudentResponse;
-    if (object.storedStudent !== undefined && object.storedStudent !== null) {
-      message.storedStudent = StoredStudent.fromPartial(object.storedStudent);
-    } else {
-      message.storedStudent = undefined;
-    }
-    return message;
-  },
-};
-
-const baseQueryAllStoredStudentRequest: object = {};
-
-export const QueryAllStoredStudentRequest = {
-  encode(
-    message: QueryAllStoredStudentRequest,
-    writer: Writer = Writer.create()
-  ): Writer {
-    if (message.pagination !== undefined) {
-      PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
-    }
-    return writer;
-  },
-
-  decode(
-    input: Reader | Uint8Array,
-    length?: number
-  ): QueryAllStoredStudentRequest {
-    const reader = input instanceof Uint8Array ? new Reader(input) : input;
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseQueryAllStoredStudentRequest,
-    } as QueryAllStoredStudentRequest;
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          message.pagination = PageRequest.decode(reader, reader.uint32());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-
-  fromJSON(object: any): QueryAllStoredStudentRequest {
-    const message = {
-      ...baseQueryAllStoredStudentRequest,
-    } as QueryAllStoredStudentRequest;
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromJSON(object.pagination);
-    } else {
-      message.pagination = undefined;
-    }
-    return message;
-  },
-
-  toJSON(message: QueryAllStoredStudentRequest): unknown {
-    const obj: any = {};
-    message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageRequest.toJSON(message.pagination)
-        : undefined);
-    return obj;
-  },
-
-  fromPartial(
-    object: DeepPartial<QueryAllStoredStudentRequest>
-  ): QueryAllStoredStudentRequest {
-    const message = {
-      ...baseQueryAllStoredStudentRequest,
-    } as QueryAllStoredStudentRequest;
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    } else {
-      message.pagination = undefined;
-    }
-    return message;
-  },
-};
-
-const baseQueryAllStoredStudentResponse: object = {};
-
-export const QueryAllStoredStudentResponse = {
-  encode(
-    message: QueryAllStoredStudentResponse,
-    writer: Writer = Writer.create()
-  ): Writer {
-    for (const v of message.storedStudent) {
-      StoredStudent.encode(v!, writer.uint32(10).fork()).ldelim();
-    }
-    if (message.pagination !== undefined) {
-      PageResponse.encode(
-        message.pagination,
-        writer.uint32(18).fork()
-      ).ldelim();
-    }
-    return writer;
-  },
-
-  decode(
-    input: Reader | Uint8Array,
-    length?: number
-  ): QueryAllStoredStudentResponse {
-    const reader = input instanceof Uint8Array ? new Reader(input) : input;
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseQueryAllStoredStudentResponse,
-    } as QueryAllStoredStudentResponse;
-    message.storedStudent = [];
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          message.storedStudent.push(
-            StoredStudent.decode(reader, reader.uint32())
-          );
-          break;
-        case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-
-  fromJSON(object: any): QueryAllStoredStudentResponse {
-    const message = {
-      ...baseQueryAllStoredStudentResponse,
-    } as QueryAllStoredStudentResponse;
-    message.storedStudent = [];
-    if (object.storedStudent !== undefined && object.storedStudent !== null) {
-      for (const e of object.storedStudent) {
-        message.storedStudent.push(StoredStudent.fromJSON(e));
-      }
-    }
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromJSON(object.pagination);
-    } else {
-      message.pagination = undefined;
-    }
-    return message;
-  },
-
-  toJSON(message: QueryAllStoredStudentResponse): unknown {
-    const obj: any = {};
-    if (message.storedStudent) {
-      obj.storedStudent = message.storedStudent.map((e) =>
-        e ? StoredStudent.toJSON(e) : undefined
-      );
-    } else {
-      obj.storedStudent = [];
-    }
-    message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageResponse.toJSON(message.pagination)
-        : undefined);
-    return obj;
-  },
-
-  fromPartial(
-    object: DeepPartial<QueryAllStoredStudentResponse>
-  ): QueryAllStoredStudentResponse {
-    const message = {
-      ...baseQueryAllStoredStudentResponse,
-    } as QueryAllStoredStudentResponse;
-    message.storedStudent = [];
-    if (object.storedStudent !== undefined && object.storedStudent !== null) {
-      for (const e of object.storedStudent) {
-        message.storedStudent.push(StoredStudent.fromPartial(e));
-      }
-    }
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    } else {
-      message.pagination = undefined;
-    }
-    return message;
-  },
-};
-
-const baseQueryGetUniversityInfoRequest: object = {};
-
-export const QueryGetUniversityInfoRequest = {
-  encode(
-    _: QueryGetUniversityInfoRequest,
-    writer: Writer = Writer.create()
-  ): Writer {
-    return writer;
-  },
-
-  decode(
-    input: Reader | Uint8Array,
-    length?: number
-  ): QueryGetUniversityInfoRequest {
-    const reader = input instanceof Uint8Array ? new Reader(input) : input;
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseQueryGetUniversityInfoRequest,
-    } as QueryGetUniversityInfoRequest;
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-
-  fromJSON(_: any): QueryGetUniversityInfoRequest {
-    const message = {
-      ...baseQueryGetUniversityInfoRequest,
-    } as QueryGetUniversityInfoRequest;
-    return message;
-  },
-
-  toJSON(_: QueryGetUniversityInfoRequest): unknown {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromPartial(
-    _: DeepPartial<QueryGetUniversityInfoRequest>
-  ): QueryGetUniversityInfoRequest {
-    const message = {
-      ...baseQueryGetUniversityInfoRequest,
-    } as QueryGetUniversityInfoRequest;
-    return message;
-  },
-};
-
-const baseQueryGetUniversityInfoResponse: object = {};
-
-export const QueryGetUniversityInfoResponse = {
-  encode(
-    message: QueryGetUniversityInfoResponse,
-    writer: Writer = Writer.create()
-  ): Writer {
-    if (message.UniversityInfo !== undefined) {
-      UniversityInfo.encode(
-        message.UniversityInfo,
-        writer.uint32(10).fork()
-      ).ldelim();
-    }
-    return writer;
-  },
-
-  decode(
-    input: Reader | Uint8Array,
-    length?: number
-  ): QueryGetUniversityInfoResponse {
-    const reader = input instanceof Uint8Array ? new Reader(input) : input;
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseQueryGetUniversityInfoResponse,
-    } as QueryGetUniversityInfoResponse;
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          message.UniversityInfo = UniversityInfo.decode(
-            reader,
-            reader.uint32()
-          );
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-
-  fromJSON(object: any): QueryGetUniversityInfoResponse {
-    const message = {
-      ...baseQueryGetUniversityInfoResponse,
-    } as QueryGetUniversityInfoResponse;
-    if (object.UniversityInfo !== undefined && object.UniversityInfo !== null) {
-      message.UniversityInfo = UniversityInfo.fromJSON(object.UniversityInfo);
-    } else {
-      message.UniversityInfo = undefined;
-    }
-    return message;
-  },
-
-  toJSON(message: QueryGetUniversityInfoResponse): unknown {
-    const obj: any = {};
-    message.UniversityInfo !== undefined &&
-      (obj.UniversityInfo = message.UniversityInfo
-        ? UniversityInfo.toJSON(message.UniversityInfo)
-        : undefined);
-    return obj;
-  },
-
-  fromPartial(
-    object: DeepPartial<QueryGetUniversityInfoResponse>
-  ): QueryGetUniversityInfoResponse {
-    const message = {
-      ...baseQueryGetUniversityInfoResponse,
-    } as QueryGetUniversityInfoResponse;
-    if (object.UniversityInfo !== undefined && object.UniversityInfo !== null) {
-      message.UniversityInfo = UniversityInfo.fromPartial(
-        object.UniversityInfo
-      );
-    } else {
-      message.UniversityInfo = undefined;
     }
     return message;
   },
@@ -3247,18 +2531,826 @@ export const QueryGetUniversityInfoUniroma1Response = {
   },
 };
 
+const baseQueryGetProfessorsExamsUnipiRequest: object = { examName: "" };
+
+export const QueryGetProfessorsExamsUnipiRequest = {
+  encode(
+    message: QueryGetProfessorsExamsUnipiRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.examName !== "") {
+      writer.uint32(10).string(message.examName);
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetProfessorsExamsUnipiRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetProfessorsExamsUnipiRequest,
+    } as QueryGetProfessorsExamsUnipiRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.examName = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetProfessorsExamsUnipiRequest {
+    const message = {
+      ...baseQueryGetProfessorsExamsUnipiRequest,
+    } as QueryGetProfessorsExamsUnipiRequest;
+    if (object.examName !== undefined && object.examName !== null) {
+      message.examName = String(object.examName);
+    } else {
+      message.examName = "";
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetProfessorsExamsUnipiRequest): unknown {
+    const obj: any = {};
+    message.examName !== undefined && (obj.examName = message.examName);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetProfessorsExamsUnipiRequest>
+  ): QueryGetProfessorsExamsUnipiRequest {
+    const message = {
+      ...baseQueryGetProfessorsExamsUnipiRequest,
+    } as QueryGetProfessorsExamsUnipiRequest;
+    if (object.examName !== undefined && object.examName !== null) {
+      message.examName = object.examName;
+    } else {
+      message.examName = "";
+    }
+    return message;
+  },
+};
+
+const baseQueryGetProfessorsExamsUnipiResponse: object = {};
+
+export const QueryGetProfessorsExamsUnipiResponse = {
+  encode(
+    message: QueryGetProfessorsExamsUnipiResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.professorsExamsUnipi !== undefined) {
+      ProfessorsExamsUnipi.encode(
+        message.professorsExamsUnipi,
+        writer.uint32(10).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetProfessorsExamsUnipiResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetProfessorsExamsUnipiResponse,
+    } as QueryGetProfessorsExamsUnipiResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.professorsExamsUnipi = ProfessorsExamsUnipi.decode(
+            reader,
+            reader.uint32()
+          );
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetProfessorsExamsUnipiResponse {
+    const message = {
+      ...baseQueryGetProfessorsExamsUnipiResponse,
+    } as QueryGetProfessorsExamsUnipiResponse;
+    if (
+      object.professorsExamsUnipi !== undefined &&
+      object.professorsExamsUnipi !== null
+    ) {
+      message.professorsExamsUnipi = ProfessorsExamsUnipi.fromJSON(
+        object.professorsExamsUnipi
+      );
+    } else {
+      message.professorsExamsUnipi = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetProfessorsExamsUnipiResponse): unknown {
+    const obj: any = {};
+    message.professorsExamsUnipi !== undefined &&
+      (obj.professorsExamsUnipi = message.professorsExamsUnipi
+        ? ProfessorsExamsUnipi.toJSON(message.professorsExamsUnipi)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetProfessorsExamsUnipiResponse>
+  ): QueryGetProfessorsExamsUnipiResponse {
+    const message = {
+      ...baseQueryGetProfessorsExamsUnipiResponse,
+    } as QueryGetProfessorsExamsUnipiResponse;
+    if (
+      object.professorsExamsUnipi !== undefined &&
+      object.professorsExamsUnipi !== null
+    ) {
+      message.professorsExamsUnipi = ProfessorsExamsUnipi.fromPartial(
+        object.professorsExamsUnipi
+      );
+    } else {
+      message.professorsExamsUnipi = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllProfessorsExamsUnipiRequest: object = {};
+
+export const QueryAllProfessorsExamsUnipiRequest = {
+  encode(
+    message: QueryAllProfessorsExamsUnipiRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllProfessorsExamsUnipiRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllProfessorsExamsUnipiRequest,
+    } as QueryAllProfessorsExamsUnipiRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllProfessorsExamsUnipiRequest {
+    const message = {
+      ...baseQueryAllProfessorsExamsUnipiRequest,
+    } as QueryAllProfessorsExamsUnipiRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllProfessorsExamsUnipiRequest): unknown {
+    const obj: any = {};
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageRequest.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllProfessorsExamsUnipiRequest>
+  ): QueryAllProfessorsExamsUnipiRequest {
+    const message = {
+      ...baseQueryAllProfessorsExamsUnipiRequest,
+    } as QueryAllProfessorsExamsUnipiRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllProfessorsExamsUnipiResponse: object = {};
+
+export const QueryAllProfessorsExamsUnipiResponse = {
+  encode(
+    message: QueryAllProfessorsExamsUnipiResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    for (const v of message.professorsExamsUnipi) {
+      ProfessorsExamsUnipi.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(
+        message.pagination,
+        writer.uint32(18).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllProfessorsExamsUnipiResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllProfessorsExamsUnipiResponse,
+    } as QueryAllProfessorsExamsUnipiResponse;
+    message.professorsExamsUnipi = [];
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.professorsExamsUnipi.push(
+            ProfessorsExamsUnipi.decode(reader, reader.uint32())
+          );
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllProfessorsExamsUnipiResponse {
+    const message = {
+      ...baseQueryAllProfessorsExamsUnipiResponse,
+    } as QueryAllProfessorsExamsUnipiResponse;
+    message.professorsExamsUnipi = [];
+    if (
+      object.professorsExamsUnipi !== undefined &&
+      object.professorsExamsUnipi !== null
+    ) {
+      for (const e of object.professorsExamsUnipi) {
+        message.professorsExamsUnipi.push(ProfessorsExamsUnipi.fromJSON(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllProfessorsExamsUnipiResponse): unknown {
+    const obj: any = {};
+    if (message.professorsExamsUnipi) {
+      obj.professorsExamsUnipi = message.professorsExamsUnipi.map((e) =>
+        e ? ProfessorsExamsUnipi.toJSON(e) : undefined
+      );
+    } else {
+      obj.professorsExamsUnipi = [];
+    }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageResponse.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllProfessorsExamsUnipiResponse>
+  ): QueryAllProfessorsExamsUnipiResponse {
+    const message = {
+      ...baseQueryAllProfessorsExamsUnipiResponse,
+    } as QueryAllProfessorsExamsUnipiResponse;
+    message.professorsExamsUnipi = [];
+    if (
+      object.professorsExamsUnipi !== undefined &&
+      object.professorsExamsUnipi !== null
+    ) {
+      for (const e of object.professorsExamsUnipi) {
+        message.professorsExamsUnipi.push(ProfessorsExamsUnipi.fromPartial(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryGetStoredStudentUnipiRequest: object = { index: "" };
+
+export const QueryGetStoredStudentUnipiRequest = {
+  encode(
+    message: QueryGetStoredStudentUnipiRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.index !== "") {
+      writer.uint32(10).string(message.index);
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetStoredStudentUnipiRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetStoredStudentUnipiRequest,
+    } as QueryGetStoredStudentUnipiRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.index = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetStoredStudentUnipiRequest {
+    const message = {
+      ...baseQueryGetStoredStudentUnipiRequest,
+    } as QueryGetStoredStudentUnipiRequest;
+    if (object.index !== undefined && object.index !== null) {
+      message.index = String(object.index);
+    } else {
+      message.index = "";
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetStoredStudentUnipiRequest): unknown {
+    const obj: any = {};
+    message.index !== undefined && (obj.index = message.index);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetStoredStudentUnipiRequest>
+  ): QueryGetStoredStudentUnipiRequest {
+    const message = {
+      ...baseQueryGetStoredStudentUnipiRequest,
+    } as QueryGetStoredStudentUnipiRequest;
+    if (object.index !== undefined && object.index !== null) {
+      message.index = object.index;
+    } else {
+      message.index = "";
+    }
+    return message;
+  },
+};
+
+const baseQueryGetStoredStudentUnipiResponse: object = {};
+
+export const QueryGetStoredStudentUnipiResponse = {
+  encode(
+    message: QueryGetStoredStudentUnipiResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.storedStudentUnipi !== undefined) {
+      StoredStudentUnipi.encode(
+        message.storedStudentUnipi,
+        writer.uint32(10).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetStoredStudentUnipiResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetStoredStudentUnipiResponse,
+    } as QueryGetStoredStudentUnipiResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.storedStudentUnipi = StoredStudentUnipi.decode(
+            reader,
+            reader.uint32()
+          );
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetStoredStudentUnipiResponse {
+    const message = {
+      ...baseQueryGetStoredStudentUnipiResponse,
+    } as QueryGetStoredStudentUnipiResponse;
+    if (
+      object.storedStudentUnipi !== undefined &&
+      object.storedStudentUnipi !== null
+    ) {
+      message.storedStudentUnipi = StoredStudentUnipi.fromJSON(
+        object.storedStudentUnipi
+      );
+    } else {
+      message.storedStudentUnipi = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetStoredStudentUnipiResponse): unknown {
+    const obj: any = {};
+    message.storedStudentUnipi !== undefined &&
+      (obj.storedStudentUnipi = message.storedStudentUnipi
+        ? StoredStudentUnipi.toJSON(message.storedStudentUnipi)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetStoredStudentUnipiResponse>
+  ): QueryGetStoredStudentUnipiResponse {
+    const message = {
+      ...baseQueryGetStoredStudentUnipiResponse,
+    } as QueryGetStoredStudentUnipiResponse;
+    if (
+      object.storedStudentUnipi !== undefined &&
+      object.storedStudentUnipi !== null
+    ) {
+      message.storedStudentUnipi = StoredStudentUnipi.fromPartial(
+        object.storedStudentUnipi
+      );
+    } else {
+      message.storedStudentUnipi = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllStoredStudentUnipiRequest: object = {};
+
+export const QueryAllStoredStudentUnipiRequest = {
+  encode(
+    message: QueryAllStoredStudentUnipiRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllStoredStudentUnipiRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllStoredStudentUnipiRequest,
+    } as QueryAllStoredStudentUnipiRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllStoredStudentUnipiRequest {
+    const message = {
+      ...baseQueryAllStoredStudentUnipiRequest,
+    } as QueryAllStoredStudentUnipiRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllStoredStudentUnipiRequest): unknown {
+    const obj: any = {};
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageRequest.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllStoredStudentUnipiRequest>
+  ): QueryAllStoredStudentUnipiRequest {
+    const message = {
+      ...baseQueryAllStoredStudentUnipiRequest,
+    } as QueryAllStoredStudentUnipiRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllStoredStudentUnipiResponse: object = {};
+
+export const QueryAllStoredStudentUnipiResponse = {
+  encode(
+    message: QueryAllStoredStudentUnipiResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    for (const v of message.storedStudentUnipi) {
+      StoredStudentUnipi.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(
+        message.pagination,
+        writer.uint32(18).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllStoredStudentUnipiResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllStoredStudentUnipiResponse,
+    } as QueryAllStoredStudentUnipiResponse;
+    message.storedStudentUnipi = [];
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.storedStudentUnipi.push(
+            StoredStudentUnipi.decode(reader, reader.uint32())
+          );
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllStoredStudentUnipiResponse {
+    const message = {
+      ...baseQueryAllStoredStudentUnipiResponse,
+    } as QueryAllStoredStudentUnipiResponse;
+    message.storedStudentUnipi = [];
+    if (
+      object.storedStudentUnipi !== undefined &&
+      object.storedStudentUnipi !== null
+    ) {
+      for (const e of object.storedStudentUnipi) {
+        message.storedStudentUnipi.push(StoredStudentUnipi.fromJSON(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllStoredStudentUnipiResponse): unknown {
+    const obj: any = {};
+    if (message.storedStudentUnipi) {
+      obj.storedStudentUnipi = message.storedStudentUnipi.map((e) =>
+        e ? StoredStudentUnipi.toJSON(e) : undefined
+      );
+    } else {
+      obj.storedStudentUnipi = [];
+    }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageResponse.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllStoredStudentUnipiResponse>
+  ): QueryAllStoredStudentUnipiResponse {
+    const message = {
+      ...baseQueryAllStoredStudentUnipiResponse,
+    } as QueryAllStoredStudentUnipiResponse;
+    message.storedStudentUnipi = [];
+    if (
+      object.storedStudentUnipi !== undefined &&
+      object.storedStudentUnipi !== null
+    ) {
+      for (const e of object.storedStudentUnipi) {
+        message.storedStudentUnipi.push(StoredStudentUnipi.fromPartial(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryGetUniversityInfoUnipiRequest: object = {};
+
+export const QueryGetUniversityInfoUnipiRequest = {
+  encode(
+    _: QueryGetUniversityInfoUnipiRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetUniversityInfoUnipiRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetUniversityInfoUnipiRequest,
+    } as QueryGetUniversityInfoUnipiRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): QueryGetUniversityInfoUnipiRequest {
+    const message = {
+      ...baseQueryGetUniversityInfoUnipiRequest,
+    } as QueryGetUniversityInfoUnipiRequest;
+    return message;
+  },
+
+  toJSON(_: QueryGetUniversityInfoUnipiRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial(
+    _: DeepPartial<QueryGetUniversityInfoUnipiRequest>
+  ): QueryGetUniversityInfoUnipiRequest {
+    const message = {
+      ...baseQueryGetUniversityInfoUnipiRequest,
+    } as QueryGetUniversityInfoUnipiRequest;
+    return message;
+  },
+};
+
+const baseQueryGetUniversityInfoUnipiResponse: object = {};
+
+export const QueryGetUniversityInfoUnipiResponse = {
+  encode(
+    message: QueryGetUniversityInfoUnipiResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.UniversityInfoUnipi !== undefined) {
+      UniversityInfoUnipi.encode(
+        message.UniversityInfoUnipi,
+        writer.uint32(10).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetUniversityInfoUnipiResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetUniversityInfoUnipiResponse,
+    } as QueryGetUniversityInfoUnipiResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.UniversityInfoUnipi = UniversityInfoUnipi.decode(
+            reader,
+            reader.uint32()
+          );
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetUniversityInfoUnipiResponse {
+    const message = {
+      ...baseQueryGetUniversityInfoUnipiResponse,
+    } as QueryGetUniversityInfoUnipiResponse;
+    if (
+      object.UniversityInfoUnipi !== undefined &&
+      object.UniversityInfoUnipi !== null
+    ) {
+      message.UniversityInfoUnipi = UniversityInfoUnipi.fromJSON(
+        object.UniversityInfoUnipi
+      );
+    } else {
+      message.UniversityInfoUnipi = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetUniversityInfoUnipiResponse): unknown {
+    const obj: any = {};
+    message.UniversityInfoUnipi !== undefined &&
+      (obj.UniversityInfoUnipi = message.UniversityInfoUnipi
+        ? UniversityInfoUnipi.toJSON(message.UniversityInfoUnipi)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetUniversityInfoUnipiResponse>
+  ): QueryGetUniversityInfoUnipiResponse {
+    const message = {
+      ...baseQueryGetUniversityInfoUnipiResponse,
+    } as QueryGetUniversityInfoUnipiResponse;
+    if (
+      object.UniversityInfoUnipi !== undefined &&
+      object.UniversityInfoUnipi !== null
+    ) {
+      message.UniversityInfoUnipi = UniversityInfoUnipi.fromPartial(
+        object.UniversityInfoUnipi
+      );
+    } else {
+      message.UniversityInfoUnipi = undefined;
+    }
+    return message;
+  },
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Parameters queries the parameters of the module. */
   Params(request: QueryParamsRequest): Promise<QueryParamsResponse>;
-  /** Queries a ProfessorsExams by index. */
-  ProfessorsExams(
-    request: QueryGetProfessorsExamsRequest
-  ): Promise<QueryGetProfessorsExamsResponse>;
-  /** Queries a list of ProfessorsExams items. */
-  ProfessorsExamsAll(
-    request: QueryAllProfessorsExamsRequest
-  ): Promise<QueryAllProfessorsExamsResponse>;
   /** Queries a StudentInfo by index. */
   StudentInfo(
     request: QueryGetStudentInfoRequest
@@ -3287,18 +3379,6 @@ export interface Query {
   ErasmusInfo(
     request: QueryGetErasmusInfoRequest
   ): Promise<QueryGetErasmusInfoResponse>;
-  /** Queries a StoredStudent by index. */
-  StoredStudent(
-    request: QueryGetStoredStudentRequest
-  ): Promise<QueryGetStoredStudentResponse>;
-  /** Queries a list of StoredStudent items. */
-  StoredStudentAll(
-    request: QueryAllStoredStudentRequest
-  ): Promise<QueryAllStoredStudentResponse>;
-  /** Queries a UniversityInfo by index. */
-  UniversityInfo(
-    request: QueryGetUniversityInfoRequest
-  ): Promise<QueryGetUniversityInfoResponse>;
   /** Queries a ChainInfo by index. */
   ChainInfo(
     request: QueryGetChainInfoRequest
@@ -3331,6 +3411,26 @@ export interface Query {
   UniversityInfoUniroma1(
     request: QueryGetUniversityInfoUniroma1Request
   ): Promise<QueryGetUniversityInfoUniroma1Response>;
+  /** Queries a ProfessorsExamsUnipi by index. */
+  ProfessorsExamsUnipi(
+    request: QueryGetProfessorsExamsUnipiRequest
+  ): Promise<QueryGetProfessorsExamsUnipiResponse>;
+  /** Queries a list of ProfessorsExamsUnipi items. */
+  ProfessorsExamsUnipiAll(
+    request: QueryAllProfessorsExamsUnipiRequest
+  ): Promise<QueryAllProfessorsExamsUnipiResponse>;
+  /** Queries a StoredStudentUnipi by index. */
+  StoredStudentUnipi(
+    request: QueryGetStoredStudentUnipiRequest
+  ): Promise<QueryGetStoredStudentUnipiResponse>;
+  /** Queries a list of StoredStudentUnipi items. */
+  StoredStudentUnipiAll(
+    request: QueryAllStoredStudentUnipiRequest
+  ): Promise<QueryAllStoredStudentUnipiResponse>;
+  /** Queries a UniversityInfoUnipi by index. */
+  UniversityInfoUnipi(
+    request: QueryGetUniversityInfoUnipiRequest
+  ): Promise<QueryGetUniversityInfoUnipiResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -3346,34 +3446,6 @@ export class QueryClientImpl implements Query {
       data
     );
     return promise.then((data) => QueryParamsResponse.decode(new Reader(data)));
-  }
-
-  ProfessorsExams(
-    request: QueryGetProfessorsExamsRequest
-  ): Promise<QueryGetProfessorsExamsResponse> {
-    const data = QueryGetProfessorsExamsRequest.encode(request).finish();
-    const promise = this.rpc.request(
-      "university_chain_it.universitychainit.Query",
-      "ProfessorsExams",
-      data
-    );
-    return promise.then((data) =>
-      QueryGetProfessorsExamsResponse.decode(new Reader(data))
-    );
-  }
-
-  ProfessorsExamsAll(
-    request: QueryAllProfessorsExamsRequest
-  ): Promise<QueryAllProfessorsExamsResponse> {
-    const data = QueryAllProfessorsExamsRequest.encode(request).finish();
-    const promise = this.rpc.request(
-      "university_chain_it.universitychainit.Query",
-      "ProfessorsExamsAll",
-      data
-    );
-    return promise.then((data) =>
-      QueryAllProfessorsExamsResponse.decode(new Reader(data))
-    );
   }
 
   StudentInfo(
@@ -3471,48 +3543,6 @@ export class QueryClientImpl implements Query {
     );
     return promise.then((data) =>
       QueryGetErasmusInfoResponse.decode(new Reader(data))
-    );
-  }
-
-  StoredStudent(
-    request: QueryGetStoredStudentRequest
-  ): Promise<QueryGetStoredStudentResponse> {
-    const data = QueryGetStoredStudentRequest.encode(request).finish();
-    const promise = this.rpc.request(
-      "university_chain_it.universitychainit.Query",
-      "StoredStudent",
-      data
-    );
-    return promise.then((data) =>
-      QueryGetStoredStudentResponse.decode(new Reader(data))
-    );
-  }
-
-  StoredStudentAll(
-    request: QueryAllStoredStudentRequest
-  ): Promise<QueryAllStoredStudentResponse> {
-    const data = QueryAllStoredStudentRequest.encode(request).finish();
-    const promise = this.rpc.request(
-      "university_chain_it.universitychainit.Query",
-      "StoredStudentAll",
-      data
-    );
-    return promise.then((data) =>
-      QueryAllStoredStudentResponse.decode(new Reader(data))
-    );
-  }
-
-  UniversityInfo(
-    request: QueryGetUniversityInfoRequest
-  ): Promise<QueryGetUniversityInfoResponse> {
-    const data = QueryGetUniversityInfoRequest.encode(request).finish();
-    const promise = this.rpc.request(
-      "university_chain_it.universitychainit.Query",
-      "UniversityInfo",
-      data
-    );
-    return promise.then((data) =>
-      QueryGetUniversityInfoResponse.decode(new Reader(data))
     );
   }
 
@@ -3629,6 +3659,76 @@ export class QueryClientImpl implements Query {
     );
     return promise.then((data) =>
       QueryGetUniversityInfoUniroma1Response.decode(new Reader(data))
+    );
+  }
+
+  ProfessorsExamsUnipi(
+    request: QueryGetProfessorsExamsUnipiRequest
+  ): Promise<QueryGetProfessorsExamsUnipiResponse> {
+    const data = QueryGetProfessorsExamsUnipiRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "university_chain_it.universitychainit.Query",
+      "ProfessorsExamsUnipi",
+      data
+    );
+    return promise.then((data) =>
+      QueryGetProfessorsExamsUnipiResponse.decode(new Reader(data))
+    );
+  }
+
+  ProfessorsExamsUnipiAll(
+    request: QueryAllProfessorsExamsUnipiRequest
+  ): Promise<QueryAllProfessorsExamsUnipiResponse> {
+    const data = QueryAllProfessorsExamsUnipiRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "university_chain_it.universitychainit.Query",
+      "ProfessorsExamsUnipiAll",
+      data
+    );
+    return promise.then((data) =>
+      QueryAllProfessorsExamsUnipiResponse.decode(new Reader(data))
+    );
+  }
+
+  StoredStudentUnipi(
+    request: QueryGetStoredStudentUnipiRequest
+  ): Promise<QueryGetStoredStudentUnipiResponse> {
+    const data = QueryGetStoredStudentUnipiRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "university_chain_it.universitychainit.Query",
+      "StoredStudentUnipi",
+      data
+    );
+    return promise.then((data) =>
+      QueryGetStoredStudentUnipiResponse.decode(new Reader(data))
+    );
+  }
+
+  StoredStudentUnipiAll(
+    request: QueryAllStoredStudentUnipiRequest
+  ): Promise<QueryAllStoredStudentUnipiResponse> {
+    const data = QueryAllStoredStudentUnipiRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "university_chain_it.universitychainit.Query",
+      "StoredStudentUnipiAll",
+      data
+    );
+    return promise.then((data) =>
+      QueryAllStoredStudentUnipiResponse.decode(new Reader(data))
+    );
+  }
+
+  UniversityInfoUnipi(
+    request: QueryGetUniversityInfoUnipiRequest
+  ): Promise<QueryGetUniversityInfoUnipiResponse> {
+    const data = QueryGetUniversityInfoUnipiRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "university_chain_it.universitychainit.Query",
+      "UniversityInfoUnipi",
+      data
+    );
+    return promise.then((data) =>
+      QueryGetUniversityInfoUnipiResponse.decode(new Reader(data))
     );
   }
 }

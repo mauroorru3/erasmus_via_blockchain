@@ -9,19 +9,19 @@ import (
 	"university_chain_it/x/universitychainit/types"
 )
 
-func CmdShowUniversityInfo() *cobra.Command {
+func CmdShowUniversityInfoUnipi() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "show-university-info",
-		Short: "shows university_info",
+		Use:   "show-university-info-unipi",
+		Short: "shows university_info_unipi",
 		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx := client.GetClientContextFromCmd(cmd)
 
 			queryClient := types.NewQueryClient(clientCtx)
 
-			params := &types.QueryGetUniversityInfoRequest{}
+			params := &types.QueryGetUniversityInfoUnipiRequest{}
 
-			res, err := queryClient.UniversityInfo(context.Background(), params)
+			res, err := queryClient.UniversityInfoUnipi(context.Background(), params)
 			if err != nil {
 				return err
 			}

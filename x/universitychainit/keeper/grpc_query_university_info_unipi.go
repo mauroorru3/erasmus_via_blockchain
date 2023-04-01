@@ -9,16 +9,16 @@ import (
 	"university_chain_it/x/universitychainit/types"
 )
 
-func (k Keeper) UniversityInfo(c context.Context, req *types.QueryGetUniversityInfoRequest) (*types.QueryGetUniversityInfoResponse, error) {
+func (k Keeper) UniversityInfoUnipi(c context.Context, req *types.QueryGetUniversityInfoUnipiRequest) (*types.QueryGetUniversityInfoUnipiResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
 	ctx := sdk.UnwrapSDKContext(c)
 
-	val, found := k.GetUniversityInfo(ctx)
+	val, found := k.GetUniversityInfoUnipi(ctx)
 	if !found {
 		return nil, status.Error(codes.NotFound, "not found")
 	}
 
-	return &types.QueryGetUniversityInfoResponse{UniversityInfo: val}, nil
+	return &types.QueryGetUniversityInfoUnipiResponse{UniversityInfoUnipi: val}, nil
 }

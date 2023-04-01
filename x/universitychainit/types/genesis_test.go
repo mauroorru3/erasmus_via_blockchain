@@ -23,14 +23,6 @@ func TestGenesisState_Validate(t *testing.T) {
 			desc: "valid genesis state",
 			genState: &types.GenesisState{
 				PortId: types.PortID,
-				ProfessorsExamsList: []types.ProfessorsExams{
-					{
-						ExamName: "0",
-					},
-					{
-						ExamName: "1",
-					},
-				},
 				StudentInfo: &types.StudentInfo{
 					Name:                     "69",
 					Surname:                  "71",
@@ -89,24 +81,6 @@ func TestGenesisState_Validate(t *testing.T) {
 					PreviousStudentFifo: "42",
 					NextStudentFifo:     "21",
 				},
-				StoredStudentList: []types.StoredStudent{
-					{
-						Index: "0",
-					},
-					{
-						Index: "1",
-					},
-				},
-				UniversityInfo: &types.UniversityInfo{
-					NextStudentId:   3,
-					SecretariatKey:  "91",
-					UniversityKey:   "4",
-					CaiKey:          "51",
-					FifoHeadErasmus: "27",
-					FifoTailErasmus: "70",
-					DeadlineTaxes:   "89",
-					DeadlineErasmus: "99",
-				},
 				ChainInfo: types.ChainInfo{
 					HubKey:   "96",
 					ChainKey: "54",
@@ -146,37 +120,35 @@ func TestGenesisState_Validate(t *testing.T) {
 					DeadlineTaxes:   "34",
 					DeadlineErasmus: "97",
 				},
+				ProfessorsExamsUnipiList: []types.ProfessorsExamsUnipi{
+					{
+						ExamName: "0",
+					},
+					{
+						ExamName: "1",
+					},
+				},
+				StoredStudentUnipiList: []types.StoredStudentUnipi{
+					{
+						Index: "0",
+					},
+					{
+						Index: "1",
+					},
+				},
+				UniversityInfoUnipi: &types.UniversityInfoUnipi{
+					NextStudentId:   97,
+					SecretariatKey:  "46",
+					UniversityKey:   "57",
+					CaiKey:          "24",
+					FifoHeadErasmus: "93",
+					FifoTailErasmus: "14",
+					DeadlineTaxes:   "8",
+					DeadlineErasmus: "91",
+				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
-		},
-		{
-			desc: "duplicated professorsExams",
-			genState: &types.GenesisState{
-				ProfessorsExamsList: []types.ProfessorsExams{
-					{
-						ExamName: "0",
-					},
-					{
-						ExamName: "0",
-					},
-				},
-			},
-			valid: false,
-		},
-		{
-			desc: "duplicated storedStudent",
-			genState: &types.GenesisState{
-				StoredStudentList: []types.StoredStudent{
-					{
-						Index: "0",
-					},
-					{
-						Index: "0",
-					},
-				},
-			},
-			valid: false,
 		},
 		{
 			desc: "duplicated foreignUniversities",
@@ -220,6 +192,34 @@ func TestGenesisState_Validate(t *testing.T) {
 			},
 			valid: false,
 		},
+		{
+			desc: "duplicated professorsExamsUnipi",
+			genState: &types.GenesisState{
+				ProfessorsExamsUnipiList: []types.ProfessorsExamsUnipi{
+					{
+						ExamName: "0",
+					},
+					{
+						ExamName: "0",
+					},
+				},
+			},
+			valid: false,
+		},
+		{
+			desc: "duplicated storedStudentUnipi",
+			genState: &types.GenesisState{
+				StoredStudentUnipiList: []types.StoredStudentUnipi{
+					{
+						Index: "0",
+					},
+					{
+						Index: "0",
+					},
+				},
+			},
+			valid: false,
+		},
 		// this line is used by starport scaffolding # types/genesis/testcase
 	} {
 		t.Run(tc.desc, func(t *testing.T) {
@@ -237,7 +237,6 @@ func TestDefaultGenesisState_ExpectedInitialValues(t *testing.T) {
 	require.EqualValues(t,
 		&types.GenesisState{
 			PortId:              "universitychainit",
-			ProfessorsExamsList: []types.ProfessorsExams{},
 			StudentInfo:         nil,
 			TranscriptOfRecords: nil,
 			PersonalInfo:        nil,
@@ -245,8 +244,6 @@ func TestDefaultGenesisState_ExpectedInitialValues(t *testing.T) {
 			ContactInfo:         nil,
 			TaxesInfo:           nil,
 			ErasmusInfo:         nil,
-			StoredStudentList:   []types.StoredStudent{},
-			UniversityInfo:      nil,
 			ChainInfo: types.ChainInfo{
 				HubKey:                "",
 				ChainKey:              "",

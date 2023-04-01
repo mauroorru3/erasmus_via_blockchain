@@ -15,23 +15,23 @@ import (
 	"university_chain_it/x/universitychainit/types"
 )
 
-func networkWithUniversityInfoObjects(t *testing.T) (*network.Network, types.UniversityInfo) {
+func networkWithUniversityInfoUnipiObjects(t *testing.T) (*network.Network, types.UniversityInfoUnipi) {
 	t.Helper()
 	cfg := network.DefaultConfig()
 	state := types.GenesisState{}
 	require.NoError(t, cfg.Codec.UnmarshalJSON(cfg.GenesisState[types.ModuleName], &state))
 
-	universityInfo := &types.UniversityInfo{}
-	nullify.Fill(&universityInfo)
-	state.UniversityInfo = universityInfo
+	universityInfoUnipi := &types.UniversityInfoUnipi{}
+	nullify.Fill(&universityInfoUnipi)
+	state.UniversityInfoUnipi = universityInfoUnipi
 	buf, err := cfg.Codec.MarshalJSON(&state)
 	require.NoError(t, err)
 	cfg.GenesisState[types.ModuleName] = buf
-	return network.New(t, cfg), *state.UniversityInfo
+	return network.New(t, cfg), *state.UniversityInfoUnipi
 }
 
-func TestShowUniversityInfo(t *testing.T) {
-	net, obj := networkWithUniversityInfoObjects(t)
+func TestShowUniversityInfoUnipi(t *testing.T) {
+	net, obj := networkWithUniversityInfoUnipiObjects(t)
 
 	ctx := net.Validators[0].ClientCtx
 	common := []string{
@@ -41,7 +41,7 @@ func TestShowUniversityInfo(t *testing.T) {
 		desc string
 		args []string
 		err  error
-		obj  types.UniversityInfo
+		obj  types.UniversityInfoUnipi
 	}{
 		{
 			desc: "get",
@@ -52,19 +52,19 @@ func TestShowUniversityInfo(t *testing.T) {
 		t.Run(tc.desc, func(t *testing.T) {
 			var args []string
 			args = append(args, tc.args...)
-			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdShowUniversityInfo(), args)
+			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdShowUniversityInfoUnipi(), args)
 			if tc.err != nil {
 				stat, ok := status.FromError(tc.err)
 				require.True(t, ok)
 				require.ErrorIs(t, stat.Err(), tc.err)
 			} else {
 				require.NoError(t, err)
-				var resp types.QueryGetUniversityInfoResponse
+				var resp types.QueryGetUniversityInfoUnipiResponse
 				require.NoError(t, net.Config.Codec.UnmarshalJSON(out.Bytes(), &resp))
-				require.NotNil(t, resp.UniversityInfo)
+				require.NotNil(t, resp.UniversityInfoUnipi)
 				require.Equal(t,
 					nullify.Fill(&tc.obj),
-					nullify.Fill(&resp.UniversityInfo),
+					nullify.Fill(&resp.UniversityInfoUnipi),
 				)
 			}
 		})

@@ -29846,17 +29846,17 @@ paths:
                   additionalProperties: {}
       tags:
         - Query
-  /university_chain_it/universitychainit/professors_exams:
+  /university_chain_it/universitychainit/professors_exams_unipi:
     get:
-      summary: Queries a list of ProfessorsExams items.
-      operationId: UniversityChainItUniversitychainitProfessorsExamsAll
+      summary: Queries a list of ProfessorsExamsUnipi items.
+      operationId: UniversityChainItUniversitychainitProfessorsExamsUnipiAll
       responses:
         '200':
           description: A successful response.
           schema:
             type: object
             properties:
-              professorsExams:
+              professorsExamsUnipi:
                 type: array
                 items:
                   type: object
@@ -29973,17 +29973,17 @@ paths:
           type: boolean
       tags:
         - Query
-  '/university_chain_it/universitychainit/professors_exams/{examName}':
+  '/university_chain_it/universitychainit/professors_exams_unipi/{examName}':
     get:
-      summary: Queries a ProfessorsExams by index.
-      operationId: UniversityChainItUniversitychainitProfessorsExams
+      summary: Queries a ProfessorsExamsUnipi by index.
+      operationId: UniversityChainItUniversitychainitProfessorsExamsUnipi
       responses:
         '200':
           description: A successful response.
           schema:
             type: object
             properties:
-              professorsExams:
+              professorsExamsUnipi:
                 type: object
                 properties:
                   examName:
@@ -30239,17 +30239,17 @@ paths:
                   additionalProperties: {}
       tags:
         - Query
-  /university_chain_it/universitychainit/stored_student:
+  /university_chain_it/universitychainit/stored_student_unipi:
     get:
-      summary: Queries a list of StoredStudent items.
-      operationId: UniversityChainItUniversitychainitStoredStudentAll
+      summary: Queries a list of StoredStudentUnipi items.
+      operationId: UniversityChainItUniversitychainitStoredStudentUnipiAll
       responses:
         '200':
           description: A successful response.
           schema:
             type: object
             properties:
-              storedStudent:
+              storedStudentUnipi:
                 type: array
                 items:
                   type: object
@@ -30485,17 +30485,17 @@ paths:
           type: boolean
       tags:
         - Query
-  '/university_chain_it/universitychainit/stored_student/{index}':
+  '/university_chain_it/universitychainit/stored_student_unipi/{index}':
     get:
-      summary: Queries a StoredStudent by index.
-      operationId: UniversityChainItUniversitychainitStoredStudent
+      summary: Queries a StoredStudentUnipi by index.
+      operationId: UniversityChainItUniversitychainitStoredStudentUnipi
       responses:
         '200':
           description: A successful response.
           schema:
             type: object
             properties:
-              storedStudent:
+              storedStudentUnipi:
                 type: object
                 properties:
                   index:
@@ -31203,17 +31203,17 @@ paths:
                   additionalProperties: {}
       tags:
         - Query
-  /university_chain_it/universitychainit/university_info:
+  /university_chain_it/universitychainit/university_info_unipi:
     get:
-      summary: Queries a UniversityInfo by index.
-      operationId: UniversityChainItUniversitychainitUniversityInfo
+      summary: Queries a UniversityInfoUnipi by index.
+      operationId: UniversityChainItUniversitychainitUniversityInfoUnipi
       responses:
         '200':
           description: A successful response.
           schema:
             type: object
             properties:
-              UniversityInfo:
+              UniversityInfoUnipi:
                 type: object
                 properties:
                   nextStudentId:
@@ -51375,7 +51375,7 @@ definitions:
         type: string
       taxCode:
         type: string
-  university_chain_it.universitychainit.ProfessorsExams:
+  university_chain_it.universitychainit.ProfessorsExamsUnipi:
     type: object
     properties:
       examName:
@@ -51434,10 +51434,10 @@ definitions:
                    repeated Bar results = 1;
                    PageResponse page = 2;
            }
-  university_chain_it.universitychainit.QueryAllProfessorsExamsResponse:
+  university_chain_it.universitychainit.QueryAllProfessorsExamsUnipiResponse:
     type: object
     properties:
-      professorsExams:
+      professorsExamsUnipi:
         type: array
         items:
           type: object
@@ -51516,10 +51516,10 @@ definitions:
                    repeated Bar results = 1;
                    PageResponse page = 2;
            }
-  university_chain_it.universitychainit.QueryAllStoredStudentResponse:
+  university_chain_it.universitychainit.QueryAllStoredStudentUnipiResponse:
     type: object
     properties:
-      storedStudent:
+      storedStudentUnipi:
         type: array
         items:
           type: object
@@ -51927,10 +51927,10 @@ definitions:
             type: string
           taxCode:
             type: string
-  university_chain_it.universitychainit.QueryGetProfessorsExamsResponse:
+  university_chain_it.universitychainit.QueryGetProfessorsExamsUnipiResponse:
     type: object
     properties:
-      professorsExams:
+      professorsExamsUnipi:
         type: object
         properties:
           examName:
@@ -51975,10 +51975,10 @@ definitions:
             type: string
           homePhone:
             type: string
-  university_chain_it.universitychainit.QueryGetStoredStudentResponse:
+  university_chain_it.universitychainit.QueryGetStoredStudentUnipiResponse:
     type: object
     properties:
-      storedStudent:
+      storedStudentUnipi:
         type: object
         properties:
           index:
@@ -52302,10 +52302,10 @@ definitions:
           achievedCredits:
             type: string
             format: uint64
-  university_chain_it.universitychainit.QueryGetUniversityInfoResponse:
+  university_chain_it.universitychainit.QueryGetUniversityInfoUnipiResponse:
     type: object
     properties:
-      UniversityInfo:
+      UniversityInfoUnipi:
         type: object
         properties:
           nextStudentId:
@@ -52372,7 +52372,7 @@ definitions:
         type: string
       homePhone:
         type: string
-  university_chain_it.universitychainit.StoredStudent:
+  university_chain_it.universitychainit.StoredStudentUnipi:
     type: object
     properties:
       index:
@@ -52684,7 +52684,7 @@ definitions:
       achievedCredits:
         type: string
         format: uint64
-  university_chain_it.universitychainit.UniversityInfo:
+  university_chain_it.universitychainit.UniversityInfoUnipi:
     type: object
     properties:
       nextStudentId:

@@ -10,7 +10,7 @@ import "universitychainit/contact_info.proto";
 import "universitychainit/taxes_info.proto"; 
 import "universitychainit/erasmus_info.proto"; 
 
-message StoredStudent {
+message StoredStudentUnipi {
   string index = 1; 
   StudentInfo studentData = 2; 
   TranscriptOfRecords transcriptData = 3; 

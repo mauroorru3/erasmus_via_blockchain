@@ -13,20 +13,20 @@ import (
 	"university_chain_it/x/universitychainit/types"
 )
 
-func TestUniversityInfoQuery(t *testing.T) {
+func TestUniversityInfoUnipiQuery(t *testing.T) {
 	keeper, ctx := keepertest.UniversitychainitKeeper(t)
 	wctx := sdk.WrapSDKContext(ctx)
-	item := createTestUniversityInfo(keeper, ctx)
+	item := createTestUniversityInfoUnipi(keeper, ctx)
 	for _, tc := range []struct {
 		desc     string
-		request  *types.QueryGetUniversityInfoRequest
-		response *types.QueryGetUniversityInfoResponse
+		request  *types.QueryGetUniversityInfoUnipiRequest
+		response *types.QueryGetUniversityInfoUnipiResponse
 		err      error
 	}{
 		{
 			desc:     "First",
-			request:  &types.QueryGetUniversityInfoRequest{},
-			response: &types.QueryGetUniversityInfoResponse{UniversityInfo: item},
+			request:  &types.QueryGetUniversityInfoUnipiRequest{},
+			response: &types.QueryGetUniversityInfoUnipiResponse{UniversityInfoUnipi: item},
 		},
 		{
 			desc: "InvalidRequest",
@@ -34,7 +34,7 @@ func TestUniversityInfoQuery(t *testing.T) {
 		},
 	} {
 		t.Run(tc.desc, func(t *testing.T) {
-			response, err := keeper.UniversityInfo(wctx, tc.request)
+			response, err := keeper.UniversityInfoUnipi(wctx, tc.request)
 			if tc.err != nil {
 				require.ErrorIs(t, err, tc.err)
 			} else {

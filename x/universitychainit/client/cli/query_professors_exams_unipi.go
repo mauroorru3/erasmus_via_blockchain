@@ -9,10 +9,10 @@ import (
 	"university_chain_it/x/universitychainit/types"
 )
 
-func CmdListProfessorsExams() *cobra.Command {
+func CmdListProfessorsExamsUnipi() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "list-professors-exams",
-		Short: "list all professors_exams",
+		Use:   "list-professors-exams-unipi",
+		Short: "list all professors_exams_unipi",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx := client.GetClientContextFromCmd(cmd)
 
@@ -23,11 +23,11 @@ func CmdListProfessorsExams() *cobra.Command {
 
 			queryClient := types.NewQueryClient(clientCtx)
 
-			params := &types.QueryAllProfessorsExamsRequest{
+			params := &types.QueryAllProfessorsExamsUnipiRequest{
 				Pagination: pageReq,
 			}
 
-			res, err := queryClient.ProfessorsExamsAll(context.Background(), params)
+			res, err := queryClient.ProfessorsExamsUnipiAll(context.Background(), params)
 			if err != nil {
 				return err
 			}
@@ -42,10 +42,10 @@ func CmdListProfessorsExams() *cobra.Command {
 	return cmd
 }
 
-func CmdShowProfessorsExams() *cobra.Command {
+func CmdShowProfessorsExamsUnipi() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "show-professors-exams [exam-name]",
-		Short: "shows a professors_exams",
+		Use:   "show-professors-exams-unipi [exam-name]",
+		Short: "shows a professors_exams_unipi",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 			clientCtx := client.GetClientContextFromCmd(cmd)
@@ -54,11 +54,11 @@ func CmdShowProfessorsExams() *cobra.Command {
 
 			argExamName := args[0]
 
-			params := &types.QueryGetProfessorsExamsRequest{
+			params := &types.QueryGetProfessorsExamsUnipiRequest{
 				ExamName: argExamName,
 			}
 
-			res, err := queryClient.ProfessorsExams(context.Background(), params)
+			res, err := queryClient.ProfessorsExamsUnipi(context.Background(), params)
 			if err != nil {
 				return err
 			}

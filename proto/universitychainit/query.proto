@@ -10,6 +10,9 @@ import "universitychainit/foreign_universities.proto";
 import "universitychainit/professors_exams_uniroma_1.proto";
 import "universitychainit/stored_student_uniroma_1.proto";
 import "universitychainit/university_info_uniroma_1.proto";
+import "universitychainit/professors_exams_unipi.proto";
+import "universitychainit/stored_student_unipi.proto";
+import "universitychainit/university_info_unipi.proto";
 // this line is used by starport scaffolding # 1
 import "universitychainit/erasmus_info.proto";
 import "universitychainit/taxes_info.proto";
@@ -18,9 +21,6 @@ import "universitychainit/residence_info.proto";
 import "universitychainit/personal_info.proto";
 import "universitychainit/transcript_of_records.proto";
 import "universitychainit/student_info.proto";
-import "universitychainit/stored_student.proto";
-import "universitychainit/university_info.proto";
-import "universitychainit/professors_exams.proto";
 
 option go_package = "university_chain_it/x/universitychainit/types";
 
@@ -30,15 +30,6 @@ service Query {
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/university_chain_it/universitychainit/params";
   }
-  // Queries a ProfessorsExams by index.
-	rpc ProfessorsExams(QueryGetProfessorsExamsRequest) returns (QueryGetProfessorsExamsResponse) {
-		option (google.api.http).get = "/university_chain_it/universitychainit/professors_exams/{examName}";
-	}
-
-	// Queries a list of ProfessorsExams items.
-	rpc ProfessorsExamsAll(QueryAllProfessorsExamsRequest) returns (QueryAllProfessorsExamsResponse) {
-		option (google.api.http).get = "/university_chain_it/universitychainit/professors_exams";
-	}
 
 // Queries a StudentInfo by index.
 	rpc StudentInfo(QueryGetStudentInfoRequest) returns (QueryGetStudentInfoResponse) {
@@ -70,20 +61,6 @@ service Query {
 // Queries a ErasmusInfo by index.
 	rpc ErasmusInfo(QueryGetErasmusInfoRequest) returns (QueryGetErasmusInfoResponse) {
 		option (google.api.http).get = "/university_chain_it/universitychainit/erasmus_info";
-	}
-// Queries a StoredStudent by index.
-	rpc StoredStudent(QueryGetStoredStudentRequest) returns (QueryGetStoredStudentResponse) {
-		option (google.api.http).get = "/university_chain_it/universitychainit/stored_student/{index}";
-	}
-
-	// Queries a list of StoredStudent items.
-	rpc StoredStudentAll(QueryAllStoredStudentRequest) returns (QueryAllStoredStudentResponse) {
-		option (google.api.http).get = "/university_chain_it/universitychainit/stored_student";
-	}
-
-// Queries a UniversityInfo by index.
-	rpc UniversityInfo(QueryGetUniversityInfoRequest) returns (QueryGetUniversityInfoResponse) {
-		option (google.api.http).get = "/university_chain_it/universitychainit/university_info";
 	}
 
 // Queries a ChainInfo by index.
@@ -124,6 +101,30 @@ service Query {
 	rpc UniversityInfoUniroma1(QueryGetUniversityInfoUniroma1Request) returns (QueryGetUniversityInfoUniroma1Response) {
 		option (google.api.http).get = "/university_chain_it/universitychainit/university_info_uniroma_1";
 	}
+// Queries a ProfessorsExamsUnipi by index.
+	rpc ProfessorsExamsUnipi(QueryGetProfessorsExamsUnipiRequest) returns (QueryGetProfessorsExamsUnipiResponse) {
+		option (google.api.http).get = "/university_chain_it/universitychainit/professors_exams_unipi/{examName}";
+	}
+
+	// Queries a list of ProfessorsExamsUnipi items.
+	rpc ProfessorsExamsUnipiAll(QueryAllProfessorsExamsUnipiRequest) returns (QueryAllProfessorsExamsUnipiResponse) {
+		option (google.api.http).get = "/university_chain_it/universitychainit/professors_exams_unipi";
+	}
+
+// Queries a StoredStudentUnipi by index.
+	rpc StoredStudentUnipi(QueryGetStoredStudentUnipiRequest) returns (QueryGetStoredStudentUnipiResponse) {
+		option (google.api.http).get = "/university_chain_it/universitychainit/stored_student_unipi/{index}";
+	}
+
+	// Queries a list of StoredStudentUnipi items.
+	rpc StoredStudentUnipiAll(QueryAllStoredStudentUnipiRequest) returns (QueryAllStoredStudentUnipiResponse) {
+		option (google.api.http).get = "/university_chain_it/universitychainit/stored_student_unipi";
+	}
+
+// Queries a UniversityInfoUnipi by index.
+	rpc UniversityInfoUnipi(QueryGetUniversityInfoUnipiRequest) returns (QueryGetUniversityInfoUnipiResponse) {
+		option (google.api.http).get = "/university_chain_it/universitychainit/university_info_unipi";
+	}
 // this line is used by starport scaffolding # 2
 }
 
@@ -139,19 +140,6 @@ message QueryParamsResponse {
 message QueryGetProfessorsExamsRequest {
 	  string examName = 1;
 
-}
-
-message QueryGetProfessorsExamsResponse {
-	ProfessorsExams professorsExams = 1 [(gogoproto.nullable) = false];
-}
-
-message QueryAllProfessorsExamsRequest {
-	cosmos.base.query.v1beta1.PageRequest pagination = 1;
-}
-
-message QueryAllProfessorsExamsResponse {
-	repeated ProfessorsExams professorsExams = 1 [(gogoproto.nullable) = false];
-	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 message QueryGetStudentInfoRequest {}
@@ -191,29 +179,6 @@ message QueryGetErasmusInfoRequest {}
 
 message QueryGetErasmusInfoResponse {
 	ErasmusInfo ErasmusInfo = 1 [(gogoproto.nullable) = false];
-}
-message QueryGetStoredStudentRequest {
-	  string index = 1;
-
-}
-
-message QueryGetStoredStudentResponse {
-	StoredStudent storedStudent = 1 [(gogoproto.nullable) = false];
-}
-
-message QueryAllStoredStudentRequest {
-	cosmos.base.query.v1beta1.PageRequest pagination = 1;
-}
-
-message QueryAllStoredStudentResponse {
-	repeated StoredStudent storedStudent = 1 [(gogoproto.nullable) = false];
-	cosmos.base.query.v1beta1.PageResponse pagination = 2;
-}
-
-message QueryGetUniversityInfoRequest {}
-
-message QueryGetUniversityInfoResponse {
-	UniversityInfo UniversityInfo = 1 [(gogoproto.nullable) = false];
 }
 
 message QueryGetChainInfoRequest {}
@@ -279,5 +244,46 @@ message QueryGetUniversityInfoUniroma1Request {}
 
 message QueryGetUniversityInfoUniroma1Response {
 	UniversityInfoUniroma1 UniversityInfoUniroma1 = 1 [(gogoproto.nullable) = false];
+}
+message QueryGetProfessorsExamsUnipiRequest {
+	  string examName = 1;
+
+}
+
+message QueryGetProfessorsExamsUnipiResponse {
+	ProfessorsExamsUnipi professorsExamsUnipi = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllProfessorsExamsUnipiRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllProfessorsExamsUnipiResponse {
+	repeated ProfessorsExamsUnipi professorsExamsUnipi = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetStoredStudentUnipiRequest {
+	  string index = 1;
+
+}
+
+message QueryGetStoredStudentUnipiResponse {
+	StoredStudentUnipi storedStudentUnipi = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllStoredStudentUnipiRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllStoredStudentUnipiResponse {
+	repeated StoredStudentUnipi storedStudentUnipi = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetUniversityInfoUnipiRequest {}
+
+message QueryGetUniversityInfoUnipiResponse {
+	UniversityInfoUnipi UniversityInfoUnipi = 1 [(gogoproto.nullable) = false];
 }
 // this line is used by starport scaffolding # 3
