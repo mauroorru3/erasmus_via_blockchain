@@ -92,6 +92,13 @@ export interface UniversitychainitProfessorsExams {
   professorKey?: string;
 }
 
+export interface UniversitychainitProfessorsExamsUniroma1 {
+  examName?: string;
+  professorName?: string;
+  professorId?: string;
+  professorKey?: string;
+}
+
 export interface UniversitychainitQueryAllForeignUniversitiesResponse {
   foreignUniversities?: UniversitychainitForeignUniversities[];
 
@@ -122,8 +129,38 @@ export interface UniversitychainitQueryAllProfessorsExamsResponse {
   pagination?: V1Beta1PageResponse;
 }
 
+export interface UniversitychainitQueryAllProfessorsExamsUniroma1Response {
+  professorsExamsUniroma1?: UniversitychainitProfessorsExamsUniroma1[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
+
 export interface UniversitychainitQueryAllStoredStudentResponse {
   storedStudent?: UniversitychainitStoredStudent[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
+
+export interface UniversitychainitQueryAllStoredStudentUniroma1Response {
+  storedStudentUniroma1?: UniversitychainitStoredStudentUniroma1[];
 
   /**
    * PageResponse is to be embedded in gRPC response messages where the
@@ -161,12 +198,20 @@ export interface UniversitychainitQueryGetProfessorsExamsResponse {
   professorsExams?: UniversitychainitProfessorsExams;
 }
 
+export interface UniversitychainitQueryGetProfessorsExamsUniroma1Response {
+  professorsExamsUniroma1?: UniversitychainitProfessorsExamsUniroma1;
+}
+
 export interface UniversitychainitQueryGetResidenceInfoResponse {
   ResidenceInfo?: UniversitychainitResidenceInfo;
 }
 
 export interface UniversitychainitQueryGetStoredStudentResponse {
   storedStudent?: UniversitychainitStoredStudent;
+}
+
+export interface UniversitychainitQueryGetStoredStudentUniroma1Response {
+  storedStudentUniroma1?: UniversitychainitStoredStudentUniroma1;
 }
 
 export interface UniversitychainitQueryGetStudentInfoResponse {
@@ -183,6 +228,10 @@ export interface UniversitychainitQueryGetTranscriptOfRecordsResponse {
 
 export interface UniversitychainitQueryGetUniversityInfoResponse {
   UniversityInfo?: UniversitychainitUniversityInfo;
+}
+
+export interface UniversitychainitQueryGetUniversityInfoUniroma1Response {
+  UniversityInfoUniroma1?: UniversitychainitUniversityInfoUniroma1;
 }
 
 /**
@@ -204,6 +253,17 @@ export interface UniversitychainitResidenceInfo {
 }
 
 export interface UniversitychainitStoredStudent {
+  index?: string;
+  studentData?: UniversitychainitStudentInfo;
+  transcriptData?: UniversitychainitTranscriptOfRecords;
+  personalData?: UniversitychainitPersonalInfo;
+  residenceData?: UniversitychainitResidenceInfo;
+  contactData?: UniversitychainitContactInfo;
+  taxesData?: UniversitychainitTaxesInfo;
+  erasmusData?: UniversitychainitErasmusInfo;
+}
+
+export interface UniversitychainitStoredStudentUniroma1 {
   index?: string;
   studentData?: UniversitychainitStudentInfo;
   transcriptData?: UniversitychainitTranscriptOfRecords;
@@ -259,6 +319,18 @@ export interface UniversitychainitTranscriptOfRecords {
 }
 
 export interface UniversitychainitUniversityInfo {
+  /** @format uint64 */
+  nextStudentId?: string;
+  secretariatKey?: string;
+  universityKey?: string;
+  caiKey?: string;
+  fifoHeadErasmus?: string;
+  fifoTailErasmus?: string;
+  deadlineTaxes?: string;
+  deadlineErasmus?: string;
+}
+
+export interface UniversitychainitUniversityInfoUniroma1 {
   /** @format uint64 */
   nextStudentId?: string;
   secretariatKey?: string;
@@ -697,6 +769,48 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    * No description
    *
    * @tags Query
+   * @name QueryProfessorsExamsUniroma1All
+   * @summary Queries a list of ProfessorsExamsUniroma1 items.
+   * @request GET:/university_chain_it/universitychainit/professors_exams_uniroma_1
+   */
+  queryProfessorsExamsUniroma1All = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<UniversitychainitQueryAllProfessorsExamsUniroma1Response, RpcStatus>({
+      path: `/university_chain_it/universitychainit/professors_exams_uniroma_1`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryProfessorsExamsUniroma1
+   * @summary Queries a ProfessorsExamsUniroma1 by index.
+   * @request GET:/university_chain_it/universitychainit/professors_exams_uniroma_1/{examName}
+   */
+  queryProfessorsExamsUniroma1 = (examName: string, params: RequestParams = {}) =>
+    this.request<UniversitychainitQueryGetProfessorsExamsUniroma1Response, RpcStatus>({
+      path: `/university_chain_it/universitychainit/professors_exams_uniroma_1/${examName}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
    * @name QueryResidenceInfo
    * @summary Queries a ResidenceInfo by index.
    * @request GET:/university_chain_it/universitychainit/residence_info
@@ -746,6 +860,48 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryStoredStudent = (index: string, params: RequestParams = {}) =>
     this.request<UniversitychainitQueryGetStoredStudentResponse, RpcStatus>({
       path: `/university_chain_it/universitychainit/stored_student/${index}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryStoredStudentUniroma1All
+   * @summary Queries a list of StoredStudentUniroma1 items.
+   * @request GET:/university_chain_it/universitychainit/stored_student_uniroma_1
+   */
+  queryStoredStudentUniroma1All = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<UniversitychainitQueryAllStoredStudentUniroma1Response, RpcStatus>({
+      path: `/university_chain_it/universitychainit/stored_student_uniroma_1`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryStoredStudentUniroma1
+   * @summary Queries a StoredStudentUniroma1 by index.
+   * @request GET:/university_chain_it/universitychainit/stored_student_uniroma_1/{index}
+   */
+  queryStoredStudentUniroma1 = (index: string, params: RequestParams = {}) =>
+    this.request<UniversitychainitQueryGetStoredStudentUniroma1Response, RpcStatus>({
+      path: `/university_chain_it/universitychainit/stored_student_uniroma_1/${index}`,
       method: "GET",
       format: "json",
       ...params,
@@ -810,6 +966,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryUniversityInfo = (params: RequestParams = {}) =>
     this.request<UniversitychainitQueryGetUniversityInfoResponse, RpcStatus>({
       path: `/university_chain_it/universitychainit/university_info`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryUniversityInfoUniroma1
+   * @summary Queries a UniversityInfoUniroma1 by index.
+   * @request GET:/university_chain_it/universitychainit/university_info_uniroma_1
+   */
+  queryUniversityInfoUniroma1 = (params: RequestParams = {}) =>
+    this.request<UniversitychainitQueryGetUniversityInfoUniroma1Response, RpcStatus>({
+      path: `/university_chain_it/universitychainit/university_info_uniroma_1`,
       method: "GET",
       format: "json",
       ...params,

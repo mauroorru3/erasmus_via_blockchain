@@ -2,7 +2,6 @@ package keeper
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"os"
 
@@ -55,44 +54,91 @@ func (k msgServer) ConfigureChain(goCtx context.Context, msg *types.MsgConfigure
 				}, err
 			}
 			for i = 0; i < len(universityInfoList); i++ {
-				universityData := types.UniversityInfo{
-					NextStudentId:   1,
-					SecretariatKey:  universityInfoList[i].Secretariat_key,
-					UniversityKey:   universityInfoList[i].University_key,
-					CaiKey:          "",
-					FifoHeadErasmus: "-1",
-					FifoTailErasmus: "-1",
-					DeadlineTaxes:   universityInfoList[i].Deadline_taxes,
-					DeadlineErasmus: universityInfoList[i].Deadline_erasmus,
-				}
 
-				j := 0
+				switch universityInfoList[i].Name {
+				case "unipi":
+					k.Keeper.SetUniversityInfo(ctx, types.UniversityInfo{
+						NextStudentId:   1,
+						SecretariatKey:  universityInfoList[i].Secretariat_key,
+						UniversityKey:   universityInfoList[i].University_key,
+						CaiKey:          "",
+						FifoHeadErasmus: "-1",
+						FifoTailErasmus: "-1",
+						DeadlineTaxes:   universityInfoList[i].Deadline_taxes,
+						DeadlineErasmus: universityInfoList[i].Deadline_erasmus,
+					})
 
-				for j = 0; j < len(universityInfoList[i].DepartmentList); j++ {
-					q := 0
-					for q = 0; q < len(universityInfoList[i].DepartmentList[j].CoursesTypeList); q++ {
-						w := 0
-						for w = 0; w < len(universityInfoList[i].DepartmentList[j].CoursesTypeList[q].Courses); w++ {
-							z := 0
-							for z = 0; z < len(universityInfoList[i].DepartmentList[j].CoursesTypeList[q].Courses[w].Exams); z++ {
+					j := 0
 
-								data := map[string]interface{}{
-									"intValue":    1234,
-									"boolValue":   true,
-									"stringValue": "hello!",
-									"objectValue": map[string]interface{}{
-										"arrayValue": []int{1, 2, 3, 4},
-									},
+					for j = 0; j < len(universityInfoList[i].DepartmentList); j++ {
+						q := 0
+						for q = 0; q < len(universityInfoList[i].DepartmentList[j].CoursesTypeList); q++ {
+							w := 0
+							for w = 0; w < len(universityInfoList[i].DepartmentList[j].CoursesTypeList[q].Courses); w++ {
+								z := 0
+								for z = 0; z < len(universityInfoList[i].DepartmentList[j].CoursesTypeList[q].Courses[w].Exams); z++ {
+
+									/*
+
+										data := map[string]interface{}{
+											"intValue":    1234,
+											"boolValue":   true,
+											"stringValue": "hello!",
+											"objectValue": map[string]interface{}{
+												"arrayValue": []int{1, 2, 3, 4},
+											},
+										}
+
+										test_json, _ := json.Marshal(data)
+
+										test_ass := string(test_json)
+
+									*/
+
+									k.Keeper.SetProfessorsExams(ctx, types.ProfessorsExams{
+										ExamName:      universityInfoList[i].DepartmentList[j].CoursesTypeList[q].Courses[w].Exams[z].ExamName,
+										ProfessorName: universityInfoList[i].DepartmentList[j].CoursesTypeList[q].Courses[w].Exams[z].ProfessorName,
+										ProfessorId:   "",
+										ProfessorKey:  universityInfoList[i].DepartmentList[j].CoursesTypeList[q].Courses[w].Exams[z].ProfessorAddress,
+									})
 								}
 
-								test_json, _ := json.Marshal(data)
+							}
 
-								k.Keeper.SetProfessorsExams(ctx, types.ProfessorsExams{
-									ExamName:      universityInfoList[i].DepartmentList[j].CoursesTypeList[q].Courses[w].Exams[z].ExamName,
-									ProfessorName: universityInfoList[i].DepartmentList[j].CoursesTypeList[q].Courses[w].Exams[z].ProfessorName,
-									ProfessorId:   string(test_json),
-									ProfessorKey:  universityInfoList[i].DepartmentList[j].CoursesTypeList[q].Courses[w].Exams[z].ProfessorAddress,
-								})
+						}
+
+					}
+
+				case "uniroma1":
+					k.Keeper.SetUniversityInfoUniroma1(ctx, types.UniversityInfoUniroma1{
+						NextStudentId:   1,
+						SecretariatKey:  universityInfoList[i].Secretariat_key,
+						UniversityKey:   universityInfoList[i].University_key,
+						CaiKey:          "",
+						FifoHeadErasmus: "-1",
+						FifoTailErasmus: "-1",
+						DeadlineTaxes:   universityInfoList[i].Deadline_taxes,
+						DeadlineErasmus: universityInfoList[i].Deadline_erasmus,
+					})
+
+					j := 0
+
+					for j = 0; j < len(universityInfoList[i].DepartmentList); j++ {
+						q := 0
+						for q = 0; q < len(universityInfoList[i].DepartmentList[j].CoursesTypeList); q++ {
+							w := 0
+							for w = 0; w < len(universityInfoList[i].DepartmentList[j].CoursesTypeList[q].Courses); w++ {
+								z := 0
+								for z = 0; z < len(universityInfoList[i].DepartmentList[j].CoursesTypeList[q].Courses[w].Exams); z++ {
+
+									k.Keeper.SetProfessorsExamsUniroma1(ctx, types.ProfessorsExamsUniroma1{
+										ExamName:      universityInfoList[i].DepartmentList[j].CoursesTypeList[q].Courses[w].Exams[z].ExamName,
+										ProfessorName: universityInfoList[i].DepartmentList[j].CoursesTypeList[q].Courses[w].Exams[z].ProfessorName,
+										ProfessorId:   "",
+										ProfessorKey:  universityInfoList[i].DepartmentList[j].CoursesTypeList[q].Courses[w].Exams[z].ProfessorAddress,
+									})
+								}
+
 							}
 
 						}
@@ -100,7 +146,6 @@ func (k msgServer) ConfigureChain(goCtx context.Context, msg *types.MsgConfigure
 					}
 
 				}
-				fmt.Println(universityData)
 
 			}
 

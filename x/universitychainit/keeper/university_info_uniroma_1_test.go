@@ -12,16 +12,16 @@ import (
 	"university_chain_it/x/universitychainit/types"
 )
 
-func createTestErasmusContribution(keeper *keeper.Keeper, ctx sdk.Context) types.ErasmusContribution {
-	item := types.ErasmusContribution{}
-	keeper.SetErasmusContribution(ctx, item)
+func createTestUniversityInfoUniroma1(keeper *keeper.Keeper, ctx sdk.Context) types.UniversityInfoUniroma1 {
+	item := types.UniversityInfoUniroma1{}
+	keeper.SetUniversityInfoUniroma1(ctx, item)
 	return item
 }
 
-func TestErasmusContributionGet(t *testing.T) {
+func TestUniversityInfoUniroma1Get(t *testing.T) {
 	keeper, ctx := keepertest.UniversitychainitKeeper(t)
-	item := createTestErasmusContribution(keeper, ctx)
-	rst, found := keeper.GetErasmusContribution(ctx)
+	item := createTestUniversityInfoUniroma1(keeper, ctx)
+	rst, found := keeper.GetUniversityInfoUniroma1(ctx)
 	require.True(t, found)
 	require.Equal(t,
 		nullify.Fill(&item),
@@ -29,10 +29,10 @@ func TestErasmusContributionGet(t *testing.T) {
 	)
 }
 
-func TestErasmusContributionRemove(t *testing.T) {
+func TestUniversityInfoUniroma1Remove(t *testing.T) {
 	keeper, ctx := keepertest.UniversitychainitKeeper(t)
-	createTestErasmusContribution(keeper, ctx)
-	keeper.RemoveErasmusContribution(ctx)
-	_, found := keeper.GetErasmusContribution(ctx)
+	createTestUniversityInfoUniroma1(keeper, ctx)
+	keeper.RemoveUniversityInfoUniroma1(ctx)
+	_, found := keeper.GetUniversityInfoUniroma1(ctx)
 	require.False(t, found)
 }

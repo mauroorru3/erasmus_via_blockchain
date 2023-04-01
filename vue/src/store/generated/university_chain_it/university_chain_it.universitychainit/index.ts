@@ -9,15 +9,18 @@ import { NoData } from "./module/types/universitychainit/packet"
 import { Params } from "./module/types/universitychainit/params"
 import { PersonalInfo } from "./module/types/universitychainit/personal_info"
 import { ProfessorsExams } from "./module/types/universitychainit/professors_exams"
+import { ProfessorsExamsUniroma1 } from "./module/types/universitychainit/professors_exams_uniroma_1"
 import { ResidenceInfo } from "./module/types/universitychainit/residence_info"
 import { StoredStudent } from "./module/types/universitychainit/stored_student"
+import { StoredStudentUniroma1 } from "./module/types/universitychainit/stored_student_uniroma_1"
 import { StudentInfo } from "./module/types/universitychainit/student_info"
 import { TaxesInfo } from "./module/types/universitychainit/taxes_info"
 import { TranscriptOfRecords } from "./module/types/universitychainit/transcript_of_records"
 import { UniversityInfo } from "./module/types/universitychainit/university_info"
+import { UniversityInfoUniroma1 } from "./module/types/universitychainit/university_info_uniroma_1"
 
 
-export { ChainInfo, ContactInfo, ErasmusInfo, ForeignUniversities, UniversitychainitPacketData, NoData, Params, PersonalInfo, ProfessorsExams, ResidenceInfo, StoredStudent, StudentInfo, TaxesInfo, TranscriptOfRecords, UniversityInfo };
+export { ChainInfo, ContactInfo, ErasmusInfo, ForeignUniversities, UniversitychainitPacketData, NoData, Params, PersonalInfo, ProfessorsExams, ProfessorsExamsUniroma1, ResidenceInfo, StoredStudent, StoredStudentUniroma1, StudentInfo, TaxesInfo, TranscriptOfRecords, UniversityInfo, UniversityInfoUniroma1 };
 
 async function initTxClient(vuexGetters) {
 	return await txClient(vuexGetters['common/wallet/signer'], {
@@ -71,6 +74,11 @@ const getDefaultState = () => {
 				ChainInfo: {},
 				ForeignUniversities: {},
 				ForeignUniversitiesAll: {},
+				ProfessorsExamsUniroma1: {},
+				ProfessorsExamsUniroma1All: {},
+				StoredStudentUniroma1: {},
+				StoredStudentUniroma1All: {},
+				UniversityInfoUniroma1: {},
 				
 				_Structure: {
 						ChainInfo: getStructure(ChainInfo.fromPartial({})),
@@ -82,12 +90,15 @@ const getDefaultState = () => {
 						Params: getStructure(Params.fromPartial({})),
 						PersonalInfo: getStructure(PersonalInfo.fromPartial({})),
 						ProfessorsExams: getStructure(ProfessorsExams.fromPartial({})),
+						ProfessorsExamsUniroma1: getStructure(ProfessorsExamsUniroma1.fromPartial({})),
 						ResidenceInfo: getStructure(ResidenceInfo.fromPartial({})),
 						StoredStudent: getStructure(StoredStudent.fromPartial({})),
+						StoredStudentUniroma1: getStructure(StoredStudentUniroma1.fromPartial({})),
 						StudentInfo: getStructure(StudentInfo.fromPartial({})),
 						TaxesInfo: getStructure(TaxesInfo.fromPartial({})),
 						TranscriptOfRecords: getStructure(TranscriptOfRecords.fromPartial({})),
 						UniversityInfo: getStructure(UniversityInfo.fromPartial({})),
+						UniversityInfoUniroma1: getStructure(UniversityInfoUniroma1.fromPartial({})),
 						
 		},
 		_Registry: registry,
@@ -211,6 +222,36 @@ export default {
 						(<any> params).query=null
 					}
 			return state.ForeignUniversitiesAll[JSON.stringify(params)] ?? {}
+		},
+				getProfessorsExamsUniroma1: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.ProfessorsExamsUniroma1[JSON.stringify(params)] ?? {}
+		},
+				getProfessorsExamsUniroma1All: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.ProfessorsExamsUniroma1All[JSON.stringify(params)] ?? {}
+		},
+				getStoredStudentUniroma1: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.StoredStudentUniroma1[JSON.stringify(params)] ?? {}
+		},
+				getStoredStudentUniroma1All: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.StoredStudentUniroma1All[JSON.stringify(params)] ?? {}
+		},
+				getUniversityInfoUniroma1: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.UniversityInfoUniroma1[JSON.stringify(params)] ?? {}
 		},
 				
 		getTypeStructure: (state) => (type) => {
@@ -605,6 +646,124 @@ export default {
 				return getters['getForeignUniversitiesAll']( { params: {...key}, query}) ?? {}
 			} catch (e) {
 				throw new Error('QueryClient:QueryForeignUniversitiesAll API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryProfessorsExamsUniroma1({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryProfessorsExamsUniroma1( key.examName)).data
+				
+					
+				commit('QUERY', { query: 'ProfessorsExamsUniroma1', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryProfessorsExamsUniroma1', payload: { options: { all }, params: {...key},query }})
+				return getters['getProfessorsExamsUniroma1']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryProfessorsExamsUniroma1 API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryProfessorsExamsUniroma1All({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryProfessorsExamsUniroma1All(query)).data
+				
+					
+				while (all && (<any> value).pagination && (<any> value).pagination.next_key!=null) {
+					let next_values=(await queryClient.queryProfessorsExamsUniroma1All({...query, 'pagination.key':(<any> value).pagination.next_key})).data
+					value = mergeResults(value, next_values);
+				}
+				commit('QUERY', { query: 'ProfessorsExamsUniroma1All', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryProfessorsExamsUniroma1All', payload: { options: { all }, params: {...key},query }})
+				return getters['getProfessorsExamsUniroma1All']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryProfessorsExamsUniroma1All API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryStoredStudentUniroma1({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryStoredStudentUniroma1( key.index)).data
+				
+					
+				commit('QUERY', { query: 'StoredStudentUniroma1', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryStoredStudentUniroma1', payload: { options: { all }, params: {...key},query }})
+				return getters['getStoredStudentUniroma1']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryStoredStudentUniroma1 API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryStoredStudentUniroma1All({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryStoredStudentUniroma1All(query)).data
+				
+					
+				while (all && (<any> value).pagination && (<any> value).pagination.next_key!=null) {
+					let next_values=(await queryClient.queryStoredStudentUniroma1All({...query, 'pagination.key':(<any> value).pagination.next_key})).data
+					value = mergeResults(value, next_values);
+				}
+				commit('QUERY', { query: 'StoredStudentUniroma1All', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryStoredStudentUniroma1All', payload: { options: { all }, params: {...key},query }})
+				return getters['getStoredStudentUniroma1All']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryStoredStudentUniroma1All API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryUniversityInfoUniroma1({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryUniversityInfoUniroma1()).data
+				
+					
+				commit('QUERY', { query: 'UniversityInfoUniroma1', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryUniversityInfoUniroma1', payload: { options: { all }, params: {...key},query }})
+				return getters['getUniversityInfoUniroma1']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryUniversityInfoUniroma1 API Node Unavailable. Could not perform query: ' + e.message)
 				
 			}
 		},

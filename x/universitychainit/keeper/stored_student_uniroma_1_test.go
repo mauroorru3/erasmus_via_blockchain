@@ -15,22 +15,22 @@ import (
 // Prevent strconv unused error
 var _ = strconv.IntSize
 
-func createNErasmusExams(keeper *keeper.Keeper, ctx sdk.Context, n int) []types.ErasmusExams {
-	items := make([]types.ErasmusExams, n)
+func createNStoredStudentUniroma1(keeper *keeper.Keeper, ctx sdk.Context, n int) []types.StoredStudentUniroma1 {
+	items := make([]types.StoredStudentUniroma1, n)
 	for i := range items {
-		items[i].ExamName = strconv.Itoa(i)
+		items[i].Index = strconv.Itoa(i)
 
-		keeper.SetErasmusExams(ctx, items[i])
+		keeper.SetStoredStudentUniroma1(ctx, items[i])
 	}
 	return items
 }
 
-func TestErasmusExamsGet(t *testing.T) {
+func TestStoredStudentUniroma1Get(t *testing.T) {
 	keeper, ctx := keepertest.UniversitychainitKeeper(t)
-	items := createNErasmusExams(keeper, ctx, 10)
+	items := createNStoredStudentUniroma1(keeper, ctx, 10)
 	for _, item := range items {
-		rst, found := keeper.GetErasmusExams(ctx,
-			item.ExamName,
+		rst, found := keeper.GetStoredStudentUniroma1(ctx,
+			item.Index,
 		)
 		require.True(t, found)
 		require.Equal(t,
@@ -39,25 +39,25 @@ func TestErasmusExamsGet(t *testing.T) {
 		)
 	}
 }
-func TestErasmusExamsRemove(t *testing.T) {
+func TestStoredStudentUniroma1Remove(t *testing.T) {
 	keeper, ctx := keepertest.UniversitychainitKeeper(t)
-	items := createNErasmusExams(keeper, ctx, 10)
+	items := createNStoredStudentUniroma1(keeper, ctx, 10)
 	for _, item := range items {
-		keeper.RemoveErasmusExams(ctx,
-			item.ExamName,
+		keeper.RemoveStoredStudentUniroma1(ctx,
+			item.Index,
 		)
-		_, found := keeper.GetErasmusExams(ctx,
-			item.ExamName,
+		_, found := keeper.GetStoredStudentUniroma1(ctx,
+			item.Index,
 		)
 		require.False(t, found)
 	}
 }
 
-func TestErasmusExamsGetAll(t *testing.T) {
+func TestStoredStudentUniroma1GetAll(t *testing.T) {
 	keeper, ctx := keepertest.UniversitychainitKeeper(t)
-	items := createNErasmusExams(keeper, ctx, 10)
+	items := createNStoredStudentUniroma1(keeper, ctx, 10)
 	require.ElementsMatch(t,
 		nullify.Fill(items),
-		nullify.Fill(keeper.GetAllErasmusExams(ctx)),
+		nullify.Fill(keeper.GetAllStoredStudentUniroma1(ctx)),
 	)
 }

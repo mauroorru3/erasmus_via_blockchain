@@ -12,6 +12,9 @@ import { StoredStudent } from "../universitychainit/stored_student";
 import { UniversityInfo } from "../universitychainit/university_info";
 import { ChainInfo } from "../universitychainit/chain_info";
 import { ForeignUniversities } from "../universitychainit/foreign_universities";
+import { ProfessorsExamsUniroma1 } from "../universitychainit/professors_exams_uniroma_1";
+import { StoredStudentUniroma1 } from "../universitychainit/stored_student_uniroma_1";
+import { UniversityInfoUniroma1 } from "../universitychainit/university_info_uniroma_1";
 import { Writer, Reader } from "protobufjs/minimal";
 
 export const protobufPackage = "university_chain_it.universitychainit";
@@ -31,8 +34,11 @@ export interface GenesisState {
   storedStudentList: StoredStudent[];
   universityInfo: UniversityInfo | undefined;
   chainInfo: ChainInfo | undefined;
-  /** this line is used by starport scaffolding # genesis/proto/state */
   foreignUniversitiesList: ForeignUniversities[];
+  professorsExamsUniroma1List: ProfessorsExamsUniroma1[];
+  storedStudentUniroma1List: StoredStudentUniroma1[];
+  /** this line is used by starport scaffolding # genesis/proto/state */
+  universityInfoUniroma1: UniversityInfoUniroma1 | undefined;
 }
 
 const baseGenesisState: object = { port_id: "" };
@@ -102,6 +108,18 @@ export const GenesisState = {
     for (const v of message.foreignUniversitiesList) {
       ForeignUniversities.encode(v!, writer.uint32(114).fork()).ldelim();
     }
+    for (const v of message.professorsExamsUniroma1List) {
+      ProfessorsExamsUniroma1.encode(v!, writer.uint32(122).fork()).ldelim();
+    }
+    for (const v of message.storedStudentUniroma1List) {
+      StoredStudentUniroma1.encode(v!, writer.uint32(130).fork()).ldelim();
+    }
+    if (message.universityInfoUniroma1 !== undefined) {
+      UniversityInfoUniroma1.encode(
+        message.universityInfoUniroma1,
+        writer.uint32(138).fork()
+      ).ldelim();
+    }
     return writer;
   },
 
@@ -112,6 +130,8 @@ export const GenesisState = {
     message.professorsExamsList = [];
     message.storedStudentList = [];
     message.foreignUniversitiesList = [];
+    message.professorsExamsUniroma1List = [];
+    message.storedStudentUniroma1List = [];
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -169,6 +189,22 @@ export const GenesisState = {
             ForeignUniversities.decode(reader, reader.uint32())
           );
           break;
+        case 15:
+          message.professorsExamsUniroma1List.push(
+            ProfessorsExamsUniroma1.decode(reader, reader.uint32())
+          );
+          break;
+        case 16:
+          message.storedStudentUniroma1List.push(
+            StoredStudentUniroma1.decode(reader, reader.uint32())
+          );
+          break;
+        case 17:
+          message.universityInfoUniroma1 = UniversityInfoUniroma1.decode(
+            reader,
+            reader.uint32()
+          );
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -182,6 +218,8 @@ export const GenesisState = {
     message.professorsExamsList = [];
     message.storedStudentList = [];
     message.foreignUniversitiesList = [];
+    message.professorsExamsUniroma1List = [];
+    message.storedStudentUniroma1List = [];
     if (object.params !== undefined && object.params !== null) {
       message.params = Params.fromJSON(object.params);
     } else {
@@ -266,6 +304,36 @@ export const GenesisState = {
         message.foreignUniversitiesList.push(ForeignUniversities.fromJSON(e));
       }
     }
+    if (
+      object.professorsExamsUniroma1List !== undefined &&
+      object.professorsExamsUniroma1List !== null
+    ) {
+      for (const e of object.professorsExamsUniroma1List) {
+        message.professorsExamsUniroma1List.push(
+          ProfessorsExamsUniroma1.fromJSON(e)
+        );
+      }
+    }
+    if (
+      object.storedStudentUniroma1List !== undefined &&
+      object.storedStudentUniroma1List !== null
+    ) {
+      for (const e of object.storedStudentUniroma1List) {
+        message.storedStudentUniroma1List.push(
+          StoredStudentUniroma1.fromJSON(e)
+        );
+      }
+    }
+    if (
+      object.universityInfoUniroma1 !== undefined &&
+      object.universityInfoUniroma1 !== null
+    ) {
+      message.universityInfoUniroma1 = UniversityInfoUniroma1.fromJSON(
+        object.universityInfoUniroma1
+      );
+    } else {
+      message.universityInfoUniroma1 = undefined;
+    }
     return message;
   },
 
@@ -331,6 +399,24 @@ export const GenesisState = {
     } else {
       obj.foreignUniversitiesList = [];
     }
+    if (message.professorsExamsUniroma1List) {
+      obj.professorsExamsUniroma1List = message.professorsExamsUniroma1List.map(
+        (e) => (e ? ProfessorsExamsUniroma1.toJSON(e) : undefined)
+      );
+    } else {
+      obj.professorsExamsUniroma1List = [];
+    }
+    if (message.storedStudentUniroma1List) {
+      obj.storedStudentUniroma1List = message.storedStudentUniroma1List.map(
+        (e) => (e ? StoredStudentUniroma1.toJSON(e) : undefined)
+      );
+    } else {
+      obj.storedStudentUniroma1List = [];
+    }
+    message.universityInfoUniroma1 !== undefined &&
+      (obj.universityInfoUniroma1 = message.universityInfoUniroma1
+        ? UniversityInfoUniroma1.toJSON(message.universityInfoUniroma1)
+        : undefined);
     return obj;
   },
 
@@ -339,6 +425,8 @@ export const GenesisState = {
     message.professorsExamsList = [];
     message.storedStudentList = [];
     message.foreignUniversitiesList = [];
+    message.professorsExamsUniroma1List = [];
+    message.storedStudentUniroma1List = [];
     if (object.params !== undefined && object.params !== null) {
       message.params = Params.fromPartial(object.params);
     } else {
@@ -426,6 +514,36 @@ export const GenesisState = {
           ForeignUniversities.fromPartial(e)
         );
       }
+    }
+    if (
+      object.professorsExamsUniroma1List !== undefined &&
+      object.professorsExamsUniroma1List !== null
+    ) {
+      for (const e of object.professorsExamsUniroma1List) {
+        message.professorsExamsUniroma1List.push(
+          ProfessorsExamsUniroma1.fromPartial(e)
+        );
+      }
+    }
+    if (
+      object.storedStudentUniroma1List !== undefined &&
+      object.storedStudentUniroma1List !== null
+    ) {
+      for (const e of object.storedStudentUniroma1List) {
+        message.storedStudentUniroma1List.push(
+          StoredStudentUniroma1.fromPartial(e)
+        );
+      }
+    }
+    if (
+      object.universityInfoUniroma1 !== undefined &&
+      object.universityInfoUniroma1 !== null
+    ) {
+      message.universityInfoUniroma1 = UniversityInfoUniroma1.fromPartial(
+        object.universityInfoUniroma1
+      );
+    } else {
+      message.universityInfoUniroma1 = undefined;
     }
     return message;
   },

@@ -30019,6 +30019,179 @@ paths:
           type: string
       tags:
         - Query
+  /university_chain_it/universitychainit/professors_exams_uniroma_1:
+    get:
+      summary: Queries a list of ProfessorsExamsUniroma1 items.
+      operationId: UniversityChainItUniversitychainitProfessorsExamsUniroma1All
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              professorsExamsUniroma1:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    examName:
+                      type: string
+                    professorName:
+                      type: string
+                    professorId:
+                      type: string
+                    professorKey:
+                      type: string
+              pagination:
+                type: object
+                properties:
+                  next_key:
+                    type: string
+                    format: byte
+                    title: |-
+                      next_key is the key to be passed to PageRequest.key to
+                      query the next page most efficiently
+                  total:
+                    type: string
+                    format: uint64
+                    title: >-
+                      total is total number of results available if
+                      PageRequest.count_total
+
+                      was set, its value is undefined otherwise
+                description: >-
+                  PageResponse is to be embedded in gRPC response messages where
+                  the
+
+                  corresponding request message has used PageRequest.
+
+                   message SomeResponse {
+                           repeated Bar results = 1;
+                           PageResponse page = 2;
+                   }
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: pagination.key
+          description: |-
+            key is a value returned in PageResponse.next_key to begin
+            querying the next page most efficiently. Only one of offset or key
+            should be set.
+          in: query
+          required: false
+          type: string
+          format: byte
+        - name: pagination.offset
+          description: >-
+            offset is a numeric offset that can be used when key is unavailable.
+
+            It is less efficient than using key. Only one of offset or key
+            should
+
+            be set.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.limit
+          description: >-
+            limit is the total number of results to be returned in the result
+            page.
+
+            If left empty it will default to a value to be set by each app.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.count_total
+          description: >-
+            count_total is set to true  to indicate that the result set should
+            include
+
+            a count of the total number of items available for pagination in
+            UIs.
+
+            count_total is only respected when offset is used. It is ignored
+            when key
+
+            is set.
+          in: query
+          required: false
+          type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
+          in: query
+          required: false
+          type: boolean
+      tags:
+        - Query
+  '/university_chain_it/universitychainit/professors_exams_uniroma_1/{examName}':
+    get:
+      summary: Queries a ProfessorsExamsUniroma1 by index.
+      operationId: UniversityChainItUniversitychainitProfessorsExamsUniroma1
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              professorsExamsUniroma1:
+                type: object
+                properties:
+                  examName:
+                    type: string
+                  professorName:
+                    type: string
+                  professorId:
+                    type: string
+                  professorKey:
+                    type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: examName
+          in: path
+          required: true
+          type: string
+      tags:
+        - Query
   /university_chain_it/universitychainit/residence_info:
     get:
       summary: Queries a ResidenceInfo by index.
@@ -30477,6 +30650,417 @@ paths:
           type: string
       tags:
         - Query
+  /university_chain_it/universitychainit/stored_student_uniroma_1:
+    get:
+      summary: Queries a list of StoredStudentUniroma1 items.
+      operationId: UniversityChainItUniversitychainitStoredStudentUniroma1All
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              storedStudentUniroma1:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    index:
+                      type: string
+                    studentData:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        surname:
+                          type: string
+                        courseType:
+                          type: string
+                          format: uint64
+                        courseOfStudy:
+                          type: string
+                        status:
+                          type: string
+                          format: uint64
+                        currentYearOfStudy:
+                          type: string
+                          format: uint64
+                        outOfCourse:
+                          type: boolean
+                        numberOfYearsOutOfCourse:
+                          type: string
+                          format: uint64
+                        studentKey:
+                          type: string
+                    transcriptData:
+                      type: object
+                      properties:
+                        examsData:
+                          type: string
+                        totalExams:
+                          type: string
+                          format: uint64
+                        examsPassed:
+                          type: string
+                          format: uint64
+                        totalCredits:
+                          type: string
+                          format: uint64
+                        achievedCredits:
+                          type: string
+                          format: uint64
+                    personalData:
+                      type: object
+                      properties:
+                        gender:
+                          type: string
+                          format: uint64
+                        dateOfBirth:
+                          type: string
+                        primaryNationality:
+                          type: string
+                        countryOfBirth:
+                          type: string
+                        provinceOfBirth:
+                          type: string
+                        townOfBirth:
+                          type: string
+                        taxCode:
+                          type: string
+                    residenceData:
+                      type: object
+                      properties:
+                        country:
+                          type: string
+                        province:
+                          type: string
+                        town:
+                          type: string
+                        postCode:
+                          type: string
+                        address:
+                          type: string
+                        houseNumber:
+                          type: string
+                        homePhone:
+                          type: string
+                    contactData:
+                      type: object
+                      properties:
+                        contactAddress:
+                          type: string
+                        email:
+                          type: string
+                        mobilePhone:
+                          type: string
+                    taxesData:
+                      type: object
+                      properties:
+                        status:
+                          type: boolean
+                        totalAmount:
+                          type: string
+                          format: uint64
+                        taxesHistory:
+                          type: string
+                    erasmusData:
+                      type: object
+                      properties:
+                        erasmusStudent:
+                          type: string
+                        numberTimes:
+                          type: string
+                          format: uint64
+                        numberMonths:
+                          type: string
+                          format: uint64
+                        totalExams:
+                          type: string
+                          format: uint64
+                        examsPassed:
+                          type: string
+                          format: uint64
+                        totalCredits:
+                          type: string
+                          format: uint64
+                        achievedCredits:
+                          type: string
+                          format: uint64
+                        career:
+                          type: string
+                        previousStudentFifo:
+                          type: string
+                        nextStudentFifo:
+                          type: string
+              pagination:
+                type: object
+                properties:
+                  next_key:
+                    type: string
+                    format: byte
+                    title: |-
+                      next_key is the key to be passed to PageRequest.key to
+                      query the next page most efficiently
+                  total:
+                    type: string
+                    format: uint64
+                    title: >-
+                      total is total number of results available if
+                      PageRequest.count_total
+
+                      was set, its value is undefined otherwise
+                description: >-
+                  PageResponse is to be embedded in gRPC response messages where
+                  the
+
+                  corresponding request message has used PageRequest.
+
+                   message SomeResponse {
+                           repeated Bar results = 1;
+                           PageResponse page = 2;
+                   }
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: pagination.key
+          description: |-
+            key is a value returned in PageResponse.next_key to begin
+            querying the next page most efficiently. Only one of offset or key
+            should be set.
+          in: query
+          required: false
+          type: string
+          format: byte
+        - name: pagination.offset
+          description: >-
+            offset is a numeric offset that can be used when key is unavailable.
+
+            It is less efficient than using key. Only one of offset or key
+            should
+
+            be set.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.limit
+          description: >-
+            limit is the total number of results to be returned in the result
+            page.
+
+            If left empty it will default to a value to be set by each app.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.count_total
+          description: >-
+            count_total is set to true  to indicate that the result set should
+            include
+
+            a count of the total number of items available for pagination in
+            UIs.
+
+            count_total is only respected when offset is used. It is ignored
+            when key
+
+            is set.
+          in: query
+          required: false
+          type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
+          in: query
+          required: false
+          type: boolean
+      tags:
+        - Query
+  '/university_chain_it/universitychainit/stored_student_uniroma_1/{index}':
+    get:
+      summary: Queries a StoredStudentUniroma1 by index.
+      operationId: UniversityChainItUniversitychainitStoredStudentUniroma1
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              storedStudentUniroma1:
+                type: object
+                properties:
+                  index:
+                    type: string
+                  studentData:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      surname:
+                        type: string
+                      courseType:
+                        type: string
+                        format: uint64
+                      courseOfStudy:
+                        type: string
+                      status:
+                        type: string
+                        format: uint64
+                      currentYearOfStudy:
+                        type: string
+                        format: uint64
+                      outOfCourse:
+                        type: boolean
+                      numberOfYearsOutOfCourse:
+                        type: string
+                        format: uint64
+                      studentKey:
+                        type: string
+                  transcriptData:
+                    type: object
+                    properties:
+                      examsData:
+                        type: string
+                      totalExams:
+                        type: string
+                        format: uint64
+                      examsPassed:
+                        type: string
+                        format: uint64
+                      totalCredits:
+                        type: string
+                        format: uint64
+                      achievedCredits:
+                        type: string
+                        format: uint64
+                  personalData:
+                    type: object
+                    properties:
+                      gender:
+                        type: string
+                        format: uint64
+                      dateOfBirth:
+                        type: string
+                      primaryNationality:
+                        type: string
+                      countryOfBirth:
+                        type: string
+                      provinceOfBirth:
+                        type: string
+                      townOfBirth:
+                        type: string
+                      taxCode:
+                        type: string
+                  residenceData:
+                    type: object
+                    properties:
+                      country:
+                        type: string
+                      province:
+                        type: string
+                      town:
+                        type: string
+                      postCode:
+                        type: string
+                      address:
+                        type: string
+                      houseNumber:
+                        type: string
+                      homePhone:
+                        type: string
+                  contactData:
+                    type: object
+                    properties:
+                      contactAddress:
+                        type: string
+                      email:
+                        type: string
+                      mobilePhone:
+                        type: string
+                  taxesData:
+                    type: object
+                    properties:
+                      status:
+                        type: boolean
+                      totalAmount:
+                        type: string
+                        format: uint64
+                      taxesHistory:
+                        type: string
+                  erasmusData:
+                    type: object
+                    properties:
+                      erasmusStudent:
+                        type: string
+                      numberTimes:
+                        type: string
+                        format: uint64
+                      numberMonths:
+                        type: string
+                        format: uint64
+                      totalExams:
+                        type: string
+                        format: uint64
+                      examsPassed:
+                        type: string
+                        format: uint64
+                      totalCredits:
+                        type: string
+                        format: uint64
+                      achievedCredits:
+                        type: string
+                        format: uint64
+                      career:
+                        type: string
+                      previousStudentFifo:
+                        type: string
+                      nextStudentFifo:
+                        type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: index
+          in: path
+          required: true
+          type: string
+      tags:
+        - Query
   /university_chain_it/universitychainit/student_info:
     get:
       summary: Queries a StudentInfo by index.
@@ -30630,6 +31214,56 @@ paths:
             type: object
             properties:
               UniversityInfo:
+                type: object
+                properties:
+                  nextStudentId:
+                    type: string
+                    format: uint64
+                  secretariatKey:
+                    type: string
+                  universityKey:
+                    type: string
+                  caiKey:
+                    type: string
+                  fifoHeadErasmus:
+                    type: string
+                  fifoTailErasmus:
+                    type: string
+                  deadlineTaxes:
+                    type: string
+                  deadlineErasmus:
+                    type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Query
+  /university_chain_it/universitychainit/university_info_uniroma_1:
+    get:
+      summary: Queries a UniversityInfoUniroma1 by index.
+      operationId: UniversityChainItUniversitychainitUniversityInfoUniroma1
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              UniversityInfoUniroma1:
                 type: object
                 properties:
                   nextStudentId:
@@ -50752,6 +51386,17 @@ definitions:
         type: string
       professorKey:
         type: string
+  university_chain_it.universitychainit.ProfessorsExamsUniroma1:
+    type: object
+    properties:
+      examName:
+        type: string
+      professorName:
+        type: string
+      professorId:
+        type: string
+      professorKey:
+        type: string
   university_chain_it.universitychainit.QueryAllForeignUniversitiesResponse:
     type: object
     properties:
@@ -50830,10 +51475,211 @@ definitions:
                    repeated Bar results = 1;
                    PageResponse page = 2;
            }
+  university_chain_it.universitychainit.QueryAllProfessorsExamsUniroma1Response:
+    type: object
+    properties:
+      professorsExamsUniroma1:
+        type: array
+        items:
+          type: object
+          properties:
+            examName:
+              type: string
+            professorName:
+              type: string
+            professorId:
+              type: string
+            professorKey:
+              type: string
+      pagination:
+        type: object
+        properties:
+          next_key:
+            type: string
+            format: byte
+            title: |-
+              next_key is the key to be passed to PageRequest.key to
+              query the next page most efficiently
+          total:
+            type: string
+            format: uint64
+            title: >-
+              total is total number of results available if
+              PageRequest.count_total
+
+              was set, its value is undefined otherwise
+        description: |-
+          PageResponse is to be embedded in gRPC response messages where the
+          corresponding request message has used PageRequest.
+
+           message SomeResponse {
+                   repeated Bar results = 1;
+                   PageResponse page = 2;
+           }
   university_chain_it.universitychainit.QueryAllStoredStudentResponse:
     type: object
     properties:
       storedStudent:
+        type: array
+        items:
+          type: object
+          properties:
+            index:
+              type: string
+            studentData:
+              type: object
+              properties:
+                name:
+                  type: string
+                surname:
+                  type: string
+                courseType:
+                  type: string
+                  format: uint64
+                courseOfStudy:
+                  type: string
+                status:
+                  type: string
+                  format: uint64
+                currentYearOfStudy:
+                  type: string
+                  format: uint64
+                outOfCourse:
+                  type: boolean
+                numberOfYearsOutOfCourse:
+                  type: string
+                  format: uint64
+                studentKey:
+                  type: string
+            transcriptData:
+              type: object
+              properties:
+                examsData:
+                  type: string
+                totalExams:
+                  type: string
+                  format: uint64
+                examsPassed:
+                  type: string
+                  format: uint64
+                totalCredits:
+                  type: string
+                  format: uint64
+                achievedCredits:
+                  type: string
+                  format: uint64
+            personalData:
+              type: object
+              properties:
+                gender:
+                  type: string
+                  format: uint64
+                dateOfBirth:
+                  type: string
+                primaryNationality:
+                  type: string
+                countryOfBirth:
+                  type: string
+                provinceOfBirth:
+                  type: string
+                townOfBirth:
+                  type: string
+                taxCode:
+                  type: string
+            residenceData:
+              type: object
+              properties:
+                country:
+                  type: string
+                province:
+                  type: string
+                town:
+                  type: string
+                postCode:
+                  type: string
+                address:
+                  type: string
+                houseNumber:
+                  type: string
+                homePhone:
+                  type: string
+            contactData:
+              type: object
+              properties:
+                contactAddress:
+                  type: string
+                email:
+                  type: string
+                mobilePhone:
+                  type: string
+            taxesData:
+              type: object
+              properties:
+                status:
+                  type: boolean
+                totalAmount:
+                  type: string
+                  format: uint64
+                taxesHistory:
+                  type: string
+            erasmusData:
+              type: object
+              properties:
+                erasmusStudent:
+                  type: string
+                numberTimes:
+                  type: string
+                  format: uint64
+                numberMonths:
+                  type: string
+                  format: uint64
+                totalExams:
+                  type: string
+                  format: uint64
+                examsPassed:
+                  type: string
+                  format: uint64
+                totalCredits:
+                  type: string
+                  format: uint64
+                achievedCredits:
+                  type: string
+                  format: uint64
+                career:
+                  type: string
+                previousStudentFifo:
+                  type: string
+                nextStudentFifo:
+                  type: string
+      pagination:
+        type: object
+        properties:
+          next_key:
+            type: string
+            format: byte
+            title: |-
+              next_key is the key to be passed to PageRequest.key to
+              query the next page most efficiently
+          total:
+            type: string
+            format: uint64
+            title: >-
+              total is total number of results available if
+              PageRequest.count_total
+
+              was set, its value is undefined otherwise
+        description: |-
+          PageResponse is to be embedded in gRPC response messages where the
+          corresponding request message has used PageRequest.
+
+           message SomeResponse {
+                   repeated Bar results = 1;
+                   PageResponse page = 2;
+           }
+  university_chain_it.universitychainit.QueryAllStoredStudentUniroma1Response:
+    type: object
+    properties:
+      storedStudentUniroma1:
         type: array
         items:
           type: object
@@ -51095,6 +51941,20 @@ definitions:
             type: string
           professorKey:
             type: string
+  university_chain_it.universitychainit.QueryGetProfessorsExamsUniroma1Response:
+    type: object
+    properties:
+      professorsExamsUniroma1:
+        type: object
+        properties:
+          examName:
+            type: string
+          professorName:
+            type: string
+          professorId:
+            type: string
+          professorKey:
+            type: string
   university_chain_it.universitychainit.QueryGetResidenceInfoResponse:
     type: object
     properties:
@@ -51119,6 +51979,139 @@ definitions:
     type: object
     properties:
       storedStudent:
+        type: object
+        properties:
+          index:
+            type: string
+          studentData:
+            type: object
+            properties:
+              name:
+                type: string
+              surname:
+                type: string
+              courseType:
+                type: string
+                format: uint64
+              courseOfStudy:
+                type: string
+              status:
+                type: string
+                format: uint64
+              currentYearOfStudy:
+                type: string
+                format: uint64
+              outOfCourse:
+                type: boolean
+              numberOfYearsOutOfCourse:
+                type: string
+                format: uint64
+              studentKey:
+                type: string
+          transcriptData:
+            type: object
+            properties:
+              examsData:
+                type: string
+              totalExams:
+                type: string
+                format: uint64
+              examsPassed:
+                type: string
+                format: uint64
+              totalCredits:
+                type: string
+                format: uint64
+              achievedCredits:
+                type: string
+                format: uint64
+          personalData:
+            type: object
+            properties:
+              gender:
+                type: string
+                format: uint64
+              dateOfBirth:
+                type: string
+              primaryNationality:
+                type: string
+              countryOfBirth:
+                type: string
+              provinceOfBirth:
+                type: string
+              townOfBirth:
+                type: string
+              taxCode:
+                type: string
+          residenceData:
+            type: object
+            properties:
+              country:
+                type: string
+              province:
+                type: string
+              town:
+                type: string
+              postCode:
+                type: string
+              address:
+                type: string
+              houseNumber:
+                type: string
+              homePhone:
+                type: string
+          contactData:
+            type: object
+            properties:
+              contactAddress:
+                type: string
+              email:
+                type: string
+              mobilePhone:
+                type: string
+          taxesData:
+            type: object
+            properties:
+              status:
+                type: boolean
+              totalAmount:
+                type: string
+                format: uint64
+              taxesHistory:
+                type: string
+          erasmusData:
+            type: object
+            properties:
+              erasmusStudent:
+                type: string
+              numberTimes:
+                type: string
+                format: uint64
+              numberMonths:
+                type: string
+                format: uint64
+              totalExams:
+                type: string
+                format: uint64
+              examsPassed:
+                type: string
+                format: uint64
+              totalCredits:
+                type: string
+                format: uint64
+              achievedCredits:
+                type: string
+                format: uint64
+              career:
+                type: string
+              previousStudentFifo:
+                type: string
+              nextStudentFifo:
+                type: string
+  university_chain_it.universitychainit.QueryGetStoredStudentUniroma1Response:
+    type: object
+    properties:
+      storedStudentUniroma1:
         type: object
         properties:
           index:
@@ -51332,6 +52325,29 @@ definitions:
             type: string
           deadlineErasmus:
             type: string
+  university_chain_it.universitychainit.QueryGetUniversityInfoUniroma1Response:
+    type: object
+    properties:
+      UniversityInfoUniroma1:
+        type: object
+        properties:
+          nextStudentId:
+            type: string
+            format: uint64
+          secretariatKey:
+            type: string
+          universityKey:
+            type: string
+          caiKey:
+            type: string
+          fifoHeadErasmus:
+            type: string
+          fifoTailErasmus:
+            type: string
+          deadlineTaxes:
+            type: string
+          deadlineErasmus:
+            type: string
   university_chain_it.universitychainit.QueryParamsResponse:
     type: object
     properties:
@@ -51357,6 +52373,136 @@ definitions:
       homePhone:
         type: string
   university_chain_it.universitychainit.StoredStudent:
+    type: object
+    properties:
+      index:
+        type: string
+      studentData:
+        type: object
+        properties:
+          name:
+            type: string
+          surname:
+            type: string
+          courseType:
+            type: string
+            format: uint64
+          courseOfStudy:
+            type: string
+          status:
+            type: string
+            format: uint64
+          currentYearOfStudy:
+            type: string
+            format: uint64
+          outOfCourse:
+            type: boolean
+          numberOfYearsOutOfCourse:
+            type: string
+            format: uint64
+          studentKey:
+            type: string
+      transcriptData:
+        type: object
+        properties:
+          examsData:
+            type: string
+          totalExams:
+            type: string
+            format: uint64
+          examsPassed:
+            type: string
+            format: uint64
+          totalCredits:
+            type: string
+            format: uint64
+          achievedCredits:
+            type: string
+            format: uint64
+      personalData:
+        type: object
+        properties:
+          gender:
+            type: string
+            format: uint64
+          dateOfBirth:
+            type: string
+          primaryNationality:
+            type: string
+          countryOfBirth:
+            type: string
+          provinceOfBirth:
+            type: string
+          townOfBirth:
+            type: string
+          taxCode:
+            type: string
+      residenceData:
+        type: object
+        properties:
+          country:
+            type: string
+          province:
+            type: string
+          town:
+            type: string
+          postCode:
+            type: string
+          address:
+            type: string
+          houseNumber:
+            type: string
+          homePhone:
+            type: string
+      contactData:
+        type: object
+        properties:
+          contactAddress:
+            type: string
+          email:
+            type: string
+          mobilePhone:
+            type: string
+      taxesData:
+        type: object
+        properties:
+          status:
+            type: boolean
+          totalAmount:
+            type: string
+            format: uint64
+          taxesHistory:
+            type: string
+      erasmusData:
+        type: object
+        properties:
+          erasmusStudent:
+            type: string
+          numberTimes:
+            type: string
+            format: uint64
+          numberMonths:
+            type: string
+            format: uint64
+          totalExams:
+            type: string
+            format: uint64
+          examsPassed:
+            type: string
+            format: uint64
+          totalCredits:
+            type: string
+            format: uint64
+          achievedCredits:
+            type: string
+            format: uint64
+          career:
+            type: string
+          previousStudentFifo:
+            type: string
+          nextStudentFifo:
+            type: string
+  university_chain_it.universitychainit.StoredStudentUniroma1:
     type: object
     properties:
       index:
@@ -51539,6 +52685,26 @@ definitions:
         type: string
         format: uint64
   university_chain_it.universitychainit.UniversityInfo:
+    type: object
+    properties:
+      nextStudentId:
+        type: string
+        format: uint64
+      secretariatKey:
+        type: string
+      universityKey:
+        type: string
+      caiKey:
+        type: string
+      fifoHeadErasmus:
+        type: string
+      fifoTailErasmus:
+        type: string
+      deadlineTaxes:
+        type: string
+      deadlineErasmus:
+        type: string
+  university_chain_it.universitychainit.UniversityInfoUniroma1:
     type: object
     properties:
       nextStudentId:

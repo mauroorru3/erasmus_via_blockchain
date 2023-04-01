@@ -120,6 +120,32 @@ func TestGenesisState_Validate(t *testing.T) {
 						UniversityName: "1",
 					},
 				},
+				ProfessorsExamsUniroma1List: []types.ProfessorsExamsUniroma1{
+					{
+						ExamName: "0",
+					},
+					{
+						ExamName: "1",
+					},
+				},
+				StoredStudentUniroma1List: []types.StoredStudentUniroma1{
+					{
+						Index: "0",
+					},
+					{
+						Index: "1",
+					},
+				},
+				UniversityInfoUniroma1: &types.UniversityInfoUniroma1{
+					NextStudentId:   71,
+					SecretariatKey:  "60",
+					UniversityKey:   "61",
+					CaiKey:          "4",
+					FifoHeadErasmus: "22",
+					FifoTailErasmus: "49",
+					DeadlineTaxes:   "34",
+					DeadlineErasmus: "97",
+				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
@@ -161,6 +187,34 @@ func TestGenesisState_Validate(t *testing.T) {
 					},
 					{
 						UniversityName: "0",
+					},
+				},
+			},
+			valid: false,
+		},
+		{
+			desc: "duplicated professorsExamsUniroma1",
+			genState: &types.GenesisState{
+				ProfessorsExamsUniroma1List: []types.ProfessorsExamsUniroma1{
+					{
+						ExamName: "0",
+					},
+					{
+						ExamName: "0",
+					},
+				},
+			},
+			valid: false,
+		},
+		{
+			desc: "duplicated storedStudentUniroma1",
+			genState: &types.GenesisState{
+				StoredStudentUniroma1List: []types.StoredStudentUniroma1{
+					{
+						Index: "0",
+					},
+					{
+						Index: "0",
 					},
 				},
 			},

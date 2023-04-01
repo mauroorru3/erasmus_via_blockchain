@@ -15,21 +15,21 @@ import (
 // Prevent strconv unused error
 var _ = strconv.IntSize
 
-func createNExamsInfo(keeper *keeper.Keeper, ctx sdk.Context, n int) []types.ExamsInfo {
-	items := make([]types.ExamsInfo, n)
+func createNProfessorsExamsUniroma1(keeper *keeper.Keeper, ctx sdk.Context, n int) []types.ProfessorsExamsUniroma1 {
+	items := make([]types.ProfessorsExamsUniroma1, n)
 	for i := range items {
 		items[i].ExamName = strconv.Itoa(i)
 
-		keeper.SetExamsInfo(ctx, items[i])
+		keeper.SetProfessorsExamsUniroma1(ctx, items[i])
 	}
 	return items
 }
 
-func TestExamsInfoGet(t *testing.T) {
+func TestProfessorsExamsUniroma1Get(t *testing.T) {
 	keeper, ctx := keepertest.UniversitychainitKeeper(t)
-	items := createNExamsInfo(keeper, ctx, 10)
+	items := createNProfessorsExamsUniroma1(keeper, ctx, 10)
 	for _, item := range items {
-		rst, found := keeper.GetExamsInfo(ctx,
+		rst, found := keeper.GetProfessorsExamsUniroma1(ctx,
 			item.ExamName,
 		)
 		require.True(t, found)
@@ -39,25 +39,25 @@ func TestExamsInfoGet(t *testing.T) {
 		)
 	}
 }
-func TestExamsInfoRemove(t *testing.T) {
+func TestProfessorsExamsUniroma1Remove(t *testing.T) {
 	keeper, ctx := keepertest.UniversitychainitKeeper(t)
-	items := createNExamsInfo(keeper, ctx, 10)
+	items := createNProfessorsExamsUniroma1(keeper, ctx, 10)
 	for _, item := range items {
-		keeper.RemoveExamsInfo(ctx,
+		keeper.RemoveProfessorsExamsUniroma1(ctx,
 			item.ExamName,
 		)
-		_, found := keeper.GetExamsInfo(ctx,
+		_, found := keeper.GetProfessorsExamsUniroma1(ctx,
 			item.ExamName,
 		)
 		require.False(t, found)
 	}
 }
 
-func TestExamsInfoGetAll(t *testing.T) {
+func TestProfessorsExamsUniroma1GetAll(t *testing.T) {
 	keeper, ctx := keepertest.UniversitychainitKeeper(t)
-	items := createNExamsInfo(keeper, ctx, 10)
+	items := createNProfessorsExamsUniroma1(keeper, ctx, 10)
 	require.ElementsMatch(t,
 		nullify.Fill(items),
-		nullify.Fill(keeper.GetAllExamsInfo(ctx)),
+		nullify.Fill(keeper.GetAllProfessorsExamsUniroma1(ctx)),
 	)
 }

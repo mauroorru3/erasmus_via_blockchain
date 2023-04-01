@@ -17,6 +17,9 @@ import { StoredStudent } from "../universitychainit/stored_student";
 import { UniversityInfo } from "../universitychainit/university_info";
 import { ChainInfo } from "../universitychainit/chain_info";
 import { ForeignUniversities } from "../universitychainit/foreign_universities";
+import { ProfessorsExamsUniroma1 } from "../universitychainit/professors_exams_uniroma_1";
+import { StoredStudentUniroma1 } from "../universitychainit/stored_student_uniroma_1";
+import { UniversityInfoUniroma1 } from "../universitychainit/university_info_uniroma_1";
 
 export const protobufPackage = "university_chain_it.universitychainit";
 
@@ -132,6 +135,46 @@ export interface QueryAllForeignUniversitiesRequest {
 export interface QueryAllForeignUniversitiesResponse {
   foreignUniversities: ForeignUniversities[];
   pagination: PageResponse | undefined;
+}
+
+export interface QueryGetProfessorsExamsUniroma1Request {
+  examName: string;
+}
+
+export interface QueryGetProfessorsExamsUniroma1Response {
+  professorsExamsUniroma1: ProfessorsExamsUniroma1 | undefined;
+}
+
+export interface QueryAllProfessorsExamsUniroma1Request {
+  pagination: PageRequest | undefined;
+}
+
+export interface QueryAllProfessorsExamsUniroma1Response {
+  professorsExamsUniroma1: ProfessorsExamsUniroma1[];
+  pagination: PageResponse | undefined;
+}
+
+export interface QueryGetStoredStudentUniroma1Request {
+  index: string;
+}
+
+export interface QueryGetStoredStudentUniroma1Response {
+  storedStudentUniroma1: StoredStudentUniroma1 | undefined;
+}
+
+export interface QueryAllStoredStudentUniroma1Request {
+  pagination: PageRequest | undefined;
+}
+
+export interface QueryAllStoredStudentUniroma1Response {
+  storedStudentUniroma1: StoredStudentUniroma1[];
+  pagination: PageResponse | undefined;
+}
+
+export interface QueryGetUniversityInfoUniroma1Request {}
+
+export interface QueryGetUniversityInfoUniroma1Response {
+  UniversityInfoUniroma1: UniversityInfoUniroma1 | undefined;
 }
 
 const baseQueryParamsRequest: object = {};
@@ -2382,6 +2425,828 @@ export const QueryAllForeignUniversitiesResponse = {
   },
 };
 
+const baseQueryGetProfessorsExamsUniroma1Request: object = { examName: "" };
+
+export const QueryGetProfessorsExamsUniroma1Request = {
+  encode(
+    message: QueryGetProfessorsExamsUniroma1Request,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.examName !== "") {
+      writer.uint32(10).string(message.examName);
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetProfessorsExamsUniroma1Request {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetProfessorsExamsUniroma1Request,
+    } as QueryGetProfessorsExamsUniroma1Request;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.examName = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetProfessorsExamsUniroma1Request {
+    const message = {
+      ...baseQueryGetProfessorsExamsUniroma1Request,
+    } as QueryGetProfessorsExamsUniroma1Request;
+    if (object.examName !== undefined && object.examName !== null) {
+      message.examName = String(object.examName);
+    } else {
+      message.examName = "";
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetProfessorsExamsUniroma1Request): unknown {
+    const obj: any = {};
+    message.examName !== undefined && (obj.examName = message.examName);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetProfessorsExamsUniroma1Request>
+  ): QueryGetProfessorsExamsUniroma1Request {
+    const message = {
+      ...baseQueryGetProfessorsExamsUniroma1Request,
+    } as QueryGetProfessorsExamsUniroma1Request;
+    if (object.examName !== undefined && object.examName !== null) {
+      message.examName = object.examName;
+    } else {
+      message.examName = "";
+    }
+    return message;
+  },
+};
+
+const baseQueryGetProfessorsExamsUniroma1Response: object = {};
+
+export const QueryGetProfessorsExamsUniroma1Response = {
+  encode(
+    message: QueryGetProfessorsExamsUniroma1Response,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.professorsExamsUniroma1 !== undefined) {
+      ProfessorsExamsUniroma1.encode(
+        message.professorsExamsUniroma1,
+        writer.uint32(10).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetProfessorsExamsUniroma1Response {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetProfessorsExamsUniroma1Response,
+    } as QueryGetProfessorsExamsUniroma1Response;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.professorsExamsUniroma1 = ProfessorsExamsUniroma1.decode(
+            reader,
+            reader.uint32()
+          );
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetProfessorsExamsUniroma1Response {
+    const message = {
+      ...baseQueryGetProfessorsExamsUniroma1Response,
+    } as QueryGetProfessorsExamsUniroma1Response;
+    if (
+      object.professorsExamsUniroma1 !== undefined &&
+      object.professorsExamsUniroma1 !== null
+    ) {
+      message.professorsExamsUniroma1 = ProfessorsExamsUniroma1.fromJSON(
+        object.professorsExamsUniroma1
+      );
+    } else {
+      message.professorsExamsUniroma1 = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetProfessorsExamsUniroma1Response): unknown {
+    const obj: any = {};
+    message.professorsExamsUniroma1 !== undefined &&
+      (obj.professorsExamsUniroma1 = message.professorsExamsUniroma1
+        ? ProfessorsExamsUniroma1.toJSON(message.professorsExamsUniroma1)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetProfessorsExamsUniroma1Response>
+  ): QueryGetProfessorsExamsUniroma1Response {
+    const message = {
+      ...baseQueryGetProfessorsExamsUniroma1Response,
+    } as QueryGetProfessorsExamsUniroma1Response;
+    if (
+      object.professorsExamsUniroma1 !== undefined &&
+      object.professorsExamsUniroma1 !== null
+    ) {
+      message.professorsExamsUniroma1 = ProfessorsExamsUniroma1.fromPartial(
+        object.professorsExamsUniroma1
+      );
+    } else {
+      message.professorsExamsUniroma1 = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllProfessorsExamsUniroma1Request: object = {};
+
+export const QueryAllProfessorsExamsUniroma1Request = {
+  encode(
+    message: QueryAllProfessorsExamsUniroma1Request,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllProfessorsExamsUniroma1Request {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllProfessorsExamsUniroma1Request,
+    } as QueryAllProfessorsExamsUniroma1Request;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllProfessorsExamsUniroma1Request {
+    const message = {
+      ...baseQueryAllProfessorsExamsUniroma1Request,
+    } as QueryAllProfessorsExamsUniroma1Request;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllProfessorsExamsUniroma1Request): unknown {
+    const obj: any = {};
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageRequest.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllProfessorsExamsUniroma1Request>
+  ): QueryAllProfessorsExamsUniroma1Request {
+    const message = {
+      ...baseQueryAllProfessorsExamsUniroma1Request,
+    } as QueryAllProfessorsExamsUniroma1Request;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllProfessorsExamsUniroma1Response: object = {};
+
+export const QueryAllProfessorsExamsUniroma1Response = {
+  encode(
+    message: QueryAllProfessorsExamsUniroma1Response,
+    writer: Writer = Writer.create()
+  ): Writer {
+    for (const v of message.professorsExamsUniroma1) {
+      ProfessorsExamsUniroma1.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(
+        message.pagination,
+        writer.uint32(18).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllProfessorsExamsUniroma1Response {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllProfessorsExamsUniroma1Response,
+    } as QueryAllProfessorsExamsUniroma1Response;
+    message.professorsExamsUniroma1 = [];
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.professorsExamsUniroma1.push(
+            ProfessorsExamsUniroma1.decode(reader, reader.uint32())
+          );
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllProfessorsExamsUniroma1Response {
+    const message = {
+      ...baseQueryAllProfessorsExamsUniroma1Response,
+    } as QueryAllProfessorsExamsUniroma1Response;
+    message.professorsExamsUniroma1 = [];
+    if (
+      object.professorsExamsUniroma1 !== undefined &&
+      object.professorsExamsUniroma1 !== null
+    ) {
+      for (const e of object.professorsExamsUniroma1) {
+        message.professorsExamsUniroma1.push(
+          ProfessorsExamsUniroma1.fromJSON(e)
+        );
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllProfessorsExamsUniroma1Response): unknown {
+    const obj: any = {};
+    if (message.professorsExamsUniroma1) {
+      obj.professorsExamsUniroma1 = message.professorsExamsUniroma1.map((e) =>
+        e ? ProfessorsExamsUniroma1.toJSON(e) : undefined
+      );
+    } else {
+      obj.professorsExamsUniroma1 = [];
+    }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageResponse.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllProfessorsExamsUniroma1Response>
+  ): QueryAllProfessorsExamsUniroma1Response {
+    const message = {
+      ...baseQueryAllProfessorsExamsUniroma1Response,
+    } as QueryAllProfessorsExamsUniroma1Response;
+    message.professorsExamsUniroma1 = [];
+    if (
+      object.professorsExamsUniroma1 !== undefined &&
+      object.professorsExamsUniroma1 !== null
+    ) {
+      for (const e of object.professorsExamsUniroma1) {
+        message.professorsExamsUniroma1.push(
+          ProfessorsExamsUniroma1.fromPartial(e)
+        );
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryGetStoredStudentUniroma1Request: object = { index: "" };
+
+export const QueryGetStoredStudentUniroma1Request = {
+  encode(
+    message: QueryGetStoredStudentUniroma1Request,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.index !== "") {
+      writer.uint32(10).string(message.index);
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetStoredStudentUniroma1Request {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetStoredStudentUniroma1Request,
+    } as QueryGetStoredStudentUniroma1Request;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.index = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetStoredStudentUniroma1Request {
+    const message = {
+      ...baseQueryGetStoredStudentUniroma1Request,
+    } as QueryGetStoredStudentUniroma1Request;
+    if (object.index !== undefined && object.index !== null) {
+      message.index = String(object.index);
+    } else {
+      message.index = "";
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetStoredStudentUniroma1Request): unknown {
+    const obj: any = {};
+    message.index !== undefined && (obj.index = message.index);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetStoredStudentUniroma1Request>
+  ): QueryGetStoredStudentUniroma1Request {
+    const message = {
+      ...baseQueryGetStoredStudentUniroma1Request,
+    } as QueryGetStoredStudentUniroma1Request;
+    if (object.index !== undefined && object.index !== null) {
+      message.index = object.index;
+    } else {
+      message.index = "";
+    }
+    return message;
+  },
+};
+
+const baseQueryGetStoredStudentUniroma1Response: object = {};
+
+export const QueryGetStoredStudentUniroma1Response = {
+  encode(
+    message: QueryGetStoredStudentUniroma1Response,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.storedStudentUniroma1 !== undefined) {
+      StoredStudentUniroma1.encode(
+        message.storedStudentUniroma1,
+        writer.uint32(10).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetStoredStudentUniroma1Response {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetStoredStudentUniroma1Response,
+    } as QueryGetStoredStudentUniroma1Response;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.storedStudentUniroma1 = StoredStudentUniroma1.decode(
+            reader,
+            reader.uint32()
+          );
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetStoredStudentUniroma1Response {
+    const message = {
+      ...baseQueryGetStoredStudentUniroma1Response,
+    } as QueryGetStoredStudentUniroma1Response;
+    if (
+      object.storedStudentUniroma1 !== undefined &&
+      object.storedStudentUniroma1 !== null
+    ) {
+      message.storedStudentUniroma1 = StoredStudentUniroma1.fromJSON(
+        object.storedStudentUniroma1
+      );
+    } else {
+      message.storedStudentUniroma1 = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetStoredStudentUniroma1Response): unknown {
+    const obj: any = {};
+    message.storedStudentUniroma1 !== undefined &&
+      (obj.storedStudentUniroma1 = message.storedStudentUniroma1
+        ? StoredStudentUniroma1.toJSON(message.storedStudentUniroma1)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetStoredStudentUniroma1Response>
+  ): QueryGetStoredStudentUniroma1Response {
+    const message = {
+      ...baseQueryGetStoredStudentUniroma1Response,
+    } as QueryGetStoredStudentUniroma1Response;
+    if (
+      object.storedStudentUniroma1 !== undefined &&
+      object.storedStudentUniroma1 !== null
+    ) {
+      message.storedStudentUniroma1 = StoredStudentUniroma1.fromPartial(
+        object.storedStudentUniroma1
+      );
+    } else {
+      message.storedStudentUniroma1 = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllStoredStudentUniroma1Request: object = {};
+
+export const QueryAllStoredStudentUniroma1Request = {
+  encode(
+    message: QueryAllStoredStudentUniroma1Request,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllStoredStudentUniroma1Request {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllStoredStudentUniroma1Request,
+    } as QueryAllStoredStudentUniroma1Request;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllStoredStudentUniroma1Request {
+    const message = {
+      ...baseQueryAllStoredStudentUniroma1Request,
+    } as QueryAllStoredStudentUniroma1Request;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllStoredStudentUniroma1Request): unknown {
+    const obj: any = {};
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageRequest.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllStoredStudentUniroma1Request>
+  ): QueryAllStoredStudentUniroma1Request {
+    const message = {
+      ...baseQueryAllStoredStudentUniroma1Request,
+    } as QueryAllStoredStudentUniroma1Request;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllStoredStudentUniroma1Response: object = {};
+
+export const QueryAllStoredStudentUniroma1Response = {
+  encode(
+    message: QueryAllStoredStudentUniroma1Response,
+    writer: Writer = Writer.create()
+  ): Writer {
+    for (const v of message.storedStudentUniroma1) {
+      StoredStudentUniroma1.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(
+        message.pagination,
+        writer.uint32(18).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllStoredStudentUniroma1Response {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllStoredStudentUniroma1Response,
+    } as QueryAllStoredStudentUniroma1Response;
+    message.storedStudentUniroma1 = [];
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.storedStudentUniroma1.push(
+            StoredStudentUniroma1.decode(reader, reader.uint32())
+          );
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllStoredStudentUniroma1Response {
+    const message = {
+      ...baseQueryAllStoredStudentUniroma1Response,
+    } as QueryAllStoredStudentUniroma1Response;
+    message.storedStudentUniroma1 = [];
+    if (
+      object.storedStudentUniroma1 !== undefined &&
+      object.storedStudentUniroma1 !== null
+    ) {
+      for (const e of object.storedStudentUniroma1) {
+        message.storedStudentUniroma1.push(StoredStudentUniroma1.fromJSON(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllStoredStudentUniroma1Response): unknown {
+    const obj: any = {};
+    if (message.storedStudentUniroma1) {
+      obj.storedStudentUniroma1 = message.storedStudentUniroma1.map((e) =>
+        e ? StoredStudentUniroma1.toJSON(e) : undefined
+      );
+    } else {
+      obj.storedStudentUniroma1 = [];
+    }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageResponse.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllStoredStudentUniroma1Response>
+  ): QueryAllStoredStudentUniroma1Response {
+    const message = {
+      ...baseQueryAllStoredStudentUniroma1Response,
+    } as QueryAllStoredStudentUniroma1Response;
+    message.storedStudentUniroma1 = [];
+    if (
+      object.storedStudentUniroma1 !== undefined &&
+      object.storedStudentUniroma1 !== null
+    ) {
+      for (const e of object.storedStudentUniroma1) {
+        message.storedStudentUniroma1.push(
+          StoredStudentUniroma1.fromPartial(e)
+        );
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryGetUniversityInfoUniroma1Request: object = {};
+
+export const QueryGetUniversityInfoUniroma1Request = {
+  encode(
+    _: QueryGetUniversityInfoUniroma1Request,
+    writer: Writer = Writer.create()
+  ): Writer {
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetUniversityInfoUniroma1Request {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetUniversityInfoUniroma1Request,
+    } as QueryGetUniversityInfoUniroma1Request;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): QueryGetUniversityInfoUniroma1Request {
+    const message = {
+      ...baseQueryGetUniversityInfoUniroma1Request,
+    } as QueryGetUniversityInfoUniroma1Request;
+    return message;
+  },
+
+  toJSON(_: QueryGetUniversityInfoUniroma1Request): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial(
+    _: DeepPartial<QueryGetUniversityInfoUniroma1Request>
+  ): QueryGetUniversityInfoUniroma1Request {
+    const message = {
+      ...baseQueryGetUniversityInfoUniroma1Request,
+    } as QueryGetUniversityInfoUniroma1Request;
+    return message;
+  },
+};
+
+const baseQueryGetUniversityInfoUniroma1Response: object = {};
+
+export const QueryGetUniversityInfoUniroma1Response = {
+  encode(
+    message: QueryGetUniversityInfoUniroma1Response,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.UniversityInfoUniroma1 !== undefined) {
+      UniversityInfoUniroma1.encode(
+        message.UniversityInfoUniroma1,
+        writer.uint32(10).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetUniversityInfoUniroma1Response {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetUniversityInfoUniroma1Response,
+    } as QueryGetUniversityInfoUniroma1Response;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.UniversityInfoUniroma1 = UniversityInfoUniroma1.decode(
+            reader,
+            reader.uint32()
+          );
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetUniversityInfoUniroma1Response {
+    const message = {
+      ...baseQueryGetUniversityInfoUniroma1Response,
+    } as QueryGetUniversityInfoUniroma1Response;
+    if (
+      object.UniversityInfoUniroma1 !== undefined &&
+      object.UniversityInfoUniroma1 !== null
+    ) {
+      message.UniversityInfoUniroma1 = UniversityInfoUniroma1.fromJSON(
+        object.UniversityInfoUniroma1
+      );
+    } else {
+      message.UniversityInfoUniroma1 = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetUniversityInfoUniroma1Response): unknown {
+    const obj: any = {};
+    message.UniversityInfoUniroma1 !== undefined &&
+      (obj.UniversityInfoUniroma1 = message.UniversityInfoUniroma1
+        ? UniversityInfoUniroma1.toJSON(message.UniversityInfoUniroma1)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetUniversityInfoUniroma1Response>
+  ): QueryGetUniversityInfoUniroma1Response {
+    const message = {
+      ...baseQueryGetUniversityInfoUniroma1Response,
+    } as QueryGetUniversityInfoUniroma1Response;
+    if (
+      object.UniversityInfoUniroma1 !== undefined &&
+      object.UniversityInfoUniroma1 !== null
+    ) {
+      message.UniversityInfoUniroma1 = UniversityInfoUniroma1.fromPartial(
+        object.UniversityInfoUniroma1
+      );
+    } else {
+      message.UniversityInfoUniroma1 = undefined;
+    }
+    return message;
+  },
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Parameters queries the parameters of the module. */
@@ -2446,6 +3311,26 @@ export interface Query {
   ForeignUniversitiesAll(
     request: QueryAllForeignUniversitiesRequest
   ): Promise<QueryAllForeignUniversitiesResponse>;
+  /** Queries a ProfessorsExamsUniroma1 by index. */
+  ProfessorsExamsUniroma1(
+    request: QueryGetProfessorsExamsUniroma1Request
+  ): Promise<QueryGetProfessorsExamsUniroma1Response>;
+  /** Queries a list of ProfessorsExamsUniroma1 items. */
+  ProfessorsExamsUniroma1All(
+    request: QueryAllProfessorsExamsUniroma1Request
+  ): Promise<QueryAllProfessorsExamsUniroma1Response>;
+  /** Queries a StoredStudentUniroma1 by index. */
+  StoredStudentUniroma1(
+    request: QueryGetStoredStudentUniroma1Request
+  ): Promise<QueryGetStoredStudentUniroma1Response>;
+  /** Queries a list of StoredStudentUniroma1 items. */
+  StoredStudentUniroma1All(
+    request: QueryAllStoredStudentUniroma1Request
+  ): Promise<QueryAllStoredStudentUniroma1Response>;
+  /** Queries a UniversityInfoUniroma1 by index. */
+  UniversityInfoUniroma1(
+    request: QueryGetUniversityInfoUniroma1Request
+  ): Promise<QueryGetUniversityInfoUniroma1Response>;
 }
 
 export class QueryClientImpl implements Query {
@@ -2670,6 +3555,80 @@ export class QueryClientImpl implements Query {
     );
     return promise.then((data) =>
       QueryAllForeignUniversitiesResponse.decode(new Reader(data))
+    );
+  }
+
+  ProfessorsExamsUniroma1(
+    request: QueryGetProfessorsExamsUniroma1Request
+  ): Promise<QueryGetProfessorsExamsUniroma1Response> {
+    const data = QueryGetProfessorsExamsUniroma1Request.encode(
+      request
+    ).finish();
+    const promise = this.rpc.request(
+      "university_chain_it.universitychainit.Query",
+      "ProfessorsExamsUniroma1",
+      data
+    );
+    return promise.then((data) =>
+      QueryGetProfessorsExamsUniroma1Response.decode(new Reader(data))
+    );
+  }
+
+  ProfessorsExamsUniroma1All(
+    request: QueryAllProfessorsExamsUniroma1Request
+  ): Promise<QueryAllProfessorsExamsUniroma1Response> {
+    const data = QueryAllProfessorsExamsUniroma1Request.encode(
+      request
+    ).finish();
+    const promise = this.rpc.request(
+      "university_chain_it.universitychainit.Query",
+      "ProfessorsExamsUniroma1All",
+      data
+    );
+    return promise.then((data) =>
+      QueryAllProfessorsExamsUniroma1Response.decode(new Reader(data))
+    );
+  }
+
+  StoredStudentUniroma1(
+    request: QueryGetStoredStudentUniroma1Request
+  ): Promise<QueryGetStoredStudentUniroma1Response> {
+    const data = QueryGetStoredStudentUniroma1Request.encode(request).finish();
+    const promise = this.rpc.request(
+      "university_chain_it.universitychainit.Query",
+      "StoredStudentUniroma1",
+      data
+    );
+    return promise.then((data) =>
+      QueryGetStoredStudentUniroma1Response.decode(new Reader(data))
+    );
+  }
+
+  StoredStudentUniroma1All(
+    request: QueryAllStoredStudentUniroma1Request
+  ): Promise<QueryAllStoredStudentUniroma1Response> {
+    const data = QueryAllStoredStudentUniroma1Request.encode(request).finish();
+    const promise = this.rpc.request(
+      "university_chain_it.universitychainit.Query",
+      "StoredStudentUniroma1All",
+      data
+    );
+    return promise.then((data) =>
+      QueryAllStoredStudentUniroma1Response.decode(new Reader(data))
+    );
+  }
+
+  UniversityInfoUniroma1(
+    request: QueryGetUniversityInfoUniroma1Request
+  ): Promise<QueryGetUniversityInfoUniroma1Response> {
+    const data = QueryGetUniversityInfoUniroma1Request.encode(request).finish();
+    const promise = this.rpc.request(
+      "university_chain_it.universitychainit.Query",
+      "UniversityInfoUniroma1",
+      data
+    );
+    return promise.then((data) =>
+      QueryGetUniversityInfoUniroma1Response.decode(new Reader(data))
     );
   }
 }

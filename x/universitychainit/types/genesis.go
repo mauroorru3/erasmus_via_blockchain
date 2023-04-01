@@ -35,7 +35,10 @@ func DefaultGenesis() *GenesisState {
 			Country:               "",
 			InitStatus:            false,
 		},
-		ForeignUniversitiesList: []ForeignUniversities{},
+		ForeignUniversitiesList:     []ForeignUniversities{},
+		ProfessorsExamsUniroma1List: []ProfessorsExamsUniroma1{},
+		StoredStudentUniroma1List:   []StoredStudentUniroma1{},
+		UniversityInfoUniroma1:      nil,
 		// this line is used by starport scaffolding # genesis/types/default
 		Params: DefaultParams(),
 	}
@@ -76,6 +79,26 @@ func (gs GenesisState) Validate() error {
 			return fmt.Errorf("duplicated index for foreignUniversities")
 		}
 		foreignUniversitiesIndexMap[index] = struct{}{}
+	}
+	// Check for duplicated index in professorsExamsUniroma1
+	professorsExamsUniroma1IndexMap := make(map[string]struct{})
+
+	for _, elem := range gs.ProfessorsExamsUniroma1List {
+		index := string(ProfessorsExamsUniroma1Key(elem.ExamName))
+		if _, ok := professorsExamsUniroma1IndexMap[index]; ok {
+			return fmt.Errorf("duplicated index for professorsExamsUniroma1")
+		}
+		professorsExamsUniroma1IndexMap[index] = struct{}{}
+	}
+	// Check for duplicated index in storedStudentUniroma1
+	storedStudentUniroma1IndexMap := make(map[string]struct{})
+
+	for _, elem := range gs.StoredStudentUniroma1List {
+		index := string(StoredStudentUniroma1Key(elem.Index))
+		if _, ok := storedStudentUniroma1IndexMap[index]; ok {
+			return fmt.Errorf("duplicated index for storedStudentUniroma1")
+		}
+		storedStudentUniroma1IndexMap[index] = struct{}{}
 	}
 	// this line is used by starport scaffolding # genesis/types/validate
 
