@@ -14,10 +14,9 @@ import "universitychainit/chain_info.proto";
 import "universitychainit/foreign_universities.proto";
 import "universitychainit/professors_exams_uniroma_1.proto";
 import "universitychainit/stored_student_uniroma_1.proto";
-import "universitychainit/university_info_uniroma_1.proto";
 import "universitychainit/professors_exams_unipi.proto";
 import "universitychainit/stored_student_unipi.proto";
-import "universitychainit/university_info_unipi.proto";
+import "universitychainit/university_info.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 
 option go_package = "university_chain_it/x/universitychainit/types";
@@ -37,9 +36,8 @@ message GenesisState {
   repeated ForeignUniversities foreignUniversitiesList = 11 [(gogoproto.nullable) = false];
   repeated ProfessorsExamsUniroma1 professorsExamsUniroma1List = 12 [(gogoproto.nullable) = false];
   repeated StoredStudentUniroma1 storedStudentUniroma1List = 13 [(gogoproto.nullable) = false];
-  UniversityInfoUniroma1 universityInfoUniroma1 = 14;
-  repeated ProfessorsExamsUnipi professorsExamsUnipiList = 15 [(gogoproto.nullable) = false];
-  repeated StoredStudentUnipi storedStudentUnipiList = 16 [(gogoproto.nullable) = false];
-  UniversityInfoUnipi universityInfoUnipi = 17;
+  repeated ProfessorsExamsUnipi professorsExamsUnipiList = 14 [(gogoproto.nullable) = false];
+  repeated StoredStudentUnipi storedStudentUnipiList = 15 [(gogoproto.nullable) = false];
+  repeated UniversityInfo universityInfoList = 16 [(gogoproto.nullable) = false];
   // this line is used by starport scaffolding # genesis/proto/state
 }

@@ -5,12 +5,12 @@ import "encoding/binary"
 var _ binary.ByteOrder
 
 const (
-	// UniversityDetailsKeyPrefix is the prefix to retrieve all UniversityDetails
-	UniversityDetailsKeyPrefix = "UniversityDetails/value/"
+	// UniversityInfoKeyPrefix is the prefix to retrieve all UniversityInfo
+	UniversityInfoKeyPrefix = "UniversityInfo/value/"
 )
 
-// UniversityDetailsKey returns the store key to retrieve a UniversityDetails from the index fields
-func UniversityDetailsKey(
+// UniversityInfoKey returns the store key to retrieve a UniversityInfo from the index fields
+func UniversityInfoKey(
 	universityName string,
 ) []byte {
 	var key []byte

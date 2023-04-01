@@ -58,7 +58,8 @@ func (k msgServer) ConfigureChain(goCtx context.Context, msg *types.MsgConfigure
 
 				switch universityInfoList[i].Name {
 				case "unipi":
-					k.Keeper.SetUniversityInfoUnipi(ctx, types.UniversityInfoUnipi{
+					k.Keeper.SetUniversityInfo(ctx, types.UniversityInfo{
+						UniversityName:  "unipi",
 						NextStudentId:   1,
 						SecretariatKey:  universityInfoList[i].Secretariat_key,
 						UniversityKey:   universityInfoList[i].University_key,
@@ -110,7 +111,8 @@ func (k msgServer) ConfigureChain(goCtx context.Context, msg *types.MsgConfigure
 					}
 
 				case "uniroma1":
-					k.Keeper.SetUniversityInfoUniroma1(ctx, types.UniversityInfoUniroma1{
+					k.Keeper.SetUniversityInfo(ctx, types.UniversityInfo{
+						UniversityName:  "uniroma1",
 						NextStudentId:   1,
 						SecretariatKey:  universityInfoList[i].Secretariat_key,
 						UniversityKey:   universityInfoList[i].University_key,

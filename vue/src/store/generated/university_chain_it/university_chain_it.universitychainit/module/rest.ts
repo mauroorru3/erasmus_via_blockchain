@@ -174,6 +174,21 @@ export interface UniversitychainitQueryAllStoredStudentUniroma1Response {
   pagination?: V1Beta1PageResponse;
 }
 
+export interface UniversitychainitQueryAllUniversityInfoResponse {
+  universityInfo?: UniversitychainitUniversityInfo[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
+
 export interface UniversitychainitQueryGetChainInfoResponse {
   ChainInfo?: UniversitychainitChainInfo;
 }
@@ -226,12 +241,8 @@ export interface UniversitychainitQueryGetTranscriptOfRecordsResponse {
   TranscriptOfRecords?: UniversitychainitTranscriptOfRecords;
 }
 
-export interface UniversitychainitQueryGetUniversityInfoUnipiResponse {
-  UniversityInfoUnipi?: UniversitychainitUniversityInfoUnipi;
-}
-
-export interface UniversitychainitQueryGetUniversityInfoUniroma1Response {
-  UniversityInfoUniroma1?: UniversitychainitUniversityInfoUniroma1;
+export interface UniversitychainitQueryGetUniversityInfoResponse {
+  universityInfo?: UniversitychainitUniversityInfo;
 }
 
 /**
@@ -318,19 +329,9 @@ export interface UniversitychainitTranscriptOfRecords {
   achievedCredits?: string;
 }
 
-export interface UniversitychainitUniversityInfoUnipi {
-  /** @format uint64 */
-  nextStudentId?: string;
-  secretariatKey?: string;
-  universityKey?: string;
-  caiKey?: string;
-  fifoHeadErasmus?: string;
-  fifoTailErasmus?: string;
-  deadlineTaxes?: string;
-  deadlineErasmus?: string;
-}
+export interface UniversitychainitUniversityInfo {
+  universityName?: string;
 
-export interface UniversitychainitUniversityInfoUniroma1 {
   /** @format uint64 */
   nextStudentId?: string;
   secretariatKey?: string;
@@ -959,14 +960,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    * No description
    *
    * @tags Query
-   * @name QueryUniversityInfoUnipi
-   * @summary Queries a UniversityInfoUnipi by index.
-   * @request GET:/university_chain_it/universitychainit/university_info_unipi
+   * @name QueryUniversityInfoAll
+   * @summary Queries a list of UniversityInfo items.
+   * @request GET:/university_chain_it/universitychainit/university_info
    */
-  queryUniversityInfoUnipi = (params: RequestParams = {}) =>
-    this.request<UniversitychainitQueryGetUniversityInfoUnipiResponse, RpcStatus>({
-      path: `/university_chain_it/universitychainit/university_info_unipi`,
+  queryUniversityInfoAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<UniversitychainitQueryAllUniversityInfoResponse, RpcStatus>({
+      path: `/university_chain_it/universitychainit/university_info`,
       method: "GET",
+      query: query,
       format: "json",
       ...params,
     });
@@ -975,13 +986,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    * No description
    *
    * @tags Query
-   * @name QueryUniversityInfoUniroma1
-   * @summary Queries a UniversityInfoUniroma1 by index.
-   * @request GET:/university_chain_it/universitychainit/university_info_uniroma_1
+   * @name QueryUniversityInfo
+   * @summary Queries a UniversityInfo by index.
+   * @request GET:/university_chain_it/universitychainit/university_info/{universityName}
    */
-  queryUniversityInfoUniroma1 = (params: RequestParams = {}) =>
-    this.request<UniversitychainitQueryGetUniversityInfoUniroma1Response, RpcStatus>({
-      path: `/university_chain_it/universitychainit/university_info_uniroma_1`,
+  queryUniversityInfo = (universityName: string, params: RequestParams = {}) =>
+    this.request<UniversitychainitQueryGetUniversityInfoResponse, RpcStatus>({
+      path: `/university_chain_it/universitychainit/university_info/${universityName}`,
       method: "GET",
       format: "json",
       ...params,

@@ -75,17 +75,5 @@ const (
 )
 
 const (
-	UniversityInfoKey = "UniversityInfo-value-"
-)
-
-const (
 	ChainInfoKey = "ChainInfo-value-"
-)
-
-const (
-	UniversityInfoUniroma1Key = "UniversityInfoUniroma1-value-"
-)
-
-const (
-	UniversityInfoUnipiKey = "UniversityInfoUnipi-value-"
 )

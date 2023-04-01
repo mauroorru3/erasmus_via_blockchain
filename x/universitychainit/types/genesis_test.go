@@ -110,16 +110,6 @@ func TestGenesisState_Validate(t *testing.T) {
 						Index: "1",
 					},
 				},
-				UniversityInfoUniroma1: &types.UniversityInfoUniroma1{
-					NextStudentId:   71,
-					SecretariatKey:  "60",
-					UniversityKey:   "61",
-					CaiKey:          "4",
-					FifoHeadErasmus: "22",
-					FifoTailErasmus: "49",
-					DeadlineTaxes:   "34",
-					DeadlineErasmus: "97",
-				},
 				ProfessorsExamsUnipiList: []types.ProfessorsExamsUnipi{
 					{
 						ExamName: "0",
@@ -136,15 +126,13 @@ func TestGenesisState_Validate(t *testing.T) {
 						Index: "1",
 					},
 				},
-				UniversityInfoUnipi: &types.UniversityInfoUnipi{
-					NextStudentId:   97,
-					SecretariatKey:  "46",
-					UniversityKey:   "57",
-					CaiKey:          "24",
-					FifoHeadErasmus: "93",
-					FifoTailErasmus: "14",
-					DeadlineTaxes:   "8",
-					DeadlineErasmus: "91",
+				UniversityInfoList: []types.UniversityInfo{
+					{
+						UniversityName: "0",
+					},
+					{
+						UniversityName: "1",
+					},
 				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
@@ -220,6 +208,20 @@ func TestGenesisState_Validate(t *testing.T) {
 			},
 			valid: false,
 		},
+		{
+			desc: "duplicated universityInfo",
+			genState: &types.GenesisState{
+				UniversityInfoList: []types.UniversityInfo{
+					{
+						UniversityName: "0",
+					},
+					{
+						UniversityName: "0",
+					},
+				},
+			},
+			valid: false,
+		},
 		// this line is used by starport scaffolding # types/genesis/testcase
 	} {
 		t.Run(tc.desc, func(t *testing.T) {
@@ -254,10 +256,9 @@ func TestDefaultGenesisState_ExpectedInitialValues(t *testing.T) {
 			ForeignUniversitiesList:     []types.ForeignUniversities{},
 			ProfessorsExamsUniroma1List: []types.ProfessorsExamsUniroma1{},
 			StoredStudentUniroma1List:   []types.StoredStudentUniroma1{},
-			UniversityInfoUniroma1:      nil,
 			ProfessorsExamsUnipiList:    []types.ProfessorsExamsUnipi{},
 			StoredStudentUnipiList:      []types.StoredStudentUnipi{},
-			UniversityInfoUnipi:         nil,
+			UniversityInfoList:          []types.UniversityInfo{},
 			Params:                      types.DefaultParams(),
 		},
 		types.DefaultGenesis())

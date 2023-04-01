@@ -9,10 +9,9 @@ import "universitychainit/chain_info.proto";
 import "universitychainit/foreign_universities.proto";
 import "universitychainit/professors_exams_uniroma_1.proto";
 import "universitychainit/stored_student_uniroma_1.proto";
-import "universitychainit/university_info_uniroma_1.proto";
 import "universitychainit/professors_exams_unipi.proto";
 import "universitychainit/stored_student_unipi.proto";
-import "universitychainit/university_info_unipi.proto";
+import "universitychainit/university_info.proto";
 // this line is used by starport scaffolding # 1
 import "universitychainit/erasmus_info.proto";
 import "universitychainit/taxes_info.proto";
@@ -96,11 +95,7 @@ service Query {
 	rpc StoredStudentUniroma1All(QueryAllStoredStudentUniroma1Request) returns (QueryAllStoredStudentUniroma1Response) {
 		option (google.api.http).get = "/university_chain_it/universitychainit/stored_student_uniroma_1";
 	}
-
-// Queries a UniversityInfoUniroma1 by index.
-	rpc UniversityInfoUniroma1(QueryGetUniversityInfoUniroma1Request) returns (QueryGetUniversityInfoUniroma1Response) {
-		option (google.api.http).get = "/university_chain_it/universitychainit/university_info_uniroma_1";
-	}
+	
 // Queries a ProfessorsExamsUnipi by index.
 	rpc ProfessorsExamsUnipi(QueryGetProfessorsExamsUnipiRequest) returns (QueryGetProfessorsExamsUnipiResponse) {
 		option (google.api.http).get = "/university_chain_it/universitychainit/professors_exams_unipi/{examName}";
@@ -121,10 +116,16 @@ service Query {
 		option (google.api.http).get = "/university_chain_it/universitychainit/stored_student_unipi";
 	}
 
-// Queries a UniversityInfoUnipi by index.
-	rpc UniversityInfoUnipi(QueryGetUniversityInfoUnipiRequest) returns (QueryGetUniversityInfoUnipiResponse) {
-		option (google.api.http).get = "/university_chain_it/universitychainit/university_info_unipi";
+// Queries a UniversityInfo by index.
+	rpc UniversityInfo(QueryGetUniversityInfoRequest) returns (QueryGetUniversityInfoResponse) {
+		option (google.api.http).get = "/university_chain_it/universitychainit/university_info/{universityName}";
 	}
+
+	// Queries a list of UniversityInfo items.
+	rpc UniversityInfoAll(QueryAllUniversityInfoRequest) returns (QueryAllUniversityInfoResponse) {
+		option (google.api.http).get = "/university_chain_it/universitychainit/university_info";
+	}
+
 // this line is used by starport scaffolding # 2
 }
 
@@ -240,11 +241,6 @@ message QueryAllStoredStudentUniroma1Response {
 	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
-message QueryGetUniversityInfoUniroma1Request {}
-
-message QueryGetUniversityInfoUniroma1Response {
-	UniversityInfoUniroma1 UniversityInfoUniroma1 = 1 [(gogoproto.nullable) = false];
-}
 message QueryGetProfessorsExamsUnipiRequest {
 	  string examName = 1;
 
@@ -281,9 +277,22 @@ message QueryAllStoredStudentUnipiResponse {
 	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
-message QueryGetUniversityInfoUnipiRequest {}
+message QueryGetUniversityInfoRequest {
+	  string universityName = 1;
 
-message QueryGetUniversityInfoUnipiResponse {
-	UniversityInfoUnipi UniversityInfoUnipi = 1 [(gogoproto.nullable) = false];
 }
+
+message QueryGetUniversityInfoResponse {
+	UniversityInfo universityInfo = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllUniversityInfoRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllUniversityInfoResponse {
+	repeated UniversityInfo universityInfo = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
 // this line is used by starport scaffolding # 3

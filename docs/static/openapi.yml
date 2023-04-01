@@ -31203,36 +31203,67 @@ paths:
                   additionalProperties: {}
       tags:
         - Query
-  /university_chain_it/universitychainit/university_info_unipi:
+  /university_chain_it/universitychainit/university_info:
     get:
-      summary: Queries a UniversityInfoUnipi by index.
-      operationId: UniversityChainItUniversitychainitUniversityInfoUnipi
+      summary: Queries a list of UniversityInfo items.
+      operationId: UniversityChainItUniversitychainitUniversityInfoAll
       responses:
         '200':
           description: A successful response.
           schema:
             type: object
             properties:
-              UniversityInfoUnipi:
+              universityInfo:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    universityName:
+                      type: string
+                    nextStudentId:
+                      type: string
+                      format: uint64
+                    secretariatKey:
+                      type: string
+                    universityKey:
+                      type: string
+                    caiKey:
+                      type: string
+                    fifoHeadErasmus:
+                      type: string
+                    fifoTailErasmus:
+                      type: string
+                    deadlineTaxes:
+                      type: string
+                    deadlineErasmus:
+                      type: string
+              pagination:
                 type: object
                 properties:
-                  nextStudentId:
+                  next_key:
+                    type: string
+                    format: byte
+                    title: |-
+                      next_key is the key to be passed to PageRequest.key to
+                      query the next page most efficiently
+                  total:
                     type: string
                     format: uint64
-                  secretariatKey:
-                    type: string
-                  universityKey:
-                    type: string
-                  caiKey:
-                    type: string
-                  fifoHeadErasmus:
-                    type: string
-                  fifoTailErasmus:
-                    type: string
-                  deadlineTaxes:
-                    type: string
-                  deadlineErasmus:
-                    type: string
+                    title: >-
+                      total is total number of results available if
+                      PageRequest.count_total
+
+                      was set, its value is undefined otherwise
+                description: >-
+                  PageResponse is to be embedded in gRPC response messages where
+                  the
+
+                  corresponding request message has used PageRequest.
+
+                   message SomeResponse {
+                           repeated Bar results = 1;
+                           PageResponse page = 2;
+                   }
         default:
           description: An unexpected error response.
           schema:
@@ -31251,21 +31282,80 @@ paths:
                     '@type':
                       type: string
                   additionalProperties: {}
+      parameters:
+        - name: pagination.key
+          description: |-
+            key is a value returned in PageResponse.next_key to begin
+            querying the next page most efficiently. Only one of offset or key
+            should be set.
+          in: query
+          required: false
+          type: string
+          format: byte
+        - name: pagination.offset
+          description: >-
+            offset is a numeric offset that can be used when key is unavailable.
+
+            It is less efficient than using key. Only one of offset or key
+            should
+
+            be set.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.limit
+          description: >-
+            limit is the total number of results to be returned in the result
+            page.
+
+            If left empty it will default to a value to be set by each app.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.count_total
+          description: >-
+            count_total is set to true  to indicate that the result set should
+            include
+
+            a count of the total number of items available for pagination in
+            UIs.
+
+            count_total is only respected when offset is used. It is ignored
+            when key
+
+            is set.
+          in: query
+          required: false
+          type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
+          in: query
+          required: false
+          type: boolean
       tags:
         - Query
-  /university_chain_it/universitychainit/university_info_uniroma_1:
+  '/university_chain_it/universitychainit/university_info/{universityName}':
     get:
-      summary: Queries a UniversityInfoUniroma1 by index.
-      operationId: UniversityChainItUniversitychainitUniversityInfoUniroma1
+      summary: Queries a UniversityInfo by index.
+      operationId: UniversityChainItUniversitychainitUniversityInfo
       responses:
         '200':
           description: A successful response.
           schema:
             type: object
             properties:
-              UniversityInfoUniroma1:
+              universityInfo:
                 type: object
                 properties:
+                  universityName:
+                    type: string
                   nextStudentId:
                     type: string
                     format: uint64
@@ -31301,6 +31391,11 @@ paths:
                     '@type':
                       type: string
                   additionalProperties: {}
+      parameters:
+        - name: universityName
+          in: path
+          required: true
+          type: string
       tags:
         - Query
 definitions:
@@ -51836,6 +51931,58 @@ definitions:
                    repeated Bar results = 1;
                    PageResponse page = 2;
            }
+  university_chain_it.universitychainit.QueryAllUniversityInfoResponse:
+    type: object
+    properties:
+      universityInfo:
+        type: array
+        items:
+          type: object
+          properties:
+            universityName:
+              type: string
+            nextStudentId:
+              type: string
+              format: uint64
+            secretariatKey:
+              type: string
+            universityKey:
+              type: string
+            caiKey:
+              type: string
+            fifoHeadErasmus:
+              type: string
+            fifoTailErasmus:
+              type: string
+            deadlineTaxes:
+              type: string
+            deadlineErasmus:
+              type: string
+      pagination:
+        type: object
+        properties:
+          next_key:
+            type: string
+            format: byte
+            title: |-
+              next_key is the key to be passed to PageRequest.key to
+              query the next page most efficiently
+          total:
+            type: string
+            format: uint64
+            title: >-
+              total is total number of results available if
+              PageRequest.count_total
+
+              was set, its value is undefined otherwise
+        description: |-
+          PageResponse is to be embedded in gRPC response messages where the
+          corresponding request message has used PageRequest.
+
+           message SomeResponse {
+                   repeated Bar results = 1;
+                   PageResponse page = 2;
+           }
   university_chain_it.universitychainit.QueryGetChainInfoResponse:
     type: object
     properties:
@@ -52302,35 +52449,14 @@ definitions:
           achievedCredits:
             type: string
             format: uint64
-  university_chain_it.universitychainit.QueryGetUniversityInfoUnipiResponse:
+  university_chain_it.universitychainit.QueryGetUniversityInfoResponse:
     type: object
     properties:
-      UniversityInfoUnipi:
+      universityInfo:
         type: object
         properties:
-          nextStudentId:
+          universityName:
             type: string
-            format: uint64
-          secretariatKey:
-            type: string
-          universityKey:
-            type: string
-          caiKey:
-            type: string
-          fifoHeadErasmus:
-            type: string
-          fifoTailErasmus:
-            type: string
-          deadlineTaxes:
-            type: string
-          deadlineErasmus:
-            type: string
-  university_chain_it.universitychainit.QueryGetUniversityInfoUniroma1Response:
-    type: object
-    properties:
-      UniversityInfoUniroma1:
-        type: object
-        properties:
           nextStudentId:
             type: string
             format: uint64
@@ -52684,29 +52810,11 @@ definitions:
       achievedCredits:
         type: string
         format: uint64
-  university_chain_it.universitychainit.UniversityInfoUnipi:
+  university_chain_it.universitychainit.UniversityInfo:
     type: object
     properties:
-      nextStudentId:
+      universityName:
         type: string
-        format: uint64
-      secretariatKey:
-        type: string
-      universityKey:
-        type: string
-      caiKey:
-        type: string
-      fifoHeadErasmus:
-        type: string
-      fifoTailErasmus:
-        type: string
-      deadlineTaxes:
-        type: string
-      deadlineErasmus:
-        type: string
-  university_chain_it.universitychainit.UniversityInfoUniroma1:
-    type: object
-    properties:
       nextStudentId:
         type: string
         format: uint64

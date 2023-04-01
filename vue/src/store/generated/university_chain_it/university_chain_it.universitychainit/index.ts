@@ -17,11 +17,10 @@ import { StoredStudentUniroma1 } from "./module/types/universitychainit/stored_s
 import { StudentInfo } from "./module/types/universitychainit/student_info"
 import { TaxesInfo } from "./module/types/universitychainit/taxes_info"
 import { TranscriptOfRecords } from "./module/types/universitychainit/transcript_of_records"
-import { UniversityInfoUnipi } from "./module/types/universitychainit/university_info_unipi"
-import { UniversityInfoUniroma1 } from "./module/types/universitychainit/university_info_uniroma_1"
+import { UniversityInfo } from "./module/types/universitychainit/university_info"
 
 
-export { ChainInfo, ContactInfo, ErasmusInfo, ForeignUniversities, UniversitychainitPacketData, NoData, Params, PersonalInfo, ProfessorsExamsUnipi, ProfessorsExamsUniroma1, QueryGetProfessorsExamsRequest, ResidenceInfo, StoredStudentUnipi, StoredStudentUniroma1, StudentInfo, TaxesInfo, TranscriptOfRecords, UniversityInfoUnipi, UniversityInfoUniroma1 };
+export { ChainInfo, ContactInfo, ErasmusInfo, ForeignUniversities, UniversitychainitPacketData, NoData, Params, PersonalInfo, ProfessorsExamsUnipi, ProfessorsExamsUniroma1, QueryGetProfessorsExamsRequest, ResidenceInfo, StoredStudentUnipi, StoredStudentUniroma1, StudentInfo, TaxesInfo, TranscriptOfRecords, UniversityInfo };
 
 async function initTxClient(vuexGetters) {
 	return await txClient(vuexGetters['common/wallet/signer'], {
@@ -74,12 +73,12 @@ const getDefaultState = () => {
 				ProfessorsExamsUniroma1All: {},
 				StoredStudentUniroma1: {},
 				StoredStudentUniroma1All: {},
-				UniversityInfoUniroma1: {},
 				ProfessorsExamsUnipi: {},
 				ProfessorsExamsUnipiAll: {},
 				StoredStudentUnipi: {},
 				StoredStudentUnipiAll: {},
-				UniversityInfoUnipi: {},
+				UniversityInfo: {},
+				UniversityInfoAll: {},
 				
 				_Structure: {
 						ChainInfo: getStructure(ChainInfo.fromPartial({})),
@@ -99,8 +98,7 @@ const getDefaultState = () => {
 						StudentInfo: getStructure(StudentInfo.fromPartial({})),
 						TaxesInfo: getStructure(TaxesInfo.fromPartial({})),
 						TranscriptOfRecords: getStructure(TranscriptOfRecords.fromPartial({})),
-						UniversityInfoUnipi: getStructure(UniversityInfoUnipi.fromPartial({})),
-						UniversityInfoUniroma1: getStructure(UniversityInfoUniroma1.fromPartial({})),
+						UniversityInfo: getStructure(UniversityInfo.fromPartial({})),
 						
 		},
 		_Registry: registry,
@@ -219,12 +217,6 @@ export default {
 					}
 			return state.StoredStudentUniroma1All[JSON.stringify(params)] ?? {}
 		},
-				getUniversityInfoUniroma1: (state) => (params = { params: {}}) => {
-					if (!(<any> params).query) {
-						(<any> params).query=null
-					}
-			return state.UniversityInfoUniroma1[JSON.stringify(params)] ?? {}
-		},
 				getProfessorsExamsUnipi: (state) => (params = { params: {}}) => {
 					if (!(<any> params).query) {
 						(<any> params).query=null
@@ -249,11 +241,17 @@ export default {
 					}
 			return state.StoredStudentUnipiAll[JSON.stringify(params)] ?? {}
 		},
-				getUniversityInfoUnipi: (state) => (params = { params: {}}) => {
+				getUniversityInfo: (state) => (params = { params: {}}) => {
 					if (!(<any> params).query) {
 						(<any> params).query=null
 					}
-			return state.UniversityInfoUnipi[JSON.stringify(params)] ?? {}
+			return state.UniversityInfo[JSON.stringify(params)] ?? {}
+		},
+				getUniversityInfoAll: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.UniversityInfoAll[JSON.stringify(params)] ?? {}
 		},
 				
 		getTypeStructure: (state) => (type) => {
@@ -636,28 +634,6 @@ export default {
 		 		
 		
 		
-		async QueryUniversityInfoUniroma1({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
-			try {
-				const key = params ?? {};
-				const queryClient=await initQueryClient(rootGetters)
-				let value= (await queryClient.queryUniversityInfoUniroma1()).data
-				
-					
-				commit('QUERY', { query: 'UniversityInfoUniroma1', key: { params: {...key}, query}, value })
-				if (subscribe) commit('SUBSCRIBE', { action: 'QueryUniversityInfoUniroma1', payload: { options: { all }, params: {...key},query }})
-				return getters['getUniversityInfoUniroma1']( { params: {...key}, query}) ?? {}
-			} catch (e) {
-				throw new Error('QueryClient:QueryUniversityInfoUniroma1 API Node Unavailable. Could not perform query: ' + e.message)
-				
-			}
-		},
-		
-		
-		
-		
-		 		
-		
-		
 		async QueryProfessorsExamsUnipi({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
 			try {
 				const key = params ?? {};
@@ -754,18 +730,44 @@ export default {
 		 		
 		
 		
-		async QueryUniversityInfoUnipi({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+		async QueryUniversityInfo({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
 			try {
 				const key = params ?? {};
 				const queryClient=await initQueryClient(rootGetters)
-				let value= (await queryClient.queryUniversityInfoUnipi()).data
+				let value= (await queryClient.queryUniversityInfo( key.universityName)).data
 				
 					
-				commit('QUERY', { query: 'UniversityInfoUnipi', key: { params: {...key}, query}, value })
-				if (subscribe) commit('SUBSCRIBE', { action: 'QueryUniversityInfoUnipi', payload: { options: { all }, params: {...key},query }})
-				return getters['getUniversityInfoUnipi']( { params: {...key}, query}) ?? {}
+				commit('QUERY', { query: 'UniversityInfo', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryUniversityInfo', payload: { options: { all }, params: {...key},query }})
+				return getters['getUniversityInfo']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryUniversityInfoUnipi API Node Unavailable. Could not perform query: ' + e.message)
+				throw new Error('QueryClient:QueryUniversityInfo API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryUniversityInfoAll({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryUniversityInfoAll(query)).data
+				
+					
+				while (all && (<any> value).pagination && (<any> value).pagination.next_key!=null) {
+					let next_values=(await queryClient.queryUniversityInfoAll({...query, 'pagination.key':(<any> value).pagination.next_key})).data
+					value = mergeResults(value, next_values);
+				}
+				commit('QUERY', { query: 'UniversityInfoAll', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryUniversityInfoAll', payload: { options: { all }, params: {...key},query }})
+				return getters['getUniversityInfoAll']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryUniversityInfoAll API Node Unavailable. Could not perform query: ' + e.message)
 				
 			}
 		},

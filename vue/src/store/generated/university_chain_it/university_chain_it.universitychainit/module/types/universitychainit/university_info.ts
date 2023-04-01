@@ -5,6 +5,7 @@ import { util, configure, Writer, Reader } from "protobufjs/minimal";
 export const protobufPackage = "university_chain_it.universitychainit";
 
 export interface UniversityInfo {
+  universityName: string;
   nextStudentId: number;
   secretariatKey: string;
   universityKey: string;
@@ -16,6 +17,7 @@ export interface UniversityInfo {
 }
 
 const baseUniversityInfo: object = {
+  universityName: "",
   nextStudentId: 0,
   secretariatKey: "",
   universityKey: "",
@@ -28,29 +30,32 @@ const baseUniversityInfo: object = {
 
 export const UniversityInfo = {
   encode(message: UniversityInfo, writer: Writer = Writer.create()): Writer {
+    if (message.universityName !== "") {
+      writer.uint32(10).string(message.universityName);
+    }
     if (message.nextStudentId !== 0) {
-      writer.uint32(8).uint64(message.nextStudentId);
+      writer.uint32(16).uint64(message.nextStudentId);
     }
     if (message.secretariatKey !== "") {
-      writer.uint32(18).string(message.secretariatKey);
+      writer.uint32(26).string(message.secretariatKey);
     }
     if (message.universityKey !== "") {
-      writer.uint32(26).string(message.universityKey);
+      writer.uint32(34).string(message.universityKey);
     }
     if (message.caiKey !== "") {
-      writer.uint32(34).string(message.caiKey);
+      writer.uint32(42).string(message.caiKey);
     }
     if (message.fifoHeadErasmus !== "") {
-      writer.uint32(42).string(message.fifoHeadErasmus);
+      writer.uint32(50).string(message.fifoHeadErasmus);
     }
     if (message.fifoTailErasmus !== "") {
-      writer.uint32(50).string(message.fifoTailErasmus);
+      writer.uint32(58).string(message.fifoTailErasmus);
     }
     if (message.deadlineTaxes !== "") {
-      writer.uint32(58).string(message.deadlineTaxes);
+      writer.uint32(66).string(message.deadlineTaxes);
     }
     if (message.deadlineErasmus !== "") {
-      writer.uint32(66).string(message.deadlineErasmus);
+      writer.uint32(74).string(message.deadlineErasmus);
     }
     return writer;
   },
@@ -63,27 +68,30 @@ export const UniversityInfo = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.nextStudentId = longToNumber(reader.uint64() as Long);
+          message.universityName = reader.string();
           break;
         case 2:
-          message.secretariatKey = reader.string();
+          message.nextStudentId = longToNumber(reader.uint64() as Long);
           break;
         case 3:
-          message.universityKey = reader.string();
+          message.secretariatKey = reader.string();
           break;
         case 4:
-          message.caiKey = reader.string();
+          message.universityKey = reader.string();
           break;
         case 5:
-          message.fifoHeadErasmus = reader.string();
+          message.caiKey = reader.string();
           break;
         case 6:
-          message.fifoTailErasmus = reader.string();
+          message.fifoHeadErasmus = reader.string();
           break;
         case 7:
-          message.deadlineTaxes = reader.string();
+          message.fifoTailErasmus = reader.string();
           break;
         case 8:
+          message.deadlineTaxes = reader.string();
+          break;
+        case 9:
           message.deadlineErasmus = reader.string();
           break;
         default:
@@ -96,6 +104,11 @@ export const UniversityInfo = {
 
   fromJSON(object: any): UniversityInfo {
     const message = { ...baseUniversityInfo } as UniversityInfo;
+    if (object.universityName !== undefined && object.universityName !== null) {
+      message.universityName = String(object.universityName);
+    } else {
+      message.universityName = "";
+    }
     if (object.nextStudentId !== undefined && object.nextStudentId !== null) {
       message.nextStudentId = Number(object.nextStudentId);
     } else {
@@ -150,6 +163,8 @@ export const UniversityInfo = {
 
   toJSON(message: UniversityInfo): unknown {
     const obj: any = {};
+    message.universityName !== undefined &&
+      (obj.universityName = message.universityName);
     message.nextStudentId !== undefined &&
       (obj.nextStudentId = message.nextStudentId);
     message.secretariatKey !== undefined &&
@@ -170,6 +185,11 @@ export const UniversityInfo = {
 
   fromPartial(object: DeepPartial<UniversityInfo>): UniversityInfo {
     const message = { ...baseUniversityInfo } as UniversityInfo;
+    if (object.universityName !== undefined && object.universityName !== null) {
+      message.universityName = object.universityName;
+    } else {
+      message.universityName = "";
+    }
     if (object.nextStudentId !== undefined && object.nextStudentId !== null) {
       message.nextStudentId = object.nextStudentId;
     } else {
