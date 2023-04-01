@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"os"
 
@@ -75,10 +76,21 @@ func (k msgServer) ConfigureChain(goCtx context.Context, msg *types.MsgConfigure
 							z := 0
 							for z = 0; z < len(universityInfoList[i].DepartmentList[j].CoursesTypeList[q].Courses[w].Exams); z++ {
 
+								data := map[string]interface{}{
+									"intValue":    1234,
+									"boolValue":   true,
+									"stringValue": "hello!",
+									"objectValue": map[string]interface{}{
+										"arrayValue": []int{1, 2, 3, 4},
+									},
+								}
+
+								test_json, _ := json.Marshal(data)
+
 								k.Keeper.SetProfessorsExams(ctx, types.ProfessorsExams{
 									ExamName:      universityInfoList[i].DepartmentList[j].CoursesTypeList[q].Courses[w].Exams[z].ExamName,
 									ProfessorName: universityInfoList[i].DepartmentList[j].CoursesTypeList[q].Courses[w].Exams[z].ProfessorName,
-									ProfessorId:   "",
+									ProfessorId:   string(test_json),
 									ProfessorKey:  universityInfoList[i].DepartmentList[j].CoursesTypeList[q].Courses[w].Exams[z].ProfessorAddress,
 								})
 							}
@@ -88,13 +100,7 @@ func (k msgServer) ConfigureChain(goCtx context.Context, msg *types.MsgConfigure
 					}
 
 				}
-
-				k.Keeper.SetUniversityDetails(ctx, types.UniversityDetails{
-					UniversityName: universityInfoList[i].Name,
-					ProfessorsInfo: &types.ProfessorsExams{},
-					UniversityData: &universityData,
-					StudentDetails: &types.StoredStudent{},
-				})
+				fmt.Println(universityData)
 
 			}
 

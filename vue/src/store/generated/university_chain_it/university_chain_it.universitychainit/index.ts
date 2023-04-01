@@ -1,13 +1,8 @@
 import { txClient, queryClient, MissingWalletError , registry} from './module'
 
-import { AnnualTaxes } from "./module/types/universitychainit/annual_taxes"
 import { ChainInfo } from "./module/types/universitychainit/chain_info"
 import { ContactInfo } from "./module/types/universitychainit/contact_info"
-import { ErasmusCareer } from "./module/types/universitychainit/erasmus_career"
-import { ErasmusContribution } from "./module/types/universitychainit/erasmus_contribution"
-import { ErasmusExams } from "./module/types/universitychainit/erasmus_exams"
 import { ErasmusInfo } from "./module/types/universitychainit/erasmus_info"
-import { ExamsInfo } from "./module/types/universitychainit/exams_info"
 import { ForeignUniversities } from "./module/types/universitychainit/foreign_universities"
 import { UniversitychainitPacketData } from "./module/types/universitychainit/packet"
 import { NoData } from "./module/types/universitychainit/packet"
@@ -19,11 +14,10 @@ import { StoredStudent } from "./module/types/universitychainit/stored_student"
 import { StudentInfo } from "./module/types/universitychainit/student_info"
 import { TaxesInfo } from "./module/types/universitychainit/taxes_info"
 import { TranscriptOfRecords } from "./module/types/universitychainit/transcript_of_records"
-import { UniversityDetails } from "./module/types/universitychainit/university_details"
 import { UniversityInfo } from "./module/types/universitychainit/university_info"
 
 
-export { AnnualTaxes, ChainInfo, ContactInfo, ErasmusCareer, ErasmusContribution, ErasmusExams, ErasmusInfo, ExamsInfo, ForeignUniversities, UniversitychainitPacketData, NoData, Params, PersonalInfo, ProfessorsExams, ResidenceInfo, StoredStudent, StudentInfo, TaxesInfo, TranscriptOfRecords, UniversityDetails, UniversityInfo };
+export { ChainInfo, ContactInfo, ErasmusInfo, ForeignUniversities, UniversitychainitPacketData, NoData, Params, PersonalInfo, ProfessorsExams, ResidenceInfo, StoredStudent, StudentInfo, TaxesInfo, TranscriptOfRecords, UniversityInfo };
 
 async function initTxClient(vuexGetters) {
 	return await txClient(vuexGetters['common/wallet/signer'], {
@@ -65,39 +59,23 @@ const getDefaultState = () => {
 				ProfessorsExams: {},
 				ProfessorsExamsAll: {},
 				StudentInfo: {},
-				ExamsInfo: {},
-				ExamsInfoAll: {},
 				TranscriptOfRecords: {},
 				PersonalInfo: {},
 				ResidenceInfo: {},
 				ContactInfo: {},
-				AnnualTaxes: {},
-				AnnualTaxesAll: {},
 				TaxesInfo: {},
-				ErasmusContribution: {},
-				ErasmusExams: {},
-				ErasmusExamsAll: {},
-				ErasmusCareer: {},
-				ErasmusCareerAll: {},
 				ErasmusInfo: {},
 				StoredStudent: {},
 				StoredStudentAll: {},
 				UniversityInfo: {},
-				UniversityDetails: {},
-				UniversityDetailsAll: {},
 				ChainInfo: {},
 				ForeignUniversities: {},
 				ForeignUniversitiesAll: {},
 				
 				_Structure: {
-						AnnualTaxes: getStructure(AnnualTaxes.fromPartial({})),
 						ChainInfo: getStructure(ChainInfo.fromPartial({})),
 						ContactInfo: getStructure(ContactInfo.fromPartial({})),
-						ErasmusCareer: getStructure(ErasmusCareer.fromPartial({})),
-						ErasmusContribution: getStructure(ErasmusContribution.fromPartial({})),
-						ErasmusExams: getStructure(ErasmusExams.fromPartial({})),
 						ErasmusInfo: getStructure(ErasmusInfo.fromPartial({})),
-						ExamsInfo: getStructure(ExamsInfo.fromPartial({})),
 						ForeignUniversities: getStructure(ForeignUniversities.fromPartial({})),
 						UniversitychainitPacketData: getStructure(UniversitychainitPacketData.fromPartial({})),
 						NoData: getStructure(NoData.fromPartial({})),
@@ -109,7 +87,6 @@ const getDefaultState = () => {
 						StudentInfo: getStructure(StudentInfo.fromPartial({})),
 						TaxesInfo: getStructure(TaxesInfo.fromPartial({})),
 						TranscriptOfRecords: getStructure(TranscriptOfRecords.fromPartial({})),
-						UniversityDetails: getStructure(UniversityDetails.fromPartial({})),
 						UniversityInfo: getStructure(UniversityInfo.fromPartial({})),
 						
 		},
@@ -163,18 +140,6 @@ export default {
 					}
 			return state.StudentInfo[JSON.stringify(params)] ?? {}
 		},
-				getExamsInfo: (state) => (params = { params: {}}) => {
-					if (!(<any> params).query) {
-						(<any> params).query=null
-					}
-			return state.ExamsInfo[JSON.stringify(params)] ?? {}
-		},
-				getExamsInfoAll: (state) => (params = { params: {}}) => {
-					if (!(<any> params).query) {
-						(<any> params).query=null
-					}
-			return state.ExamsInfoAll[JSON.stringify(params)] ?? {}
-		},
 				getTranscriptOfRecords: (state) => (params = { params: {}}) => {
 					if (!(<any> params).query) {
 						(<any> params).query=null
@@ -199,53 +164,11 @@ export default {
 					}
 			return state.ContactInfo[JSON.stringify(params)] ?? {}
 		},
-				getAnnualTaxes: (state) => (params = { params: {}}) => {
-					if (!(<any> params).query) {
-						(<any> params).query=null
-					}
-			return state.AnnualTaxes[JSON.stringify(params)] ?? {}
-		},
-				getAnnualTaxesAll: (state) => (params = { params: {}}) => {
-					if (!(<any> params).query) {
-						(<any> params).query=null
-					}
-			return state.AnnualTaxesAll[JSON.stringify(params)] ?? {}
-		},
 				getTaxesInfo: (state) => (params = { params: {}}) => {
 					if (!(<any> params).query) {
 						(<any> params).query=null
 					}
 			return state.TaxesInfo[JSON.stringify(params)] ?? {}
-		},
-				getErasmusContribution: (state) => (params = { params: {}}) => {
-					if (!(<any> params).query) {
-						(<any> params).query=null
-					}
-			return state.ErasmusContribution[JSON.stringify(params)] ?? {}
-		},
-				getErasmusExams: (state) => (params = { params: {}}) => {
-					if (!(<any> params).query) {
-						(<any> params).query=null
-					}
-			return state.ErasmusExams[JSON.stringify(params)] ?? {}
-		},
-				getErasmusExamsAll: (state) => (params = { params: {}}) => {
-					if (!(<any> params).query) {
-						(<any> params).query=null
-					}
-			return state.ErasmusExamsAll[JSON.stringify(params)] ?? {}
-		},
-				getErasmusCareer: (state) => (params = { params: {}}) => {
-					if (!(<any> params).query) {
-						(<any> params).query=null
-					}
-			return state.ErasmusCareer[JSON.stringify(params)] ?? {}
-		},
-				getErasmusCareerAll: (state) => (params = { params: {}}) => {
-					if (!(<any> params).query) {
-						(<any> params).query=null
-					}
-			return state.ErasmusCareerAll[JSON.stringify(params)] ?? {}
 		},
 				getErasmusInfo: (state) => (params = { params: {}}) => {
 					if (!(<any> params).query) {
@@ -270,18 +193,6 @@ export default {
 						(<any> params).query=null
 					}
 			return state.UniversityInfo[JSON.stringify(params)] ?? {}
-		},
-				getUniversityDetails: (state) => (params = { params: {}}) => {
-					if (!(<any> params).query) {
-						(<any> params).query=null
-					}
-			return state.UniversityDetails[JSON.stringify(params)] ?? {}
-		},
-				getUniversityDetailsAll: (state) => (params = { params: {}}) => {
-					if (!(<any> params).query) {
-						(<any> params).query=null
-					}
-			return state.UniversityDetailsAll[JSON.stringify(params)] ?? {}
 		},
 				getChainInfo: (state) => (params = { params: {}}) => {
 					if (!(<any> params).query) {
@@ -432,54 +343,6 @@ export default {
 		 		
 		
 		
-		async QueryExamsInfo({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
-			try {
-				const key = params ?? {};
-				const queryClient=await initQueryClient(rootGetters)
-				let value= (await queryClient.queryExamsInfo( key.examName)).data
-				
-					
-				commit('QUERY', { query: 'ExamsInfo', key: { params: {...key}, query}, value })
-				if (subscribe) commit('SUBSCRIBE', { action: 'QueryExamsInfo', payload: { options: { all }, params: {...key},query }})
-				return getters['getExamsInfo']( { params: {...key}, query}) ?? {}
-			} catch (e) {
-				throw new Error('QueryClient:QueryExamsInfo API Node Unavailable. Could not perform query: ' + e.message)
-				
-			}
-		},
-		
-		
-		
-		
-		 		
-		
-		
-		async QueryExamsInfoAll({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
-			try {
-				const key = params ?? {};
-				const queryClient=await initQueryClient(rootGetters)
-				let value= (await queryClient.queryExamsInfoAll(query)).data
-				
-					
-				while (all && (<any> value).pagination && (<any> value).pagination.next_key!=null) {
-					let next_values=(await queryClient.queryExamsInfoAll({...query, 'pagination.key':(<any> value).pagination.next_key})).data
-					value = mergeResults(value, next_values);
-				}
-				commit('QUERY', { query: 'ExamsInfoAll', key: { params: {...key}, query}, value })
-				if (subscribe) commit('SUBSCRIBE', { action: 'QueryExamsInfoAll', payload: { options: { all }, params: {...key},query }})
-				return getters['getExamsInfoAll']( { params: {...key}, query}) ?? {}
-			} catch (e) {
-				throw new Error('QueryClient:QueryExamsInfoAll API Node Unavailable. Could not perform query: ' + e.message)
-				
-			}
-		},
-		
-		
-		
-		
-		 		
-		
-		
 		async QueryTranscriptOfRecords({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
 			try {
 				const key = params ?? {};
@@ -568,54 +431,6 @@ export default {
 		 		
 		
 		
-		async QueryAnnualTaxes({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
-			try {
-				const key = params ?? {};
-				const queryClient=await initQueryClient(rootGetters)
-				let value= (await queryClient.queryAnnualTaxes( key.id)).data
-				
-					
-				commit('QUERY', { query: 'AnnualTaxes', key: { params: {...key}, query}, value })
-				if (subscribe) commit('SUBSCRIBE', { action: 'QueryAnnualTaxes', payload: { options: { all }, params: {...key},query }})
-				return getters['getAnnualTaxes']( { params: {...key}, query}) ?? {}
-			} catch (e) {
-				throw new Error('QueryClient:QueryAnnualTaxes API Node Unavailable. Could not perform query: ' + e.message)
-				
-			}
-		},
-		
-		
-		
-		
-		 		
-		
-		
-		async QueryAnnualTaxesAll({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
-			try {
-				const key = params ?? {};
-				const queryClient=await initQueryClient(rootGetters)
-				let value= (await queryClient.queryAnnualTaxesAll(query)).data
-				
-					
-				while (all && (<any> value).pagination && (<any> value).pagination.next_key!=null) {
-					let next_values=(await queryClient.queryAnnualTaxesAll({...query, 'pagination.key':(<any> value).pagination.next_key})).data
-					value = mergeResults(value, next_values);
-				}
-				commit('QUERY', { query: 'AnnualTaxesAll', key: { params: {...key}, query}, value })
-				if (subscribe) commit('SUBSCRIBE', { action: 'QueryAnnualTaxesAll', payload: { options: { all }, params: {...key},query }})
-				return getters['getAnnualTaxesAll']( { params: {...key}, query}) ?? {}
-			} catch (e) {
-				throw new Error('QueryClient:QueryAnnualTaxesAll API Node Unavailable. Could not perform query: ' + e.message)
-				
-			}
-		},
-		
-		
-		
-		
-		 		
-		
-		
 		async QueryTaxesInfo({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
 			try {
 				const key = params ?? {};
@@ -628,124 +443,6 @@ export default {
 				return getters['getTaxesInfo']( { params: {...key}, query}) ?? {}
 			} catch (e) {
 				throw new Error('QueryClient:QueryTaxesInfo API Node Unavailable. Could not perform query: ' + e.message)
-				
-			}
-		},
-		
-		
-		
-		
-		 		
-		
-		
-		async QueryErasmusContribution({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
-			try {
-				const key = params ?? {};
-				const queryClient=await initQueryClient(rootGetters)
-				let value= (await queryClient.queryErasmusContribution()).data
-				
-					
-				commit('QUERY', { query: 'ErasmusContribution', key: { params: {...key}, query}, value })
-				if (subscribe) commit('SUBSCRIBE', { action: 'QueryErasmusContribution', payload: { options: { all }, params: {...key},query }})
-				return getters['getErasmusContribution']( { params: {...key}, query}) ?? {}
-			} catch (e) {
-				throw new Error('QueryClient:QueryErasmusContribution API Node Unavailable. Could not perform query: ' + e.message)
-				
-			}
-		},
-		
-		
-		
-		
-		 		
-		
-		
-		async QueryErasmusExams({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
-			try {
-				const key = params ?? {};
-				const queryClient=await initQueryClient(rootGetters)
-				let value= (await queryClient.queryErasmusExams( key.examName)).data
-				
-					
-				commit('QUERY', { query: 'ErasmusExams', key: { params: {...key}, query}, value })
-				if (subscribe) commit('SUBSCRIBE', { action: 'QueryErasmusExams', payload: { options: { all }, params: {...key},query }})
-				return getters['getErasmusExams']( { params: {...key}, query}) ?? {}
-			} catch (e) {
-				throw new Error('QueryClient:QueryErasmusExams API Node Unavailable. Could not perform query: ' + e.message)
-				
-			}
-		},
-		
-		
-		
-		
-		 		
-		
-		
-		async QueryErasmusExamsAll({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
-			try {
-				const key = params ?? {};
-				const queryClient=await initQueryClient(rootGetters)
-				let value= (await queryClient.queryErasmusExamsAll(query)).data
-				
-					
-				while (all && (<any> value).pagination && (<any> value).pagination.next_key!=null) {
-					let next_values=(await queryClient.queryErasmusExamsAll({...query, 'pagination.key':(<any> value).pagination.next_key})).data
-					value = mergeResults(value, next_values);
-				}
-				commit('QUERY', { query: 'ErasmusExamsAll', key: { params: {...key}, query}, value })
-				if (subscribe) commit('SUBSCRIBE', { action: 'QueryErasmusExamsAll', payload: { options: { all }, params: {...key},query }})
-				return getters['getErasmusExamsAll']( { params: {...key}, query}) ?? {}
-			} catch (e) {
-				throw new Error('QueryClient:QueryErasmusExamsAll API Node Unavailable. Could not perform query: ' + e.message)
-				
-			}
-		},
-		
-		
-		
-		
-		 		
-		
-		
-		async QueryErasmusCareer({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
-			try {
-				const key = params ?? {};
-				const queryClient=await initQueryClient(rootGetters)
-				let value= (await queryClient.queryErasmusCareer( key.id)).data
-				
-					
-				commit('QUERY', { query: 'ErasmusCareer', key: { params: {...key}, query}, value })
-				if (subscribe) commit('SUBSCRIBE', { action: 'QueryErasmusCareer', payload: { options: { all }, params: {...key},query }})
-				return getters['getErasmusCareer']( { params: {...key}, query}) ?? {}
-			} catch (e) {
-				throw new Error('QueryClient:QueryErasmusCareer API Node Unavailable. Could not perform query: ' + e.message)
-				
-			}
-		},
-		
-		
-		
-		
-		 		
-		
-		
-		async QueryErasmusCareerAll({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
-			try {
-				const key = params ?? {};
-				const queryClient=await initQueryClient(rootGetters)
-				let value= (await queryClient.queryErasmusCareerAll(query)).data
-				
-					
-				while (all && (<any> value).pagination && (<any> value).pagination.next_key!=null) {
-					let next_values=(await queryClient.queryErasmusCareerAll({...query, 'pagination.key':(<any> value).pagination.next_key})).data
-					value = mergeResults(value, next_values);
-				}
-				commit('QUERY', { query: 'ErasmusCareerAll', key: { params: {...key}, query}, value })
-				if (subscribe) commit('SUBSCRIBE', { action: 'QueryErasmusCareerAll', payload: { options: { all }, params: {...key},query }})
-				return getters['getErasmusCareerAll']( { params: {...key}, query}) ?? {}
-			} catch (e) {
-				throw new Error('QueryClient:QueryErasmusCareerAll API Node Unavailable. Could not perform query: ' + e.message)
 				
 			}
 		},
@@ -838,54 +535,6 @@ export default {
 				return getters['getUniversityInfo']( { params: {...key}, query}) ?? {}
 			} catch (e) {
 				throw new Error('QueryClient:QueryUniversityInfo API Node Unavailable. Could not perform query: ' + e.message)
-				
-			}
-		},
-		
-		
-		
-		
-		 		
-		
-		
-		async QueryUniversityDetails({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
-			try {
-				const key = params ?? {};
-				const queryClient=await initQueryClient(rootGetters)
-				let value= (await queryClient.queryUniversityDetails( key.universityName)).data
-				
-					
-				commit('QUERY', { query: 'UniversityDetails', key: { params: {...key}, query}, value })
-				if (subscribe) commit('SUBSCRIBE', { action: 'QueryUniversityDetails', payload: { options: { all }, params: {...key},query }})
-				return getters['getUniversityDetails']( { params: {...key}, query}) ?? {}
-			} catch (e) {
-				throw new Error('QueryClient:QueryUniversityDetails API Node Unavailable. Could not perform query: ' + e.message)
-				
-			}
-		},
-		
-		
-		
-		
-		 		
-		
-		
-		async QueryUniversityDetailsAll({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
-			try {
-				const key = params ?? {};
-				const queryClient=await initQueryClient(rootGetters)
-				let value= (await queryClient.queryUniversityDetailsAll(query)).data
-				
-					
-				while (all && (<any> value).pagination && (<any> value).pagination.next_key!=null) {
-					let next_values=(await queryClient.queryUniversityDetailsAll({...query, 'pagination.key':(<any> value).pagination.next_key})).data
-					value = mergeResults(value, next_values);
-				}
-				commit('QUERY', { query: 'UniversityDetailsAll', key: { params: {...key}, query}, value })
-				if (subscribe) commit('SUBSCRIBE', { action: 'QueryUniversityDetailsAll', payload: { options: { all }, params: {...key},query }})
-				return getters['getUniversityDetailsAll']( { params: {...key}, query}) ?? {}
-			} catch (e) {
-				throw new Error('QueryClient:QueryUniversityDetailsAll API Node Unavailable. Could not perform query: ' + e.message)
 				
 			}
 		},

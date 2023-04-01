@@ -2,7 +2,6 @@ syntax = "proto3";
 package university_chain_it.universitychainit;
 
 option go_package = "university_chain_it/x/universitychainit/types";
-import "universitychainit/erasmus_career.proto"; 
 
 message ErasmusInfo {
   string erasmusStudent = 1; 
@@ -12,7 +11,7 @@ message ErasmusInfo {
   uint64 examsPassed = 5; 
   uint64 totalCredits = 6; 
   uint64 achievedCredits = 7; 
-  ErasmusCareer career = 8; 
+  string career = 8; 
   string previousStudentFifo = 9; 
   string nextStudentFifo = 10; 
   

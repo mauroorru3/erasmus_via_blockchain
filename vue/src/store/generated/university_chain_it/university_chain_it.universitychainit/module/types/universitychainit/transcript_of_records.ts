@@ -1,12 +1,11 @@
 /* eslint-disable */
 import * as Long from "long";
 import { util, configure, Writer, Reader } from "protobufjs/minimal";
-import { ExamsInfo } from "../universitychainit/exams_info";
 
 export const protobufPackage = "university_chain_it.universitychainit";
 
 export interface TranscriptOfRecords {
-  examsData: ExamsInfo | undefined;
+  examsData: string;
   totalExams: number;
   examsPassed: number;
   totalCredits: number;
@@ -14,6 +13,7 @@ export interface TranscriptOfRecords {
 }
 
 const baseTranscriptOfRecords: object = {
+  examsData: "",
   totalExams: 0,
   examsPassed: 0,
   totalCredits: 0,
@@ -25,8 +25,8 @@ export const TranscriptOfRecords = {
     message: TranscriptOfRecords,
     writer: Writer = Writer.create()
   ): Writer {
-    if (message.examsData !== undefined) {
-      ExamsInfo.encode(message.examsData, writer.uint32(10).fork()).ldelim();
+    if (message.examsData !== "") {
+      writer.uint32(10).string(message.examsData);
     }
     if (message.totalExams !== 0) {
       writer.uint32(16).uint64(message.totalExams);
@@ -51,7 +51,7 @@ export const TranscriptOfRecords = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.examsData = ExamsInfo.decode(reader, reader.uint32());
+          message.examsData = reader.string();
           break;
         case 2:
           message.totalExams = longToNumber(reader.uint64() as Long);
@@ -76,9 +76,9 @@ export const TranscriptOfRecords = {
   fromJSON(object: any): TranscriptOfRecords {
     const message = { ...baseTranscriptOfRecords } as TranscriptOfRecords;
     if (object.examsData !== undefined && object.examsData !== null) {
-      message.examsData = ExamsInfo.fromJSON(object.examsData);
+      message.examsData = String(object.examsData);
     } else {
-      message.examsData = undefined;
+      message.examsData = "";
     }
     if (object.totalExams !== undefined && object.totalExams !== null) {
       message.totalExams = Number(object.totalExams);
@@ -108,10 +108,7 @@ export const TranscriptOfRecords = {
 
   toJSON(message: TranscriptOfRecords): unknown {
     const obj: any = {};
-    message.examsData !== undefined &&
-      (obj.examsData = message.examsData
-        ? ExamsInfo.toJSON(message.examsData)
-        : undefined);
+    message.examsData !== undefined && (obj.examsData = message.examsData);
     message.totalExams !== undefined && (obj.totalExams = message.totalExams);
     message.examsPassed !== undefined &&
       (obj.examsPassed = message.examsPassed);
@@ -125,9 +122,9 @@ export const TranscriptOfRecords = {
   fromPartial(object: DeepPartial<TranscriptOfRecords>): TranscriptOfRecords {
     const message = { ...baseTranscriptOfRecords } as TranscriptOfRecords;
     if (object.examsData !== undefined && object.examsData !== null) {
-      message.examsData = ExamsInfo.fromPartial(object.examsData);
+      message.examsData = object.examsData;
     } else {
-      message.examsData = undefined;
+      message.examsData = "";
     }
     if (object.totalExams !== undefined && object.totalExams !== null) {
       message.totalExams = object.totalExams;

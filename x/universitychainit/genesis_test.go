@@ -34,16 +34,8 @@ func TestGenesis(t *testing.T) {
 			NumberOfYearsOutOfCourse: 69,
 			StudentKey:               "57",
 		},
-		ExamsInfoList: []types.ExamsInfo{
-			{
-				ExamName: "0",
-			},
-			{
-				ExamName: "1",
-			},
-		},
 		TranscriptOfRecords: &types.TranscriptOfRecords{
-			ExamsData:       new(types.ExamsInfo),
+			ExamsData:       "46",
 			TotalExams:      44,
 			ExamsPassed:     43,
 			TotalCredits:    65,
@@ -72,43 +64,11 @@ func TestGenesis(t *testing.T) {
 			Email:          "17",
 			MobilePhone:    "83",
 		},
-		AnnualTaxesList: []types.AnnualTaxes{
-			{
-				Id: 0,
-			},
-			{
-				Id: 1,
-			},
-		},
-		AnnualTaxesCount: 2,
 		TaxesInfo: &types.TaxesInfo{
 			Status:       false,
 			TotalAmount:  73,
-			TaxesHistory: new(types.AnnualTaxes),
+			TaxesHistory: "10",
 		},
-		ErasmusContribution: &types.ErasmusContribution{
-			Amount:        86,
-			IncomeBracket: 20,
-			PaymentMade:   true,
-			DateOfPayment: "33",
-		},
-		ErasmusExamsList: []types.ErasmusExams{
-			{
-				ExamName: "0",
-			},
-			{
-				ExamName: "1",
-			},
-		},
-		ErasmusCareerList: []types.ErasmusCareer{
-			{
-				Id: 0,
-			},
-			{
-				Id: 1,
-			},
-		},
-		ErasmusCareerCount: 2,
 		ErasmusInfo: &types.ErasmusInfo{
 			ErasmusStudent:      "35",
 			NumberTimes:         16,
@@ -117,7 +77,7 @@ func TestGenesis(t *testing.T) {
 			ExamsPassed:         45,
 			TotalCredits:        1,
 			AchievedCredits:     10,
-			Career:              new(types.ErasmusCareer),
+			Career:              "10",
 			PreviousStudentFifo: "83",
 			NextStudentFifo:     "26",
 		},
@@ -138,14 +98,6 @@ func TestGenesis(t *testing.T) {
 			FifoTailErasmus: "98",
 			DeadlineTaxes:   "23",
 			DeadlineErasmus: "46",
-		},
-		UniversityDetailsList: []types.UniversityDetails{
-			{
-				UniversityName: "0",
-			},
-			{
-				UniversityName: "1",
-			},
 		},
 		ChainInfo: types.ChainInfo{
 			HubKey:   "21",
@@ -175,22 +127,14 @@ func TestGenesis(t *testing.T) {
 
 	require.ElementsMatch(t, genesisState.ProfessorsExamsList, got.ProfessorsExamsList)
 	require.Equal(t, genesisState.StudentInfo, got.StudentInfo)
-	require.ElementsMatch(t, genesisState.ExamsInfoList, got.ExamsInfoList)
 	require.Equal(t, genesisState.TranscriptOfRecords, got.TranscriptOfRecords)
 	require.Equal(t, genesisState.PersonalInfo, got.PersonalInfo)
 	require.Equal(t, genesisState.ResidenceInfo, got.ResidenceInfo)
 	require.Equal(t, genesisState.ContactInfo, got.ContactInfo)
-	require.ElementsMatch(t, genesisState.AnnualTaxesList, got.AnnualTaxesList)
-	require.Equal(t, genesisState.AnnualTaxesCount, got.AnnualTaxesCount)
 	require.Equal(t, genesisState.TaxesInfo, got.TaxesInfo)
-	require.Equal(t, genesisState.ErasmusContribution, got.ErasmusContribution)
-	require.ElementsMatch(t, genesisState.ErasmusExamsList, got.ErasmusExamsList)
-	require.ElementsMatch(t, genesisState.ErasmusCareerList, got.ErasmusCareerList)
-	require.Equal(t, genesisState.ErasmusCareerCount, got.ErasmusCareerCount)
 	require.Equal(t, genesisState.ErasmusInfo, got.ErasmusInfo)
 	require.ElementsMatch(t, genesisState.StoredStudentList, got.StoredStudentList)
 	require.Equal(t, genesisState.UniversityInfo, got.UniversityInfo)
-	require.ElementsMatch(t, genesisState.UniversityDetailsList, got.UniversityDetailsList)
 	require.Equal(t, genesisState.ChainInfo, got.ChainInfo)
 	require.ElementsMatch(t, genesisState.ForeignUniversitiesList, got.ForeignUniversitiesList)
 	// this line is used by starport scaffolding # genesis/test/assert

@@ -42,16 +42,8 @@ func TestGenesisState_Validate(t *testing.T) {
 					NumberOfYearsOutOfCourse: 25,
 					StudentKey:               "3",
 				},
-				ExamsInfoList: []types.ExamsInfo{
-					{
-						ExamName: "0",
-					},
-					{
-						ExamName: "1",
-					},
-				},
 				TranscriptOfRecords: &types.TranscriptOfRecords{
-					ExamsData:       new(types.ExamsInfo),
+					ExamsData:       "69",
 					TotalExams:      55,
 					ExamsPassed:     53,
 					TotalCredits:    39,
@@ -80,43 +72,11 @@ func TestGenesisState_Validate(t *testing.T) {
 					Email:          "6",
 					MobilePhone:    "63",
 				},
-				AnnualTaxesList: []types.AnnualTaxes{
-					{
-						Id: 0,
-					},
-					{
-						Id: 1,
-					},
-				},
-				AnnualTaxesCount: 2,
 				TaxesInfo: &types.TaxesInfo{
 					Status:       false,
 					TotalAmount:  63,
-					TaxesHistory: new(types.AnnualTaxes),
+					TaxesHistory: "85",
 				},
-				ErasmusContribution: &types.ErasmusContribution{
-					Amount:        59,
-					IncomeBracket: 74,
-					PaymentMade:   false,
-					DateOfPayment: "10",
-				},
-				ErasmusExamsList: []types.ErasmusExams{
-					{
-						ExamName: "0",
-					},
-					{
-						ExamName: "1",
-					},
-				},
-				ErasmusCareerList: []types.ErasmusCareer{
-					{
-						Id: 0,
-					},
-					{
-						Id: 1,
-					},
-				},
-				ErasmusCareerCount: 2,
 				ErasmusInfo: &types.ErasmusInfo{
 					ErasmusStudent:      "57",
 					NumberTimes:         69,
@@ -125,7 +85,7 @@ func TestGenesisState_Validate(t *testing.T) {
 					ExamsPassed:         51,
 					TotalCredits:        7,
 					AchievedCredits:     36,
-					Career:              new(types.ErasmusCareer),
+					Career:              "55",
 					PreviousStudentFifo: "42",
 					NextStudentFifo:     "21",
 				},
@@ -146,14 +106,6 @@ func TestGenesisState_Validate(t *testing.T) {
 					FifoTailErasmus: "70",
 					DeadlineTaxes:   "89",
 					DeadlineErasmus: "99",
-				},
-				UniversityDetailsList: []types.UniversityDetails{
-					{
-						UniversityName: "0",
-					},
-					{
-						UniversityName: "1",
-					},
 				},
 				ChainInfo: types.ChainInfo{
 					HubKey:   "96",
@@ -187,86 +139,6 @@ func TestGenesisState_Validate(t *testing.T) {
 			valid: false,
 		},
 		{
-			desc: "duplicated examsInfo",
-			genState: &types.GenesisState{
-				ExamsInfoList: []types.ExamsInfo{
-					{
-						ExamName: "0",
-					},
-					{
-						ExamName: "0",
-					},
-				},
-			},
-			valid: false,
-		},
-		{
-			desc: "duplicated annualTaxes",
-			genState: &types.GenesisState{
-				AnnualTaxesList: []types.AnnualTaxes{
-					{
-						Id: 0,
-					},
-					{
-						Id: 0,
-					},
-				},
-			},
-			valid: false,
-		},
-		{
-			desc: "invalid annualTaxes count",
-			genState: &types.GenesisState{
-				AnnualTaxesList: []types.AnnualTaxes{
-					{
-						Id: 1,
-					},
-				},
-				AnnualTaxesCount: 0,
-			},
-			valid: false,
-		},
-		{
-			desc: "duplicated erasmusExams",
-			genState: &types.GenesisState{
-				ErasmusExamsList: []types.ErasmusExams{
-					{
-						ExamName: "0",
-					},
-					{
-						ExamName: "0",
-					},
-				},
-			},
-			valid: false,
-		},
-		{
-			desc: "duplicated erasmusCareer",
-			genState: &types.GenesisState{
-				ErasmusCareerList: []types.ErasmusCareer{
-					{
-						Id: 0,
-					},
-					{
-						Id: 0,
-					},
-				},
-			},
-			valid: false,
-		},
-		{
-			desc: "invalid erasmusCareer count",
-			genState: &types.GenesisState{
-				ErasmusCareerList: []types.ErasmusCareer{
-					{
-						Id: 1,
-					},
-				},
-				ErasmusCareerCount: 0,
-			},
-			valid: false,
-		},
-		{
 			desc: "duplicated storedStudent",
 			genState: &types.GenesisState{
 				StoredStudentList: []types.StoredStudent{
@@ -275,20 +147,6 @@ func TestGenesisState_Validate(t *testing.T) {
 					},
 					{
 						Index: "0",
-					},
-				},
-			},
-			valid: false,
-		},
-		{
-			desc: "duplicated universityDetails",
-			genState: &types.GenesisState{
-				UniversityDetailsList: []types.UniversityDetails{
-					{
-						UniversityName: "0",
-					},
-					{
-						UniversityName: "0",
 					},
 				},
 			},
@@ -324,23 +182,17 @@ func TestGenesisState_Validate(t *testing.T) {
 func TestDefaultGenesisState_ExpectedInitialValues(t *testing.T) {
 	require.EqualValues(t,
 		&types.GenesisState{
-			PortId:                "universitychainit",
-			ProfessorsExamsList:   []types.ProfessorsExams{},
-			StudentInfo:           nil,
-			ExamsInfoList:         []types.ExamsInfo{},
-			TranscriptOfRecords:   nil,
-			PersonalInfo:          nil,
-			ResidenceInfo:         nil,
-			ContactInfo:           nil,
-			AnnualTaxesList:       []types.AnnualTaxes{},
-			TaxesInfo:             nil,
-			ErasmusContribution:   nil,
-			ErasmusExamsList:      []types.ErasmusExams{},
-			ErasmusCareerList:     []types.ErasmusCareer{},
-			ErasmusInfo:           nil,
-			StoredStudentList:     []types.StoredStudent{},
-			UniversityInfo:        nil,
-			UniversityDetailsList: []types.UniversityDetails{},
+			PortId:              "universitychainit",
+			ProfessorsExamsList: []types.ProfessorsExams{},
+			StudentInfo:         nil,
+			TranscriptOfRecords: nil,
+			PersonalInfo:        nil,
+			ResidenceInfo:       nil,
+			ContactInfo:         nil,
+			TaxesInfo:           nil,
+			ErasmusInfo:         nil,
+			StoredStudentList:   []types.StoredStudent{},
+			UniversityInfo:      nil,
 			ChainInfo: types.ChainInfo{
 				HubKey:                "",
 				ChainKey:              "",

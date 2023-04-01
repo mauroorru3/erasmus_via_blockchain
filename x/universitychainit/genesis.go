@@ -18,10 +18,6 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 	if genState.StudentInfo != nil {
 		k.SetStudentInfo(ctx, *genState.StudentInfo)
 	}
-	// Set all the examsInfo
-	for _, elem := range genState.ExamsInfoList {
-		k.SetExamsInfo(ctx, elem)
-	}
 	// Set if defined
 	if genState.TranscriptOfRecords != nil {
 		k.SetTranscriptOfRecords(ctx, *genState.TranscriptOfRecords)
@@ -38,32 +34,10 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 	if genState.ContactInfo != nil {
 		k.SetContactInfo(ctx, *genState.ContactInfo)
 	}
-	// Set all the annualTaxes
-	for _, elem := range genState.AnnualTaxesList {
-		k.SetAnnualTaxes(ctx, elem)
-	}
-
-	// Set annualTaxes count
-	k.SetAnnualTaxesCount(ctx, genState.AnnualTaxesCount)
 	// Set if defined
 	if genState.TaxesInfo != nil {
 		k.SetTaxesInfo(ctx, *genState.TaxesInfo)
 	}
-	// Set if defined
-	if genState.ErasmusContribution != nil {
-		k.SetErasmusContribution(ctx, *genState.ErasmusContribution)
-	}
-	// Set all the erasmusExams
-	for _, elem := range genState.ErasmusExamsList {
-		k.SetErasmusExams(ctx, elem)
-	}
-	// Set all the erasmusCareer
-	for _, elem := range genState.ErasmusCareerList {
-		k.SetErasmusCareer(ctx, elem)
-	}
-
-	// Set erasmusCareer count
-	k.SetErasmusCareerCount(ctx, genState.ErasmusCareerCount)
 	// Set if defined
 	if genState.ErasmusInfo != nil {
 		k.SetErasmusInfo(ctx, *genState.ErasmusInfo)
@@ -75,10 +49,6 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 	// Set if defined
 	if genState.UniversityInfo != nil {
 		k.SetUniversityInfo(ctx, *genState.UniversityInfo)
-	}
-	// Set all the universityDetails
-	for _, elem := range genState.UniversityDetailsList {
-		k.SetUniversityDetails(ctx, elem)
 	}
 	// Set if defined
 	k.SetChainInfo(ctx, genState.ChainInfo)
@@ -113,7 +83,6 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 	if found {
 		genesis.StudentInfo = &studentInfo
 	}
-	genesis.ExamsInfoList = k.GetAllExamsInfo(ctx)
 	// Get all transcriptOfRecords
 	transcriptOfRecords, found := k.GetTranscriptOfRecords(ctx)
 	if found {
@@ -134,21 +103,11 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 	if found {
 		genesis.ContactInfo = &contactInfo
 	}
-	genesis.AnnualTaxesList = k.GetAllAnnualTaxes(ctx)
-	genesis.AnnualTaxesCount = k.GetAnnualTaxesCount(ctx)
 	// Get all taxesInfo
 	taxesInfo, found := k.GetTaxesInfo(ctx)
 	if found {
 		genesis.TaxesInfo = &taxesInfo
 	}
-	// Get all erasmusContribution
-	erasmusContribution, found := k.GetErasmusContribution(ctx)
-	if found {
-		genesis.ErasmusContribution = &erasmusContribution
-	}
-	genesis.ErasmusExamsList = k.GetAllErasmusExams(ctx)
-	genesis.ErasmusCareerList = k.GetAllErasmusCareer(ctx)
-	genesis.ErasmusCareerCount = k.GetErasmusCareerCount(ctx)
 	// Get all erasmusInfo
 	erasmusInfo, found := k.GetErasmusInfo(ctx)
 	if found {
@@ -160,7 +119,6 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 	if found {
 		genesis.UniversityInfo = &universityInfo
 	}
-	genesis.UniversityDetailsList = k.GetAllUniversityDetails(ctx)
 	// Get all chainInfo
 	chainInfo, found := k.GetChainInfo(ctx)
 	if found {

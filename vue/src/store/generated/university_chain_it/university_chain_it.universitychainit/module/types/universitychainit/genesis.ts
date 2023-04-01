@@ -1,25 +1,18 @@
 /* eslint-disable */
-import * as Long from "long";
-import { util, configure, Writer, Reader } from "protobufjs/minimal";
 import { Params } from "../universitychainit/params";
 import { ProfessorsExams } from "../universitychainit/professors_exams";
 import { StudentInfo } from "../universitychainit/student_info";
-import { ExamsInfo } from "../universitychainit/exams_info";
 import { TranscriptOfRecords } from "../universitychainit/transcript_of_records";
 import { PersonalInfo } from "../universitychainit/personal_info";
 import { ResidenceInfo } from "../universitychainit/residence_info";
 import { ContactInfo } from "../universitychainit/contact_info";
-import { AnnualTaxes } from "../universitychainit/annual_taxes";
 import { TaxesInfo } from "../universitychainit/taxes_info";
-import { ErasmusContribution } from "../universitychainit/erasmus_contribution";
-import { ErasmusExams } from "../universitychainit/erasmus_exams";
-import { ErasmusCareer } from "../universitychainit/erasmus_career";
 import { ErasmusInfo } from "../universitychainit/erasmus_info";
 import { StoredStudent } from "../universitychainit/stored_student";
 import { UniversityInfo } from "../universitychainit/university_info";
-import { UniversityDetails } from "../universitychainit/university_details";
 import { ChainInfo } from "../universitychainit/chain_info";
 import { ForeignUniversities } from "../universitychainit/foreign_universities";
+import { Writer, Reader } from "protobufjs/minimal";
 
 export const protobufPackage = "university_chain_it.universitychainit";
 
@@ -29,32 +22,20 @@ export interface GenesisState {
   port_id: string;
   professorsExamsList: ProfessorsExams[];
   studentInfo: StudentInfo | undefined;
-  examsInfoList: ExamsInfo[];
   transcriptOfRecords: TranscriptOfRecords | undefined;
   personalInfo: PersonalInfo | undefined;
   residenceInfo: ResidenceInfo | undefined;
   contactInfo: ContactInfo | undefined;
-  annualTaxesList: AnnualTaxes[];
-  annualTaxesCount: number;
   taxesInfo: TaxesInfo | undefined;
-  erasmusContribution: ErasmusContribution | undefined;
-  erasmusExamsList: ErasmusExams[];
-  erasmusCareerList: ErasmusCareer[];
-  erasmusCareerCount: number;
   erasmusInfo: ErasmusInfo | undefined;
   storedStudentList: StoredStudent[];
   universityInfo: UniversityInfo | undefined;
-  universityDetailsList: UniversityDetails[];
   chainInfo: ChainInfo | undefined;
   /** this line is used by starport scaffolding # genesis/proto/state */
   foreignUniversitiesList: ForeignUniversities[];
 }
 
-const baseGenesisState: object = {
-  port_id: "",
-  annualTaxesCount: 0,
-  erasmusCareerCount: 0,
-};
+const baseGenesisState: object = { port_id: "" };
 
 export const GenesisState = {
   encode(message: GenesisState, writer: Writer = Writer.create()): Writer {
@@ -73,80 +54,53 @@ export const GenesisState = {
         writer.uint32(34).fork()
       ).ldelim();
     }
-    for (const v of message.examsInfoList) {
-      ExamsInfo.encode(v!, writer.uint32(42).fork()).ldelim();
-    }
     if (message.transcriptOfRecords !== undefined) {
       TranscriptOfRecords.encode(
         message.transcriptOfRecords,
-        writer.uint32(50).fork()
+        writer.uint32(42).fork()
       ).ldelim();
     }
     if (message.personalInfo !== undefined) {
       PersonalInfo.encode(
         message.personalInfo,
-        writer.uint32(58).fork()
+        writer.uint32(50).fork()
       ).ldelim();
     }
     if (message.residenceInfo !== undefined) {
       ResidenceInfo.encode(
         message.residenceInfo,
-        writer.uint32(66).fork()
+        writer.uint32(58).fork()
       ).ldelim();
     }
     if (message.contactInfo !== undefined) {
       ContactInfo.encode(
         message.contactInfo,
-        writer.uint32(74).fork()
+        writer.uint32(66).fork()
       ).ldelim();
-    }
-    for (const v of message.annualTaxesList) {
-      AnnualTaxes.encode(v!, writer.uint32(82).fork()).ldelim();
-    }
-    if (message.annualTaxesCount !== 0) {
-      writer.uint32(88).uint64(message.annualTaxesCount);
     }
     if (message.taxesInfo !== undefined) {
-      TaxesInfo.encode(message.taxesInfo, writer.uint32(98).fork()).ldelim();
-    }
-    if (message.erasmusContribution !== undefined) {
-      ErasmusContribution.encode(
-        message.erasmusContribution,
-        writer.uint32(106).fork()
-      ).ldelim();
-    }
-    for (const v of message.erasmusExamsList) {
-      ErasmusExams.encode(v!, writer.uint32(114).fork()).ldelim();
-    }
-    for (const v of message.erasmusCareerList) {
-      ErasmusCareer.encode(v!, writer.uint32(122).fork()).ldelim();
-    }
-    if (message.erasmusCareerCount !== 0) {
-      writer.uint32(128).uint64(message.erasmusCareerCount);
+      TaxesInfo.encode(message.taxesInfo, writer.uint32(74).fork()).ldelim();
     }
     if (message.erasmusInfo !== undefined) {
       ErasmusInfo.encode(
         message.erasmusInfo,
-        writer.uint32(138).fork()
+        writer.uint32(82).fork()
       ).ldelim();
     }
     for (const v of message.storedStudentList) {
-      StoredStudent.encode(v!, writer.uint32(146).fork()).ldelim();
+      StoredStudent.encode(v!, writer.uint32(90).fork()).ldelim();
     }
     if (message.universityInfo !== undefined) {
       UniversityInfo.encode(
         message.universityInfo,
-        writer.uint32(154).fork()
+        writer.uint32(98).fork()
       ).ldelim();
     }
-    for (const v of message.universityDetailsList) {
-      UniversityDetails.encode(v!, writer.uint32(162).fork()).ldelim();
-    }
     if (message.chainInfo !== undefined) {
-      ChainInfo.encode(message.chainInfo, writer.uint32(170).fork()).ldelim();
+      ChainInfo.encode(message.chainInfo, writer.uint32(106).fork()).ldelim();
     }
     for (const v of message.foreignUniversitiesList) {
-      ForeignUniversities.encode(v!, writer.uint32(178).fork()).ldelim();
+      ForeignUniversities.encode(v!, writer.uint32(114).fork()).ldelim();
     }
     return writer;
   },
@@ -156,12 +110,7 @@ export const GenesisState = {
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = { ...baseGenesisState } as GenesisState;
     message.professorsExamsList = [];
-    message.examsInfoList = [];
-    message.annualTaxesList = [];
-    message.erasmusExamsList = [];
-    message.erasmusCareerList = [];
     message.storedStudentList = [];
-    message.universityDetailsList = [];
     message.foreignUniversitiesList = [];
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -181,76 +130,41 @@ export const GenesisState = {
           message.studentInfo = StudentInfo.decode(reader, reader.uint32());
           break;
         case 5:
-          message.examsInfoList.push(ExamsInfo.decode(reader, reader.uint32()));
-          break;
-        case 6:
           message.transcriptOfRecords = TranscriptOfRecords.decode(
             reader,
             reader.uint32()
           );
           break;
-        case 7:
+        case 6:
           message.personalInfo = PersonalInfo.decode(reader, reader.uint32());
           break;
-        case 8:
+        case 7:
           message.residenceInfo = ResidenceInfo.decode(reader, reader.uint32());
           break;
-        case 9:
+        case 8:
           message.contactInfo = ContactInfo.decode(reader, reader.uint32());
           break;
-        case 10:
-          message.annualTaxesList.push(
-            AnnualTaxes.decode(reader, reader.uint32())
-          );
-          break;
-        case 11:
-          message.annualTaxesCount = longToNumber(reader.uint64() as Long);
-          break;
-        case 12:
+        case 9:
           message.taxesInfo = TaxesInfo.decode(reader, reader.uint32());
           break;
-        case 13:
-          message.erasmusContribution = ErasmusContribution.decode(
-            reader,
-            reader.uint32()
-          );
-          break;
-        case 14:
-          message.erasmusExamsList.push(
-            ErasmusExams.decode(reader, reader.uint32())
-          );
-          break;
-        case 15:
-          message.erasmusCareerList.push(
-            ErasmusCareer.decode(reader, reader.uint32())
-          );
-          break;
-        case 16:
-          message.erasmusCareerCount = longToNumber(reader.uint64() as Long);
-          break;
-        case 17:
+        case 10:
           message.erasmusInfo = ErasmusInfo.decode(reader, reader.uint32());
           break;
-        case 18:
+        case 11:
           message.storedStudentList.push(
             StoredStudent.decode(reader, reader.uint32())
           );
           break;
-        case 19:
+        case 12:
           message.universityInfo = UniversityInfo.decode(
             reader,
             reader.uint32()
           );
           break;
-        case 20:
-          message.universityDetailsList.push(
-            UniversityDetails.decode(reader, reader.uint32())
-          );
-          break;
-        case 21:
+        case 13:
           message.chainInfo = ChainInfo.decode(reader, reader.uint32());
           break;
-        case 22:
+        case 14:
           message.foreignUniversitiesList.push(
             ForeignUniversities.decode(reader, reader.uint32())
           );
@@ -266,12 +180,7 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     const message = { ...baseGenesisState } as GenesisState;
     message.professorsExamsList = [];
-    message.examsInfoList = [];
-    message.annualTaxesList = [];
-    message.erasmusExamsList = [];
-    message.erasmusCareerList = [];
     message.storedStudentList = [];
-    message.universityDetailsList = [];
     message.foreignUniversitiesList = [];
     if (object.params !== undefined && object.params !== null) {
       message.params = Params.fromJSON(object.params);
@@ -295,11 +204,6 @@ export const GenesisState = {
       message.studentInfo = StudentInfo.fromJSON(object.studentInfo);
     } else {
       message.studentInfo = undefined;
-    }
-    if (object.examsInfoList !== undefined && object.examsInfoList !== null) {
-      for (const e of object.examsInfoList) {
-        message.examsInfoList.push(ExamsInfo.fromJSON(e));
-      }
     }
     if (
       object.transcriptOfRecords !== undefined &&
@@ -326,60 +230,10 @@ export const GenesisState = {
     } else {
       message.contactInfo = undefined;
     }
-    if (
-      object.annualTaxesList !== undefined &&
-      object.annualTaxesList !== null
-    ) {
-      for (const e of object.annualTaxesList) {
-        message.annualTaxesList.push(AnnualTaxes.fromJSON(e));
-      }
-    }
-    if (
-      object.annualTaxesCount !== undefined &&
-      object.annualTaxesCount !== null
-    ) {
-      message.annualTaxesCount = Number(object.annualTaxesCount);
-    } else {
-      message.annualTaxesCount = 0;
-    }
     if (object.taxesInfo !== undefined && object.taxesInfo !== null) {
       message.taxesInfo = TaxesInfo.fromJSON(object.taxesInfo);
     } else {
       message.taxesInfo = undefined;
-    }
-    if (
-      object.erasmusContribution !== undefined &&
-      object.erasmusContribution !== null
-    ) {
-      message.erasmusContribution = ErasmusContribution.fromJSON(
-        object.erasmusContribution
-      );
-    } else {
-      message.erasmusContribution = undefined;
-    }
-    if (
-      object.erasmusExamsList !== undefined &&
-      object.erasmusExamsList !== null
-    ) {
-      for (const e of object.erasmusExamsList) {
-        message.erasmusExamsList.push(ErasmusExams.fromJSON(e));
-      }
-    }
-    if (
-      object.erasmusCareerList !== undefined &&
-      object.erasmusCareerList !== null
-    ) {
-      for (const e of object.erasmusCareerList) {
-        message.erasmusCareerList.push(ErasmusCareer.fromJSON(e));
-      }
-    }
-    if (
-      object.erasmusCareerCount !== undefined &&
-      object.erasmusCareerCount !== null
-    ) {
-      message.erasmusCareerCount = Number(object.erasmusCareerCount);
-    } else {
-      message.erasmusCareerCount = 0;
     }
     if (object.erasmusInfo !== undefined && object.erasmusInfo !== null) {
       message.erasmusInfo = ErasmusInfo.fromJSON(object.erasmusInfo);
@@ -398,14 +252,6 @@ export const GenesisState = {
       message.universityInfo = UniversityInfo.fromJSON(object.universityInfo);
     } else {
       message.universityInfo = undefined;
-    }
-    if (
-      object.universityDetailsList !== undefined &&
-      object.universityDetailsList !== null
-    ) {
-      for (const e of object.universityDetailsList) {
-        message.universityDetailsList.push(UniversityDetails.fromJSON(e));
-      }
     }
     if (object.chainInfo !== undefined && object.chainInfo !== null) {
       message.chainInfo = ChainInfo.fromJSON(object.chainInfo);
@@ -439,13 +285,6 @@ export const GenesisState = {
       (obj.studentInfo = message.studentInfo
         ? StudentInfo.toJSON(message.studentInfo)
         : undefined);
-    if (message.examsInfoList) {
-      obj.examsInfoList = message.examsInfoList.map((e) =>
-        e ? ExamsInfo.toJSON(e) : undefined
-      );
-    } else {
-      obj.examsInfoList = [];
-    }
     message.transcriptOfRecords !== undefined &&
       (obj.transcriptOfRecords = message.transcriptOfRecords
         ? TranscriptOfRecords.toJSON(message.transcriptOfRecords)
@@ -462,39 +301,10 @@ export const GenesisState = {
       (obj.contactInfo = message.contactInfo
         ? ContactInfo.toJSON(message.contactInfo)
         : undefined);
-    if (message.annualTaxesList) {
-      obj.annualTaxesList = message.annualTaxesList.map((e) =>
-        e ? AnnualTaxes.toJSON(e) : undefined
-      );
-    } else {
-      obj.annualTaxesList = [];
-    }
-    message.annualTaxesCount !== undefined &&
-      (obj.annualTaxesCount = message.annualTaxesCount);
     message.taxesInfo !== undefined &&
       (obj.taxesInfo = message.taxesInfo
         ? TaxesInfo.toJSON(message.taxesInfo)
         : undefined);
-    message.erasmusContribution !== undefined &&
-      (obj.erasmusContribution = message.erasmusContribution
-        ? ErasmusContribution.toJSON(message.erasmusContribution)
-        : undefined);
-    if (message.erasmusExamsList) {
-      obj.erasmusExamsList = message.erasmusExamsList.map((e) =>
-        e ? ErasmusExams.toJSON(e) : undefined
-      );
-    } else {
-      obj.erasmusExamsList = [];
-    }
-    if (message.erasmusCareerList) {
-      obj.erasmusCareerList = message.erasmusCareerList.map((e) =>
-        e ? ErasmusCareer.toJSON(e) : undefined
-      );
-    } else {
-      obj.erasmusCareerList = [];
-    }
-    message.erasmusCareerCount !== undefined &&
-      (obj.erasmusCareerCount = message.erasmusCareerCount);
     message.erasmusInfo !== undefined &&
       (obj.erasmusInfo = message.erasmusInfo
         ? ErasmusInfo.toJSON(message.erasmusInfo)
@@ -510,13 +320,6 @@ export const GenesisState = {
       (obj.universityInfo = message.universityInfo
         ? UniversityInfo.toJSON(message.universityInfo)
         : undefined);
-    if (message.universityDetailsList) {
-      obj.universityDetailsList = message.universityDetailsList.map((e) =>
-        e ? UniversityDetails.toJSON(e) : undefined
-      );
-    } else {
-      obj.universityDetailsList = [];
-    }
     message.chainInfo !== undefined &&
       (obj.chainInfo = message.chainInfo
         ? ChainInfo.toJSON(message.chainInfo)
@@ -534,12 +337,7 @@ export const GenesisState = {
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = { ...baseGenesisState } as GenesisState;
     message.professorsExamsList = [];
-    message.examsInfoList = [];
-    message.annualTaxesList = [];
-    message.erasmusExamsList = [];
-    message.erasmusCareerList = [];
     message.storedStudentList = [];
-    message.universityDetailsList = [];
     message.foreignUniversitiesList = [];
     if (object.params !== undefined && object.params !== null) {
       message.params = Params.fromPartial(object.params);
@@ -563,11 +361,6 @@ export const GenesisState = {
       message.studentInfo = StudentInfo.fromPartial(object.studentInfo);
     } else {
       message.studentInfo = undefined;
-    }
-    if (object.examsInfoList !== undefined && object.examsInfoList !== null) {
-      for (const e of object.examsInfoList) {
-        message.examsInfoList.push(ExamsInfo.fromPartial(e));
-      }
     }
     if (
       object.transcriptOfRecords !== undefined &&
@@ -594,60 +387,10 @@ export const GenesisState = {
     } else {
       message.contactInfo = undefined;
     }
-    if (
-      object.annualTaxesList !== undefined &&
-      object.annualTaxesList !== null
-    ) {
-      for (const e of object.annualTaxesList) {
-        message.annualTaxesList.push(AnnualTaxes.fromPartial(e));
-      }
-    }
-    if (
-      object.annualTaxesCount !== undefined &&
-      object.annualTaxesCount !== null
-    ) {
-      message.annualTaxesCount = object.annualTaxesCount;
-    } else {
-      message.annualTaxesCount = 0;
-    }
     if (object.taxesInfo !== undefined && object.taxesInfo !== null) {
       message.taxesInfo = TaxesInfo.fromPartial(object.taxesInfo);
     } else {
       message.taxesInfo = undefined;
-    }
-    if (
-      object.erasmusContribution !== undefined &&
-      object.erasmusContribution !== null
-    ) {
-      message.erasmusContribution = ErasmusContribution.fromPartial(
-        object.erasmusContribution
-      );
-    } else {
-      message.erasmusContribution = undefined;
-    }
-    if (
-      object.erasmusExamsList !== undefined &&
-      object.erasmusExamsList !== null
-    ) {
-      for (const e of object.erasmusExamsList) {
-        message.erasmusExamsList.push(ErasmusExams.fromPartial(e));
-      }
-    }
-    if (
-      object.erasmusCareerList !== undefined &&
-      object.erasmusCareerList !== null
-    ) {
-      for (const e of object.erasmusCareerList) {
-        message.erasmusCareerList.push(ErasmusCareer.fromPartial(e));
-      }
-    }
-    if (
-      object.erasmusCareerCount !== undefined &&
-      object.erasmusCareerCount !== null
-    ) {
-      message.erasmusCareerCount = object.erasmusCareerCount;
-    } else {
-      message.erasmusCareerCount = 0;
     }
     if (object.erasmusInfo !== undefined && object.erasmusInfo !== null) {
       message.erasmusInfo = ErasmusInfo.fromPartial(object.erasmusInfo);
@@ -669,14 +412,6 @@ export const GenesisState = {
     } else {
       message.universityInfo = undefined;
     }
-    if (
-      object.universityDetailsList !== undefined &&
-      object.universityDetailsList !== null
-    ) {
-      for (const e of object.universityDetailsList) {
-        message.universityDetailsList.push(UniversityDetails.fromPartial(e));
-      }
-    }
     if (object.chainInfo !== undefined && object.chainInfo !== null) {
       message.chainInfo = ChainInfo.fromPartial(object.chainInfo);
     } else {
@@ -696,16 +431,6 @@ export const GenesisState = {
   },
 };
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
-  throw "Unable to locate global object";
-})();
-
 type Builtin = Date | Function | Uint8Array | string | number | undefined;
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -716,15 +441,3 @@ export type DeepPartial<T> = T extends Builtin
   : T extends {}
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-function longToNumber(long: Long): number {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
-}
-
-if (util.Long !== Long) {
-  util.Long = Long as any;
-  configure();
-}

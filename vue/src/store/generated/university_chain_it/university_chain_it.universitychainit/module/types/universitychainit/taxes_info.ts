@@ -1,17 +1,20 @@
 /* eslint-disable */
 import * as Long from "long";
 import { util, configure, Writer, Reader } from "protobufjs/minimal";
-import { AnnualTaxes } from "../universitychainit/annual_taxes";
 
 export const protobufPackage = "university_chain_it.universitychainit";
 
 export interface TaxesInfo {
   status: boolean;
   totalAmount: number;
-  taxesHistory: AnnualTaxes | undefined;
+  taxesHistory: string;
 }
 
-const baseTaxesInfo: object = { status: false, totalAmount: 0 };
+const baseTaxesInfo: object = {
+  status: false,
+  totalAmount: 0,
+  taxesHistory: "",
+};
 
 export const TaxesInfo = {
   encode(message: TaxesInfo, writer: Writer = Writer.create()): Writer {
@@ -21,11 +24,8 @@ export const TaxesInfo = {
     if (message.totalAmount !== 0) {
       writer.uint32(16).uint64(message.totalAmount);
     }
-    if (message.taxesHistory !== undefined) {
-      AnnualTaxes.encode(
-        message.taxesHistory,
-        writer.uint32(26).fork()
-      ).ldelim();
+    if (message.taxesHistory !== "") {
+      writer.uint32(26).string(message.taxesHistory);
     }
     return writer;
   },
@@ -44,7 +44,7 @@ export const TaxesInfo = {
           message.totalAmount = longToNumber(reader.uint64() as Long);
           break;
         case 3:
-          message.taxesHistory = AnnualTaxes.decode(reader, reader.uint32());
+          message.taxesHistory = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -67,9 +67,9 @@ export const TaxesInfo = {
       message.totalAmount = 0;
     }
     if (object.taxesHistory !== undefined && object.taxesHistory !== null) {
-      message.taxesHistory = AnnualTaxes.fromJSON(object.taxesHistory);
+      message.taxesHistory = String(object.taxesHistory);
     } else {
-      message.taxesHistory = undefined;
+      message.taxesHistory = "";
     }
     return message;
   },
@@ -80,9 +80,7 @@ export const TaxesInfo = {
     message.totalAmount !== undefined &&
       (obj.totalAmount = message.totalAmount);
     message.taxesHistory !== undefined &&
-      (obj.taxesHistory = message.taxesHistory
-        ? AnnualTaxes.toJSON(message.taxesHistory)
-        : undefined);
+      (obj.taxesHistory = message.taxesHistory);
     return obj;
   },
 
@@ -99,9 +97,9 @@ export const TaxesInfo = {
       message.totalAmount = 0;
     }
     if (object.taxesHistory !== undefined && object.taxesHistory !== null) {
-      message.taxesHistory = AnnualTaxes.fromPartial(object.taxesHistory);
+      message.taxesHistory = object.taxesHistory;
     } else {
-      message.taxesHistory = undefined;
+      message.taxesHistory = "";
     }
     return message;
   },

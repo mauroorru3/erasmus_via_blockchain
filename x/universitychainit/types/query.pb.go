@@ -377,190 +377,6 @@ func (m *QueryGetStudentInfoResponse) GetStudentInfo() StudentInfo {
 	return StudentInfo{}
 }
 
-type QueryGetExamsInfoRequest struct {
-	ExamName string `protobuf:"bytes,1,opt,name=examName,proto3" json:"examName,omitempty"`
-}
-
-func (m *QueryGetExamsInfoRequest) Reset()         { *m = QueryGetExamsInfoRequest{} }
-func (m *QueryGetExamsInfoRequest) String() string { return proto.CompactTextString(m) }
-func (*QueryGetExamsInfoRequest) ProtoMessage()    {}
-func (*QueryGetExamsInfoRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{8}
-}
-func (m *QueryGetExamsInfoRequest) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *QueryGetExamsInfoRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_QueryGetExamsInfoRequest.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *QueryGetExamsInfoRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryGetExamsInfoRequest.Merge(m, src)
-}
-func (m *QueryGetExamsInfoRequest) XXX_Size() int {
-	return m.Size()
-}
-func (m *QueryGetExamsInfoRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryGetExamsInfoRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_QueryGetExamsInfoRequest proto.InternalMessageInfo
-
-func (m *QueryGetExamsInfoRequest) GetExamName() string {
-	if m != nil {
-		return m.ExamName
-	}
-	return ""
-}
-
-type QueryGetExamsInfoResponse struct {
-	ExamsInfo ExamsInfo `protobuf:"bytes,1,opt,name=examsInfo,proto3" json:"examsInfo"`
-}
-
-func (m *QueryGetExamsInfoResponse) Reset()         { *m = QueryGetExamsInfoResponse{} }
-func (m *QueryGetExamsInfoResponse) String() string { return proto.CompactTextString(m) }
-func (*QueryGetExamsInfoResponse) ProtoMessage()    {}
-func (*QueryGetExamsInfoResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{9}
-}
-func (m *QueryGetExamsInfoResponse) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *QueryGetExamsInfoResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_QueryGetExamsInfoResponse.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *QueryGetExamsInfoResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryGetExamsInfoResponse.Merge(m, src)
-}
-func (m *QueryGetExamsInfoResponse) XXX_Size() int {
-	return m.Size()
-}
-func (m *QueryGetExamsInfoResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryGetExamsInfoResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_QueryGetExamsInfoResponse proto.InternalMessageInfo
-
-func (m *QueryGetExamsInfoResponse) GetExamsInfo() ExamsInfo {
-	if m != nil {
-		return m.ExamsInfo
-	}
-	return ExamsInfo{}
-}
-
-type QueryAllExamsInfoRequest struct {
-	Pagination *query.PageRequest `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
-}
-
-func (m *QueryAllExamsInfoRequest) Reset()         { *m = QueryAllExamsInfoRequest{} }
-func (m *QueryAllExamsInfoRequest) String() string { return proto.CompactTextString(m) }
-func (*QueryAllExamsInfoRequest) ProtoMessage()    {}
-func (*QueryAllExamsInfoRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{10}
-}
-func (m *QueryAllExamsInfoRequest) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *QueryAllExamsInfoRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_QueryAllExamsInfoRequest.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *QueryAllExamsInfoRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryAllExamsInfoRequest.Merge(m, src)
-}
-func (m *QueryAllExamsInfoRequest) XXX_Size() int {
-	return m.Size()
-}
-func (m *QueryAllExamsInfoRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryAllExamsInfoRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_QueryAllExamsInfoRequest proto.InternalMessageInfo
-
-func (m *QueryAllExamsInfoRequest) GetPagination() *query.PageRequest {
-	if m != nil {
-		return m.Pagination
-	}
-	return nil
-}
-
-type QueryAllExamsInfoResponse struct {
-	ExamsInfo  []ExamsInfo         `protobuf:"bytes,1,rep,name=examsInfo,proto3" json:"examsInfo"`
-	Pagination *query.PageResponse `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
-}
-
-func (m *QueryAllExamsInfoResponse) Reset()         { *m = QueryAllExamsInfoResponse{} }
-func (m *QueryAllExamsInfoResponse) String() string { return proto.CompactTextString(m) }
-func (*QueryAllExamsInfoResponse) ProtoMessage()    {}
-func (*QueryAllExamsInfoResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{11}
-}
-func (m *QueryAllExamsInfoResponse) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *QueryAllExamsInfoResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_QueryAllExamsInfoResponse.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *QueryAllExamsInfoResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryAllExamsInfoResponse.Merge(m, src)
-}
-func (m *QueryAllExamsInfoResponse) XXX_Size() int {
-	return m.Size()
-}
-func (m *QueryAllExamsInfoResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryAllExamsInfoResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_QueryAllExamsInfoResponse proto.InternalMessageInfo
-
-func (m *QueryAllExamsInfoResponse) GetExamsInfo() []ExamsInfo {
-	if m != nil {
-		return m.ExamsInfo
-	}
-	return nil
-}
-
-func (m *QueryAllExamsInfoResponse) GetPagination() *query.PageResponse {
-	if m != nil {
-		return m.Pagination
-	}
-	return nil
-}
-
 type QueryGetTranscriptOfRecordsRequest struct {
 }
 
@@ -568,7 +384,7 @@ func (m *QueryGetTranscriptOfRecordsRequest) Reset()         { *m = QueryGetTran
 func (m *QueryGetTranscriptOfRecordsRequest) String() string { return proto.CompactTextString(m) }
 func (*QueryGetTranscriptOfRecordsRequest) ProtoMessage()    {}
 func (*QueryGetTranscriptOfRecordsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{12}
+	return fileDescriptor_a11fe59a0e65b096, []int{8}
 }
 func (m *QueryGetTranscriptOfRecordsRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -605,7 +421,7 @@ func (m *QueryGetTranscriptOfRecordsResponse) Reset()         { *m = QueryGetTra
 func (m *QueryGetTranscriptOfRecordsResponse) String() string { return proto.CompactTextString(m) }
 func (*QueryGetTranscriptOfRecordsResponse) ProtoMessage()    {}
 func (*QueryGetTranscriptOfRecordsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{13}
+	return fileDescriptor_a11fe59a0e65b096, []int{9}
 }
 func (m *QueryGetTranscriptOfRecordsResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -648,7 +464,7 @@ func (m *QueryGetPersonalInfoRequest) Reset()         { *m = QueryGetPersonalInf
 func (m *QueryGetPersonalInfoRequest) String() string { return proto.CompactTextString(m) }
 func (*QueryGetPersonalInfoRequest) ProtoMessage()    {}
 func (*QueryGetPersonalInfoRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{14}
+	return fileDescriptor_a11fe59a0e65b096, []int{10}
 }
 func (m *QueryGetPersonalInfoRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -685,7 +501,7 @@ func (m *QueryGetPersonalInfoResponse) Reset()         { *m = QueryGetPersonalIn
 func (m *QueryGetPersonalInfoResponse) String() string { return proto.CompactTextString(m) }
 func (*QueryGetPersonalInfoResponse) ProtoMessage()    {}
 func (*QueryGetPersonalInfoResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{15}
+	return fileDescriptor_a11fe59a0e65b096, []int{11}
 }
 func (m *QueryGetPersonalInfoResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -728,7 +544,7 @@ func (m *QueryGetResidenceInfoRequest) Reset()         { *m = QueryGetResidenceI
 func (m *QueryGetResidenceInfoRequest) String() string { return proto.CompactTextString(m) }
 func (*QueryGetResidenceInfoRequest) ProtoMessage()    {}
 func (*QueryGetResidenceInfoRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{16}
+	return fileDescriptor_a11fe59a0e65b096, []int{12}
 }
 func (m *QueryGetResidenceInfoRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -765,7 +581,7 @@ func (m *QueryGetResidenceInfoResponse) Reset()         { *m = QueryGetResidence
 func (m *QueryGetResidenceInfoResponse) String() string { return proto.CompactTextString(m) }
 func (*QueryGetResidenceInfoResponse) ProtoMessage()    {}
 func (*QueryGetResidenceInfoResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{17}
+	return fileDescriptor_a11fe59a0e65b096, []int{13}
 }
 func (m *QueryGetResidenceInfoResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -808,7 +624,7 @@ func (m *QueryGetContactInfoRequest) Reset()         { *m = QueryGetContactInfoR
 func (m *QueryGetContactInfoRequest) String() string { return proto.CompactTextString(m) }
 func (*QueryGetContactInfoRequest) ProtoMessage()    {}
 func (*QueryGetContactInfoRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{18}
+	return fileDescriptor_a11fe59a0e65b096, []int{14}
 }
 func (m *QueryGetContactInfoRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -845,7 +661,7 @@ func (m *QueryGetContactInfoResponse) Reset()         { *m = QueryGetContactInfo
 func (m *QueryGetContactInfoResponse) String() string { return proto.CompactTextString(m) }
 func (*QueryGetContactInfoResponse) ProtoMessage()    {}
 func (*QueryGetContactInfoResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{19}
+	return fileDescriptor_a11fe59a0e65b096, []int{15}
 }
 func (m *QueryGetContactInfoResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -881,190 +697,6 @@ func (m *QueryGetContactInfoResponse) GetContactInfo() ContactInfo {
 	return ContactInfo{}
 }
 
-type QueryGetAnnualTaxesRequest struct {
-	Id uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-}
-
-func (m *QueryGetAnnualTaxesRequest) Reset()         { *m = QueryGetAnnualTaxesRequest{} }
-func (m *QueryGetAnnualTaxesRequest) String() string { return proto.CompactTextString(m) }
-func (*QueryGetAnnualTaxesRequest) ProtoMessage()    {}
-func (*QueryGetAnnualTaxesRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{20}
-}
-func (m *QueryGetAnnualTaxesRequest) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *QueryGetAnnualTaxesRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_QueryGetAnnualTaxesRequest.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *QueryGetAnnualTaxesRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryGetAnnualTaxesRequest.Merge(m, src)
-}
-func (m *QueryGetAnnualTaxesRequest) XXX_Size() int {
-	return m.Size()
-}
-func (m *QueryGetAnnualTaxesRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryGetAnnualTaxesRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_QueryGetAnnualTaxesRequest proto.InternalMessageInfo
-
-func (m *QueryGetAnnualTaxesRequest) GetId() uint64 {
-	if m != nil {
-		return m.Id
-	}
-	return 0
-}
-
-type QueryGetAnnualTaxesResponse struct {
-	AnnualTaxes AnnualTaxes `protobuf:"bytes,1,opt,name=AnnualTaxes,proto3" json:"AnnualTaxes"`
-}
-
-func (m *QueryGetAnnualTaxesResponse) Reset()         { *m = QueryGetAnnualTaxesResponse{} }
-func (m *QueryGetAnnualTaxesResponse) String() string { return proto.CompactTextString(m) }
-func (*QueryGetAnnualTaxesResponse) ProtoMessage()    {}
-func (*QueryGetAnnualTaxesResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{21}
-}
-func (m *QueryGetAnnualTaxesResponse) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *QueryGetAnnualTaxesResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_QueryGetAnnualTaxesResponse.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *QueryGetAnnualTaxesResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryGetAnnualTaxesResponse.Merge(m, src)
-}
-func (m *QueryGetAnnualTaxesResponse) XXX_Size() int {
-	return m.Size()
-}
-func (m *QueryGetAnnualTaxesResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryGetAnnualTaxesResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_QueryGetAnnualTaxesResponse proto.InternalMessageInfo
-
-func (m *QueryGetAnnualTaxesResponse) GetAnnualTaxes() AnnualTaxes {
-	if m != nil {
-		return m.AnnualTaxes
-	}
-	return AnnualTaxes{}
-}
-
-type QueryAllAnnualTaxesRequest struct {
-	Pagination *query.PageRequest `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
-}
-
-func (m *QueryAllAnnualTaxesRequest) Reset()         { *m = QueryAllAnnualTaxesRequest{} }
-func (m *QueryAllAnnualTaxesRequest) String() string { return proto.CompactTextString(m) }
-func (*QueryAllAnnualTaxesRequest) ProtoMessage()    {}
-func (*QueryAllAnnualTaxesRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{22}
-}
-func (m *QueryAllAnnualTaxesRequest) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *QueryAllAnnualTaxesRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_QueryAllAnnualTaxesRequest.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *QueryAllAnnualTaxesRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryAllAnnualTaxesRequest.Merge(m, src)
-}
-func (m *QueryAllAnnualTaxesRequest) XXX_Size() int {
-	return m.Size()
-}
-func (m *QueryAllAnnualTaxesRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryAllAnnualTaxesRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_QueryAllAnnualTaxesRequest proto.InternalMessageInfo
-
-func (m *QueryAllAnnualTaxesRequest) GetPagination() *query.PageRequest {
-	if m != nil {
-		return m.Pagination
-	}
-	return nil
-}
-
-type QueryAllAnnualTaxesResponse struct {
-	AnnualTaxes []AnnualTaxes       `protobuf:"bytes,1,rep,name=AnnualTaxes,proto3" json:"AnnualTaxes"`
-	Pagination  *query.PageResponse `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
-}
-
-func (m *QueryAllAnnualTaxesResponse) Reset()         { *m = QueryAllAnnualTaxesResponse{} }
-func (m *QueryAllAnnualTaxesResponse) String() string { return proto.CompactTextString(m) }
-func (*QueryAllAnnualTaxesResponse) ProtoMessage()    {}
-func (*QueryAllAnnualTaxesResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{23}
-}
-func (m *QueryAllAnnualTaxesResponse) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *QueryAllAnnualTaxesResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_QueryAllAnnualTaxesResponse.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *QueryAllAnnualTaxesResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryAllAnnualTaxesResponse.Merge(m, src)
-}
-func (m *QueryAllAnnualTaxesResponse) XXX_Size() int {
-	return m.Size()
-}
-func (m *QueryAllAnnualTaxesResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryAllAnnualTaxesResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_QueryAllAnnualTaxesResponse proto.InternalMessageInfo
-
-func (m *QueryAllAnnualTaxesResponse) GetAnnualTaxes() []AnnualTaxes {
-	if m != nil {
-		return m.AnnualTaxes
-	}
-	return nil
-}
-
-func (m *QueryAllAnnualTaxesResponse) GetPagination() *query.PageResponse {
-	if m != nil {
-		return m.Pagination
-	}
-	return nil
-}
-
 type QueryGetTaxesInfoRequest struct {
 }
 
@@ -1072,7 +704,7 @@ func (m *QueryGetTaxesInfoRequest) Reset()         { *m = QueryGetTaxesInfoReque
 func (m *QueryGetTaxesInfoRequest) String() string { return proto.CompactTextString(m) }
 func (*QueryGetTaxesInfoRequest) ProtoMessage()    {}
 func (*QueryGetTaxesInfoRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{24}
+	return fileDescriptor_a11fe59a0e65b096, []int{16}
 }
 func (m *QueryGetTaxesInfoRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1109,7 +741,7 @@ func (m *QueryGetTaxesInfoResponse) Reset()         { *m = QueryGetTaxesInfoResp
 func (m *QueryGetTaxesInfoResponse) String() string { return proto.CompactTextString(m) }
 func (*QueryGetTaxesInfoResponse) ProtoMessage()    {}
 func (*QueryGetTaxesInfoResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{25}
+	return fileDescriptor_a11fe59a0e65b096, []int{17}
 }
 func (m *QueryGetTaxesInfoResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1145,454 +777,6 @@ func (m *QueryGetTaxesInfoResponse) GetTaxesInfo() TaxesInfo {
 	return TaxesInfo{}
 }
 
-type QueryGetErasmusContributionRequest struct {
-}
-
-func (m *QueryGetErasmusContributionRequest) Reset()         { *m = QueryGetErasmusContributionRequest{} }
-func (m *QueryGetErasmusContributionRequest) String() string { return proto.CompactTextString(m) }
-func (*QueryGetErasmusContributionRequest) ProtoMessage()    {}
-func (*QueryGetErasmusContributionRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{26}
-}
-func (m *QueryGetErasmusContributionRequest) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *QueryGetErasmusContributionRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_QueryGetErasmusContributionRequest.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *QueryGetErasmusContributionRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryGetErasmusContributionRequest.Merge(m, src)
-}
-func (m *QueryGetErasmusContributionRequest) XXX_Size() int {
-	return m.Size()
-}
-func (m *QueryGetErasmusContributionRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryGetErasmusContributionRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_QueryGetErasmusContributionRequest proto.InternalMessageInfo
-
-type QueryGetErasmusContributionResponse struct {
-	ErasmusContribution ErasmusContribution `protobuf:"bytes,1,opt,name=ErasmusContribution,proto3" json:"ErasmusContribution"`
-}
-
-func (m *QueryGetErasmusContributionResponse) Reset()         { *m = QueryGetErasmusContributionResponse{} }
-func (m *QueryGetErasmusContributionResponse) String() string { return proto.CompactTextString(m) }
-func (*QueryGetErasmusContributionResponse) ProtoMessage()    {}
-func (*QueryGetErasmusContributionResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{27}
-}
-func (m *QueryGetErasmusContributionResponse) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *QueryGetErasmusContributionResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_QueryGetErasmusContributionResponse.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *QueryGetErasmusContributionResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryGetErasmusContributionResponse.Merge(m, src)
-}
-func (m *QueryGetErasmusContributionResponse) XXX_Size() int {
-	return m.Size()
-}
-func (m *QueryGetErasmusContributionResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryGetErasmusContributionResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_QueryGetErasmusContributionResponse proto.InternalMessageInfo
-
-func (m *QueryGetErasmusContributionResponse) GetErasmusContribution() ErasmusContribution {
-	if m != nil {
-		return m.ErasmusContribution
-	}
-	return ErasmusContribution{}
-}
-
-type QueryGetErasmusExamsRequest struct {
-	ExamName string `protobuf:"bytes,1,opt,name=examName,proto3" json:"examName,omitempty"`
-}
-
-func (m *QueryGetErasmusExamsRequest) Reset()         { *m = QueryGetErasmusExamsRequest{} }
-func (m *QueryGetErasmusExamsRequest) String() string { return proto.CompactTextString(m) }
-func (*QueryGetErasmusExamsRequest) ProtoMessage()    {}
-func (*QueryGetErasmusExamsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{28}
-}
-func (m *QueryGetErasmusExamsRequest) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *QueryGetErasmusExamsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_QueryGetErasmusExamsRequest.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *QueryGetErasmusExamsRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryGetErasmusExamsRequest.Merge(m, src)
-}
-func (m *QueryGetErasmusExamsRequest) XXX_Size() int {
-	return m.Size()
-}
-func (m *QueryGetErasmusExamsRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryGetErasmusExamsRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_QueryGetErasmusExamsRequest proto.InternalMessageInfo
-
-func (m *QueryGetErasmusExamsRequest) GetExamName() string {
-	if m != nil {
-		return m.ExamName
-	}
-	return ""
-}
-
-type QueryGetErasmusExamsResponse struct {
-	ErasmusExams ErasmusExams `protobuf:"bytes,1,opt,name=erasmusExams,proto3" json:"erasmusExams"`
-}
-
-func (m *QueryGetErasmusExamsResponse) Reset()         { *m = QueryGetErasmusExamsResponse{} }
-func (m *QueryGetErasmusExamsResponse) String() string { return proto.CompactTextString(m) }
-func (*QueryGetErasmusExamsResponse) ProtoMessage()    {}
-func (*QueryGetErasmusExamsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{29}
-}
-func (m *QueryGetErasmusExamsResponse) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *QueryGetErasmusExamsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_QueryGetErasmusExamsResponse.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *QueryGetErasmusExamsResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryGetErasmusExamsResponse.Merge(m, src)
-}
-func (m *QueryGetErasmusExamsResponse) XXX_Size() int {
-	return m.Size()
-}
-func (m *QueryGetErasmusExamsResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryGetErasmusExamsResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_QueryGetErasmusExamsResponse proto.InternalMessageInfo
-
-func (m *QueryGetErasmusExamsResponse) GetErasmusExams() ErasmusExams {
-	if m != nil {
-		return m.ErasmusExams
-	}
-	return ErasmusExams{}
-}
-
-type QueryAllErasmusExamsRequest struct {
-	Pagination *query.PageRequest `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
-}
-
-func (m *QueryAllErasmusExamsRequest) Reset()         { *m = QueryAllErasmusExamsRequest{} }
-func (m *QueryAllErasmusExamsRequest) String() string { return proto.CompactTextString(m) }
-func (*QueryAllErasmusExamsRequest) ProtoMessage()    {}
-func (*QueryAllErasmusExamsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{30}
-}
-func (m *QueryAllErasmusExamsRequest) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *QueryAllErasmusExamsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_QueryAllErasmusExamsRequest.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *QueryAllErasmusExamsRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryAllErasmusExamsRequest.Merge(m, src)
-}
-func (m *QueryAllErasmusExamsRequest) XXX_Size() int {
-	return m.Size()
-}
-func (m *QueryAllErasmusExamsRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryAllErasmusExamsRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_QueryAllErasmusExamsRequest proto.InternalMessageInfo
-
-func (m *QueryAllErasmusExamsRequest) GetPagination() *query.PageRequest {
-	if m != nil {
-		return m.Pagination
-	}
-	return nil
-}
-
-type QueryAllErasmusExamsResponse struct {
-	ErasmusExams []ErasmusExams      `protobuf:"bytes,1,rep,name=erasmusExams,proto3" json:"erasmusExams"`
-	Pagination   *query.PageResponse `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
-}
-
-func (m *QueryAllErasmusExamsResponse) Reset()         { *m = QueryAllErasmusExamsResponse{} }
-func (m *QueryAllErasmusExamsResponse) String() string { return proto.CompactTextString(m) }
-func (*QueryAllErasmusExamsResponse) ProtoMessage()    {}
-func (*QueryAllErasmusExamsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{31}
-}
-func (m *QueryAllErasmusExamsResponse) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *QueryAllErasmusExamsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_QueryAllErasmusExamsResponse.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *QueryAllErasmusExamsResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryAllErasmusExamsResponse.Merge(m, src)
-}
-func (m *QueryAllErasmusExamsResponse) XXX_Size() int {
-	return m.Size()
-}
-func (m *QueryAllErasmusExamsResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryAllErasmusExamsResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_QueryAllErasmusExamsResponse proto.InternalMessageInfo
-
-func (m *QueryAllErasmusExamsResponse) GetErasmusExams() []ErasmusExams {
-	if m != nil {
-		return m.ErasmusExams
-	}
-	return nil
-}
-
-func (m *QueryAllErasmusExamsResponse) GetPagination() *query.PageResponse {
-	if m != nil {
-		return m.Pagination
-	}
-	return nil
-}
-
-type QueryGetErasmusCareerRequest struct {
-	Id uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-}
-
-func (m *QueryGetErasmusCareerRequest) Reset()         { *m = QueryGetErasmusCareerRequest{} }
-func (m *QueryGetErasmusCareerRequest) String() string { return proto.CompactTextString(m) }
-func (*QueryGetErasmusCareerRequest) ProtoMessage()    {}
-func (*QueryGetErasmusCareerRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{32}
-}
-func (m *QueryGetErasmusCareerRequest) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *QueryGetErasmusCareerRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_QueryGetErasmusCareerRequest.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *QueryGetErasmusCareerRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryGetErasmusCareerRequest.Merge(m, src)
-}
-func (m *QueryGetErasmusCareerRequest) XXX_Size() int {
-	return m.Size()
-}
-func (m *QueryGetErasmusCareerRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryGetErasmusCareerRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_QueryGetErasmusCareerRequest proto.InternalMessageInfo
-
-func (m *QueryGetErasmusCareerRequest) GetId() uint64 {
-	if m != nil {
-		return m.Id
-	}
-	return 0
-}
-
-type QueryGetErasmusCareerResponse struct {
-	ErasmusCareer ErasmusCareer `protobuf:"bytes,1,opt,name=ErasmusCareer,proto3" json:"ErasmusCareer"`
-}
-
-func (m *QueryGetErasmusCareerResponse) Reset()         { *m = QueryGetErasmusCareerResponse{} }
-func (m *QueryGetErasmusCareerResponse) String() string { return proto.CompactTextString(m) }
-func (*QueryGetErasmusCareerResponse) ProtoMessage()    {}
-func (*QueryGetErasmusCareerResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{33}
-}
-func (m *QueryGetErasmusCareerResponse) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *QueryGetErasmusCareerResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_QueryGetErasmusCareerResponse.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *QueryGetErasmusCareerResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryGetErasmusCareerResponse.Merge(m, src)
-}
-func (m *QueryGetErasmusCareerResponse) XXX_Size() int {
-	return m.Size()
-}
-func (m *QueryGetErasmusCareerResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryGetErasmusCareerResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_QueryGetErasmusCareerResponse proto.InternalMessageInfo
-
-func (m *QueryGetErasmusCareerResponse) GetErasmusCareer() ErasmusCareer {
-	if m != nil {
-		return m.ErasmusCareer
-	}
-	return ErasmusCareer{}
-}
-
-type QueryAllErasmusCareerRequest struct {
-	Pagination *query.PageRequest `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
-}
-
-func (m *QueryAllErasmusCareerRequest) Reset()         { *m = QueryAllErasmusCareerRequest{} }
-func (m *QueryAllErasmusCareerRequest) String() string { return proto.CompactTextString(m) }
-func (*QueryAllErasmusCareerRequest) ProtoMessage()    {}
-func (*QueryAllErasmusCareerRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{34}
-}
-func (m *QueryAllErasmusCareerRequest) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *QueryAllErasmusCareerRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_QueryAllErasmusCareerRequest.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *QueryAllErasmusCareerRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryAllErasmusCareerRequest.Merge(m, src)
-}
-func (m *QueryAllErasmusCareerRequest) XXX_Size() int {
-	return m.Size()
-}
-func (m *QueryAllErasmusCareerRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryAllErasmusCareerRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_QueryAllErasmusCareerRequest proto.InternalMessageInfo
-
-func (m *QueryAllErasmusCareerRequest) GetPagination() *query.PageRequest {
-	if m != nil {
-		return m.Pagination
-	}
-	return nil
-}
-
-type QueryAllErasmusCareerResponse struct {
-	ErasmusCareer []ErasmusCareer     `protobuf:"bytes,1,rep,name=ErasmusCareer,proto3" json:"ErasmusCareer"`
-	Pagination    *query.PageResponse `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
-}
-
-func (m *QueryAllErasmusCareerResponse) Reset()         { *m = QueryAllErasmusCareerResponse{} }
-func (m *QueryAllErasmusCareerResponse) String() string { return proto.CompactTextString(m) }
-func (*QueryAllErasmusCareerResponse) ProtoMessage()    {}
-func (*QueryAllErasmusCareerResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{35}
-}
-func (m *QueryAllErasmusCareerResponse) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *QueryAllErasmusCareerResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_QueryAllErasmusCareerResponse.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *QueryAllErasmusCareerResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryAllErasmusCareerResponse.Merge(m, src)
-}
-func (m *QueryAllErasmusCareerResponse) XXX_Size() int {
-	return m.Size()
-}
-func (m *QueryAllErasmusCareerResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryAllErasmusCareerResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_QueryAllErasmusCareerResponse proto.InternalMessageInfo
-
-func (m *QueryAllErasmusCareerResponse) GetErasmusCareer() []ErasmusCareer {
-	if m != nil {
-		return m.ErasmusCareer
-	}
-	return nil
-}
-
-func (m *QueryAllErasmusCareerResponse) GetPagination() *query.PageResponse {
-	if m != nil {
-		return m.Pagination
-	}
-	return nil
-}
-
 type QueryGetErasmusInfoRequest struct {
 }
 
@@ -1600,7 +784,7 @@ func (m *QueryGetErasmusInfoRequest) Reset()         { *m = QueryGetErasmusInfoR
 func (m *QueryGetErasmusInfoRequest) String() string { return proto.CompactTextString(m) }
 func (*QueryGetErasmusInfoRequest) ProtoMessage()    {}
 func (*QueryGetErasmusInfoRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{36}
+	return fileDescriptor_a11fe59a0e65b096, []int{18}
 }
 func (m *QueryGetErasmusInfoRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1637,7 +821,7 @@ func (m *QueryGetErasmusInfoResponse) Reset()         { *m = QueryGetErasmusInfo
 func (m *QueryGetErasmusInfoResponse) String() string { return proto.CompactTextString(m) }
 func (*QueryGetErasmusInfoResponse) ProtoMessage()    {}
 func (*QueryGetErasmusInfoResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{37}
+	return fileDescriptor_a11fe59a0e65b096, []int{19}
 }
 func (m *QueryGetErasmusInfoResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1681,7 +865,7 @@ func (m *QueryGetStoredStudentRequest) Reset()         { *m = QueryGetStoredStud
 func (m *QueryGetStoredStudentRequest) String() string { return proto.CompactTextString(m) }
 func (*QueryGetStoredStudentRequest) ProtoMessage()    {}
 func (*QueryGetStoredStudentRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{38}
+	return fileDescriptor_a11fe59a0e65b096, []int{20}
 }
 func (m *QueryGetStoredStudentRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1725,7 +909,7 @@ func (m *QueryGetStoredStudentResponse) Reset()         { *m = QueryGetStoredStu
 func (m *QueryGetStoredStudentResponse) String() string { return proto.CompactTextString(m) }
 func (*QueryGetStoredStudentResponse) ProtoMessage()    {}
 func (*QueryGetStoredStudentResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{39}
+	return fileDescriptor_a11fe59a0e65b096, []int{21}
 }
 func (m *QueryGetStoredStudentResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1769,7 +953,7 @@ func (m *QueryAllStoredStudentRequest) Reset()         { *m = QueryAllStoredStud
 func (m *QueryAllStoredStudentRequest) String() string { return proto.CompactTextString(m) }
 func (*QueryAllStoredStudentRequest) ProtoMessage()    {}
 func (*QueryAllStoredStudentRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{40}
+	return fileDescriptor_a11fe59a0e65b096, []int{22}
 }
 func (m *QueryAllStoredStudentRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1814,7 +998,7 @@ func (m *QueryAllStoredStudentResponse) Reset()         { *m = QueryAllStoredStu
 func (m *QueryAllStoredStudentResponse) String() string { return proto.CompactTextString(m) }
 func (*QueryAllStoredStudentResponse) ProtoMessage()    {}
 func (*QueryAllStoredStudentResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{41}
+	return fileDescriptor_a11fe59a0e65b096, []int{23}
 }
 func (m *QueryAllStoredStudentResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1864,7 +1048,7 @@ func (m *QueryGetUniversityInfoRequest) Reset()         { *m = QueryGetUniversit
 func (m *QueryGetUniversityInfoRequest) String() string { return proto.CompactTextString(m) }
 func (*QueryGetUniversityInfoRequest) ProtoMessage()    {}
 func (*QueryGetUniversityInfoRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{42}
+	return fileDescriptor_a11fe59a0e65b096, []int{24}
 }
 func (m *QueryGetUniversityInfoRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1901,7 +1085,7 @@ func (m *QueryGetUniversityInfoResponse) Reset()         { *m = QueryGetUniversi
 func (m *QueryGetUniversityInfoResponse) String() string { return proto.CompactTextString(m) }
 func (*QueryGetUniversityInfoResponse) ProtoMessage()    {}
 func (*QueryGetUniversityInfoResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{43}
+	return fileDescriptor_a11fe59a0e65b096, []int{25}
 }
 func (m *QueryGetUniversityInfoResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1937,190 +1121,6 @@ func (m *QueryGetUniversityInfoResponse) GetUniversityInfo() UniversityInfo {
 	return UniversityInfo{}
 }
 
-type QueryGetUniversityDetailsRequest struct {
-	UniversityName string `protobuf:"bytes,1,opt,name=universityName,proto3" json:"universityName,omitempty"`
-}
-
-func (m *QueryGetUniversityDetailsRequest) Reset()         { *m = QueryGetUniversityDetailsRequest{} }
-func (m *QueryGetUniversityDetailsRequest) String() string { return proto.CompactTextString(m) }
-func (*QueryGetUniversityDetailsRequest) ProtoMessage()    {}
-func (*QueryGetUniversityDetailsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{44}
-}
-func (m *QueryGetUniversityDetailsRequest) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *QueryGetUniversityDetailsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_QueryGetUniversityDetailsRequest.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *QueryGetUniversityDetailsRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryGetUniversityDetailsRequest.Merge(m, src)
-}
-func (m *QueryGetUniversityDetailsRequest) XXX_Size() int {
-	return m.Size()
-}
-func (m *QueryGetUniversityDetailsRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryGetUniversityDetailsRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_QueryGetUniversityDetailsRequest proto.InternalMessageInfo
-
-func (m *QueryGetUniversityDetailsRequest) GetUniversityName() string {
-	if m != nil {
-		return m.UniversityName
-	}
-	return ""
-}
-
-type QueryGetUniversityDetailsResponse struct {
-	UniversityDetails UniversityDetails `protobuf:"bytes,1,opt,name=universityDetails,proto3" json:"universityDetails"`
-}
-
-func (m *QueryGetUniversityDetailsResponse) Reset()         { *m = QueryGetUniversityDetailsResponse{} }
-func (m *QueryGetUniversityDetailsResponse) String() string { return proto.CompactTextString(m) }
-func (*QueryGetUniversityDetailsResponse) ProtoMessage()    {}
-func (*QueryGetUniversityDetailsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{45}
-}
-func (m *QueryGetUniversityDetailsResponse) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *QueryGetUniversityDetailsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_QueryGetUniversityDetailsResponse.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *QueryGetUniversityDetailsResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryGetUniversityDetailsResponse.Merge(m, src)
-}
-func (m *QueryGetUniversityDetailsResponse) XXX_Size() int {
-	return m.Size()
-}
-func (m *QueryGetUniversityDetailsResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryGetUniversityDetailsResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_QueryGetUniversityDetailsResponse proto.InternalMessageInfo
-
-func (m *QueryGetUniversityDetailsResponse) GetUniversityDetails() UniversityDetails {
-	if m != nil {
-		return m.UniversityDetails
-	}
-	return UniversityDetails{}
-}
-
-type QueryAllUniversityDetailsRequest struct {
-	Pagination *query.PageRequest `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
-}
-
-func (m *QueryAllUniversityDetailsRequest) Reset()         { *m = QueryAllUniversityDetailsRequest{} }
-func (m *QueryAllUniversityDetailsRequest) String() string { return proto.CompactTextString(m) }
-func (*QueryAllUniversityDetailsRequest) ProtoMessage()    {}
-func (*QueryAllUniversityDetailsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{46}
-}
-func (m *QueryAllUniversityDetailsRequest) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *QueryAllUniversityDetailsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_QueryAllUniversityDetailsRequest.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *QueryAllUniversityDetailsRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryAllUniversityDetailsRequest.Merge(m, src)
-}
-func (m *QueryAllUniversityDetailsRequest) XXX_Size() int {
-	return m.Size()
-}
-func (m *QueryAllUniversityDetailsRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryAllUniversityDetailsRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_QueryAllUniversityDetailsRequest proto.InternalMessageInfo
-
-func (m *QueryAllUniversityDetailsRequest) GetPagination() *query.PageRequest {
-	if m != nil {
-		return m.Pagination
-	}
-	return nil
-}
-
-type QueryAllUniversityDetailsResponse struct {
-	UniversityDetails []UniversityDetails `protobuf:"bytes,1,rep,name=universityDetails,proto3" json:"universityDetails"`
-	Pagination        *query.PageResponse `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
-}
-
-func (m *QueryAllUniversityDetailsResponse) Reset()         { *m = QueryAllUniversityDetailsResponse{} }
-func (m *QueryAllUniversityDetailsResponse) String() string { return proto.CompactTextString(m) }
-func (*QueryAllUniversityDetailsResponse) ProtoMessage()    {}
-func (*QueryAllUniversityDetailsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{47}
-}
-func (m *QueryAllUniversityDetailsResponse) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *QueryAllUniversityDetailsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_QueryAllUniversityDetailsResponse.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *QueryAllUniversityDetailsResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryAllUniversityDetailsResponse.Merge(m, src)
-}
-func (m *QueryAllUniversityDetailsResponse) XXX_Size() int {
-	return m.Size()
-}
-func (m *QueryAllUniversityDetailsResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryAllUniversityDetailsResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_QueryAllUniversityDetailsResponse proto.InternalMessageInfo
-
-func (m *QueryAllUniversityDetailsResponse) GetUniversityDetails() []UniversityDetails {
-	if m != nil {
-		return m.UniversityDetails
-	}
-	return nil
-}
-
-func (m *QueryAllUniversityDetailsResponse) GetPagination() *query.PageResponse {
-	if m != nil {
-		return m.Pagination
-	}
-	return nil
-}
-
 type QueryGetChainInfoRequest struct {
 }
 
@@ -2128,7 +1128,7 @@ func (m *QueryGetChainInfoRequest) Reset()         { *m = QueryGetChainInfoReque
 func (m *QueryGetChainInfoRequest) String() string { return proto.CompactTextString(m) }
 func (*QueryGetChainInfoRequest) ProtoMessage()    {}
 func (*QueryGetChainInfoRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{48}
+	return fileDescriptor_a11fe59a0e65b096, []int{26}
 }
 func (m *QueryGetChainInfoRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -2165,7 +1165,7 @@ func (m *QueryGetChainInfoResponse) Reset()         { *m = QueryGetChainInfoResp
 func (m *QueryGetChainInfoResponse) String() string { return proto.CompactTextString(m) }
 func (*QueryGetChainInfoResponse) ProtoMessage()    {}
 func (*QueryGetChainInfoResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{49}
+	return fileDescriptor_a11fe59a0e65b096, []int{27}
 }
 func (m *QueryGetChainInfoResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -2209,7 +1209,7 @@ func (m *QueryGetForeignUniversitiesRequest) Reset()         { *m = QueryGetFore
 func (m *QueryGetForeignUniversitiesRequest) String() string { return proto.CompactTextString(m) }
 func (*QueryGetForeignUniversitiesRequest) ProtoMessage()    {}
 func (*QueryGetForeignUniversitiesRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{50}
+	return fileDescriptor_a11fe59a0e65b096, []int{28}
 }
 func (m *QueryGetForeignUniversitiesRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -2253,7 +1253,7 @@ func (m *QueryGetForeignUniversitiesResponse) Reset()         { *m = QueryGetFor
 func (m *QueryGetForeignUniversitiesResponse) String() string { return proto.CompactTextString(m) }
 func (*QueryGetForeignUniversitiesResponse) ProtoMessage()    {}
 func (*QueryGetForeignUniversitiesResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{51}
+	return fileDescriptor_a11fe59a0e65b096, []int{29}
 }
 func (m *QueryGetForeignUniversitiesResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -2297,7 +1297,7 @@ func (m *QueryAllForeignUniversitiesRequest) Reset()         { *m = QueryAllFore
 func (m *QueryAllForeignUniversitiesRequest) String() string { return proto.CompactTextString(m) }
 func (*QueryAllForeignUniversitiesRequest) ProtoMessage()    {}
 func (*QueryAllForeignUniversitiesRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{52}
+	return fileDescriptor_a11fe59a0e65b096, []int{30}
 }
 func (m *QueryAllForeignUniversitiesRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -2342,7 +1342,7 @@ func (m *QueryAllForeignUniversitiesResponse) Reset()         { *m = QueryAllFor
 func (m *QueryAllForeignUniversitiesResponse) String() string { return proto.CompactTextString(m) }
 func (*QueryAllForeignUniversitiesResponse) ProtoMessage()    {}
 func (*QueryAllForeignUniversitiesResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a11fe59a0e65b096, []int{53}
+	return fileDescriptor_a11fe59a0e65b096, []int{31}
 }
 func (m *QueryAllForeignUniversitiesResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -2394,10 +1394,6 @@ func init() {
 	proto.RegisterType((*QueryAllProfessorsExamsResponse)(nil), "university_chain_it.universitychainit.QueryAllProfessorsExamsResponse")
 	proto.RegisterType((*QueryGetStudentInfoRequest)(nil), "university_chain_it.universitychainit.QueryGetStudentInfoRequest")
 	proto.RegisterType((*QueryGetStudentInfoResponse)(nil), "university_chain_it.universitychainit.QueryGetStudentInfoResponse")
-	proto.RegisterType((*QueryGetExamsInfoRequest)(nil), "university_chain_it.universitychainit.QueryGetExamsInfoRequest")
-	proto.RegisterType((*QueryGetExamsInfoResponse)(nil), "university_chain_it.universitychainit.QueryGetExamsInfoResponse")
-	proto.RegisterType((*QueryAllExamsInfoRequest)(nil), "university_chain_it.universitychainit.QueryAllExamsInfoRequest")
-	proto.RegisterType((*QueryAllExamsInfoResponse)(nil), "university_chain_it.universitychainit.QueryAllExamsInfoResponse")
 	proto.RegisterType((*QueryGetTranscriptOfRecordsRequest)(nil), "university_chain_it.universitychainit.QueryGetTranscriptOfRecordsRequest")
 	proto.RegisterType((*QueryGetTranscriptOfRecordsResponse)(nil), "university_chain_it.universitychainit.QueryGetTranscriptOfRecordsResponse")
 	proto.RegisterType((*QueryGetPersonalInfoRequest)(nil), "university_chain_it.universitychainit.QueryGetPersonalInfoRequest")
@@ -2406,22 +1402,8 @@ func init() {
 	proto.RegisterType((*QueryGetResidenceInfoResponse)(nil), "university_chain_it.universitychainit.QueryGetResidenceInfoResponse")
 	proto.RegisterType((*QueryGetContactInfoRequest)(nil), "university_chain_it.universitychainit.QueryGetContactInfoRequest")
 	proto.RegisterType((*QueryGetContactInfoResponse)(nil), "university_chain_it.universitychainit.QueryGetContactInfoResponse")
-	proto.RegisterType((*QueryGetAnnualTaxesRequest)(nil), "university_chain_it.universitychainit.QueryGetAnnualTaxesRequest")
-	proto.RegisterType((*QueryGetAnnualTaxesResponse)(nil), "university_chain_it.universitychainit.QueryGetAnnualTaxesResponse")
-	proto.RegisterType((*QueryAllAnnualTaxesRequest)(nil), "university_chain_it.universitychainit.QueryAllAnnualTaxesRequest")
-	proto.RegisterType((*QueryAllAnnualTaxesResponse)(nil), "university_chain_it.universitychainit.QueryAllAnnualTaxesResponse")
 	proto.RegisterType((*QueryGetTaxesInfoRequest)(nil), "university_chain_it.universitychainit.QueryGetTaxesInfoRequest")
 	proto.RegisterType((*QueryGetTaxesInfoResponse)(nil), "university_chain_it.universitychainit.QueryGetTaxesInfoResponse")
-	proto.RegisterType((*QueryGetErasmusContributionRequest)(nil), "university_chain_it.universitychainit.QueryGetErasmusContributionRequest")
-	proto.RegisterType((*QueryGetErasmusContributionResponse)(nil), "university_chain_it.universitychainit.QueryGetErasmusContributionResponse")
-	proto.RegisterType((*QueryGetErasmusExamsRequest)(nil), "university_chain_it.universitychainit.QueryGetErasmusExamsRequest")
-	proto.RegisterType((*QueryGetErasmusExamsResponse)(nil), "university_chain_it.universitychainit.QueryGetErasmusExamsResponse")
-	proto.RegisterType((*QueryAllErasmusExamsRequest)(nil), "university_chain_it.universitychainit.QueryAllErasmusExamsRequest")
-	proto.RegisterType((*QueryAllErasmusExamsResponse)(nil), "university_chain_it.universitychainit.QueryAllErasmusExamsResponse")
-	proto.RegisterType((*QueryGetErasmusCareerRequest)(nil), "university_chain_it.universitychainit.QueryGetErasmusCareerRequest")
-	proto.RegisterType((*QueryGetErasmusCareerResponse)(nil), "university_chain_it.universitychainit.QueryGetErasmusCareerResponse")
-	proto.RegisterType((*QueryAllErasmusCareerRequest)(nil), "university_chain_it.universitychainit.QueryAllErasmusCareerRequest")
-	proto.RegisterType((*QueryAllErasmusCareerResponse)(nil), "university_chain_it.universitychainit.QueryAllErasmusCareerResponse")
 	proto.RegisterType((*QueryGetErasmusInfoRequest)(nil), "university_chain_it.universitychainit.QueryGetErasmusInfoRequest")
 	proto.RegisterType((*QueryGetErasmusInfoResponse)(nil), "university_chain_it.universitychainit.QueryGetErasmusInfoResponse")
 	proto.RegisterType((*QueryGetStoredStudentRequest)(nil), "university_chain_it.universitychainit.QueryGetStoredStudentRequest")
@@ -2430,10 +1412,6 @@ func init() {
 	proto.RegisterType((*QueryAllStoredStudentResponse)(nil), "university_chain_it.universitychainit.QueryAllStoredStudentResponse")
 	proto.RegisterType((*QueryGetUniversityInfoRequest)(nil), "university_chain_it.universitychainit.QueryGetUniversityInfoRequest")
 	proto.RegisterType((*QueryGetUniversityInfoResponse)(nil), "university_chain_it.universitychainit.QueryGetUniversityInfoResponse")
-	proto.RegisterType((*QueryGetUniversityDetailsRequest)(nil), "university_chain_it.universitychainit.QueryGetUniversityDetailsRequest")
-	proto.RegisterType((*QueryGetUniversityDetailsResponse)(nil), "university_chain_it.universitychainit.QueryGetUniversityDetailsResponse")
-	proto.RegisterType((*QueryAllUniversityDetailsRequest)(nil), "university_chain_it.universitychainit.QueryAllUniversityDetailsRequest")
-	proto.RegisterType((*QueryAllUniversityDetailsResponse)(nil), "university_chain_it.universitychainit.QueryAllUniversityDetailsResponse")
 	proto.RegisterType((*QueryGetChainInfoRequest)(nil), "university_chain_it.universitychainit.QueryGetChainInfoRequest")
 	proto.RegisterType((*QueryGetChainInfoResponse)(nil), "university_chain_it.universitychainit.QueryGetChainInfoResponse")
 	proto.RegisterType((*QueryGetForeignUniversitiesRequest)(nil), "university_chain_it.universitychainit.QueryGetForeignUniversitiesRequest")
@@ -2445,135 +1423,95 @@ func init() {
 func init() { proto.RegisterFile("universitychainit/query.proto", fileDescriptor_a11fe59a0e65b096) }
 
 var fileDescriptor_a11fe59a0e65b096 = []byte{
-	// 2041 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x9a, 0x4d, 0x6f, 0x14, 0x47,
-	0x1a, 0xc7, 0x5d, 0x1e, 0x40, 0x4b, 0x01, 0x66, 0x29, 0xac, 0x15, 0x3b, 0x0b, 0x03, 0x5b, 0xcb,
-	0x9b, 0x56, 0x78, 0x66, 0xc1, 0xd8, 0x60, 0x63, 0x30, 0xe3, 0x17, 0xbc, 0x78, 0x11, 0xeb, 0x1d,
-	0xcc, 0x05, 0x69, 0x35, 0x69, 0xcf, 0xd4, 0x98, 0x8e, 0xda, 0xdd, 0x43, 0x77, 0x0f, 0xb2, 0x65,
-	0xf9, 0x10, 0xa4, 0x1c, 0x72, 0x4b, 0x94, 0x53, 0xbe, 0x40, 0x3e, 0x42, 0x0e, 0x39, 0xe6, 0x10,
-	0x91, 0x28, 0x07, 0xf2, 0x2a, 0x12, 0x25, 0x88, 0x18, 0x8e, 0x5c, 0x12, 0xe5, 0x94, 0x53, 0x34,
-	0xd5, 0xd5, 0xdd, 0x55, 0xdd, 0xd5, 0x4d, 0xd7, 0x4c, 0xfb, 0x66, 0xd7, 0xcb, 0x53, 0xcf, 0xaf,
-	0xea, 0xa9, 0xa7, 0x6a, 0xfe, 0xd5, 0xf0, 0x58, 0xc7, 0xd4, 0x1f, 0x12, 0xdb, 0xd1, 0xdd, 0x8d,
-	0xc6, 0x7d, 0x4d, 0x37, 0x75, 0xb7, 0xf2, 0xa0, 0x43, 0xec, 0x8d, 0x72, 0xdb, 0xb6, 0x5c, 0x0b,
-	0x9d, 0x0a, 0xab, 0xeb, 0xb4, 0xbe, 0xae, 0xbb, 0xe5, 0x58, 0x97, 0xe2, 0xf0, 0xaa, 0xb5, 0x6a,
-	0xd1, 0x1e, 0x95, 0xee, 0x5f, 0x5e, 0xe7, 0xe2, 0xd1, 0x55, 0xcb, 0x5a, 0x35, 0x48, 0x45, 0x6b,
-	0xeb, 0x15, 0xcd, 0x34, 0x2d, 0x57, 0x73, 0x75, 0xcb, 0x74, 0x58, 0xed, 0x3f, 0x1b, 0x96, 0xb3,
-	0x66, 0x39, 0x95, 0x15, 0xcd, 0x21, 0xde, 0x98, 0x95, 0x87, 0xe7, 0x57, 0x88, 0xab, 0x9d, 0xaf,
-	0xb4, 0xb5, 0x55, 0xdd, 0xa4, 0x8d, 0x59, 0xdb, 0x52, 0xdc, 0xcb, 0xb6, 0x66, 0x6b, 0x6b, 0xbe,
-	0x2d, 0x1c, 0xaf, 0x27, 0xeb, 0xda, 0x9a, 0x53, 0xd7, 0xcd, 0x96, 0xef, 0xcd, 0xc9, 0x78, 0x1b,
-	0xcd, 0x34, 0x3b, 0x9a, 0x51, 0x77, 0xb5, 0x75, 0xe2, 0x5b, 0x3a, 0x27, 0xb1, 0x64, 0x6b, 0xce,
-	0x5a, 0xc7, 0xa9, 0x37, 0x2c, 0xd3, 0xb5, 0xf5, 0x95, 0x0e, 0xe7, 0xd7, 0xa9, 0xe4, 0xd6, 0x74,
-	0x7c, 0xd6, 0xec, 0x74, 0x8a, 0x51, 0xcd, 0x26, 0xc4, 0xf6, 0xa7, 0x24, 0xde, 0x8e, 0x9b, 0xff,
-	0x26, 0x71, 0x35, 0xdd, 0x48, 0x41, 0x66, 0x0b, 0x14, 0x22, 0x4b, 0x60, 0x5a, 0x96, 0x4d, 0xf4,
-	0x55, 0xb3, 0x1e, 0xd4, 0xe8, 0x24, 0xc5, 0x4b, 0xc7, 0xb5, 0x6c, 0xd2, 0xac, 0x3b, 0x6e, 0xa7,
-	0x49, 0x4c, 0x97, 0xb5, 0x3b, 0x93, 0xea, 0x25, 0x37, 0xfc, 0x59, 0xc9, 0xaa, 0xd9, 0x56, 0x8b,
-	0x38, 0x8e, 0x65, 0x8b, 0x13, 0x74, 0x32, 0x79, 0x82, 0x38, 0x7b, 0x12, 0x64, 0xba, 0x74, 0xaf,
-	0x59, 0xe5, 0xee, 0xba, 0x69, 0x0d, 0x97, 0x6f, 0x25, 0x41, 0xb5, 0x89, 0xa3, 0x37, 0x89, 0xd9,
-	0x20, 0x7c, 0x3b, 0xc9, 0xfa, 0xb6, 0x89, 0xed, 0x58, 0xa6, 0x66, 0xf0, 0xcd, 0x46, 0x24, 0x8e,
-	0xd9, 0x9a, 0xe9, 0x34, 0x6c, 0xbd, 0xed, 0xd6, 0xad, 0x56, 0xdd, 0x26, 0x0d, 0xcb, 0x6e, 0xa6,
-	0xd0, 0xb2, 0x19, 0xe6, 0x8c, 0xe2, 0x61, 0x88, 0xfe, 0xd7, 0xdd, 0x15, 0x4b, 0x34, 0xd0, 0x6b,
-	0xe4, 0x41, 0x87, 0x38, 0x2e, 0x5e, 0x81, 0x87, 0x85, 0x52, 0xa7, 0x6d, 0x99, 0x0e, 0x41, 0xff,
-	0x81, 0x7b, 0xbc, 0x0d, 0x71, 0x04, 0x9c, 0x00, 0x67, 0xf7, 0x5d, 0x18, 0x29, 0x67, 0xda, 0xb8,
-	0x65, 0xcf, 0xcc, 0xcc, 0xae, 0xc7, 0xcf, 0x8e, 0x0f, 0xd4, 0x98, 0x09, 0x3c, 0x05, 0x4b, 0x74,
-	0x8c, 0x05, 0xe2, 0x2e, 0x05, 0xeb, 0x35, 0xbf, 0x1e, 0x7a, 0x81, 0x8a, 0xf0, 0x4f, 0xdd, 0xe5,
-	0xbb, 0xad, 0xad, 0x11, 0x3a, 0xe0, 0xde, 0x5a, 0xf0, 0x3f, 0x7e, 0x07, 0xc0, 0xe3, 0x89, 0xdd,
-	0x99, 0xbb, 0x2d, 0x78, 0xb0, 0x2d, 0x56, 0x31, 0xbf, 0xc7, 0xb3, 0xfa, 0x2d, 0xf6, 0x66, 0x00,
-	0x51, 0xa3, 0xf8, 0x3e, 0x23, 0xa9, 0x1a, 0x46, 0x02, 0xc9, 0x0d, 0x08, 0xc3, 0x6c, 0xc3, 0x9c,
-	0x38, 0x5d, 0xf6, 0x52, 0x53, 0xb9, 0x9b, 0x9a, 0xca, 0x5e, 0x3a, 0x64, 0xa9, 0xa9, 0xbc, 0xa4,
-	0xad, 0x12, 0xd6, 0xb7, 0xc6, 0xf5, 0xc4, 0x5f, 0xf9, 0xd4, 0xb2, 0xa1, 0xd2, 0xa8, 0x0b, 0xb9,
-	0x53, 0xa3, 0x05, 0x81, 0x69, 0x90, 0x32, 0x9d, 0x79, 0x2d, 0x93, 0xe7, 0xa4, 0x00, 0x75, 0x14,
-	0x16, 0xfd, 0x95, 0xbc, 0xe3, 0x05, 0xe8, 0x4d, 0xb3, 0x65, 0xf9, 0xa1, 0xb8, 0x01, 0xff, 0x26,
-	0xad, 0x65, 0xb4, 0xf7, 0xe0, 0x3e, 0xae, 0x98, 0x4d, 0xed, 0x85, 0x8c, 0xa4, 0x5c, 0x4f, 0x46,
-	0xc9, 0x1b, 0xc3, 0xe3, 0xf0, 0x88, 0x3f, 0x34, 0x45, 0xe6, 0xdc, 0x4a, 0x8d, 0xcd, 0x07, 0xf0,
-	0xaf, 0x92, 0x7e, 0xcc, 0xe1, 0x65, 0xb8, 0x97, 0xf8, 0x85, 0xcc, 0xdd, 0x7f, 0x65, 0x74, 0x37,
-	0x30, 0xc6, 0x9c, 0x0d, 0x0d, 0xe1, 0x15, 0xe6, 0x6a, 0xd5, 0x30, 0x62, 0xae, 0xe6, 0x15, 0x7c,
-	0x1f, 0x03, 0xc6, 0x25, 0x0e, 0x22, 0xe7, 0x2a, 0xe4, 0xc2, 0x95, 0x5f, 0x90, 0x9d, 0x84, 0xd8,
-	0x5f, 0x93, 0xe5, 0x20, 0x69, 0xfe, 0xb7, 0x55, 0xf3, 0x52, 0xa6, 0x1f, 0x6c, 0x1f, 0x00, 0xf8,
-	0x8f, 0xd4, 0x66, 0x0c, 0xd6, 0x86, 0x87, 0x25, 0xd5, 0x6c, 0x6e, 0x27, 0x33, 0x62, 0x4b, 0x2c,
-	0xb0, 0x09, 0x90, 0x19, 0xc7, 0xc7, 0xc2, 0x8d, 0xb0, 0xc4, 0x4e, 0x07, 0x7e, 0x9f, 0x6c, 0xc1,
-	0xa3, 0xf2, 0x6a, 0xe6, 0xf2, 0xff, 0xe1, 0x7e, 0xbe, 0x9c, 0xf9, 0x3a, 0x9a, 0x35, 0x27, 0x70,
-	0x5d, 0x99, 0x93, 0x82, 0x39, 0x5c, 0x0a, 0x87, 0xaf, 0xf9, 0x67, 0x1c, 0xef, 0xde, 0x5b, 0x00,
-	0x1e, 0x4b, 0x68, 0xc0, 0x1c, 0x7c, 0x03, 0x1e, 0x10, 0x2a, 0x98, 0x87, 0x17, 0x33, 0x7a, 0x28,
-	0xf4, 0x65, 0x2e, 0x8a, 0x06, 0xf9, 0x44, 0x33, 0xeb, 0x9d, 0xd6, 0x09, 0x89, 0x46, 0xa8, 0x0d,
-	0x13, 0x0d, 0x57, 0xac, 0x98, 0x68, 0xb8, 0x9e, 0x7e, 0xa2, 0xe1, 0x8a, 0xf0, 0xb9, 0xd0, 0xb1,
-	0x2a, 0xbd, 0x2c, 0x2e, 0x77, 0x2f, 0x1c, 0xfe, 0xfe, 0x1d, 0x82, 0x83, 0x7a, 0x93, 0x0e, 0xb8,
-	0xab, 0x36, 0xa8, 0x37, 0x79, 0x47, 0x85, 0xd6, 0xa1, 0xa3, 0x5c, 0xb1, 0xa2, 0xa3, 0x5c, 0x4f,
-	0xdf, 0x51, 0xae, 0x08, 0x37, 0x99, 0xa3, 0x55, 0xc3, 0x90, 0x38, 0x9a, 0x57, 0xa2, 0xf9, 0x04,
-	0x30, 0xc2, 0xe8, 0x30, 0x49, 0x84, 0x85, 0xdc, 0x08, 0xf3, 0x4b, 0x38, 0xc5, 0xf0, 0xf0, 0xa0,
-	0x96, 0xf9, 0x50, 0xe3, 0x0e, 0x08, 0xae, 0x2e, 0x4c, 0xa4, 0x41, 0xa1, 0xe2, 0x01, 0x11, 0xf4,
-	0xf3, 0x13, 0x69, 0x50, 0xc0, 0xe7, 0xbf, 0x79, 0xef, 0xce, 0x3b, 0xcb, 0xfd, 0xd0, 0x90, 0xe5,
-	0x3f, 0x69, 0xb3, 0x30, 0xff, 0x49, 0xaa, 0x15, 0xf3, 0x9f, 0xc4, 0x82, 0x9f, 0xff, 0x24, 0x55,
-	0x78, 0x22, 0x0c, 0x7b, 0x56, 0x9d, 0xf9, 0xb2, 0xc8, 0xe5, 0x46, 0xb1, 0x6b, 0x98, 0x1b, 0x09,
-	0x57, 0xae, 0x98, 0x1b, 0x79, 0x93, 0x7e, 0x6e, 0xe4, 0xcd, 0x61, 0x12, 0x86, 0xb3, 0xcc, 0xf3,
-	0xbc, 0xb6, 0xcd, 0xa7, 0x80, 0x61, 0xc6, 0xc6, 0x49, 0xc4, 0x2c, 0xe4, 0x88, 0x99, 0xdf, 0xd6,
-	0x29, 0xc7, 0x96, 0x6b, 0x96, 0xfe, 0x7e, 0x4d, 0x4a, 0x88, 0xfc, 0xd9, 0x12, 0xe9, 0x10, 0x9e,
-	0x2d, 0x42, 0x85, 0xe2, 0xd9, 0x22, 0xf4, 0xf5, 0xcf, 0x16, 0xa1, 0x10, 0xb7, 0x62, 0x73, 0x2f,
-	0xfa, 0x9c, 0xd7, 0x22, 0x7f, 0xee, 0xb3, 0xc6, 0x07, 0x4a, 0x66, 0x2d, 0xe4, 0xca, 0xba, 0x23,
-	0x37, 0x7f, 0x36, 0x42, 0xc2, 0x81, 0x2c, 0xd4, 0x86, 0xa7, 0x00, 0x57, 0xac, 0x78, 0xce, 0x71,
-	0x3d, 0xfd, 0x53, 0x80, 0x2b, 0xc2, 0x17, 0xc3, 0x08, 0xbc, 0x43, 0xc5, 0x09, 0xf6, 0xb3, 0xc0,
-	0x5f, 0xcd, 0x61, 0xb8, 0x5b, 0x37, 0x9b, 0x64, 0x9d, 0x65, 0x1a, 0xef, 0x1f, 0x21, 0x0e, 0x23,
-	0xdd, 0xc2, 0xb5, 0x71, 0xf8, 0x0a, 0xc5, 0x38, 0x14, 0x8c, 0xfa, 0x6b, 0x23, 0x18, 0xe4, 0xe3,
-	0x50, 0xea, 0xf9, 0x4e, 0xc4, 0x61, 0x66, 0xd6, 0x42, 0xae, 0xac, 0xf9, 0xc5, 0xe1, 0xf1, 0x70,
-	0xdd, 0xee, 0x06, 0x8e, 0xf0, 0xa1, 0xf8, 0x36, 0x08, 0xc5, 0x8a, 0x68, 0x0b, 0x86, 0xdb, 0x80,
-	0x43, 0x62, 0x0d, 0x9b, 0xdc, 0xb1, 0x8c, 0xbc, 0x62, 0x67, 0x06, 0x1c, 0x31, 0x89, 0x17, 0xe1,
-	0x89, 0xb8, 0x1b, 0x73, 0x9e, 0x62, 0xe7, 0xaf, 0xf0, 0x69, 0x38, 0x14, 0x5a, 0xe7, 0x8e, 0xc3,
-	0x48, 0x29, 0x7e, 0x0f, 0xc0, 0xbf, 0xa7, 0x18, 0x63, 0x58, 0x06, 0x3c, 0xd4, 0x89, 0x56, 0x32,
-	0xb2, 0xcb, 0xca, 0x64, 0xac, 0x3f, 0x83, 0x8b, 0x1b, 0xc6, 0x6f, 0x32, 0xbe, 0xaa, 0x61, 0x24,
-	0xf2, 0xe5, 0x15, 0xc1, 0x3f, 0xf8, 0xfc, 0xf2, 0xc1, 0xd2, 0xf9, 0x0b, 0x3b, 0xc2, 0xbf, 0x23,
-	0xb7, 0xcf, 0xd9, 0xae, 0x1b, 0x09, 0xb7, 0x4f, 0xae, 0x2e, 0xbc, 0x7d, 0x06, 0x85, 0x8a, 0xb7,
-	0xcf, 0xa0, 0x9f, 0x7f, 0xfb, 0x0c, 0x0a, 0xf0, 0xad, 0xf0, 0xf6, 0x79, 0xc3, 0x93, 0x86, 0xef,
-	0x72, 0xca, 0xb0, 0x6a, 0xe4, 0xf2, 0xb7, 0x54, 0xa9, 0xb9, 0xf0, 0x96, 0xda, 0x8a, 0x57, 0x2b,
-	0xde, 0x52, 0x25, 0x03, 0xf8, 0xb7, 0x54, 0x89, 0x71, 0x6c, 0x30, 0xd2, 0xaa, 0x61, 0xa4, 0x90,
-	0xe6, 0x15, 0xc3, 0xdb, 0xfe, 0x4c, 0x24, 0x0d, 0xf7, 0xba, 0x99, 0x28, 0xec, 0xd8, 0x4c, 0xe4,
-	0x16, 0xcb, 0x17, 0x3e, 0xac, 0xc0, 0xdd, 0x14, 0x12, 0x7d, 0x04, 0xe0, 0x1e, 0x4f, 0x4b, 0x46,
-	0x13, 0x19, 0x9d, 0x8e, 0x8b, 0xdb, 0xc5, 0xc9, 0x5e, 0xba, 0x7a, 0x7e, 0xe1, 0xb1, 0x47, 0x5f,
-	0xbf, 0x7c, 0x7f, 0xb0, 0x82, 0x46, 0x2a, 0x12, 0x1b, 0x95, 0xa4, 0xf7, 0x23, 0xf4, 0x0a, 0xc0,
-	0x83, 0x11, 0x59, 0x15, 0xcd, 0xab, 0xb8, 0x91, 0x28, 0x92, 0x17, 0x6f, 0xf4, 0x6b, 0x86, 0x91,
-	0x2d, 0x52, 0xb2, 0x39, 0x34, 0x93, 0x95, 0x2c, 0xf2, 0xc6, 0x52, 0xd9, 0xf4, 0x7f, 0x6e, 0x6d,
-	0xa1, 0x97, 0x00, 0xa2, 0xc8, 0x38, 0x55, 0xc3, 0x50, 0x23, 0x4e, 0x14, 0xd3, 0xd5, 0x88, 0x93,
-	0x85, 0x72, 0x3c, 0x4d, 0x89, 0x27, 0xd0, 0xa5, 0x1e, 0x89, 0xd1, 0x97, 0x40, 0x10, 0x9f, 0x51,
-	0x55, 0x71, 0x29, 0xe2, 0x6a, 0x77, 0x71, 0xa6, 0x1f, 0x13, 0x8c, 0xeb, 0x0a, 0xe5, 0x1a, 0x43,
-	0xa3, 0x19, 0xb9, 0xf8, 0x57, 0x21, 0xf4, 0x0d, 0x80, 0x7b, 0x03, 0x3d, 0x16, 0x4d, 0x2b, 0xba,
-	0x13, 0xd5, 0x9e, 0x8b, 0xd7, 0x7b, 0x37, 0xc0, 0x68, 0xe6, 0x28, 0xcd, 0x35, 0x34, 0x95, 0x91,
-	0x26, 0x7c, 0x91, 0xe5, 0x23, 0xf2, 0x0b, 0x00, 0xf7, 0x07, 0xb6, 0xbb, 0xb1, 0x38, 0xad, 0x18,
-	0x44, 0xfd, 0x91, 0xc9, 0x14, 0x73, 0x3c, 0x41, 0xc9, 0x46, 0xd1, 0x79, 0x65, 0x32, 0xf4, 0x2b,
-	0x90, 0x0a, 0xd0, 0xe8, 0xa6, 0xe2, 0x74, 0x27, 0x4b, 0xe1, 0xc5, 0xc5, 0x3c, 0x4c, 0xf5, 0xb8,
-	0x86, 0xd2, 0x67, 0x4d, 0xf4, 0x2d, 0x10, 0x25, 0x6c, 0xa4, 0xba, 0x59, 0x24, 0xb2, 0x79, 0x71,
-	0xb6, 0x2f, 0x1b, 0x8c, 0x6f, 0x8a, 0xf2, 0x8d, 0xa3, 0x8b, 0x59, 0x33, 0x09, 0xff, 0xba, 0x8b,
-	0xbe, 0x07, 0x11, 0xe5, 0x1b, 0xa9, 0x3a, 0x25, 0x53, 0xdc, 0x8b, 0x73, 0xfd, 0x19, 0x61, 0x68,
-	0x57, 0x29, 0xda, 0x25, 0x34, 0x96, 0x11, 0x4d, 0x7c, 0xe0, 0xa6, 0x29, 0x92, 0x53, 0xba, 0x95,
-	0x53, 0x64, 0x5c, 0xa7, 0x57, 0x4e, 0x91, 0x12, 0x31, 0x5f, 0x39, 0x45, 0xf2, 0x8f, 0xfb, 0xe8,
-	0x3b, 0x20, 0xe8, 0xcf, 0xca, 0x4c, 0x71, 0xe5, 0x5c, 0x99, 0x49, 0xa2, 0x8a, 0xe3, 0xeb, 0x94,
-	0x69, 0x12, 0x5d, 0xce, 0xc8, 0xc4, 0x7f, 0x96, 0x52, 0xd9, 0xd4, 0x9b, 0x5b, 0xdd, 0xdc, 0x3f,
-	0xc4, 0x59, 0xee, 0xa6, 0xc9, 0xaa, 0x62, 0x96, 0xeb, 0x97, 0x4d, 0xae, 0xf8, 0x2b, 0xaf, 0x17,
-	0xcf, 0x86, 0x3e, 0x03, 0x9c, 0xa2, 0xae, 0x7c, 0xa4, 0x45, 0xc5, 0x7b, 0xe5, 0x23, 0x2d, 0xa6,
-	0xf0, 0x2b, 0x27, 0xfe, 0xf0, 0xf3, 0x13, 0xf4, 0x0b, 0x90, 0x2a, 0xef, 0xca, 0x89, 0x3f, 0xf9,
-	0x0d, 0x40, 0x39, 0xf1, 0xa7, 0xbc, 0x13, 0xe0, 0x59, 0x4a, 0x7a, 0x15, 0x5d, 0xc9, 0x7a, 0xc4,
-	0x49, 0x3e, 0x82, 0x42, 0xcf, 0xbb, 0x67, 0x37, 0x2f, 0x34, 0xcf, 0xf4, 0xe6, 0xa1, 0x70, 0x89,
-	0x9c, 0xed, 0xcb, 0x06, 0xc3, 0x5b, 0xa0, 0x78, 0x55, 0x34, 0xad, 0x88, 0x17, 0xbb, 0x30, 0x3f,
-	0x05, 0xf0, 0x20, 0x3f, 0x42, 0x77, 0xeb, 0xa9, 0xee, 0x9b, 0xbe, 0x29, 0x13, 0x9e, 0x0d, 0x94,
-	0x4f, 0x37, 0x81, 0x12, 0x3d, 0x03, 0x11, 0x3d, 0x1a, 0xf5, 0x38, 0xf5, 0x82, 0x9e, 0xae, 0x7c,
-	0xba, 0x49, 0xb5, 0x72, 0x3c, 0x43, 0xd1, 0xa6, 0xd0, 0xa4, 0x6a, 0x7c, 0x52, 0x33, 0x5e, 0xd6,
-	0xfc, 0x11, 0xc0, 0x3f, 0x0b, 0xd6, 0xbb, 0x8b, 0xd7, 0xe3, 0xc4, 0xf7, 0xc1, 0x98, 0xf4, 0x1e,
-	0xa0, 0x7c, 0x82, 0x8b, 0x8c, 0xf4, 0x04, 0xe7, 0xa4, 0x71, 0xe5, 0xd3, 0x2e, 0x2e, 0xec, 0x17,
-	0x67, 0xfa, 0x31, 0xd1, 0xe3, 0x89, 0xc0, 0x7f, 0xe8, 0x87, 0x7e, 0x06, 0xf0, 0x80, 0xa0, 0x2f,
-	0x2b, 0xc7, 0xa4, 0x4c, 0x5b, 0x57, 0x8e, 0x49, 0xa9, 0x6e, 0x8e, 0xe7, 0x29, 0xd9, 0x34, 0xba,
-	0x9a, 0xf9, 0xe7, 0x1b, 0xff, 0xf5, 0x64, 0x65, 0x93, 0xbe, 0x45, 0x78, 0x61, 0x29, 0x0c, 0xd0,
-	0x4b, 0x58, 0xf6, 0x8f, 0x99, 0xf4, 0x3c, 0xa0, 0x1c, 0x96, 0x22, 0x26, 0xfa, 0x09, 0x44, 0xf5,
-	0x76, 0xa4, 0x3a, 0xfd, 0x52, 0xa9, 0xbf, 0x38, 0xdf, 0xa7, 0x15, 0x86, 0x77, 0x8d, 0xe2, 0x5d,
-	0x46, 0xe3, 0x19, 0xf1, 0x22, 0xdf, 0xb6, 0xa2, 0xdf, 0x01, 0x3c, 0x74, 0x37, 0xae, 0x0f, 0xf7,
-	0xec, 0x9c, 0x28, 0xa2, 0x17, 0xff, 0xdd, 0xbf, 0x21, 0x06, 0x5a, 0xa3, 0xa0, 0xb7, 0xd0, 0xa2,
-	0x3a, 0x28, 0xfb, 0xd4, 0xb8, 0xb2, 0x29, 0xea, 0xbb, 0x5b, 0xe8, 0x15, 0x80, 0xc3, 0xb1, 0x11,
-	0xbb, 0xf1, 0xbb, 0xa0, 0x18, 0x7a, 0xf9, 0xf0, 0xa7, 0x3d, 0x10, 0xe0, 0x2a, 0xe5, 0xbf, 0x82,
-	0x26, 0x7a, 0xe6, 0xa7, 0x17, 0xd4, 0x40, 0x2b, 0x57, 0xbe, 0xa0, 0x46, 0xf5, 0x7d, 0xe5, 0x0b,
-	0x6a, 0xec, 0x11, 0x40, 0xf9, 0x82, 0x1a, 0x7e, 0x12, 0x8e, 0x1e, 0x0d, 0xc2, 0xc3, 0x12, 0xa1,
-	0x58, 0xf9, 0x82, 0x9a, 0x2c, 0x9e, 0x2b, 0x5f, 0x50, 0x53, 0x84, 0x71, 0xbc, 0x4c, 0x49, 0x6f,
-	0xa3, 0x5b, 0x19, 0x49, 0x65, 0x1f, 0xb6, 0xc7, 0xe3, 0xf7, 0x37, 0x00, 0xff, 0x22, 0x19, 0xb5,
-	0x1b, 0xc1, 0x37, 0x15, 0x03, 0x2f, 0xaf, 0x79, 0x48, 0x7f, 0x20, 0x50, 0xbe, 0xa8, 0xcb, 0xe6,
-	0x61, 0x66, 0xe1, 0xf1, 0x76, 0x09, 0x3c, 0xd9, 0x2e, 0x81, 0xe7, 0xdb, 0x25, 0xf0, 0xee, 0x8b,
-	0xd2, 0xc0, 0x93, 0x17, 0xa5, 0x81, 0xa7, 0x2f, 0x4a, 0x03, 0xf7, 0x46, 0x64, 0x56, 0xd7, 0x65,
-	0x3f, 0x75, 0x36, 0xda, 0xc4, 0x59, 0xd9, 0x43, 0xbf, 0x4d, 0x1f, 0xfd, 0x23, 0x00, 0x00, 0xff,
-	0xff, 0x48, 0x0a, 0x8d, 0xb2, 0x37, 0x32, 0x00, 0x00,
+	// 1408 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x59, 0x4f, 0x6f, 0xdc, 0x44,
+	0x14, 0x8f, 0x1b, 0x1a, 0xd1, 0x29, 0x6d, 0xd1, 0x24, 0x42, 0xc5, 0x4d, 0x36, 0x68, 0x68, 0xd3,
+	0x0a, 0x91, 0x35, 0xf9, 0x5b, 0xd2, 0x26, 0x0d, 0xf9, 0xaf, 0x94, 0xaa, 0x84, 0x6d, 0x7a, 0xa9,
+	0x84, 0x16, 0x67, 0x33, 0xbb, 0xb5, 0xe4, 0xd8, 0x1b, 0xdb, 0xa9, 0x12, 0x45, 0x39, 0x50, 0x89,
+	0x03, 0x37, 0x24, 0x4e, 0x7c, 0x11, 0x3e, 0x43, 0xe1, 0x54, 0x40, 0x48, 0x20, 0x01, 0x82, 0xa4,
+	0x47, 0x4e, 0x15, 0x1f, 0x00, 0xed, 0xf8, 0xd9, 0x9e, 0xb1, 0xc7, 0x5b, 0x4f, 0x76, 0xb9, 0x25,
+	0xf3, 0xe6, 0xbd, 0xf9, 0xfd, 0xde, 0xbc, 0x37, 0x33, 0x3f, 0x2f, 0x1a, 0xda, 0x73, 0xac, 0x27,
+	0xd4, 0xf3, 0xad, 0xe0, 0xa0, 0xf6, 0xd8, 0xb4, 0x1c, 0x2b, 0x30, 0x76, 0xf7, 0xa8, 0x77, 0x50,
+	0x6e, 0x7a, 0x6e, 0xe0, 0xe2, 0x6b, 0x89, 0xb9, 0xca, 0xec, 0x55, 0x2b, 0x28, 0x67, 0x5c, 0xf4,
+	0x81, 0x86, 0xdb, 0x70, 0x99, 0x87, 0xd1, 0xfa, 0x2b, 0x74, 0xd6, 0x07, 0x1b, 0xae, 0xdb, 0xb0,
+	0xa9, 0x61, 0x36, 0x2d, 0xc3, 0x74, 0x1c, 0x37, 0x30, 0x03, 0xcb, 0x75, 0x7c, 0xb0, 0xbe, 0x57,
+	0x73, 0xfd, 0x1d, 0xd7, 0x37, 0xb6, 0x4c, 0x9f, 0x86, 0x6b, 0x1a, 0x4f, 0xc6, 0xb6, 0x68, 0x60,
+	0x8e, 0x19, 0x4d, 0xb3, 0x61, 0x39, 0x6c, 0x32, 0xcc, 0x2d, 0x65, 0x51, 0x36, 0x4d, 0xcf, 0xdc,
+	0x89, 0x62, 0x91, 0xac, 0x1d, 0xd0, 0x3a, 0xf5, 0x08, 0xcd, 0xfb, 0xd9, 0x39, 0x75, 0xd7, 0xa3,
+	0x56, 0xc3, 0xa9, 0xc6, 0x16, 0x8b, 0x46, 0x11, 0x47, 0xb2, 0xb3, 0xfd, 0xc0, 0xf5, 0xe8, 0x76,
+	0xd5, 0x0f, 0xf6, 0xb6, 0xa9, 0x13, 0xc0, 0xbc, 0xeb, 0xd9, 0x79, 0x5c, 0xca, 0xb8, 0xe5, 0x6f,
+	0x48, 0x28, 0x78, 0x6e, 0x9d, 0xfa, 0xbe, 0xeb, 0xf9, 0x55, 0xba, 0x9f, 0x90, 0xb9, 0x9a, 0x9d,
+	0x49, 0x3d, 0xd3, 0xdf, 0xd9, 0xf3, 0xf9, 0x78, 0x12, 0xca, 0x81, 0xb9, 0x4f, 0x85, 0x39, 0x92,
+	0x48, 0x35, 0xd7, 0x09, 0xcc, 0x5a, 0xc0, 0xcf, 0x92, 0x50, 0xf5, 0xa8, 0x6f, 0x6d, 0x53, 0xa7,
+	0x46, 0xf9, 0x79, 0xd7, 0x24, 0x0c, 0xa8, 0xe7, 0xbb, 0x8e, 0x69, 0xf3, 0xd3, 0x46, 0x25, 0xc0,
+	0x3c, 0xd3, 0xf1, 0x6b, 0x9e, 0xd5, 0x0c, 0xaa, 0x6e, 0xbd, 0xea, 0xd1, 0x9a, 0xeb, 0x6d, 0xb7,
+	0x61, 0x0b, 0x19, 0xe6, 0x82, 0x92, 0x01, 0x84, 0x3f, 0x6d, 0x95, 0xc8, 0x06, 0xdb, 0xf5, 0x0a,
+	0xdd, 0xdd, 0xa3, 0x7e, 0x40, 0xb6, 0x50, 0xbf, 0x30, 0xea, 0x37, 0x5d, 0xc7, 0xa7, 0xf8, 0x63,
+	0xd4, 0x17, 0x56, 0xc7, 0x65, 0xed, 0x1d, 0xed, 0xc6, 0xf9, 0xf1, 0xd1, 0x72, 0xa1, 0x2a, 0x2e,
+	0x87, 0x61, 0x16, 0x5f, 0x7b, 0xf6, 0xe7, 0x70, 0x4f, 0x05, 0x42, 0x90, 0x59, 0x54, 0x62, 0x6b,
+	0xac, 0xd1, 0x60, 0x23, 0xde, 0xaf, 0x95, 0xfd, 0x04, 0x05, 0xd6, 0xd1, 0xeb, 0xad, 0xed, 0xbb,
+	0x6f, 0xee, 0x50, 0xb6, 0xe0, 0xb9, 0x4a, 0xfc, 0x3f, 0xf9, 0x4a, 0x43, 0xc3, 0xb9, 0xee, 0x00,
+	0xb7, 0x8e, 0x2e, 0x35, 0x45, 0x13, 0xe0, 0x9e, 0x2e, 0x8a, 0x5b, 0xf4, 0x06, 0x02, 0xe9, 0xa0,
+	0xe4, 0x31, 0x30, 0x59, 0xb0, 0xed, 0x1c, 0x26, 0xab, 0x08, 0x25, 0xad, 0x07, 0x20, 0x46, 0xca,
+	0x61, 0x9f, 0x96, 0x5b, 0x7d, 0x5a, 0x0e, 0xcf, 0x06, 0xe8, 0xd3, 0xf2, 0x86, 0xd9, 0xa0, 0xe0,
+	0x5b, 0xe1, 0x3c, 0xc9, 0x4f, 0x11, 0x6b, 0xd9, 0x52, 0xed, 0x58, 0xf7, 0x76, 0x9d, 0x35, 0x5e,
+	0x13, 0x38, 0x9d, 0x61, 0x9c, 0xae, 0xbf, 0x92, 0x53, 0x08, 0x52, 0x20, 0x35, 0x88, 0xf4, 0x68,
+	0x27, 0x1f, 0x84, 0x05, 0xba, 0xee, 0xd4, 0xdd, 0xa8, 0x14, 0x0f, 0xd0, 0x15, 0xa9, 0x15, 0xd8,
+	0x3e, 0x42, 0xe7, 0xb9, 0x61, 0x48, 0xed, 0x78, 0x41, 0xa6, 0x9c, 0x27, 0xb0, 0xe4, 0x83, 0x91,
+	0xab, 0x88, 0x44, 0x4b, 0x6f, 0xc6, 0x8d, 0xf6, 0x49, 0xbd, 0x12, 0xb6, 0x59, 0x04, 0xf0, 0x5b,
+	0x0d, 0xbd, 0xdb, 0x76, 0x1a, 0x20, 0xf5, 0x50, 0xbf, 0xc4, 0x0c, 0x88, 0x6f, 0x15, 0x44, 0x2c,
+	0x89, 0x00, 0xc8, 0x65, 0xc1, 0xc9, 0x50, 0x92, 0xbc, 0x0d, 0x38, 0x51, 0xf8, 0xdc, 0x1e, 0xa1,
+	0x41, 0xb9, 0x19, 0x20, 0x7f, 0x86, 0xde, 0xe0, 0xc7, 0x01, 0xeb, 0x44, 0xd1, 0x3a, 0xe2, 0x5c,
+	0x01, 0xa4, 0x10, 0x8e, 0x94, 0x92, 0xe5, 0x2b, 0xd1, 0xb9, 0xc8, 0xc3, 0xfb, 0x42, 0x43, 0x43,
+	0x39, 0x13, 0x00, 0xe0, 0xe7, 0xe8, 0x82, 0x60, 0x00, 0x84, 0x93, 0x05, 0x11, 0x0a, 0xbe, 0x00,
+	0x51, 0x0c, 0xc8, 0x17, 0xe7, 0x52, 0x78, 0xc2, 0xe7, 0x14, 0xa7, 0x60, 0x4d, 0x8a, 0x93, 0x1b,
+	0x56, 0x2c, 0x4e, 0xce, 0x33, 0x2a, 0x4e, 0x6e, 0x88, 0xe8, 0xe8, 0x72, 0x5c, 0x75, 0xad, 0xeb,
+	0x89, 0x87, 0xb5, 0x8b, 0xde, 0x96, 0xd8, 0x00, 0xd4, 0x26, 0x3a, 0x17, 0x0f, 0x02, 0xa4, 0x0f,
+	0x8a, 0x56, 0x5f, 0xe4, 0x07, 0x80, 0x92, 0x40, 0x7c, 0x9e, 0x56, 0xc2, 0x3b, 0x35, 0x27, 0x4f,
+	0x82, 0x35, 0xc9, 0x13, 0x37, 0xac, 0x98, 0x27, 0xce, 0x33, 0xca, 0x13, 0x37, 0x44, 0x26, 0x93,
+	0x22, 0x7b, 0xc0, 0xde, 0x19, 0xd0, 0xe1, 0xd1, 0xd1, 0x3c, 0x80, 0xce, 0x5a, 0xce, 0x36, 0xdd,
+	0x87, 0x1b, 0x26, 0xfc, 0x47, 0x28, 0xbd, 0x94, 0x5b, 0x52, 0x7a, 0x3e, 0x6f, 0x50, 0x2c, 0x3d,
+	0x21, 0x68, 0x54, 0x7a, 0x42, 0x40, 0x52, 0x07, 0xe4, 0x0b, 0xb6, 0x2d, 0x45, 0xde, 0xad, 0x4b,
+	0xe5, 0x87, 0x88, 0x6b, 0x76, 0xa1, 0x7c, 0xae, 0xbd, 0x5d, 0xe5, 0xda, 0xbd, 0xcb, 0x64, 0x38,
+	0xd9, 0xb7, 0x87, 0x31, 0x10, 0xbe, 0x14, 0xbf, 0xd4, 0x92, 0x77, 0x47, 0x7a, 0x06, 0xd0, 0xad,
+	0xa1, 0x8b, 0xa2, 0x05, 0x92, 0x3b, 0x55, 0x90, 0xaf, 0xe8, 0x0c, 0x84, 0x53, 0x21, 0xf9, 0xfe,
+	0x5d, 0x6a, 0xf9, 0xe5, 0xf4, 0x2f, 0x67, 0x4b, 0xfa, 0x37, 0x1e, 0x54, 0xec, 0xdf, 0xd8, 0x2f,
+	0xea, 0xdf, 0x78, 0x80, 0xdc, 0x4b, 0xee, 0xba, 0xd5, 0xf0, 0xf1, 0xfe, 0x90, 0x7b, 0xbb, 0x47,
+	0x25, 0x37, 0x82, 0x2e, 0x26, 0x51, 0xb9, 0x77, 0x59, 0x6a, 0x54, 0xb8, 0x13, 0xa5, 0xe1, 0x92,
+	0x3b, 0xb1, 0x9e, 0x35, 0x2b, 0xde, 0x89, 0x92, 0x05, 0xa2, 0x3b, 0x51, 0x12, 0x9c, 0xd8, 0xc0,
+	0x74, 0xc1, 0xb6, 0xdb, 0x30, 0xed, 0x56, 0x73, 0x1d, 0x47, 0x99, 0xc8, 0x5b, 0xee, 0x55, 0x99,
+	0xe8, 0xfd, 0xdf, 0x32, 0xd1, 0xb5, 0xa6, 0x1b, 0x7f, 0x79, 0x05, 0x9d, 0x65, 0x24, 0xf1, 0x77,
+	0x1a, 0xea, 0x0b, 0x5f, 0xfb, 0x78, 0xa6, 0x20, 0xe8, 0xac, 0xfc, 0xd0, 0x6f, 0x9d, 0xc6, 0x35,
+	0xc4, 0x45, 0xa6, 0x9e, 0xfe, 0xfc, 0xe2, 0x9b, 0x33, 0x06, 0x1e, 0x35, 0x24, 0x31, 0x8c, 0x3c,
+	0xb9, 0x8b, 0xff, 0xd1, 0xd0, 0xa5, 0xd4, 0xc3, 0x17, 0xaf, 0xa8, 0xc0, 0xc8, 0x95, 0x31, 0xfa,
+	0x6a, 0xa7, 0x61, 0x80, 0xd9, 0x5d, 0xc6, 0x6c, 0x19, 0x2f, 0x16, 0x65, 0x96, 0x52, 0xc1, 0xc6,
+	0x61, 0xa4, 0x9e, 0x8e, 0xf0, 0x0b, 0x0d, 0xe1, 0xd4, 0x3a, 0x0b, 0xb6, 0xad, 0xc6, 0x38, 0x57,
+	0xee, 0xa8, 0x31, 0xce, 0x97, 0x32, 0x64, 0x9e, 0x31, 0x9e, 0xc1, 0x37, 0x4f, 0xc9, 0x18, 0xff,
+	0xa8, 0x09, 0xf2, 0x00, 0x2f, 0x28, 0x6e, 0x45, 0x56, 0x8f, 0xe8, 0x8b, 0x9d, 0x84, 0x00, 0x5e,
+	0xb7, 0x19, 0xaf, 0x29, 0x3c, 0x51, 0x90, 0x17, 0xaf, 0xdb, 0xf1, 0x4b, 0x4d, 0x2a, 0x24, 0xf0,
+	0xba, 0x22, 0xb0, 0x7c, 0x49, 0xa3, 0xdf, 0xed, 0x46, 0x28, 0xe0, 0xba, 0xcc, 0xb8, 0xde, 0xc1,
+	0xb3, 0x05, 0xb9, 0x4a, 0x3f, 0x69, 0xe0, 0x5f, 0x34, 0x51, 0x8a, 0x60, 0xd5, 0x6d, 0x90, 0xc8,
+	0x1f, 0x7d, 0xa9, 0xa3, 0x18, 0xc0, 0x6f, 0x96, 0xf1, 0x9b, 0xc6, 0x93, 0x45, 0x6b, 0x94, 0xff,
+	0xb2, 0x83, 0x7f, 0xd3, 0x52, 0x0a, 0x06, 0xab, 0x82, 0x92, 0x29, 0x27, 0x7d, 0xb9, 0xb3, 0x20,
+	0x40, 0x6d, 0x8e, 0x51, 0xbb, 0x89, 0xa7, 0x0a, 0x52, 0x13, 0x3f, 0x6e, 0xb1, 0xe6, 0xe3, 0x14,
+	0x8b, 0x72, 0xf3, 0x65, 0xf5, 0x96, 0x72, 0xf3, 0x49, 0x44, 0x99, 0x72, 0xf3, 0xf1, 0x1f, 0xf6,
+	0xf0, 0xf7, 0x1a, 0xa7, 0x9e, 0xf0, 0xbc, 0x6a, 0x9f, 0xa4, 0x84, 0x9a, 0xfe, 0xd1, 0xe9, 0x03,
+	0x00, 0x9b, 0x19, 0xc6, 0x66, 0x02, 0x8f, 0x15, 0x6d, 0xaf, 0xf8, 0x53, 0x26, 0xdb, 0x1f, 0x4e,
+	0x29, 0x29, 0xef, 0x4f, 0x56, 0xe7, 0x29, 0xef, 0x8f, 0x44, 0x0c, 0x2a, 0xef, 0x0f, 0xff, 0x09,
+	0x17, 0xff, 0xad, 0xa1, 0x0b, 0x82, 0xdc, 0x50, 0xee, 0x27, 0x99, 0xd4, 0x52, 0xee, 0x27, 0xa9,
+	0x8c, 0x22, 0x2b, 0x8c, 0xd9, 0x3c, 0x9e, 0x2b, 0x7c, 0xec, 0xf3, 0xdf, 0xc5, 0x8d, 0x43, 0x26,
+	0x4d, 0x8f, 0xf0, 0xef, 0x1a, 0x7a, 0x53, 0x58, 0xa0, 0x75, 0x73, 0x2f, 0x29, 0x5e, 0xb9, 0x9d,
+	0xd3, 0xcc, 0x53, 0x8b, 0xca, 0xc7, 0x86, 0x48, 0x13, 0xff, 0xa1, 0xa5, 0xe5, 0x17, 0x56, 0x4d,
+	0xbf, 0x54, 0xf9, 0xe9, 0x2b, 0x1d, 0x46, 0x01, 0x7a, 0x77, 0x18, 0xbd, 0x0f, 0xf1, 0x74, 0x41,
+	0x7a, 0xa9, 0x5f, 0x2d, 0xd8, 0x11, 0x12, 0xeb, 0x2e, 0xe5, 0x23, 0x24, 0xad, 0x15, 0x95, 0x8f,
+	0x90, 0x8c, 0xa0, 0x54, 0x3e, 0x42, 0x92, 0x1f, 0x80, 0xf0, 0xd3, 0x33, 0xa8, 0x5f, 0x22, 0x3a,
+	0x94, 0xdf, 0x22, 0xf9, 0x42, 0x4c, 0xf9, 0x2d, 0xd2, 0x46, 0x64, 0x91, 0x4d, 0xc6, 0xf4, 0x3e,
+	0xbe, 0x57, 0x90, 0xa9, 0xec, 0x67, 0x2c, 0xe3, 0x50, 0xd4, 0xba, 0x47, 0xf8, 0x5f, 0x0d, 0xbd,
+	0x25, 0x59, 0xb5, 0xd5, 0x95, 0xeb, 0x8a, 0x0d, 0xd5, 0xad, 0x3c, 0xb4, 0x17, 0x9b, 0x64, 0x89,
+	0xe5, 0x61, 0x0e, 0xdf, 0xee, 0x20, 0x0f, 0x8b, 0x6b, 0xcf, 0x8e, 0x4b, 0xda, 0xf3, 0xe3, 0x92,
+	0xf6, 0xd7, 0x71, 0x49, 0xfb, 0xfa, 0xa4, 0xd4, 0xf3, 0xfc, 0xa4, 0xd4, 0xf3, 0xeb, 0x49, 0xa9,
+	0xe7, 0xd1, 0xa8, 0x2c, 0xea, 0xbe, 0xec, 0x32, 0x3a, 0x68, 0x52, 0x7f, 0xab, 0x8f, 0xfd, 0x12,
+	0x35, 0xf1, 0x5f, 0x00, 0x00, 0x00, 0xff, 0xff, 0xb5, 0xeb, 0x05, 0xa7, 0x32, 0x1d, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -2596,10 +1534,6 @@ type QueryClient interface {
 	ProfessorsExamsAll(ctx context.Context, in *QueryAllProfessorsExamsRequest, opts ...grpc.CallOption) (*QueryAllProfessorsExamsResponse, error)
 	// Queries a StudentInfo by index.
 	StudentInfo(ctx context.Context, in *QueryGetStudentInfoRequest, opts ...grpc.CallOption) (*QueryGetStudentInfoResponse, error)
-	// Queries a ExamsInfo by index.
-	ExamsInfo(ctx context.Context, in *QueryGetExamsInfoRequest, opts ...grpc.CallOption) (*QueryGetExamsInfoResponse, error)
-	// Queries a list of ExamsInfo items.
-	ExamsInfoAll(ctx context.Context, in *QueryAllExamsInfoRequest, opts ...grpc.CallOption) (*QueryAllExamsInfoResponse, error)
 	// Queries a TranscriptOfRecords by index.
 	TranscriptOfRecords(ctx context.Context, in *QueryGetTranscriptOfRecordsRequest, opts ...grpc.CallOption) (*QueryGetTranscriptOfRecordsResponse, error)
 	// Queries a PersonalInfo by index.
@@ -2608,22 +1542,8 @@ type QueryClient interface {
 	ResidenceInfo(ctx context.Context, in *QueryGetResidenceInfoRequest, opts ...grpc.CallOption) (*QueryGetResidenceInfoResponse, error)
 	// Queries a ContactInfo by index.
 	ContactInfo(ctx context.Context, in *QueryGetContactInfoRequest, opts ...grpc.CallOption) (*QueryGetContactInfoResponse, error)
-	// Queries a AnnualTaxes by id.
-	AnnualTaxes(ctx context.Context, in *QueryGetAnnualTaxesRequest, opts ...grpc.CallOption) (*QueryGetAnnualTaxesResponse, error)
-	// Queries a list of AnnualTaxes items.
-	AnnualTaxesAll(ctx context.Context, in *QueryAllAnnualTaxesRequest, opts ...grpc.CallOption) (*QueryAllAnnualTaxesResponse, error)
 	// Queries a TaxesInfo by index.
 	TaxesInfo(ctx context.Context, in *QueryGetTaxesInfoRequest, opts ...grpc.CallOption) (*QueryGetTaxesInfoResponse, error)
-	// Queries a ErasmusContribution by index.
-	ErasmusContribution(ctx context.Context, in *QueryGetErasmusContributionRequest, opts ...grpc.CallOption) (*QueryGetErasmusContributionResponse, error)
-	// Queries a ErasmusExams by index.
-	ErasmusExams(ctx context.Context, in *QueryGetErasmusExamsRequest, opts ...grpc.CallOption) (*QueryGetErasmusExamsResponse, error)
-	// Queries a list of ErasmusExams items.
-	ErasmusExamsAll(ctx context.Context, in *QueryAllErasmusExamsRequest, opts ...grpc.CallOption) (*QueryAllErasmusExamsResponse, error)
-	// Queries a ErasmusCareer by id.
-	ErasmusCareer(ctx context.Context, in *QueryGetErasmusCareerRequest, opts ...grpc.CallOption) (*QueryGetErasmusCareerResponse, error)
-	// Queries a list of ErasmusCareer items.
-	ErasmusCareerAll(ctx context.Context, in *QueryAllErasmusCareerRequest, opts ...grpc.CallOption) (*QueryAllErasmusCareerResponse, error)
 	// Queries a ErasmusInfo by index.
 	ErasmusInfo(ctx context.Context, in *QueryGetErasmusInfoRequest, opts ...grpc.CallOption) (*QueryGetErasmusInfoResponse, error)
 	// Queries a StoredStudent by index.
@@ -2632,10 +1552,6 @@ type QueryClient interface {
 	StoredStudentAll(ctx context.Context, in *QueryAllStoredStudentRequest, opts ...grpc.CallOption) (*QueryAllStoredStudentResponse, error)
 	// Queries a UniversityInfo by index.
 	UniversityInfo(ctx context.Context, in *QueryGetUniversityInfoRequest, opts ...grpc.CallOption) (*QueryGetUniversityInfoResponse, error)
-	// Queries a UniversityDetails by index.
-	UniversityDetails(ctx context.Context, in *QueryGetUniversityDetailsRequest, opts ...grpc.CallOption) (*QueryGetUniversityDetailsResponse, error)
-	// Queries a list of UniversityDetails items.
-	UniversityDetailsAll(ctx context.Context, in *QueryAllUniversityDetailsRequest, opts ...grpc.CallOption) (*QueryAllUniversityDetailsResponse, error)
 	// Queries a ChainInfo by index.
 	ChainInfo(ctx context.Context, in *QueryGetChainInfoRequest, opts ...grpc.CallOption) (*QueryGetChainInfoResponse, error)
 	// Queries a ForeignUniversities by index.
@@ -2688,24 +1604,6 @@ func (c *queryClient) StudentInfo(ctx context.Context, in *QueryGetStudentInfoRe
 	return out, nil
 }
 
-func (c *queryClient) ExamsInfo(ctx context.Context, in *QueryGetExamsInfoRequest, opts ...grpc.CallOption) (*QueryGetExamsInfoResponse, error) {
-	out := new(QueryGetExamsInfoResponse)
-	err := c.cc.Invoke(ctx, "/university_chain_it.universitychainit.Query/ExamsInfo", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *queryClient) ExamsInfoAll(ctx context.Context, in *QueryAllExamsInfoRequest, opts ...grpc.CallOption) (*QueryAllExamsInfoResponse, error) {
-	out := new(QueryAllExamsInfoResponse)
-	err := c.cc.Invoke(ctx, "/university_chain_it.universitychainit.Query/ExamsInfoAll", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *queryClient) TranscriptOfRecords(ctx context.Context, in *QueryGetTranscriptOfRecordsRequest, opts ...grpc.CallOption) (*QueryGetTranscriptOfRecordsResponse, error) {
 	out := new(QueryGetTranscriptOfRecordsResponse)
 	err := c.cc.Invoke(ctx, "/university_chain_it.universitychainit.Query/TranscriptOfRecords", in, out, opts...)
@@ -2742,72 +1640,9 @@ func (c *queryClient) ContactInfo(ctx context.Context, in *QueryGetContactInfoRe
 	return out, nil
 }
 
-func (c *queryClient) AnnualTaxes(ctx context.Context, in *QueryGetAnnualTaxesRequest, opts ...grpc.CallOption) (*QueryGetAnnualTaxesResponse, error) {
-	out := new(QueryGetAnnualTaxesResponse)
-	err := c.cc.Invoke(ctx, "/university_chain_it.universitychainit.Query/AnnualTaxes", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *queryClient) AnnualTaxesAll(ctx context.Context, in *QueryAllAnnualTaxesRequest, opts ...grpc.CallOption) (*QueryAllAnnualTaxesResponse, error) {
-	out := new(QueryAllAnnualTaxesResponse)
-	err := c.cc.Invoke(ctx, "/university_chain_it.universitychainit.Query/AnnualTaxesAll", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *queryClient) TaxesInfo(ctx context.Context, in *QueryGetTaxesInfoRequest, opts ...grpc.CallOption) (*QueryGetTaxesInfoResponse, error) {
 	out := new(QueryGetTaxesInfoResponse)
 	err := c.cc.Invoke(ctx, "/university_chain_it.universitychainit.Query/TaxesInfo", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *queryClient) ErasmusContribution(ctx context.Context, in *QueryGetErasmusContributionRequest, opts ...grpc.CallOption) (*QueryGetErasmusContributionResponse, error) {
-	out := new(QueryGetErasmusContributionResponse)
-	err := c.cc.Invoke(ctx, "/university_chain_it.universitychainit.Query/ErasmusContribution", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *queryClient) ErasmusExams(ctx context.Context, in *QueryGetErasmusExamsRequest, opts ...grpc.CallOption) (*QueryGetErasmusExamsResponse, error) {
-	out := new(QueryGetErasmusExamsResponse)
-	err := c.cc.Invoke(ctx, "/university_chain_it.universitychainit.Query/ErasmusExams", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *queryClient) ErasmusExamsAll(ctx context.Context, in *QueryAllErasmusExamsRequest, opts ...grpc.CallOption) (*QueryAllErasmusExamsResponse, error) {
-	out := new(QueryAllErasmusExamsResponse)
-	err := c.cc.Invoke(ctx, "/university_chain_it.universitychainit.Query/ErasmusExamsAll", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *queryClient) ErasmusCareer(ctx context.Context, in *QueryGetErasmusCareerRequest, opts ...grpc.CallOption) (*QueryGetErasmusCareerResponse, error) {
-	out := new(QueryGetErasmusCareerResponse)
-	err := c.cc.Invoke(ctx, "/university_chain_it.universitychainit.Query/ErasmusCareer", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *queryClient) ErasmusCareerAll(ctx context.Context, in *QueryAllErasmusCareerRequest, opts ...grpc.CallOption) (*QueryAllErasmusCareerResponse, error) {
-	out := new(QueryAllErasmusCareerResponse)
-	err := c.cc.Invoke(ctx, "/university_chain_it.universitychainit.Query/ErasmusCareerAll", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2844,24 +1679,6 @@ func (c *queryClient) StoredStudentAll(ctx context.Context, in *QueryAllStoredSt
 func (c *queryClient) UniversityInfo(ctx context.Context, in *QueryGetUniversityInfoRequest, opts ...grpc.CallOption) (*QueryGetUniversityInfoResponse, error) {
 	out := new(QueryGetUniversityInfoResponse)
 	err := c.cc.Invoke(ctx, "/university_chain_it.universitychainit.Query/UniversityInfo", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *queryClient) UniversityDetails(ctx context.Context, in *QueryGetUniversityDetailsRequest, opts ...grpc.CallOption) (*QueryGetUniversityDetailsResponse, error) {
-	out := new(QueryGetUniversityDetailsResponse)
-	err := c.cc.Invoke(ctx, "/university_chain_it.universitychainit.Query/UniversityDetails", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *queryClient) UniversityDetailsAll(ctx context.Context, in *QueryAllUniversityDetailsRequest, opts ...grpc.CallOption) (*QueryAllUniversityDetailsResponse, error) {
-	out := new(QueryAllUniversityDetailsResponse)
-	err := c.cc.Invoke(ctx, "/university_chain_it.universitychainit.Query/UniversityDetailsAll", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2905,10 +1722,6 @@ type QueryServer interface {
 	ProfessorsExamsAll(context.Context, *QueryAllProfessorsExamsRequest) (*QueryAllProfessorsExamsResponse, error)
 	// Queries a StudentInfo by index.
 	StudentInfo(context.Context, *QueryGetStudentInfoRequest) (*QueryGetStudentInfoResponse, error)
-	// Queries a ExamsInfo by index.
-	ExamsInfo(context.Context, *QueryGetExamsInfoRequest) (*QueryGetExamsInfoResponse, error)
-	// Queries a list of ExamsInfo items.
-	ExamsInfoAll(context.Context, *QueryAllExamsInfoRequest) (*QueryAllExamsInfoResponse, error)
 	// Queries a TranscriptOfRecords by index.
 	TranscriptOfRecords(context.Context, *QueryGetTranscriptOfRecordsRequest) (*QueryGetTranscriptOfRecordsResponse, error)
 	// Queries a PersonalInfo by index.
@@ -2917,22 +1730,8 @@ type QueryServer interface {
 	ResidenceInfo(context.Context, *QueryGetResidenceInfoRequest) (*QueryGetResidenceInfoResponse, error)
 	// Queries a ContactInfo by index.
 	ContactInfo(context.Context, *QueryGetContactInfoRequest) (*QueryGetContactInfoResponse, error)
-	// Queries a AnnualTaxes by id.
-	AnnualTaxes(context.Context, *QueryGetAnnualTaxesRequest) (*QueryGetAnnualTaxesResponse, error)
-	// Queries a list of AnnualTaxes items.
-	AnnualTaxesAll(context.Context, *QueryAllAnnualTaxesRequest) (*QueryAllAnnualTaxesResponse, error)
 	// Queries a TaxesInfo by index.
 	TaxesInfo(context.Context, *QueryGetTaxesInfoRequest) (*QueryGetTaxesInfoResponse, error)
-	// Queries a ErasmusContribution by index.
-	ErasmusContribution(context.Context, *QueryGetErasmusContributionRequest) (*QueryGetErasmusContributionResponse, error)
-	// Queries a ErasmusExams by index.
-	ErasmusExams(context.Context, *QueryGetErasmusExamsRequest) (*QueryGetErasmusExamsResponse, error)
-	// Queries a list of ErasmusExams items.
-	ErasmusExamsAll(context.Context, *QueryAllErasmusExamsRequest) (*QueryAllErasmusExamsResponse, error)
-	// Queries a ErasmusCareer by id.
-	ErasmusCareer(context.Context, *QueryGetErasmusCareerRequest) (*QueryGetErasmusCareerResponse, error)
-	// Queries a list of ErasmusCareer items.
-	ErasmusCareerAll(context.Context, *QueryAllErasmusCareerRequest) (*QueryAllErasmusCareerResponse, error)
 	// Queries a ErasmusInfo by index.
 	ErasmusInfo(context.Context, *QueryGetErasmusInfoRequest) (*QueryGetErasmusInfoResponse, error)
 	// Queries a StoredStudent by index.
@@ -2941,10 +1740,6 @@ type QueryServer interface {
 	StoredStudentAll(context.Context, *QueryAllStoredStudentRequest) (*QueryAllStoredStudentResponse, error)
 	// Queries a UniversityInfo by index.
 	UniversityInfo(context.Context, *QueryGetUniversityInfoRequest) (*QueryGetUniversityInfoResponse, error)
-	// Queries a UniversityDetails by index.
-	UniversityDetails(context.Context, *QueryGetUniversityDetailsRequest) (*QueryGetUniversityDetailsResponse, error)
-	// Queries a list of UniversityDetails items.
-	UniversityDetailsAll(context.Context, *QueryAllUniversityDetailsRequest) (*QueryAllUniversityDetailsResponse, error)
 	// Queries a ChainInfo by index.
 	ChainInfo(context.Context, *QueryGetChainInfoRequest) (*QueryGetChainInfoResponse, error)
 	// Queries a ForeignUniversities by index.
@@ -2969,12 +1764,6 @@ func (*UnimplementedQueryServer) ProfessorsExamsAll(ctx context.Context, req *Qu
 func (*UnimplementedQueryServer) StudentInfo(ctx context.Context, req *QueryGetStudentInfoRequest) (*QueryGetStudentInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method StudentInfo not implemented")
 }
-func (*UnimplementedQueryServer) ExamsInfo(ctx context.Context, req *QueryGetExamsInfoRequest) (*QueryGetExamsInfoResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ExamsInfo not implemented")
-}
-func (*UnimplementedQueryServer) ExamsInfoAll(ctx context.Context, req *QueryAllExamsInfoRequest) (*QueryAllExamsInfoResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ExamsInfoAll not implemented")
-}
 func (*UnimplementedQueryServer) TranscriptOfRecords(ctx context.Context, req *QueryGetTranscriptOfRecordsRequest) (*QueryGetTranscriptOfRecordsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TranscriptOfRecords not implemented")
 }
@@ -2987,29 +1776,8 @@ func (*UnimplementedQueryServer) ResidenceInfo(ctx context.Context, req *QueryGe
 func (*UnimplementedQueryServer) ContactInfo(ctx context.Context, req *QueryGetContactInfoRequest) (*QueryGetContactInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ContactInfo not implemented")
 }
-func (*UnimplementedQueryServer) AnnualTaxes(ctx context.Context, req *QueryGetAnnualTaxesRequest) (*QueryGetAnnualTaxesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AnnualTaxes not implemented")
-}
-func (*UnimplementedQueryServer) AnnualTaxesAll(ctx context.Context, req *QueryAllAnnualTaxesRequest) (*QueryAllAnnualTaxesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AnnualTaxesAll not implemented")
-}
 func (*UnimplementedQueryServer) TaxesInfo(ctx context.Context, req *QueryGetTaxesInfoRequest) (*QueryGetTaxesInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TaxesInfo not implemented")
-}
-func (*UnimplementedQueryServer) ErasmusContribution(ctx context.Context, req *QueryGetErasmusContributionRequest) (*QueryGetErasmusContributionResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ErasmusContribution not implemented")
-}
-func (*UnimplementedQueryServer) ErasmusExams(ctx context.Context, req *QueryGetErasmusExamsRequest) (*QueryGetErasmusExamsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ErasmusExams not implemented")
-}
-func (*UnimplementedQueryServer) ErasmusExamsAll(ctx context.Context, req *QueryAllErasmusExamsRequest) (*QueryAllErasmusExamsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ErasmusExamsAll not implemented")
-}
-func (*UnimplementedQueryServer) ErasmusCareer(ctx context.Context, req *QueryGetErasmusCareerRequest) (*QueryGetErasmusCareerResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ErasmusCareer not implemented")
-}
-func (*UnimplementedQueryServer) ErasmusCareerAll(ctx context.Context, req *QueryAllErasmusCareerRequest) (*QueryAllErasmusCareerResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ErasmusCareerAll not implemented")
 }
 func (*UnimplementedQueryServer) ErasmusInfo(ctx context.Context, req *QueryGetErasmusInfoRequest) (*QueryGetErasmusInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ErasmusInfo not implemented")
@@ -3022,12 +1790,6 @@ func (*UnimplementedQueryServer) StoredStudentAll(ctx context.Context, req *Quer
 }
 func (*UnimplementedQueryServer) UniversityInfo(ctx context.Context, req *QueryGetUniversityInfoRequest) (*QueryGetUniversityInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UniversityInfo not implemented")
-}
-func (*UnimplementedQueryServer) UniversityDetails(ctx context.Context, req *QueryGetUniversityDetailsRequest) (*QueryGetUniversityDetailsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UniversityDetails not implemented")
-}
-func (*UnimplementedQueryServer) UniversityDetailsAll(ctx context.Context, req *QueryAllUniversityDetailsRequest) (*QueryAllUniversityDetailsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UniversityDetailsAll not implemented")
 }
 func (*UnimplementedQueryServer) ChainInfo(ctx context.Context, req *QueryGetChainInfoRequest) (*QueryGetChainInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ChainInfo not implemented")
@@ -3115,42 +1877,6 @@ func _Query_StudentInfo_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Query_ExamsInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryGetExamsInfoRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(QueryServer).ExamsInfo(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/university_chain_it.universitychainit.Query/ExamsInfo",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).ExamsInfo(ctx, req.(*QueryGetExamsInfoRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Query_ExamsInfoAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryAllExamsInfoRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(QueryServer).ExamsInfoAll(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/university_chain_it.universitychainit.Query/ExamsInfoAll",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).ExamsInfoAll(ctx, req.(*QueryAllExamsInfoRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Query_TranscriptOfRecords_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(QueryGetTranscriptOfRecordsRequest)
 	if err := dec(in); err != nil {
@@ -3223,42 +1949,6 @@ func _Query_ContactInfo_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Query_AnnualTaxes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryGetAnnualTaxesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(QueryServer).AnnualTaxes(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/university_chain_it.universitychainit.Query/AnnualTaxes",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).AnnualTaxes(ctx, req.(*QueryGetAnnualTaxesRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Query_AnnualTaxesAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryAllAnnualTaxesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(QueryServer).AnnualTaxesAll(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/university_chain_it.universitychainit.Query/AnnualTaxesAll",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).AnnualTaxesAll(ctx, req.(*QueryAllAnnualTaxesRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Query_TaxesInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(QueryGetTaxesInfoRequest)
 	if err := dec(in); err != nil {
@@ -3273,96 +1963,6 @@ func _Query_TaxesInfo_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(QueryServer).TaxesInfo(ctx, req.(*QueryGetTaxesInfoRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Query_ErasmusContribution_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryGetErasmusContributionRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(QueryServer).ErasmusContribution(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/university_chain_it.universitychainit.Query/ErasmusContribution",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).ErasmusContribution(ctx, req.(*QueryGetErasmusContributionRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Query_ErasmusExams_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryGetErasmusExamsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(QueryServer).ErasmusExams(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/university_chain_it.universitychainit.Query/ErasmusExams",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).ErasmusExams(ctx, req.(*QueryGetErasmusExamsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Query_ErasmusExamsAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryAllErasmusExamsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(QueryServer).ErasmusExamsAll(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/university_chain_it.universitychainit.Query/ErasmusExamsAll",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).ErasmusExamsAll(ctx, req.(*QueryAllErasmusExamsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Query_ErasmusCareer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryGetErasmusCareerRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(QueryServer).ErasmusCareer(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/university_chain_it.universitychainit.Query/ErasmusCareer",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).ErasmusCareer(ctx, req.(*QueryGetErasmusCareerRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Query_ErasmusCareerAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryAllErasmusCareerRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(QueryServer).ErasmusCareerAll(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/university_chain_it.universitychainit.Query/ErasmusCareerAll",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).ErasmusCareerAll(ctx, req.(*QueryAllErasmusCareerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3435,42 +2035,6 @@ func _Query_UniversityInfo_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(QueryServer).UniversityInfo(ctx, req.(*QueryGetUniversityInfoRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Query_UniversityDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryGetUniversityDetailsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(QueryServer).UniversityDetails(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/university_chain_it.universitychainit.Query/UniversityDetails",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).UniversityDetails(ctx, req.(*QueryGetUniversityDetailsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Query_UniversityDetailsAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryAllUniversityDetailsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(QueryServer).UniversityDetailsAll(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/university_chain_it.universitychainit.Query/UniversityDetailsAll",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).UniversityDetailsAll(ctx, req.(*QueryAllUniversityDetailsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3550,14 +2114,6 @@ var _Query_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Query_StudentInfo_Handler,
 		},
 		{
-			MethodName: "ExamsInfo",
-			Handler:    _Query_ExamsInfo_Handler,
-		},
-		{
-			MethodName: "ExamsInfoAll",
-			Handler:    _Query_ExamsInfoAll_Handler,
-		},
-		{
 			MethodName: "TranscriptOfRecords",
 			Handler:    _Query_TranscriptOfRecords_Handler,
 		},
@@ -3574,36 +2130,8 @@ var _Query_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Query_ContactInfo_Handler,
 		},
 		{
-			MethodName: "AnnualTaxes",
-			Handler:    _Query_AnnualTaxes_Handler,
-		},
-		{
-			MethodName: "AnnualTaxesAll",
-			Handler:    _Query_AnnualTaxesAll_Handler,
-		},
-		{
 			MethodName: "TaxesInfo",
 			Handler:    _Query_TaxesInfo_Handler,
-		},
-		{
-			MethodName: "ErasmusContribution",
-			Handler:    _Query_ErasmusContribution_Handler,
-		},
-		{
-			MethodName: "ErasmusExams",
-			Handler:    _Query_ErasmusExams_Handler,
-		},
-		{
-			MethodName: "ErasmusExamsAll",
-			Handler:    _Query_ErasmusExamsAll_Handler,
-		},
-		{
-			MethodName: "ErasmusCareer",
-			Handler:    _Query_ErasmusCareer_Handler,
-		},
-		{
-			MethodName: "ErasmusCareerAll",
-			Handler:    _Query_ErasmusCareerAll_Handler,
 		},
 		{
 			MethodName: "ErasmusInfo",
@@ -3620,14 +2148,6 @@ var _Query_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UniversityInfo",
 			Handler:    _Query_UniversityInfo_Handler,
-		},
-		{
-			MethodName: "UniversityDetails",
-			Handler:    _Query_UniversityDetails_Handler,
-		},
-		{
-			MethodName: "UniversityDetailsAll",
-			Handler:    _Query_UniversityDetailsAll_Handler,
 		},
 		{
 			MethodName: "ChainInfo",
@@ -3905,153 +2425,6 @@ func (m *QueryGetStudentInfoResponse) MarshalToSizedBuffer(dAtA []byte) (int, er
 	return len(dAtA) - i, nil
 }
 
-func (m *QueryGetExamsInfoRequest) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *QueryGetExamsInfoRequest) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *QueryGetExamsInfoRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if len(m.ExamName) > 0 {
-		i -= len(m.ExamName)
-		copy(dAtA[i:], m.ExamName)
-		i = encodeVarintQuery(dAtA, i, uint64(len(m.ExamName)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *QueryGetExamsInfoResponse) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *QueryGetExamsInfoResponse) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *QueryGetExamsInfoResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	{
-		size, err := m.ExamsInfo.MarshalToSizedBuffer(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarintQuery(dAtA, i, uint64(size))
-	}
-	i--
-	dAtA[i] = 0xa
-	return len(dAtA) - i, nil
-}
-
-func (m *QueryAllExamsInfoRequest) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *QueryAllExamsInfoRequest) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *QueryAllExamsInfoRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Pagination != nil {
-		{
-			size, err := m.Pagination.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintQuery(dAtA, i, uint64(size))
-		}
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *QueryAllExamsInfoResponse) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *QueryAllExamsInfoResponse) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *QueryAllExamsInfoResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Pagination != nil {
-		{
-			size, err := m.Pagination.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintQuery(dAtA, i, uint64(size))
-		}
-		i--
-		dAtA[i] = 0x12
-	}
-	if len(m.ExamsInfo) > 0 {
-		for iNdEx := len(m.ExamsInfo) - 1; iNdEx >= 0; iNdEx-- {
-			{
-				size, err := m.ExamsInfo[iNdEx].MarshalToSizedBuffer(dAtA[:i])
-				if err != nil {
-					return 0, err
-				}
-				i -= size
-				i = encodeVarintQuery(dAtA, i, uint64(size))
-			}
-			i--
-			dAtA[i] = 0xa
-		}
-	}
-	return len(dAtA) - i, nil
-}
-
 func (m *QueryGetTranscriptOfRecordsRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -4276,151 +2649,6 @@ func (m *QueryGetContactInfoResponse) MarshalToSizedBuffer(dAtA []byte) (int, er
 	return len(dAtA) - i, nil
 }
 
-func (m *QueryGetAnnualTaxesRequest) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *QueryGetAnnualTaxesRequest) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *QueryGetAnnualTaxesRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Id != 0 {
-		i = encodeVarintQuery(dAtA, i, uint64(m.Id))
-		i--
-		dAtA[i] = 0x8
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *QueryGetAnnualTaxesResponse) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *QueryGetAnnualTaxesResponse) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *QueryGetAnnualTaxesResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	{
-		size, err := m.AnnualTaxes.MarshalToSizedBuffer(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarintQuery(dAtA, i, uint64(size))
-	}
-	i--
-	dAtA[i] = 0xa
-	return len(dAtA) - i, nil
-}
-
-func (m *QueryAllAnnualTaxesRequest) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *QueryAllAnnualTaxesRequest) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *QueryAllAnnualTaxesRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Pagination != nil {
-		{
-			size, err := m.Pagination.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintQuery(dAtA, i, uint64(size))
-		}
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *QueryAllAnnualTaxesResponse) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *QueryAllAnnualTaxesResponse) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *QueryAllAnnualTaxesResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Pagination != nil {
-		{
-			size, err := m.Pagination.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintQuery(dAtA, i, uint64(size))
-		}
-		i--
-		dAtA[i] = 0x12
-	}
-	if len(m.AnnualTaxes) > 0 {
-		for iNdEx := len(m.AnnualTaxes) - 1; iNdEx >= 0; iNdEx-- {
-			{
-				size, err := m.AnnualTaxes[iNdEx].MarshalToSizedBuffer(dAtA[:i])
-				if err != nil {
-					return 0, err
-				}
-				i -= size
-				i = encodeVarintQuery(dAtA, i, uint64(size))
-			}
-			i--
-			dAtA[i] = 0xa
-		}
-	}
-	return len(dAtA) - i, nil
-}
-
 func (m *QueryGetTaxesInfoRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -4474,354 +2702,6 @@ func (m *QueryGetTaxesInfoResponse) MarshalToSizedBuffer(dAtA []byte) (int, erro
 	}
 	i--
 	dAtA[i] = 0xa
-	return len(dAtA) - i, nil
-}
-
-func (m *QueryGetErasmusContributionRequest) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *QueryGetErasmusContributionRequest) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *QueryGetErasmusContributionRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	return len(dAtA) - i, nil
-}
-
-func (m *QueryGetErasmusContributionResponse) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *QueryGetErasmusContributionResponse) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *QueryGetErasmusContributionResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	{
-		size, err := m.ErasmusContribution.MarshalToSizedBuffer(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarintQuery(dAtA, i, uint64(size))
-	}
-	i--
-	dAtA[i] = 0xa
-	return len(dAtA) - i, nil
-}
-
-func (m *QueryGetErasmusExamsRequest) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *QueryGetErasmusExamsRequest) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *QueryGetErasmusExamsRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if len(m.ExamName) > 0 {
-		i -= len(m.ExamName)
-		copy(dAtA[i:], m.ExamName)
-		i = encodeVarintQuery(dAtA, i, uint64(len(m.ExamName)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *QueryGetErasmusExamsResponse) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *QueryGetErasmusExamsResponse) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *QueryGetErasmusExamsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	{
-		size, err := m.ErasmusExams.MarshalToSizedBuffer(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarintQuery(dAtA, i, uint64(size))
-	}
-	i--
-	dAtA[i] = 0xa
-	return len(dAtA) - i, nil
-}
-
-func (m *QueryAllErasmusExamsRequest) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *QueryAllErasmusExamsRequest) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *QueryAllErasmusExamsRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Pagination != nil {
-		{
-			size, err := m.Pagination.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintQuery(dAtA, i, uint64(size))
-		}
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *QueryAllErasmusExamsResponse) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *QueryAllErasmusExamsResponse) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *QueryAllErasmusExamsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Pagination != nil {
-		{
-			size, err := m.Pagination.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintQuery(dAtA, i, uint64(size))
-		}
-		i--
-		dAtA[i] = 0x12
-	}
-	if len(m.ErasmusExams) > 0 {
-		for iNdEx := len(m.ErasmusExams) - 1; iNdEx >= 0; iNdEx-- {
-			{
-				size, err := m.ErasmusExams[iNdEx].MarshalToSizedBuffer(dAtA[:i])
-				if err != nil {
-					return 0, err
-				}
-				i -= size
-				i = encodeVarintQuery(dAtA, i, uint64(size))
-			}
-			i--
-			dAtA[i] = 0xa
-		}
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *QueryGetErasmusCareerRequest) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *QueryGetErasmusCareerRequest) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *QueryGetErasmusCareerRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Id != 0 {
-		i = encodeVarintQuery(dAtA, i, uint64(m.Id))
-		i--
-		dAtA[i] = 0x8
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *QueryGetErasmusCareerResponse) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *QueryGetErasmusCareerResponse) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *QueryGetErasmusCareerResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	{
-		size, err := m.ErasmusCareer.MarshalToSizedBuffer(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarintQuery(dAtA, i, uint64(size))
-	}
-	i--
-	dAtA[i] = 0xa
-	return len(dAtA) - i, nil
-}
-
-func (m *QueryAllErasmusCareerRequest) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *QueryAllErasmusCareerRequest) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *QueryAllErasmusCareerRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Pagination != nil {
-		{
-			size, err := m.Pagination.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintQuery(dAtA, i, uint64(size))
-		}
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *QueryAllErasmusCareerResponse) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *QueryAllErasmusCareerResponse) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *QueryAllErasmusCareerResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Pagination != nil {
-		{
-			size, err := m.Pagination.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintQuery(dAtA, i, uint64(size))
-		}
-		i--
-		dAtA[i] = 0x12
-	}
-	if len(m.ErasmusCareer) > 0 {
-		for iNdEx := len(m.ErasmusCareer) - 1; iNdEx >= 0; iNdEx-- {
-			{
-				size, err := m.ErasmusCareer[iNdEx].MarshalToSizedBuffer(dAtA[:i])
-				if err != nil {
-					return 0, err
-				}
-				i -= size
-				i = encodeVarintQuery(dAtA, i, uint64(size))
-			}
-			i--
-			dAtA[i] = 0xa
-		}
-	}
 	return len(dAtA) - i, nil
 }
 
@@ -5081,153 +2961,6 @@ func (m *QueryGetUniversityInfoResponse) MarshalToSizedBuffer(dAtA []byte) (int,
 	}
 	i--
 	dAtA[i] = 0xa
-	return len(dAtA) - i, nil
-}
-
-func (m *QueryGetUniversityDetailsRequest) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *QueryGetUniversityDetailsRequest) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *QueryGetUniversityDetailsRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if len(m.UniversityName) > 0 {
-		i -= len(m.UniversityName)
-		copy(dAtA[i:], m.UniversityName)
-		i = encodeVarintQuery(dAtA, i, uint64(len(m.UniversityName)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *QueryGetUniversityDetailsResponse) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *QueryGetUniversityDetailsResponse) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *QueryGetUniversityDetailsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	{
-		size, err := m.UniversityDetails.MarshalToSizedBuffer(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarintQuery(dAtA, i, uint64(size))
-	}
-	i--
-	dAtA[i] = 0xa
-	return len(dAtA) - i, nil
-}
-
-func (m *QueryAllUniversityDetailsRequest) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *QueryAllUniversityDetailsRequest) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *QueryAllUniversityDetailsRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Pagination != nil {
-		{
-			size, err := m.Pagination.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintQuery(dAtA, i, uint64(size))
-		}
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *QueryAllUniversityDetailsResponse) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *QueryAllUniversityDetailsResponse) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *QueryAllUniversityDetailsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Pagination != nil {
-		{
-			size, err := m.Pagination.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintQuery(dAtA, i, uint64(size))
-		}
-		i--
-		dAtA[i] = 0x12
-	}
-	if len(m.UniversityDetails) > 0 {
-		for iNdEx := len(m.UniversityDetails) - 1; iNdEx >= 0; iNdEx-- {
-			{
-				size, err := m.UniversityDetails[iNdEx].MarshalToSizedBuffer(dAtA[:i])
-				if err != nil {
-					return 0, err
-				}
-				i -= size
-				i = encodeVarintQuery(dAtA, i, uint64(size))
-			}
-			i--
-			dAtA[i] = 0xa
-		}
-	}
 	return len(dAtA) - i, nil
 }
 
@@ -5541,62 +3274,6 @@ func (m *QueryGetStudentInfoResponse) Size() (n int) {
 	return n
 }
 
-func (m *QueryGetExamsInfoRequest) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.ExamName)
-	if l > 0 {
-		n += 1 + l + sovQuery(uint64(l))
-	}
-	return n
-}
-
-func (m *QueryGetExamsInfoResponse) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = m.ExamsInfo.Size()
-	n += 1 + l + sovQuery(uint64(l))
-	return n
-}
-
-func (m *QueryAllExamsInfoRequest) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.Pagination != nil {
-		l = m.Pagination.Size()
-		n += 1 + l + sovQuery(uint64(l))
-	}
-	return n
-}
-
-func (m *QueryAllExamsInfoResponse) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if len(m.ExamsInfo) > 0 {
-		for _, e := range m.ExamsInfo {
-			l = e.Size()
-			n += 1 + l + sovQuery(uint64(l))
-		}
-	}
-	if m.Pagination != nil {
-		l = m.Pagination.Size()
-		n += 1 + l + sovQuery(uint64(l))
-	}
-	return n
-}
-
 func (m *QueryGetTranscriptOfRecordsRequest) Size() (n int) {
 	if m == nil {
 		return 0
@@ -5677,61 +3354,6 @@ func (m *QueryGetContactInfoResponse) Size() (n int) {
 	return n
 }
 
-func (m *QueryGetAnnualTaxesRequest) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.Id != 0 {
-		n += 1 + sovQuery(uint64(m.Id))
-	}
-	return n
-}
-
-func (m *QueryGetAnnualTaxesResponse) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = m.AnnualTaxes.Size()
-	n += 1 + l + sovQuery(uint64(l))
-	return n
-}
-
-func (m *QueryAllAnnualTaxesRequest) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.Pagination != nil {
-		l = m.Pagination.Size()
-		n += 1 + l + sovQuery(uint64(l))
-	}
-	return n
-}
-
-func (m *QueryAllAnnualTaxesResponse) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if len(m.AnnualTaxes) > 0 {
-		for _, e := range m.AnnualTaxes {
-			l = e.Size()
-			n += 1 + l + sovQuery(uint64(l))
-		}
-	}
-	if m.Pagination != nil {
-		l = m.Pagination.Size()
-		n += 1 + l + sovQuery(uint64(l))
-	}
-	return n
-}
-
 func (m *QueryGetTaxesInfoRequest) Size() (n int) {
 	if m == nil {
 		return 0
@@ -5749,137 +3371,6 @@ func (m *QueryGetTaxesInfoResponse) Size() (n int) {
 	_ = l
 	l = m.TaxesInfo.Size()
 	n += 1 + l + sovQuery(uint64(l))
-	return n
-}
-
-func (m *QueryGetErasmusContributionRequest) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	return n
-}
-
-func (m *QueryGetErasmusContributionResponse) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = m.ErasmusContribution.Size()
-	n += 1 + l + sovQuery(uint64(l))
-	return n
-}
-
-func (m *QueryGetErasmusExamsRequest) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.ExamName)
-	if l > 0 {
-		n += 1 + l + sovQuery(uint64(l))
-	}
-	return n
-}
-
-func (m *QueryGetErasmusExamsResponse) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = m.ErasmusExams.Size()
-	n += 1 + l + sovQuery(uint64(l))
-	return n
-}
-
-func (m *QueryAllErasmusExamsRequest) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.Pagination != nil {
-		l = m.Pagination.Size()
-		n += 1 + l + sovQuery(uint64(l))
-	}
-	return n
-}
-
-func (m *QueryAllErasmusExamsResponse) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if len(m.ErasmusExams) > 0 {
-		for _, e := range m.ErasmusExams {
-			l = e.Size()
-			n += 1 + l + sovQuery(uint64(l))
-		}
-	}
-	if m.Pagination != nil {
-		l = m.Pagination.Size()
-		n += 1 + l + sovQuery(uint64(l))
-	}
-	return n
-}
-
-func (m *QueryGetErasmusCareerRequest) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.Id != 0 {
-		n += 1 + sovQuery(uint64(m.Id))
-	}
-	return n
-}
-
-func (m *QueryGetErasmusCareerResponse) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = m.ErasmusCareer.Size()
-	n += 1 + l + sovQuery(uint64(l))
-	return n
-}
-
-func (m *QueryAllErasmusCareerRequest) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.Pagination != nil {
-		l = m.Pagination.Size()
-		n += 1 + l + sovQuery(uint64(l))
-	}
-	return n
-}
-
-func (m *QueryAllErasmusCareerResponse) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if len(m.ErasmusCareer) > 0 {
-		for _, e := range m.ErasmusCareer {
-			l = e.Size()
-			n += 1 + l + sovQuery(uint64(l))
-		}
-	}
-	if m.Pagination != nil {
-		l = m.Pagination.Size()
-		n += 1 + l + sovQuery(uint64(l))
-	}
 	return n
 }
 
@@ -5976,62 +3467,6 @@ func (m *QueryGetUniversityInfoResponse) Size() (n int) {
 	_ = l
 	l = m.UniversityInfo.Size()
 	n += 1 + l + sovQuery(uint64(l))
-	return n
-}
-
-func (m *QueryGetUniversityDetailsRequest) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.UniversityName)
-	if l > 0 {
-		n += 1 + l + sovQuery(uint64(l))
-	}
-	return n
-}
-
-func (m *QueryGetUniversityDetailsResponse) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = m.UniversityDetails.Size()
-	n += 1 + l + sovQuery(uint64(l))
-	return n
-}
-
-func (m *QueryAllUniversityDetailsRequest) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.Pagination != nil {
-		l = m.Pagination.Size()
-		n += 1 + l + sovQuery(uint64(l))
-	}
-	return n
-}
-
-func (m *QueryAllUniversityDetailsResponse) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if len(m.UniversityDetails) > 0 {
-		for _, e := range m.UniversityDetails {
-			l = e.Size()
-			n += 1 + l + sovQuery(uint64(l))
-		}
-	}
-	if m.Pagination != nil {
-		l = m.Pagination.Size()
-		n += 1 + l + sovQuery(uint64(l))
-	}
 	return n
 }
 
@@ -6754,377 +4189,6 @@ func (m *QueryGetStudentInfoResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *QueryGetExamsInfoRequest) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowQuery
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: QueryGetExamsInfoRequest: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryGetExamsInfoRequest: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ExamName", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowQuery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthQuery
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.ExamName = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipQuery(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *QueryGetExamsInfoResponse) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowQuery
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: QueryGetExamsInfoResponse: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryGetExamsInfoResponse: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ExamsInfo", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowQuery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthQuery
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if err := m.ExamsInfo.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipQuery(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *QueryAllExamsInfoRequest) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowQuery
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: QueryAllExamsInfoRequest: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryAllExamsInfoRequest: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowQuery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthQuery
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.Pagination == nil {
-				m.Pagination = &query.PageRequest{}
-			}
-			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipQuery(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *QueryAllExamsInfoResponse) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowQuery
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: QueryAllExamsInfoResponse: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryAllExamsInfoResponse: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ExamsInfo", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowQuery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthQuery
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.ExamsInfo = append(m.ExamsInfo, ExamsInfo{})
-			if err := m.ExamsInfo[len(m.ExamsInfo)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowQuery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthQuery
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.Pagination == nil {
-				m.Pagination = &query.PageResponse{}
-			}
-			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipQuery(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
 func (m *QueryGetTranscriptOfRecordsRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -7657,364 +4721,6 @@ func (m *QueryGetContactInfoResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *QueryGetAnnualTaxesRequest) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowQuery
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: QueryGetAnnualTaxesRequest: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryGetAnnualTaxesRequest: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
-			}
-			m.Id = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowQuery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Id |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		default:
-			iNdEx = preIndex
-			skippy, err := skipQuery(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *QueryGetAnnualTaxesResponse) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowQuery
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: QueryGetAnnualTaxesResponse: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryGetAnnualTaxesResponse: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field AnnualTaxes", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowQuery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthQuery
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if err := m.AnnualTaxes.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipQuery(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *QueryAllAnnualTaxesRequest) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowQuery
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: QueryAllAnnualTaxesRequest: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryAllAnnualTaxesRequest: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowQuery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthQuery
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.Pagination == nil {
-				m.Pagination = &query.PageRequest{}
-			}
-			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipQuery(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *QueryAllAnnualTaxesResponse) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowQuery
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: QueryAllAnnualTaxesResponse: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryAllAnnualTaxesResponse: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field AnnualTaxes", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowQuery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthQuery
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.AnnualTaxes = append(m.AnnualTaxes, AnnualTaxes{})
-			if err := m.AnnualTaxes[len(m.AnnualTaxes)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowQuery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthQuery
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.Pagination == nil {
-				m.Pagination = &query.PageResponse{}
-			}
-			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipQuery(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
 func (m *QueryGetTaxesInfoRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -8124,868 +4830,6 @@ func (m *QueryGetTaxesInfoResponse) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if err := m.TaxesInfo.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipQuery(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *QueryGetErasmusContributionRequest) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowQuery
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: QueryGetErasmusContributionRequest: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryGetErasmusContributionRequest: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		default:
-			iNdEx = preIndex
-			skippy, err := skipQuery(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *QueryGetErasmusContributionResponse) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowQuery
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: QueryGetErasmusContributionResponse: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryGetErasmusContributionResponse: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ErasmusContribution", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowQuery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthQuery
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if err := m.ErasmusContribution.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipQuery(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *QueryGetErasmusExamsRequest) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowQuery
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: QueryGetErasmusExamsRequest: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryGetErasmusExamsRequest: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ExamName", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowQuery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthQuery
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.ExamName = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipQuery(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *QueryGetErasmusExamsResponse) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowQuery
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: QueryGetErasmusExamsResponse: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryGetErasmusExamsResponse: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ErasmusExams", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowQuery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthQuery
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if err := m.ErasmusExams.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipQuery(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *QueryAllErasmusExamsRequest) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowQuery
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: QueryAllErasmusExamsRequest: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryAllErasmusExamsRequest: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowQuery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthQuery
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.Pagination == nil {
-				m.Pagination = &query.PageRequest{}
-			}
-			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipQuery(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *QueryAllErasmusExamsResponse) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowQuery
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: QueryAllErasmusExamsResponse: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryAllErasmusExamsResponse: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ErasmusExams", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowQuery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthQuery
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.ErasmusExams = append(m.ErasmusExams, ErasmusExams{})
-			if err := m.ErasmusExams[len(m.ErasmusExams)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowQuery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthQuery
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.Pagination == nil {
-				m.Pagination = &query.PageResponse{}
-			}
-			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipQuery(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *QueryGetErasmusCareerRequest) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowQuery
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: QueryGetErasmusCareerRequest: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryGetErasmusCareerRequest: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
-			}
-			m.Id = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowQuery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Id |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		default:
-			iNdEx = preIndex
-			skippy, err := skipQuery(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *QueryGetErasmusCareerResponse) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowQuery
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: QueryGetErasmusCareerResponse: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryGetErasmusCareerResponse: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ErasmusCareer", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowQuery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthQuery
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if err := m.ErasmusCareer.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipQuery(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *QueryAllErasmusCareerRequest) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowQuery
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: QueryAllErasmusCareerRequest: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryAllErasmusCareerRequest: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowQuery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthQuery
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.Pagination == nil {
-				m.Pagination = &query.PageRequest{}
-			}
-			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipQuery(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *QueryAllErasmusCareerResponse) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowQuery
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: QueryAllErasmusCareerResponse: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryAllErasmusCareerResponse: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ErasmusCareer", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowQuery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthQuery
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.ErasmusCareer = append(m.ErasmusCareer, ErasmusCareer{})
-			if err := m.ErasmusCareer[len(m.ErasmusCareer)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowQuery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthQuery
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.Pagination == nil {
-				m.Pagination = &query.PageResponse{}
-			}
-			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -9623,377 +5467,6 @@ func (m *QueryGetUniversityInfoResponse) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if err := m.UniversityInfo.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipQuery(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *QueryGetUniversityDetailsRequest) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowQuery
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: QueryGetUniversityDetailsRequest: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryGetUniversityDetailsRequest: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field UniversityName", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowQuery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthQuery
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.UniversityName = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipQuery(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *QueryGetUniversityDetailsResponse) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowQuery
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: QueryGetUniversityDetailsResponse: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryGetUniversityDetailsResponse: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field UniversityDetails", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowQuery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthQuery
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if err := m.UniversityDetails.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipQuery(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *QueryAllUniversityDetailsRequest) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowQuery
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: QueryAllUniversityDetailsRequest: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryAllUniversityDetailsRequest: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowQuery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthQuery
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.Pagination == nil {
-				m.Pagination = &query.PageRequest{}
-			}
-			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipQuery(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *QueryAllUniversityDetailsResponse) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowQuery
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: QueryAllUniversityDetailsResponse: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryAllUniversityDetailsResponse: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field UniversityDetails", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowQuery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthQuery
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.UniversityDetails = append(m.UniversityDetails, UniversityDetails{})
-			if err := m.UniversityDetails[len(m.UniversityDetails)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowQuery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthQuery
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.Pagination == nil {
-				m.Pagination = &query.PageResponse{}
-			}
-			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex

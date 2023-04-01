@@ -17,23 +17,17 @@ func DefaultGenesis() *GenesisState {
 	*/
 
 	return &GenesisState{
-		PortId:                PortID,
-		ProfessorsExamsList:   []ProfessorsExams{},
-		StudentInfo:           nil,
-		ExamsInfoList:         []ExamsInfo{},
-		TranscriptOfRecords:   nil,
-		PersonalInfo:          nil,
-		ResidenceInfo:         nil,
-		ContactInfo:           nil,
-		AnnualTaxesList:       []AnnualTaxes{},
-		TaxesInfo:             nil,
-		ErasmusContribution:   nil,
-		ErasmusExamsList:      []ErasmusExams{},
-		ErasmusCareerList:     []ErasmusCareer{},
-		ErasmusInfo:           nil,
-		StoredStudentList:     []StoredStudent{},
-		UniversityInfo:        nil,
-		UniversityDetailsList: []UniversityDetails{},
+		PortId:              PortID,
+		ProfessorsExamsList: []ProfessorsExams{},
+		StudentInfo:         nil,
+		TranscriptOfRecords: nil,
+		PersonalInfo:        nil,
+		ResidenceInfo:       nil,
+		ContactInfo:         nil,
+		TaxesInfo:           nil,
+		ErasmusInfo:         nil,
+		StoredStudentList:   []StoredStudent{},
+		UniversityInfo:      nil,
 		ChainInfo: ChainInfo{
 			HubKey:                "",
 			ChainAdministratorKey: "cosmos1ga559f4vhx98u0exa5cvtxr4vxnk00tqfc0rlc", // bob address, to change
@@ -63,50 +57,6 @@ func (gs GenesisState) Validate() error {
 		}
 		professorsExamsIndexMap[index] = struct{}{}
 	}
-	// Check for duplicated index in examsInfo
-	examsInfoIndexMap := make(map[string]struct{})
-
-	for _, elem := range gs.ExamsInfoList {
-		index := string(ExamsInfoKey(elem.ExamName))
-		if _, ok := examsInfoIndexMap[index]; ok {
-			return fmt.Errorf("duplicated index for examsInfo")
-		}
-		examsInfoIndexMap[index] = struct{}{}
-	}
-	// Check for duplicated ID in annualTaxes
-	annualTaxesIdMap := make(map[uint64]bool)
-	annualTaxesCount := gs.GetAnnualTaxesCount()
-	for _, elem := range gs.AnnualTaxesList {
-		if _, ok := annualTaxesIdMap[elem.Id]; ok {
-			return fmt.Errorf("duplicated id for annualTaxes")
-		}
-		if elem.Id >= annualTaxesCount {
-			return fmt.Errorf("annualTaxes id should be lower or equal than the last id")
-		}
-		annualTaxesIdMap[elem.Id] = true
-	}
-	// Check for duplicated index in erasmusExams
-	erasmusExamsIndexMap := make(map[string]struct{})
-
-	for _, elem := range gs.ErasmusExamsList {
-		index := string(ErasmusExamsKey(elem.ExamName))
-		if _, ok := erasmusExamsIndexMap[index]; ok {
-			return fmt.Errorf("duplicated index for erasmusExams")
-		}
-		erasmusExamsIndexMap[index] = struct{}{}
-	}
-	// Check for duplicated ID in erasmusCareer
-	erasmusCareerIdMap := make(map[uint64]bool)
-	erasmusCareerCount := gs.GetErasmusCareerCount()
-	for _, elem := range gs.ErasmusCareerList {
-		if _, ok := erasmusCareerIdMap[elem.Id]; ok {
-			return fmt.Errorf("duplicated id for erasmusCareer")
-		}
-		if elem.Id >= erasmusCareerCount {
-			return fmt.Errorf("erasmusCareer id should be lower or equal than the last id")
-		}
-		erasmusCareerIdMap[elem.Id] = true
-	}
 	// Check for duplicated index in storedStudent
 	storedStudentIndexMap := make(map[string]struct{})
 
@@ -116,16 +66,6 @@ func (gs GenesisState) Validate() error {
 			return fmt.Errorf("duplicated index for storedStudent")
 		}
 		storedStudentIndexMap[index] = struct{}{}
-	}
-	// Check for duplicated index in universityDetails
-	universityDetailsIndexMap := make(map[string]struct{})
-
-	for _, elem := range gs.UniversityDetailsList {
-		index := string(UniversityDetailsKey(elem.UniversityName))
-		if _, ok := universityDetailsIndexMap[index]; ok {
-			return fmt.Errorf("duplicated index for universityDetails")
-		}
-		universityDetailsIndexMap[index] = struct{}{}
 	}
 	// Check for duplicated index in foreignUniversities
 	foreignUniversitiesIndexMap := make(map[string]struct{})

@@ -5,12 +5,6 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "universitychainit/params.proto";
-import "universitychainit/exams_info.proto";
-import "universitychainit/annual_taxes.proto";
-import "universitychainit/erasmus_contribution.proto";
-import "universitychainit/erasmus_exams.proto";
-import "universitychainit/erasmus_career.proto";
-import "universitychainit/university_details.proto";
 import "universitychainit/chain_info.proto";
 import "universitychainit/foreign_universities.proto";
 // this line is used by starport scaffolding # 1
@@ -47,15 +41,6 @@ service Query {
 	rpc StudentInfo(QueryGetStudentInfoRequest) returns (QueryGetStudentInfoResponse) {
 		option (google.api.http).get = "/university_chain_it/universitychainit/student_info";
 	}
-// Queries a ExamsInfo by index.
-	rpc ExamsInfo(QueryGetExamsInfoRequest) returns (QueryGetExamsInfoResponse) {
-		option (google.api.http).get = "/university_chain_it/universitychainit/exams_info/{examName}";
-	}
-
-	// Queries a list of ExamsInfo items.
-	rpc ExamsInfoAll(QueryAllExamsInfoRequest) returns (QueryAllExamsInfoResponse) {
-		option (google.api.http).get = "/university_chain_it/universitychainit/exams_info";
-	}
 
 // Queries a TranscriptOfRecords by index.
 	rpc TranscriptOfRecords(QueryGetTranscriptOfRecordsRequest) returns (QueryGetTranscriptOfRecordsResponse) {
@@ -73,42 +58,10 @@ service Query {
 	rpc ContactInfo(QueryGetContactInfoRequest) returns (QueryGetContactInfoResponse) {
 		option (google.api.http).get = "/university_chain_it/universitychainit/contact_info";
 	}
-// Queries a AnnualTaxes by id.
-	rpc AnnualTaxes(QueryGetAnnualTaxesRequest) returns (QueryGetAnnualTaxesResponse) {
-		option (google.api.http).get = "/university_chain_it/universitychainit/annual_taxes/{id}";
-	}
-
-	// Queries a list of AnnualTaxes items.
-	rpc AnnualTaxesAll(QueryAllAnnualTaxesRequest) returns (QueryAllAnnualTaxesResponse) {
-		option (google.api.http).get = "/university_chain_it/universitychainit/annual_taxes";
-	}
 
 // Queries a TaxesInfo by index.
 	rpc TaxesInfo(QueryGetTaxesInfoRequest) returns (QueryGetTaxesInfoResponse) {
 		option (google.api.http).get = "/university_chain_it/universitychainit/taxes_info";
-	}
-// Queries a ErasmusContribution by index.
-	rpc ErasmusContribution(QueryGetErasmusContributionRequest) returns (QueryGetErasmusContributionResponse) {
-		option (google.api.http).get = "/university_chain_it/universitychainit/erasmus_contribution";
-	}
-// Queries a ErasmusExams by index.
-	rpc ErasmusExams(QueryGetErasmusExamsRequest) returns (QueryGetErasmusExamsResponse) {
-		option (google.api.http).get = "/university_chain_it/universitychainit/erasmus_exams/{examName}";
-	}
-
-	// Queries a list of ErasmusExams items.
-	rpc ErasmusExamsAll(QueryAllErasmusExamsRequest) returns (QueryAllErasmusExamsResponse) {
-		option (google.api.http).get = "/university_chain_it/universitychainit/erasmus_exams";
-	}
-
-// Queries a ErasmusCareer by id.
-	rpc ErasmusCareer(QueryGetErasmusCareerRequest) returns (QueryGetErasmusCareerResponse) {
-		option (google.api.http).get = "/university_chain_it/universitychainit/erasmus_career/{id}";
-	}
-
-	// Queries a list of ErasmusCareer items.
-	rpc ErasmusCareerAll(QueryAllErasmusCareerRequest) returns (QueryAllErasmusCareerResponse) {
-		option (google.api.http).get = "/university_chain_it/universitychainit/erasmus_career";
 	}
 
 // Queries a ErasmusInfo by index.
@@ -128,15 +81,6 @@ service Query {
 // Queries a UniversityInfo by index.
 	rpc UniversityInfo(QueryGetUniversityInfoRequest) returns (QueryGetUniversityInfoResponse) {
 		option (google.api.http).get = "/university_chain_it/universitychainit/university_info";
-	}
-// Queries a UniversityDetails by index.
-	rpc UniversityDetails(QueryGetUniversityDetailsRequest) returns (QueryGetUniversityDetailsResponse) {
-		option (google.api.http).get = "/university_chain_it/universitychainit/university_details/{universityName}";
-	}
-
-	// Queries a list of UniversityDetails items.
-	rpc UniversityDetailsAll(QueryAllUniversityDetailsRequest) returns (QueryAllUniversityDetailsResponse) {
-		option (google.api.http).get = "/university_chain_it/universitychainit/university_details";
 	}
 
 // Queries a ChainInfo by index.
@@ -188,23 +132,6 @@ message QueryGetStudentInfoRequest {}
 message QueryGetStudentInfoResponse {
 	StudentInfo StudentInfo = 1 [(gogoproto.nullable) = false];
 }
-message QueryGetExamsInfoRequest {
-	  string examName = 1;
-
-}
-
-message QueryGetExamsInfoResponse {
-	ExamsInfo examsInfo = 1 [(gogoproto.nullable) = false];
-}
-
-message QueryAllExamsInfoRequest {
-	cosmos.base.query.v1beta1.PageRequest pagination = 1;
-}
-
-message QueryAllExamsInfoResponse {
-	repeated ExamsInfo examsInfo = 1 [(gogoproto.nullable) = false];
-	cosmos.base.query.v1beta1.PageResponse pagination = 2;
-}
 
 message QueryGetTranscriptOfRecordsRequest {}
 
@@ -226,66 +153,11 @@ message QueryGetContactInfoRequest {}
 message QueryGetContactInfoResponse {
 	ContactInfo ContactInfo = 1 [(gogoproto.nullable) = false];
 }
-message QueryGetAnnualTaxesRequest {
-	uint64 id = 1;
-}
-
-message QueryGetAnnualTaxesResponse {
-	AnnualTaxes AnnualTaxes = 1 [(gogoproto.nullable) = false];
-}
-
-message QueryAllAnnualTaxesRequest {
-	cosmos.base.query.v1beta1.PageRequest pagination = 1;
-}
-
-message QueryAllAnnualTaxesResponse {
-	repeated AnnualTaxes AnnualTaxes = 1 [(gogoproto.nullable) = false];
-	cosmos.base.query.v1beta1.PageResponse pagination = 2;
-}
 
 message QueryGetTaxesInfoRequest {}
 
 message QueryGetTaxesInfoResponse {
 	TaxesInfo TaxesInfo = 1 [(gogoproto.nullable) = false];
-}
-message QueryGetErasmusContributionRequest {}
-
-message QueryGetErasmusContributionResponse {
-	ErasmusContribution ErasmusContribution = 1 [(gogoproto.nullable) = false];
-}
-message QueryGetErasmusExamsRequest {
-	  string examName = 1;
-
-}
-
-message QueryGetErasmusExamsResponse {
-	ErasmusExams erasmusExams = 1 [(gogoproto.nullable) = false];
-}
-
-message QueryAllErasmusExamsRequest {
-	cosmos.base.query.v1beta1.PageRequest pagination = 1;
-}
-
-message QueryAllErasmusExamsResponse {
-	repeated ErasmusExams erasmusExams = 1 [(gogoproto.nullable) = false];
-	cosmos.base.query.v1beta1.PageResponse pagination = 2;
-}
-
-message QueryGetErasmusCareerRequest {
-	uint64 id = 1;
-}
-
-message QueryGetErasmusCareerResponse {
-	ErasmusCareer ErasmusCareer = 1 [(gogoproto.nullable) = false];
-}
-
-message QueryAllErasmusCareerRequest {
-	cosmos.base.query.v1beta1.PageRequest pagination = 1;
-}
-
-message QueryAllErasmusCareerResponse {
-	repeated ErasmusCareer ErasmusCareer = 1 [(gogoproto.nullable) = false];
-	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 message QueryGetErasmusInfoRequest {}
@@ -315,23 +187,6 @@ message QueryGetUniversityInfoRequest {}
 
 message QueryGetUniversityInfoResponse {
 	UniversityInfo UniversityInfo = 1 [(gogoproto.nullable) = false];
-}
-message QueryGetUniversityDetailsRequest {
-	  string universityName = 1;
-
-}
-
-message QueryGetUniversityDetailsResponse {
-	UniversityDetails universityDetails = 1 [(gogoproto.nullable) = false];
-}
-
-message QueryAllUniversityDetailsRequest {
-	cosmos.base.query.v1beta1.PageRequest pagination = 1;
-}
-
-message QueryAllUniversityDetailsResponse {
-	repeated UniversityDetails universityDetails = 1 [(gogoproto.nullable) = false];
-	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 message QueryGetChainInfoRequest {}

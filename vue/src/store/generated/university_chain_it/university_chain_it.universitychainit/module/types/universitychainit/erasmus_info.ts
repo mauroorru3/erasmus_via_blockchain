@@ -1,7 +1,6 @@
 /* eslint-disable */
 import * as Long from "long";
 import { util, configure, Writer, Reader } from "protobufjs/minimal";
-import { ErasmusCareer } from "../universitychainit/erasmus_career";
 
 export const protobufPackage = "university_chain_it.universitychainit";
 
@@ -13,7 +12,7 @@ export interface ErasmusInfo {
   examsPassed: number;
   totalCredits: number;
   achievedCredits: number;
-  career: ErasmusCareer | undefined;
+  career: string;
   previousStudentFifo: string;
   nextStudentFifo: string;
 }
@@ -26,6 +25,7 @@ const baseErasmusInfo: object = {
   examsPassed: 0,
   totalCredits: 0,
   achievedCredits: 0,
+  career: "",
   previousStudentFifo: "",
   nextStudentFifo: "",
 };
@@ -53,8 +53,8 @@ export const ErasmusInfo = {
     if (message.achievedCredits !== 0) {
       writer.uint32(56).uint64(message.achievedCredits);
     }
-    if (message.career !== undefined) {
-      ErasmusCareer.encode(message.career, writer.uint32(66).fork()).ldelim();
+    if (message.career !== "") {
+      writer.uint32(66).string(message.career);
     }
     if (message.previousStudentFifo !== "") {
       writer.uint32(74).string(message.previousStudentFifo);
@@ -94,7 +94,7 @@ export const ErasmusInfo = {
           message.achievedCredits = longToNumber(reader.uint64() as Long);
           break;
         case 8:
-          message.career = ErasmusCareer.decode(reader, reader.uint32());
+          message.career = reader.string();
           break;
         case 9:
           message.previousStudentFifo = reader.string();
@@ -151,9 +151,9 @@ export const ErasmusInfo = {
       message.achievedCredits = 0;
     }
     if (object.career !== undefined && object.career !== null) {
-      message.career = ErasmusCareer.fromJSON(object.career);
+      message.career = String(object.career);
     } else {
-      message.career = undefined;
+      message.career = "";
     }
     if (
       object.previousStudentFifo !== undefined &&
@@ -189,10 +189,7 @@ export const ErasmusInfo = {
       (obj.totalCredits = message.totalCredits);
     message.achievedCredits !== undefined &&
       (obj.achievedCredits = message.achievedCredits);
-    message.career !== undefined &&
-      (obj.career = message.career
-        ? ErasmusCareer.toJSON(message.career)
-        : undefined);
+    message.career !== undefined && (obj.career = message.career);
     message.previousStudentFifo !== undefined &&
       (obj.previousStudentFifo = message.previousStudentFifo);
     message.nextStudentFifo !== undefined &&
@@ -241,9 +238,9 @@ export const ErasmusInfo = {
       message.achievedCredits = 0;
     }
     if (object.career !== undefined && object.career !== null) {
-      message.career = ErasmusCareer.fromPartial(object.career);
+      message.career = object.career;
     } else {
-      message.career = undefined;
+      message.career = "";
     }
     if (
       object.previousStudentFifo !== undefined &&
