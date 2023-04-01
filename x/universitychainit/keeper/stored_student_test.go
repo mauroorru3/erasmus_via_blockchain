@@ -15,21 +15,21 @@ import (
 // Prevent strconv unused error
 var _ = strconv.IntSize
 
-func createNStoredStudentUnipi(keeper *keeper.Keeper, ctx sdk.Context, n int) []types.StoredStudentUnipi {
-	items := make([]types.StoredStudentUnipi, n)
+func createNStoredStudent(keeper *keeper.Keeper, ctx sdk.Context, n int) []types.StoredStudent {
+	items := make([]types.StoredStudent, n)
 	for i := range items {
 		items[i].Index = strconv.Itoa(i)
 
-		keeper.SetStoredStudentUnipi(ctx, items[i])
+		keeper.SetStoredStudent(ctx, items[i])
 	}
 	return items
 }
 
-func TestStoredStudentUnipiGet(t *testing.T) {
+func TestStoredStudentGet(t *testing.T) {
 	keeper, ctx := keepertest.UniversitychainitKeeper(t)
-	items := createNStoredStudentUnipi(keeper, ctx, 10)
+	items := createNStoredStudent(keeper, ctx, 10)
 	for _, item := range items {
-		rst, found := keeper.GetStoredStudentUnipi(ctx,
+		rst, found := keeper.GetStoredStudent(ctx,
 			item.Index,
 		)
 		require.True(t, found)
@@ -39,25 +39,25 @@ func TestStoredStudentUnipiGet(t *testing.T) {
 		)
 	}
 }
-func TestStoredStudentUnipiRemove(t *testing.T) {
+func TestStoredStudentRemove(t *testing.T) {
 	keeper, ctx := keepertest.UniversitychainitKeeper(t)
-	items := createNStoredStudentUnipi(keeper, ctx, 10)
+	items := createNStoredStudent(keeper, ctx, 10)
 	for _, item := range items {
-		keeper.RemoveStoredStudentUnipi(ctx,
+		keeper.RemoveStoredStudent(ctx,
 			item.Index,
 		)
-		_, found := keeper.GetStoredStudentUnipi(ctx,
+		_, found := keeper.GetStoredStudent(ctx,
 			item.Index,
 		)
 		require.False(t, found)
 	}
 }
 
-func TestStoredStudentUnipiGetAll(t *testing.T) {
+func TestStoredStudentGetAll(t *testing.T) {
 	keeper, ctx := keepertest.UniversitychainitKeeper(t)
-	items := createNStoredStudentUnipi(keeper, ctx, 10)
+	items := createNStoredStudent(keeper, ctx, 10)
 	require.ElementsMatch(t,
 		nullify.Fill(items),
-		nullify.Fill(keeper.GetAllStoredStudentUnipi(ctx)),
+		nullify.Fill(keeper.GetAllStoredStudent(ctx)),
 	)
 }

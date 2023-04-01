@@ -96,8 +96,8 @@ func (k msgServer) ConfigureChain(goCtx context.Context, msg *types.MsgConfigure
 
 									*/
 
-									k.Keeper.SetProfessorsExamsUnipi(ctx, types.ProfessorsExamsUnipi{
-										ExamName:      universityInfoList[i].DepartmentList[j].CoursesTypeList[q].Courses[w].Exams[z].ExamName,
+									k.Keeper.SetProfessorsExams(ctx, types.ProfessorsExams{
+										ExamName:      universityInfoList[i].Name + "_" + universityInfoList[i].DepartmentList[j].CoursesTypeList[q].Courses[w].Exams[z].ExamName,
 										ProfessorName: universityInfoList[i].DepartmentList[j].CoursesTypeList[q].Courses[w].Exams[z].ProfessorName,
 										ProfessorId:   "",
 										ProfessorKey:  universityInfoList[i].DepartmentList[j].CoursesTypeList[q].Courses[w].Exams[z].ProfessorAddress,
@@ -133,8 +133,8 @@ func (k msgServer) ConfigureChain(goCtx context.Context, msg *types.MsgConfigure
 								z := 0
 								for z = 0; z < len(universityInfoList[i].DepartmentList[j].CoursesTypeList[q].Courses[w].Exams); z++ {
 
-									k.Keeper.SetProfessorsExamsUniroma1(ctx, types.ProfessorsExamsUniroma1{
-										ExamName:      universityInfoList[i].DepartmentList[j].CoursesTypeList[q].Courses[w].Exams[z].ExamName,
+									k.Keeper.SetProfessorsExams(ctx, types.ProfessorsExams{
+										ExamName:      universityInfoList[i].Name + "_" + universityInfoList[i].DepartmentList[j].CoursesTypeList[q].Courses[w].Exams[z].ExamName,
 										ProfessorName: universityInfoList[i].DepartmentList[j].CoursesTypeList[q].Courses[w].Exams[z].ProfessorName,
 										ProfessorId:   "",
 										ProfessorKey:  universityInfoList[i].DepartmentList[j].CoursesTypeList[q].Courses[w].Exams[z].ProfessorAddress,

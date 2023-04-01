@@ -86,44 +86,28 @@ func TestGenesis(t *testing.T) {
 				UniversityName: "1",
 			},
 		},
-		ProfessorsExamsUniroma1List: []types.ProfessorsExamsUniroma1{
-			{
-				ExamName: "0",
-			},
-			{
-				ExamName: "1",
-			},
-		},
-		StoredStudentUniroma1List: []types.StoredStudentUniroma1{
-			{
-				Index: "0",
-			},
-			{
-				Index: "1",
-			},
-		},
-		ProfessorsExamsUnipiList: []types.ProfessorsExamsUnipi{
-			{
-				ExamName: "0",
-			},
-			{
-				ExamName: "1",
-			},
-		},
-		StoredStudentUnipiList: []types.StoredStudentUnipi{
-			{
-				Index: "0",
-			},
-			{
-				Index: "1",
-			},
-		},
 		UniversityInfoList: []types.UniversityInfo{
 			{
 				UniversityName: "0",
 			},
 			{
 				UniversityName: "1",
+			},
+		},
+		ProfessorsExamsList: []types.ProfessorsExams{
+			{
+				ExamName: "0",
+			},
+			{
+				ExamName: "1",
+			},
+		},
+		StoredStudentList: []types.StoredStudent{
+			{
+				Index: "0",
+			},
+			{
+				Index: "1",
 			},
 		},
 		// this line is used by starport scaffolding # genesis/test/state
@@ -148,10 +132,8 @@ func TestGenesis(t *testing.T) {
 	require.Equal(t, genesisState.ErasmusInfo, got.ErasmusInfo)
 	require.Equal(t, genesisState.ChainInfo, got.ChainInfo)
 	require.ElementsMatch(t, genesisState.ForeignUniversitiesList, got.ForeignUniversitiesList)
-	require.ElementsMatch(t, genesisState.ProfessorsExamsUniroma1List, got.ProfessorsExamsUniroma1List)
-	require.ElementsMatch(t, genesisState.StoredStudentUniroma1List, got.StoredStudentUniroma1List)
-	require.ElementsMatch(t, genesisState.ProfessorsExamsUnipiList, got.ProfessorsExamsUnipiList)
-	require.ElementsMatch(t, genesisState.StoredStudentUnipiList, got.StoredStudentUnipiList)
 	require.ElementsMatch(t, genesisState.UniversityInfoList, got.UniversityInfoList)
+	require.ElementsMatch(t, genesisState.ProfessorsExamsList, got.ProfessorsExamsList)
+	require.ElementsMatch(t, genesisState.StoredStudentList, got.StoredStudentList)
 	// this line is used by starport scaffolding # genesis/test/assert
 }

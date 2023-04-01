@@ -18,33 +18,33 @@ import (
 // Prevent strconv unused error
 var _ = strconv.IntSize
 
-func TestProfessorsExamsUniroma1QuerySingle(t *testing.T) {
+func TestProfessorsExamsQuerySingle(t *testing.T) {
 	keeper, ctx := keepertest.UniversitychainitKeeper(t)
 	wctx := sdk.WrapSDKContext(ctx)
-	msgs := createNProfessorsExamsUniroma1(keeper, ctx, 2)
+	msgs := createNProfessorsExams(keeper, ctx, 2)
 	for _, tc := range []struct {
 		desc     string
-		request  *types.QueryGetProfessorsExamsUniroma1Request
-		response *types.QueryGetProfessorsExamsUniroma1Response
+		request  *types.QueryGetProfessorsExamsRequest
+		response *types.QueryGetProfessorsExamsResponse
 		err      error
 	}{
 		{
 			desc: "First",
-			request: &types.QueryGetProfessorsExamsUniroma1Request{
+			request: &types.QueryGetProfessorsExamsRequest{
 				ExamName: msgs[0].ExamName,
 			},
-			response: &types.QueryGetProfessorsExamsUniroma1Response{ProfessorsExamsUniroma1: msgs[0]},
+			response: &types.QueryGetProfessorsExamsResponse{ProfessorsExams: msgs[0]},
 		},
 		{
 			desc: "Second",
-			request: &types.QueryGetProfessorsExamsUniroma1Request{
+			request: &types.QueryGetProfessorsExamsRequest{
 				ExamName: msgs[1].ExamName,
 			},
-			response: &types.QueryGetProfessorsExamsUniroma1Response{ProfessorsExamsUniroma1: msgs[1]},
+			response: &types.QueryGetProfessorsExamsResponse{ProfessorsExams: msgs[1]},
 		},
 		{
 			desc: "KeyNotFound",
-			request: &types.QueryGetProfessorsExamsUniroma1Request{
+			request: &types.QueryGetProfessorsExamsRequest{
 				ExamName: strconv.Itoa(100000),
 			},
 			err: status.Error(codes.NotFound, "not found"),
@@ -55,7 +55,7 @@ func TestProfessorsExamsUniroma1QuerySingle(t *testing.T) {
 		},
 	} {
 		t.Run(tc.desc, func(t *testing.T) {
-			response, err := keeper.ProfessorsExamsUniroma1(wctx, tc.request)
+			response, err := keeper.ProfessorsExams(wctx, tc.request)
 			if tc.err != nil {
 				require.ErrorIs(t, err, tc.err)
 			} else {
@@ -69,13 +69,13 @@ func TestProfessorsExamsUniroma1QuerySingle(t *testing.T) {
 	}
 }
 
-func TestProfessorsExamsUniroma1QueryPaginated(t *testing.T) {
+func TestProfessorsExamsQueryPaginated(t *testing.T) {
 	keeper, ctx := keepertest.UniversitychainitKeeper(t)
 	wctx := sdk.WrapSDKContext(ctx)
-	msgs := createNProfessorsExamsUniroma1(keeper, ctx, 5)
+	msgs := createNProfessorsExams(keeper, ctx, 5)
 
-	request := func(next []byte, offset, limit uint64, total bool) *types.QueryAllProfessorsExamsUniroma1Request {
-		return &types.QueryAllProfessorsExamsUniroma1Request{
+	request := func(next []byte, offset, limit uint64, total bool) *types.QueryAllProfessorsExamsRequest {
+		return &types.QueryAllProfessorsExamsRequest{
 			Pagination: &query.PageRequest{
 				Key:        next,
 				Offset:     offset,
@@ -87,12 +87,12 @@ func TestProfessorsExamsUniroma1QueryPaginated(t *testing.T) {
 	t.Run("ByOffset", func(t *testing.T) {
 		step := 2
 		for i := 0; i < len(msgs); i += step {
-			resp, err := keeper.ProfessorsExamsUniroma1All(wctx, request(nil, uint64(i), uint64(step), false))
+			resp, err := keeper.ProfessorsExamsAll(wctx, request(nil, uint64(i), uint64(step), false))
 			require.NoError(t, err)
-			require.LessOrEqual(t, len(resp.ProfessorsExamsUniroma1), step)
+			require.LessOrEqual(t, len(resp.ProfessorsExams), step)
 			require.Subset(t,
 				nullify.Fill(msgs),
-				nullify.Fill(resp.ProfessorsExamsUniroma1),
+				nullify.Fill(resp.ProfessorsExams),
 			)
 		}
 	})
@@ -100,27 +100,27 @@ func TestProfessorsExamsUniroma1QueryPaginated(t *testing.T) {
 		step := 2
 		var next []byte
 		for i := 0; i < len(msgs); i += step {
-			resp, err := keeper.ProfessorsExamsUniroma1All(wctx, request(next, 0, uint64(step), false))
+			resp, err := keeper.ProfessorsExamsAll(wctx, request(next, 0, uint64(step), false))
 			require.NoError(t, err)
-			require.LessOrEqual(t, len(resp.ProfessorsExamsUniroma1), step)
+			require.LessOrEqual(t, len(resp.ProfessorsExams), step)
 			require.Subset(t,
 				nullify.Fill(msgs),
-				nullify.Fill(resp.ProfessorsExamsUniroma1),
+				nullify.Fill(resp.ProfessorsExams),
 			)
 			next = resp.Pagination.NextKey
 		}
 	})
 	t.Run("Total", func(t *testing.T) {
-		resp, err := keeper.ProfessorsExamsUniroma1All(wctx, request(nil, 0, 0, true))
+		resp, err := keeper.ProfessorsExamsAll(wctx, request(nil, 0, 0, true))
 		require.NoError(t, err)
 		require.Equal(t, len(msgs), int(resp.Pagination.Total))
 		require.ElementsMatch(t,
 			nullify.Fill(msgs),
-			nullify.Fill(resp.ProfessorsExamsUniroma1),
+			nullify.Fill(resp.ProfessorsExams),
 		)
 	})
 	t.Run("InvalidRequest", func(t *testing.T) {
-		_, err := keeper.ProfessorsExamsUniroma1All(wctx, nil)
+		_, err := keeper.ProfessorsExamsAll(wctx, nil)
 		require.ErrorIs(t, err, status.Error(codes.InvalidArgument, "invalid request"))
 	})
 }

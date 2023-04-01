@@ -15,22 +15,22 @@ import (
 // Prevent strconv unused error
 var _ = strconv.IntSize
 
-func createNStoredStudentUniroma1(keeper *keeper.Keeper, ctx sdk.Context, n int) []types.StoredStudentUniroma1 {
-	items := make([]types.StoredStudentUniroma1, n)
+func createNProfessorsExams(keeper *keeper.Keeper, ctx sdk.Context, n int) []types.ProfessorsExams {
+	items := make([]types.ProfessorsExams, n)
 	for i := range items {
-		items[i].Index = strconv.Itoa(i)
+		items[i].ExamName = strconv.Itoa(i)
 
-		keeper.SetStoredStudentUniroma1(ctx, items[i])
+		keeper.SetProfessorsExams(ctx, items[i])
 	}
 	return items
 }
 
-func TestStoredStudentUniroma1Get(t *testing.T) {
+func TestProfessorsExamsGet(t *testing.T) {
 	keeper, ctx := keepertest.UniversitychainitKeeper(t)
-	items := createNStoredStudentUniroma1(keeper, ctx, 10)
+	items := createNProfessorsExams(keeper, ctx, 10)
 	for _, item := range items {
-		rst, found := keeper.GetStoredStudentUniroma1(ctx,
-			item.Index,
+		rst, found := keeper.GetProfessorsExams(ctx,
+			item.ExamName,
 		)
 		require.True(t, found)
 		require.Equal(t,
@@ -39,25 +39,25 @@ func TestStoredStudentUniroma1Get(t *testing.T) {
 		)
 	}
 }
-func TestStoredStudentUniroma1Remove(t *testing.T) {
+func TestProfessorsExamsRemove(t *testing.T) {
 	keeper, ctx := keepertest.UniversitychainitKeeper(t)
-	items := createNStoredStudentUniroma1(keeper, ctx, 10)
+	items := createNProfessorsExams(keeper, ctx, 10)
 	for _, item := range items {
-		keeper.RemoveStoredStudentUniroma1(ctx,
-			item.Index,
+		keeper.RemoveProfessorsExams(ctx,
+			item.ExamName,
 		)
-		_, found := keeper.GetStoredStudentUniroma1(ctx,
-			item.Index,
+		_, found := keeper.GetProfessorsExams(ctx,
+			item.ExamName,
 		)
 		require.False(t, found)
 	}
 }
 
-func TestStoredStudentUniroma1GetAll(t *testing.T) {
+func TestProfessorsExamsGetAll(t *testing.T) {
 	keeper, ctx := keepertest.UniversitychainitKeeper(t)
-	items := createNStoredStudentUniroma1(keeper, ctx, 10)
+	items := createNProfessorsExams(keeper, ctx, 10)
 	require.ElementsMatch(t,
 		nullify.Fill(items),
-		nullify.Fill(keeper.GetAllStoredStudentUniroma1(ctx)),
+		nullify.Fill(keeper.GetAllProfessorsExams(ctx)),
 	)
 }

@@ -9,11 +9,9 @@ import { TaxesInfo } from "../universitychainit/taxes_info";
 import { ErasmusInfo } from "../universitychainit/erasmus_info";
 import { ChainInfo } from "../universitychainit/chain_info";
 import { ForeignUniversities } from "../universitychainit/foreign_universities";
-import { ProfessorsExamsUniroma1 } from "../universitychainit/professors_exams_uniroma_1";
-import { StoredStudentUniroma1 } from "../universitychainit/stored_student_uniroma_1";
-import { ProfessorsExamsUnipi } from "../universitychainit/professors_exams_unipi";
-import { StoredStudentUnipi } from "../universitychainit/stored_student_unipi";
 import { UniversityInfo } from "../universitychainit/university_info";
+import { ProfessorsExams } from "../universitychainit/professors_exams";
+import { StoredStudent } from "../universitychainit/stored_student";
 import { Writer, Reader } from "protobufjs/minimal";
 
 export const protobufPackage = "university_chain_it.universitychainit";
@@ -31,12 +29,10 @@ export interface GenesisState {
   erasmusInfo: ErasmusInfo | undefined;
   chainInfo: ChainInfo | undefined;
   foreignUniversitiesList: ForeignUniversities[];
-  professorsExamsUniroma1List: ProfessorsExamsUniroma1[];
-  storedStudentUniroma1List: StoredStudentUniroma1[];
-  professorsExamsUnipiList: ProfessorsExamsUnipi[];
-  storedStudentUnipiList: StoredStudentUnipi[];
-  /** this line is used by starport scaffolding # genesis/proto/state */
   universityInfoList: UniversityInfo[];
+  professorsExamsList: ProfessorsExams[];
+  /** this line is used by starport scaffolding # genesis/proto/state */
+  storedStudentList: StoredStudent[];
 }
 
 const baseGenesisState: object = { port_id: "" };
@@ -94,20 +90,14 @@ export const GenesisState = {
     for (const v of message.foreignUniversitiesList) {
       ForeignUniversities.encode(v!, writer.uint32(90).fork()).ldelim();
     }
-    for (const v of message.professorsExamsUniroma1List) {
-      ProfessorsExamsUniroma1.encode(v!, writer.uint32(98).fork()).ldelim();
-    }
-    for (const v of message.storedStudentUniroma1List) {
-      StoredStudentUniroma1.encode(v!, writer.uint32(106).fork()).ldelim();
-    }
-    for (const v of message.professorsExamsUnipiList) {
-      ProfessorsExamsUnipi.encode(v!, writer.uint32(114).fork()).ldelim();
-    }
-    for (const v of message.storedStudentUnipiList) {
-      StoredStudentUnipi.encode(v!, writer.uint32(122).fork()).ldelim();
-    }
     for (const v of message.universityInfoList) {
-      UniversityInfo.encode(v!, writer.uint32(130).fork()).ldelim();
+      UniversityInfo.encode(v!, writer.uint32(98).fork()).ldelim();
+    }
+    for (const v of message.professorsExamsList) {
+      ProfessorsExams.encode(v!, writer.uint32(106).fork()).ldelim();
+    }
+    for (const v of message.storedStudentList) {
+      StoredStudent.encode(v!, writer.uint32(114).fork()).ldelim();
     }
     return writer;
   },
@@ -117,11 +107,9 @@ export const GenesisState = {
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = { ...baseGenesisState } as GenesisState;
     message.foreignUniversitiesList = [];
-    message.professorsExamsUniroma1List = [];
-    message.storedStudentUniroma1List = [];
-    message.professorsExamsUnipiList = [];
-    message.storedStudentUnipiList = [];
     message.universityInfoList = [];
+    message.professorsExamsList = [];
+    message.storedStudentList = [];
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -164,28 +152,18 @@ export const GenesisState = {
           );
           break;
         case 12:
-          message.professorsExamsUniroma1List.push(
-            ProfessorsExamsUniroma1.decode(reader, reader.uint32())
+          message.universityInfoList.push(
+            UniversityInfo.decode(reader, reader.uint32())
           );
           break;
         case 13:
-          message.storedStudentUniroma1List.push(
-            StoredStudentUniroma1.decode(reader, reader.uint32())
+          message.professorsExamsList.push(
+            ProfessorsExams.decode(reader, reader.uint32())
           );
           break;
         case 14:
-          message.professorsExamsUnipiList.push(
-            ProfessorsExamsUnipi.decode(reader, reader.uint32())
-          );
-          break;
-        case 15:
-          message.storedStudentUnipiList.push(
-            StoredStudentUnipi.decode(reader, reader.uint32())
-          );
-          break;
-        case 16:
-          message.universityInfoList.push(
-            UniversityInfo.decode(reader, reader.uint32())
+          message.storedStudentList.push(
+            StoredStudent.decode(reader, reader.uint32())
           );
           break;
         default:
@@ -199,11 +177,9 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     const message = { ...baseGenesisState } as GenesisState;
     message.foreignUniversitiesList = [];
-    message.professorsExamsUniroma1List = [];
-    message.storedStudentUniroma1List = [];
-    message.professorsExamsUnipiList = [];
-    message.storedStudentUnipiList = [];
     message.universityInfoList = [];
+    message.professorsExamsList = [];
+    message.storedStudentList = [];
     if (object.params !== undefined && object.params !== null) {
       message.params = Params.fromJSON(object.params);
     } else {
@@ -268,47 +244,27 @@ export const GenesisState = {
       }
     }
     if (
-      object.professorsExamsUniroma1List !== undefined &&
-      object.professorsExamsUniroma1List !== null
-    ) {
-      for (const e of object.professorsExamsUniroma1List) {
-        message.professorsExamsUniroma1List.push(
-          ProfessorsExamsUniroma1.fromJSON(e)
-        );
-      }
-    }
-    if (
-      object.storedStudentUniroma1List !== undefined &&
-      object.storedStudentUniroma1List !== null
-    ) {
-      for (const e of object.storedStudentUniroma1List) {
-        message.storedStudentUniroma1List.push(
-          StoredStudentUniroma1.fromJSON(e)
-        );
-      }
-    }
-    if (
-      object.professorsExamsUnipiList !== undefined &&
-      object.professorsExamsUnipiList !== null
-    ) {
-      for (const e of object.professorsExamsUnipiList) {
-        message.professorsExamsUnipiList.push(ProfessorsExamsUnipi.fromJSON(e));
-      }
-    }
-    if (
-      object.storedStudentUnipiList !== undefined &&
-      object.storedStudentUnipiList !== null
-    ) {
-      for (const e of object.storedStudentUnipiList) {
-        message.storedStudentUnipiList.push(StoredStudentUnipi.fromJSON(e));
-      }
-    }
-    if (
       object.universityInfoList !== undefined &&
       object.universityInfoList !== null
     ) {
       for (const e of object.universityInfoList) {
         message.universityInfoList.push(UniversityInfo.fromJSON(e));
+      }
+    }
+    if (
+      object.professorsExamsList !== undefined &&
+      object.professorsExamsList !== null
+    ) {
+      for (const e of object.professorsExamsList) {
+        message.professorsExamsList.push(ProfessorsExams.fromJSON(e));
+      }
+    }
+    if (
+      object.storedStudentList !== undefined &&
+      object.storedStudentList !== null
+    ) {
+      for (const e of object.storedStudentList) {
+        message.storedStudentList.push(StoredStudent.fromJSON(e));
       }
     }
     return message;
@@ -358,34 +314,6 @@ export const GenesisState = {
     } else {
       obj.foreignUniversitiesList = [];
     }
-    if (message.professorsExamsUniroma1List) {
-      obj.professorsExamsUniroma1List = message.professorsExamsUniroma1List.map(
-        (e) => (e ? ProfessorsExamsUniroma1.toJSON(e) : undefined)
-      );
-    } else {
-      obj.professorsExamsUniroma1List = [];
-    }
-    if (message.storedStudentUniroma1List) {
-      obj.storedStudentUniroma1List = message.storedStudentUniroma1List.map(
-        (e) => (e ? StoredStudentUniroma1.toJSON(e) : undefined)
-      );
-    } else {
-      obj.storedStudentUniroma1List = [];
-    }
-    if (message.professorsExamsUnipiList) {
-      obj.professorsExamsUnipiList = message.professorsExamsUnipiList.map((e) =>
-        e ? ProfessorsExamsUnipi.toJSON(e) : undefined
-      );
-    } else {
-      obj.professorsExamsUnipiList = [];
-    }
-    if (message.storedStudentUnipiList) {
-      obj.storedStudentUnipiList = message.storedStudentUnipiList.map((e) =>
-        e ? StoredStudentUnipi.toJSON(e) : undefined
-      );
-    } else {
-      obj.storedStudentUnipiList = [];
-    }
     if (message.universityInfoList) {
       obj.universityInfoList = message.universityInfoList.map((e) =>
         e ? UniversityInfo.toJSON(e) : undefined
@@ -393,17 +321,29 @@ export const GenesisState = {
     } else {
       obj.universityInfoList = [];
     }
+    if (message.professorsExamsList) {
+      obj.professorsExamsList = message.professorsExamsList.map((e) =>
+        e ? ProfessorsExams.toJSON(e) : undefined
+      );
+    } else {
+      obj.professorsExamsList = [];
+    }
+    if (message.storedStudentList) {
+      obj.storedStudentList = message.storedStudentList.map((e) =>
+        e ? StoredStudent.toJSON(e) : undefined
+      );
+    } else {
+      obj.storedStudentList = [];
+    }
     return obj;
   },
 
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = { ...baseGenesisState } as GenesisState;
     message.foreignUniversitiesList = [];
-    message.professorsExamsUniroma1List = [];
-    message.storedStudentUniroma1List = [];
-    message.professorsExamsUnipiList = [];
-    message.storedStudentUnipiList = [];
     message.universityInfoList = [];
+    message.professorsExamsList = [];
+    message.storedStudentList = [];
     if (object.params !== undefined && object.params !== null) {
       message.params = Params.fromPartial(object.params);
     } else {
@@ -470,49 +410,27 @@ export const GenesisState = {
       }
     }
     if (
-      object.professorsExamsUniroma1List !== undefined &&
-      object.professorsExamsUniroma1List !== null
-    ) {
-      for (const e of object.professorsExamsUniroma1List) {
-        message.professorsExamsUniroma1List.push(
-          ProfessorsExamsUniroma1.fromPartial(e)
-        );
-      }
-    }
-    if (
-      object.storedStudentUniroma1List !== undefined &&
-      object.storedStudentUniroma1List !== null
-    ) {
-      for (const e of object.storedStudentUniroma1List) {
-        message.storedStudentUniroma1List.push(
-          StoredStudentUniroma1.fromPartial(e)
-        );
-      }
-    }
-    if (
-      object.professorsExamsUnipiList !== undefined &&
-      object.professorsExamsUnipiList !== null
-    ) {
-      for (const e of object.professorsExamsUnipiList) {
-        message.professorsExamsUnipiList.push(
-          ProfessorsExamsUnipi.fromPartial(e)
-        );
-      }
-    }
-    if (
-      object.storedStudentUnipiList !== undefined &&
-      object.storedStudentUnipiList !== null
-    ) {
-      for (const e of object.storedStudentUnipiList) {
-        message.storedStudentUnipiList.push(StoredStudentUnipi.fromPartial(e));
-      }
-    }
-    if (
       object.universityInfoList !== undefined &&
       object.universityInfoList !== null
     ) {
       for (const e of object.universityInfoList) {
         message.universityInfoList.push(UniversityInfo.fromPartial(e));
+      }
+    }
+    if (
+      object.professorsExamsList !== undefined &&
+      object.professorsExamsList !== null
+    ) {
+      for (const e of object.professorsExamsList) {
+        message.professorsExamsList.push(ProfessorsExams.fromPartial(e));
+      }
+    }
+    if (
+      object.storedStudentList !== undefined &&
+      object.storedStudentList !== null
+    ) {
+      for (const e of object.storedStudentList) {
+        message.storedStudentList.push(StoredStudent.fromPartial(e));
       }
     }
     return message;

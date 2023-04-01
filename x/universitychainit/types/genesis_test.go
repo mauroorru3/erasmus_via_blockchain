@@ -94,44 +94,28 @@ func TestGenesisState_Validate(t *testing.T) {
 						UniversityName: "1",
 					},
 				},
-				ProfessorsExamsUniroma1List: []types.ProfessorsExamsUniroma1{
-					{
-						ExamName: "0",
-					},
-					{
-						ExamName: "1",
-					},
-				},
-				StoredStudentUniroma1List: []types.StoredStudentUniroma1{
-					{
-						Index: "0",
-					},
-					{
-						Index: "1",
-					},
-				},
-				ProfessorsExamsUnipiList: []types.ProfessorsExamsUnipi{
-					{
-						ExamName: "0",
-					},
-					{
-						ExamName: "1",
-					},
-				},
-				StoredStudentUnipiList: []types.StoredStudentUnipi{
-					{
-						Index: "0",
-					},
-					{
-						Index: "1",
-					},
-				},
 				UniversityInfoList: []types.UniversityInfo{
 					{
 						UniversityName: "0",
 					},
 					{
 						UniversityName: "1",
+					},
+				},
+				ProfessorsExamsList: []types.ProfessorsExams{
+					{
+						ExamName: "0",
+					},
+					{
+						ExamName: "1",
+					},
+				},
+				StoredStudentList: []types.StoredStudent{
+					{
+						Index: "0",
+					},
+					{
+						Index: "1",
 					},
 				},
 				// this line is used by starport scaffolding # types/genesis/validField
@@ -153,62 +137,6 @@ func TestGenesisState_Validate(t *testing.T) {
 			valid: false,
 		},
 		{
-			desc: "duplicated professorsExamsUniroma1",
-			genState: &types.GenesisState{
-				ProfessorsExamsUniroma1List: []types.ProfessorsExamsUniroma1{
-					{
-						ExamName: "0",
-					},
-					{
-						ExamName: "0",
-					},
-				},
-			},
-			valid: false,
-		},
-		{
-			desc: "duplicated storedStudentUniroma1",
-			genState: &types.GenesisState{
-				StoredStudentUniroma1List: []types.StoredStudentUniroma1{
-					{
-						Index: "0",
-					},
-					{
-						Index: "0",
-					},
-				},
-			},
-			valid: false,
-		},
-		{
-			desc: "duplicated professorsExamsUnipi",
-			genState: &types.GenesisState{
-				ProfessorsExamsUnipiList: []types.ProfessorsExamsUnipi{
-					{
-						ExamName: "0",
-					},
-					{
-						ExamName: "0",
-					},
-				},
-			},
-			valid: false,
-		},
-		{
-			desc: "duplicated storedStudentUnipi",
-			genState: &types.GenesisState{
-				StoredStudentUnipiList: []types.StoredStudentUnipi{
-					{
-						Index: "0",
-					},
-					{
-						Index: "0",
-					},
-				},
-			},
-			valid: false,
-		},
-		{
 			desc: "duplicated universityInfo",
 			genState: &types.GenesisState{
 				UniversityInfoList: []types.UniversityInfo{
@@ -217,6 +145,34 @@ func TestGenesisState_Validate(t *testing.T) {
 					},
 					{
 						UniversityName: "0",
+					},
+				},
+			},
+			valid: false,
+		},
+		{
+			desc: "duplicated professorsExams",
+			genState: &types.GenesisState{
+				ProfessorsExamsList: []types.ProfessorsExams{
+					{
+						ExamName: "0",
+					},
+					{
+						ExamName: "0",
+					},
+				},
+			},
+			valid: false,
+		},
+		{
+			desc: "duplicated storedStudent",
+			genState: &types.GenesisState{
+				StoredStudentList: []types.StoredStudent{
+					{
+						Index: "0",
+					},
+					{
+						Index: "0",
 					},
 				},
 			},
@@ -253,13 +209,11 @@ func TestDefaultGenesisState_ExpectedInitialValues(t *testing.T) {
 				Country:               "",
 				InitStatus:            false,
 			},
-			ForeignUniversitiesList:     []types.ForeignUniversities{},
-			ProfessorsExamsUniroma1List: []types.ProfessorsExamsUniroma1{},
-			StoredStudentUniroma1List:   []types.StoredStudentUniroma1{},
-			ProfessorsExamsUnipiList:    []types.ProfessorsExamsUnipi{},
-			StoredStudentUnipiList:      []types.StoredStudentUnipi{},
-			UniversityInfoList:          []types.UniversityInfo{},
-			Params:                      types.DefaultParams(),
+			ForeignUniversitiesList: []types.ForeignUniversities{},
+			UniversityInfoList:      []types.UniversityInfo{},
+			ProfessorsExamsList:     []types.ProfessorsExams{},
+			StoredStudentList:       []types.StoredStudent{},
+			Params:                  types.DefaultParams(),
 		},
 		types.DefaultGenesis())
 }

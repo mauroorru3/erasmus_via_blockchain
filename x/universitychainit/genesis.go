@@ -44,25 +44,17 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 	for _, elem := range genState.ForeignUniversitiesList {
 		k.SetForeignUniversities(ctx, elem)
 	}
-	// Set all the professorsExamsUniroma1
-	for _, elem := range genState.ProfessorsExamsUniroma1List {
-		k.SetProfessorsExamsUniroma1(ctx, elem)
-	}
-	// Set all the storedStudentUniroma1
-	for _, elem := range genState.StoredStudentUniroma1List {
-		k.SetStoredStudentUniroma1(ctx, elem)
-	}
-	// Set all the professorsExamsUnipi
-	for _, elem := range genState.ProfessorsExamsUnipiList {
-		k.SetProfessorsExamsUnipi(ctx, elem)
-	}
-	// Set all the storedStudentUnipi
-	for _, elem := range genState.StoredStudentUnipiList {
-		k.SetStoredStudentUnipi(ctx, elem)
-	}
 	// Set all the universityInfo
 	for _, elem := range genState.UniversityInfoList {
 		k.SetUniversityInfo(ctx, elem)
+	}
+	// Set all the professorsExams
+	for _, elem := range genState.ProfessorsExamsList {
+		k.SetProfessorsExams(ctx, elem)
+	}
+	// Set all the storedStudent
+	for _, elem := range genState.StoredStudentList {
+		k.SetStoredStudent(ctx, elem)
 	}
 	// this line is used by starport scaffolding # genesis/module/init
 	k.SetPort(ctx, genState.PortId)
@@ -126,11 +118,9 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 		genesis.ChainInfo = chainInfo
 	}
 	genesis.ForeignUniversitiesList = k.GetAllForeignUniversities(ctx)
-	genesis.ProfessorsExamsUniroma1List = k.GetAllProfessorsExamsUniroma1(ctx)
-	genesis.StoredStudentUniroma1List = k.GetAllStoredStudentUniroma1(ctx)
-	genesis.ProfessorsExamsUnipiList = k.GetAllProfessorsExamsUnipi(ctx)
-	genesis.StoredStudentUnipiList = k.GetAllStoredStudentUnipi(ctx)
 	genesis.UniversityInfoList = k.GetAllUniversityInfo(ctx)
+	genesis.ProfessorsExamsList = k.GetAllProfessorsExams(ctx)
+	genesis.StoredStudentList = k.GetAllStoredStudent(ctx)
 	// this line is used by starport scaffolding # genesis/module/export
 
 	return genesis
