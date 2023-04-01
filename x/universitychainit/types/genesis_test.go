@@ -251,8 +251,14 @@ func TestDefaultGenesisState_ExpectedInitialValues(t *testing.T) {
 				Country:               "",
 				InitStatus:            false,
 			},
-			ForeignUniversitiesList: []types.ForeignUniversities{},
-			Params:                  types.DefaultParams(),
+			ForeignUniversitiesList:     []types.ForeignUniversities{},
+			ProfessorsExamsUniroma1List: []types.ProfessorsExamsUniroma1{},
+			StoredStudentUniroma1List:   []types.StoredStudentUniroma1{},
+			UniversityInfoUniroma1:      nil,
+			ProfessorsExamsUnipiList:    []types.ProfessorsExamsUnipi{},
+			StoredStudentUnipiList:      []types.StoredStudentUnipi{},
+			UniversityInfoUnipi:         nil,
+			Params:                      types.DefaultParams(),
 		},
 		types.DefaultGenesis())
 }
