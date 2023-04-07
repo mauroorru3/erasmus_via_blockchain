@@ -7,7 +7,13 @@
         "secretariat_key": "",
         "university_key": "",
         "deadline_taxes": "2023-12-31",
-        "deadline_erasmus": "2023-12-31", 
+        "deadline_erasmus": "2023-12-31",
+        "taxes_brackets": {
+            "first": [6500, 0], 
+            "second": [28000,200],
+            "third": [60000,400],
+            "fourth": 800
+        },
         "departmentList": 
             [
                 { 
@@ -103,6 +109,12 @@
                 "university_key": "",
                 "deadline_taxes": "2023-12-31",
                 "deadline_erasmus": "2023-12-31", 
+                "taxes_brackets": {
+                    "first": [6500, 0], 
+                    "second": [28000,200],
+                    "third": [60000,400],
+                    "fourth": 800
+                },
                 "departmentList": 
                     [
                         { 

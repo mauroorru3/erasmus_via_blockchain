@@ -1,6 +1,5 @@
 /* eslint-disable */
-import * as Long from "long";
-import { util, configure, Writer, Reader } from "protobufjs/minimal";
+import { Writer, Reader } from "protobufjs/minimal";
 
 export const protobufPackage = "university_chain_it.universitychainit";
 
@@ -14,6 +13,7 @@ export interface UniversityInfo {
   fifoTailErasmus: string;
   deadlineTaxes: string;
   deadlineErasmus: string;
+  taxesBrackets: string;
 }
 
 const baseUniversityInfo: object = {
@@ -26,6 +26,7 @@ const baseUniversityInfo: object = {
   fifoTailErasmus: "",
   deadlineTaxes: "",
   deadlineErasmus: "",
+  taxesBrackets: "",
 };
 
 export const UniversityInfo = {
@@ -34,7 +35,7 @@ export const UniversityInfo = {
       writer.uint32(10).string(message.universityName);
     }
     if (message.nextStudentId !== 0) {
-      writer.uint32(16).uint64(message.nextStudentId);
+      writer.uint32(16).uint32(message.nextStudentId);
     }
     if (message.secretariatKey !== "") {
       writer.uint32(26).string(message.secretariatKey);
@@ -57,6 +58,9 @@ export const UniversityInfo = {
     if (message.deadlineErasmus !== "") {
       writer.uint32(74).string(message.deadlineErasmus);
     }
+    if (message.taxesBrackets !== "") {
+      writer.uint32(82).string(message.taxesBrackets);
+    }
     return writer;
   },
 
@@ -71,7 +75,7 @@ export const UniversityInfo = {
           message.universityName = reader.string();
           break;
         case 2:
-          message.nextStudentId = longToNumber(reader.uint64() as Long);
+          message.nextStudentId = reader.uint32();
           break;
         case 3:
           message.secretariatKey = reader.string();
@@ -93,6 +97,9 @@ export const UniversityInfo = {
           break;
         case 9:
           message.deadlineErasmus = reader.string();
+          break;
+        case 10:
+          message.taxesBrackets = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -158,6 +165,11 @@ export const UniversityInfo = {
     } else {
       message.deadlineErasmus = "";
     }
+    if (object.taxesBrackets !== undefined && object.taxesBrackets !== null) {
+      message.taxesBrackets = String(object.taxesBrackets);
+    } else {
+      message.taxesBrackets = "";
+    }
     return message;
   },
 
@@ -180,6 +192,8 @@ export const UniversityInfo = {
       (obj.deadlineTaxes = message.deadlineTaxes);
     message.deadlineErasmus !== undefined &&
       (obj.deadlineErasmus = message.deadlineErasmus);
+    message.taxesBrackets !== undefined &&
+      (obj.taxesBrackets = message.taxesBrackets);
     return obj;
   },
 
@@ -239,19 +253,14 @@ export const UniversityInfo = {
     } else {
       message.deadlineErasmus = "";
     }
+    if (object.taxesBrackets !== undefined && object.taxesBrackets !== null) {
+      message.taxesBrackets = object.taxesBrackets;
+    } else {
+      message.taxesBrackets = "";
+    }
     return message;
   },
 };
-
-declare var self: any | undefined;
-declare var window: any | undefined;
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
-  throw "Unable to locate global object";
-})();
 
 type Builtin = Date | Function | Uint8Array | string | number | undefined;
 export type DeepPartial<T> = T extends Builtin
@@ -263,15 +272,3 @@ export type DeepPartial<T> = T extends Builtin
   : T extends {}
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-function longToNumber(long: Long): number {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
-}
-
-if (util.Long !== Long) {
-  util.Long = Long as any;
-  configure();
-}

@@ -37,23 +37,23 @@ export interface UniversitychainitContactInfo {
 export interface UniversitychainitErasmusInfo {
   erasmusStudent?: string;
 
-  /** @format uint64 */
-  numberTimes?: string;
+  /** @format int64 */
+  numberTimes?: number;
 
-  /** @format uint64 */
-  numberMonths?: string;
+  /** @format int64 */
+  numberMonths?: number;
 
-  /** @format uint64 */
-  totalExams?: string;
+  /** @format int64 */
+  totalExams?: number;
 
-  /** @format uint64 */
-  examsPassed?: string;
+  /** @format int64 */
+  examsPassed?: number;
 
-  /** @format uint64 */
-  totalCredits?: string;
+  /** @format int64 */
+  totalCredits?: number;
 
-  /** @format uint64 */
-  achievedCredits?: string;
+  /** @format int64 */
+  achievedCredits?: number;
   career?: string;
   previousStudentFifo?: string;
   nextStudentFifo?: string;
@@ -79,8 +79,8 @@ export interface UniversitychainitMsgRegisterNewStudentResponse {
 export type UniversitychainitParams = object;
 
 export interface UniversitychainitPersonalInfo {
-  /** @format uint64 */
-  gender?: string;
+  /** @format int64 */
+  gender?: number;
   dateOfBirth?: string;
   primaryNationality?: string;
   countryOfBirth?: string;
@@ -240,44 +240,44 @@ export interface UniversitychainitStudentInfo {
   courseOfStudy?: string;
   status?: string;
 
-  /** @format uint64 */
-  currentYearOfStudy?: string;
+  /** @format int64 */
+  currentYearOfStudy?: number;
   outOfCourse?: boolean;
 
-  /** @format uint64 */
-  numberOfYearsOutOfCourse?: string;
+  /** @format int64 */
+  numberOfYearsOutOfCourse?: number;
   studentKey?: string;
 }
 
 export interface UniversitychainitTaxesInfo {
   status?: boolean;
 
-  /** @format uint64 */
-  totalAmount?: string;
+  /** @format int64 */
+  totalAmount?: number;
   taxesHistory?: string;
 }
 
 export interface UniversitychainitTranscriptOfRecords {
   examsData?: string;
 
-  /** @format uint64 */
-  totalExams?: string;
+  /** @format int64 */
+  totalExams?: number;
 
-  /** @format uint64 */
-  examsPassed?: string;
+  /** @format int64 */
+  examsPassed?: number;
 
-  /** @format uint64 */
-  totalCredits?: string;
+  /** @format int64 */
+  totalCredits?: number;
 
-  /** @format uint64 */
-  achievedCredits?: string;
+  /** @format int64 */
+  achievedCredits?: number;
 }
 
 export interface UniversitychainitUniversityInfo {
   universityName?: string;
 
-  /** @format uint64 */
-  nextStudentId?: string;
+  /** @format int64 */
+  nextStudentId?: number;
   secretariatKey?: string;
   universityKey?: string;
   caiKey?: string;
@@ -285,6 +285,7 @@ export interface UniversitychainitUniversityInfo {
   fifoTailErasmus?: string;
   deadlineTaxes?: string;
   deadlineErasmus?: string;
+  taxesBrackets?: string;
 }
 
 /**

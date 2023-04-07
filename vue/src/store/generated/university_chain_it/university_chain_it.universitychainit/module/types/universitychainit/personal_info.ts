@@ -1,6 +1,5 @@
 /* eslint-disable */
-import * as Long from "long";
-import { util, configure, Writer, Reader } from "protobufjs/minimal";
+import { Writer, Reader } from "protobufjs/minimal";
 
 export const protobufPackage = "university_chain_it.universitychainit";
 
@@ -27,7 +26,7 @@ const basePersonalInfo: object = {
 export const PersonalInfo = {
   encode(message: PersonalInfo, writer: Writer = Writer.create()): Writer {
     if (message.gender !== 0) {
-      writer.uint32(8).uint64(message.gender);
+      writer.uint32(8).uint32(message.gender);
     }
     if (message.dateOfBirth !== "") {
       writer.uint32(18).string(message.dateOfBirth);
@@ -58,7 +57,7 @@ export const PersonalInfo = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.gender = longToNumber(reader.uint64() as Long);
+          message.gender = reader.uint32();
           break;
         case 2:
           message.dateOfBirth = reader.string();
@@ -196,16 +195,6 @@ export const PersonalInfo = {
   },
 };
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
-  throw "Unable to locate global object";
-})();
-
 type Builtin = Date | Function | Uint8Array | string | number | undefined;
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -216,15 +205,3 @@ export type DeepPartial<T> = T extends Builtin
   : T extends {}
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-function longToNumber(long: Long): number {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
-}
-
-if (util.Long !== Long) {
-  util.Long = Long as any;
-  configure();
-}

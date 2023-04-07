@@ -19,4 +19,5 @@ var (
 	ErrWrongCourseType               = sdkerrors.Register(ModuleName, 1106, "the course type does not exists")
 	ErrWrongCourseOfStudy            = sdkerrors.Register(ModuleName, 1107, "the course of study does not exists")
 	ErrWrongDepartment               = sdkerrors.Register(ModuleName, 1108, "the department does not exists")
+	ErrStudentAlreadyPresent         = sdkerrors.Register(ModuleName, 1109, "the student is already present")
 )

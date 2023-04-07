@@ -4,13 +4,13 @@ import { StdFee } from "@cosmjs/launchpad";
 import { SigningStargateClient } from "@cosmjs/stargate";
 import { Registry, OfflineSigner, EncodeObject, DirectSecp256k1HdWallet } from "@cosmjs/proto-signing";
 import { Api } from "./rest";
-import { MsgConfigureChain } from "./types/universitychainit/tx";
 import { MsgRegisterNewStudent } from "./types/universitychainit/tx";
+import { MsgConfigureChain } from "./types/universitychainit/tx";
 
 
 const types = [
-  ["/university_chain_it.universitychainit.MsgConfigureChain", MsgConfigureChain],
   ["/university_chain_it.universitychainit.MsgRegisterNewStudent", MsgRegisterNewStudent],
+  ["/university_chain_it.universitychainit.MsgConfigureChain", MsgConfigureChain],
   
 ];
 export const MissingWalletError = new Error("wallet is required");
@@ -43,8 +43,8 @@ const txClient = async (wallet: OfflineSigner, { addr: addr }: TxClientOptions =
 
   return {
     signAndBroadcast: (msgs: EncodeObject[], { fee, memo }: SignAndBroadcastOptions = {fee: defaultFee, memo: ""}) => client.signAndBroadcast(address, msgs, fee,memo),
-    msgConfigureChain: (data: MsgConfigureChain): EncodeObject => ({ typeUrl: "/university_chain_it.universitychainit.MsgConfigureChain", value: MsgConfigureChain.fromPartial( data ) }),
     msgRegisterNewStudent: (data: MsgRegisterNewStudent): EncodeObject => ({ typeUrl: "/university_chain_it.universitychainit.MsgRegisterNewStudent", value: MsgRegisterNewStudent.fromPartial( data ) }),
+    msgConfigureChain: (data: MsgConfigureChain): EncodeObject => ({ typeUrl: "/university_chain_it.universitychainit.MsgConfigureChain", value: MsgConfigureChain.fromPartial( data ) }),
     
   };
 };

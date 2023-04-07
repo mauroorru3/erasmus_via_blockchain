@@ -5,7 +5,7 @@ option go_package = "university_chain_it/x/universitychainit/types";
 
 message UniversityInfo {
   string universityName = 1; 
-  uint64 nextStudentId = 2; 
+  uint32 nextStudentId = 2; 
   string secretariatKey = 3; 
   string universityKey = 4; 
   string caiKey = 5; 
@@ -13,6 +13,6 @@ message UniversityInfo {
   string fifoTailErasmus = 7; 
   string deadlineTaxes = 8; 
   string deadlineErasmus = 9; 
-  
+  string taxesBrackets = 10;
 }
 

@@ -1,6 +1,5 @@
 /* eslint-disable */
-import * as Long from "long";
-import { util, configure, Writer, Reader } from "protobufjs/minimal";
+import { Writer, Reader } from "protobufjs/minimal";
 
 export const protobufPackage = "university_chain_it.universitychainit";
 
@@ -46,13 +45,13 @@ export const StudentInfo = {
       writer.uint32(42).string(message.status);
     }
     if (message.currentYearOfStudy !== 0) {
-      writer.uint32(48).uint64(message.currentYearOfStudy);
+      writer.uint32(48).uint32(message.currentYearOfStudy);
     }
     if (message.outOfCourse === true) {
       writer.uint32(56).bool(message.outOfCourse);
     }
     if (message.numberOfYearsOutOfCourse !== 0) {
-      writer.uint32(64).uint64(message.numberOfYearsOutOfCourse);
+      writer.uint32(64).uint32(message.numberOfYearsOutOfCourse);
     }
     if (message.studentKey !== "") {
       writer.uint32(74).string(message.studentKey);
@@ -83,15 +82,13 @@ export const StudentInfo = {
           message.status = reader.string();
           break;
         case 6:
-          message.currentYearOfStudy = longToNumber(reader.uint64() as Long);
+          message.currentYearOfStudy = reader.uint32();
           break;
         case 7:
           message.outOfCourse = reader.bool();
           break;
         case 8:
-          message.numberOfYearsOutOfCourse = longToNumber(
-            reader.uint64() as Long
-          );
+          message.numberOfYearsOutOfCourse = reader.uint32();
           break;
         case 9:
           message.studentKey = reader.string();
@@ -237,16 +234,6 @@ export const StudentInfo = {
   },
 };
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
-  throw "Unable to locate global object";
-})();
-
 type Builtin = Date | Function | Uint8Array | string | number | undefined;
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -257,15 +244,3 @@ export type DeepPartial<T> = T extends Builtin
   : T extends {}
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-function longToNumber(long: Long): number {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
-}
-
-if (util.Long !== Long) {
-  util.Long = Long as any;
-  configure();
-}

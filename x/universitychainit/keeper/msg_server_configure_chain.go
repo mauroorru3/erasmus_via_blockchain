@@ -58,6 +58,14 @@ func (k msgServer) ConfigureChain(goCtx context.Context, msg *types.MsgConfigure
 
 				switch universityInfoList[i].Name {
 				case "unipi":
+
+					taxesBracketsJSON, err := utilfunc.GetJSONFromTaxesBrackets(universityInfoList[i].Taxes_brackets)
+					if err != nil {
+						return &types.MsgConfigureChainResponse{
+							Status: -1,
+						}, err
+					}
+
 					k.Keeper.SetUniversityInfo(ctx, types.UniversityInfo{
 						UniversityName:  "unipi",
 						NextStudentId:   1,
@@ -68,6 +76,7 @@ func (k msgServer) ConfigureChain(goCtx context.Context, msg *types.MsgConfigure
 						FifoTailErasmus: "-1",
 						DeadlineTaxes:   universityInfoList[i].Deadline_taxes,
 						DeadlineErasmus: universityInfoList[i].Deadline_erasmus,
+						TaxesBrackets:   taxesBracketsJSON,
 					})
 
 					j := 0
