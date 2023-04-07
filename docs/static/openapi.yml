@@ -30092,12 +30092,10 @@ paths:
                           type: string
                         courseType:
                           type: string
-                          format: uint64
                         courseOfStudy:
                           type: string
                         status:
                           type: string
-                          format: uint64
                         currentYearOfStudy:
                           type: string
                           format: uint64
@@ -30336,12 +30334,10 @@ paths:
                         type: string
                       courseType:
                         type: string
-                        format: uint64
                       courseOfStudy:
                         type: string
                       status:
                         type: string
-                        format: uint64
                       currentYearOfStudy:
                         type: string
                         format: uint64
@@ -30496,12 +30492,10 @@ paths:
                     type: string
                   courseType:
                     type: string
-                    format: uint64
                   courseOfStudy:
                     type: string
                   status:
                     type: string
-                    format: uint64
                   currentYearOfStudy:
                     type: string
                     format: uint64
@@ -50865,6 +50859,11 @@ definitions:
       status:
         type: integer
         format: int32
+  university_chain_it.universitychainit.MsgRegisterNewStudentResponse:
+    type: object
+    properties:
+      studentIndex:
+        type: string
   university_chain_it.universitychainit.Params:
     type: object
     description: Params defines the parameters for the module.
@@ -50994,12 +50993,10 @@ definitions:
                   type: string
                 courseType:
                   type: string
-                  format: uint64
                 courseOfStudy:
                   type: string
                 status:
                   type: string
-                  format: uint64
                 currentYearOfStudy:
                   type: string
                   format: uint64
@@ -51329,12 +51326,10 @@ definitions:
                 type: string
               courseType:
                 type: string
-                format: uint64
               courseOfStudy:
                 type: string
               status:
                 type: string
-                format: uint64
               currentYearOfStudy:
                 type: string
                 format: uint64
@@ -51457,12 +51452,10 @@ definitions:
             type: string
           courseType:
             type: string
-            format: uint64
           courseOfStudy:
             type: string
           status:
             type: string
-            format: uint64
           currentYearOfStudy:
             type: string
             format: uint64
@@ -51569,12 +51562,10 @@ definitions:
             type: string
           courseType:
             type: string
-            format: uint64
           courseOfStudy:
             type: string
           status:
             type: string
-            format: uint64
           currentYearOfStudy:
             type: string
             format: uint64
@@ -51694,12 +51685,10 @@ definitions:
         type: string
       courseType:
         type: string
-        format: uint64
       courseOfStudy:
         type: string
       status:
         type: string
-        format: uint64
       currentYearOfStudy:
         type: string
         format: uint64

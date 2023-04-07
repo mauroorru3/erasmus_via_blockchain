@@ -8,6 +8,7 @@ option go_package = "university_chain_it/x/universitychainit/types";
 // Msg defines the Msg service.
 service Msg {
       rpc ConfigureChain(MsgConfigureChain) returns (MsgConfigureChainResponse);
+  rpc RegisterNewStudent(MsgRegisterNewStudent) returns (MsgRegisterNewStudentResponse);
 // this line is used by starport scaffolding # proto/tx/rpc
 }
 
@@ -17,6 +18,20 @@ message MsgConfigureChain {
 
 message MsgConfigureChainResponse {
   int32 status = 1;
+}
+
+message MsgRegisterNewStudent {
+  string creator = 1;
+  string university = 2;
+  string name = 3;
+  string surname = 4;
+  string courseType = 5;
+  string courseOfStudy = 6;
+  string departmentName = 7;
+}
+
+message MsgRegisterNewStudentResponse {
+  string studentIndex = 1;
 }
 
 // this line is used by starport scaffolding # proto/tx/message

@@ -26,9 +26,9 @@ func TestGenesisState_Validate(t *testing.T) {
 				StudentInfo: &types.StudentInfo{
 					Name:                     "69",
 					Surname:                  "71",
-					CourseType:               7,
+					CourseType:               "7",
 					CourseOfStudy:            "10",
-					Status:                   14,
+					Status:                   "14",
 					CurrentYearOfStudy:       67,
 					OutOfCourse:              true,
 					NumberOfYearsOutOfCourse: 25,

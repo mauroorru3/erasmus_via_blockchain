@@ -20,9 +20,9 @@ func GetStoredStudent1() types.StoredStudent {
 		StudentData: &types.StudentInfo{
 			Name:                     "Mario",
 			Surname:                  "Rossi",
-			CourseType:               0,
+			CourseType:               "0",
 			CourseOfStudy:            "CS",
-			Status:                   1,
+			Status:                   "1",
 			CurrentYearOfStudy:       1,
 			OutOfCourse:              false,
 			NumberOfYearsOutOfCourse: 0,

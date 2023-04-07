@@ -69,6 +69,10 @@ export interface UniversitychainitMsgConfigureChainResponse {
   status?: number;
 }
 
+export interface UniversitychainitMsgRegisterNewStudentResponse {
+  studentIndex?: string;
+}
+
 /**
  * Params defines the parameters for the module.
  */
@@ -232,12 +236,8 @@ export interface UniversitychainitStoredStudent {
 export interface UniversitychainitStudentInfo {
   name?: string;
   surname?: string;
-
-  /** @format uint64 */
   courseType?: string;
   courseOfStudy?: string;
-
-  /** @format uint64 */
   status?: string;
 
   /** @format uint64 */

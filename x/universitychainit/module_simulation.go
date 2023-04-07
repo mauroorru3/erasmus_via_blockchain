@@ -28,6 +28,10 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgConfigureChain int = 100
 
+	opWeightMsgRegisterNewStudent = "op_weight_msg_register_new_student"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgRegisterNewStudent int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -72,6 +76,17 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgConfigureChain,
 		universitychainitsimulation.SimulateMsgConfigureChain(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgRegisterNewStudent int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgRegisterNewStudent, &weightMsgRegisterNewStudent, nil,
+		func(_ *rand.Rand) {
+			weightMsgRegisterNewStudent = defaultWeightMsgRegisterNewStudent
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgRegisterNewStudent,
+		universitychainitsimulation.SimulateMsgRegisterNewStudent(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	// this line is used by starport scaffolding # simapp/module/operation

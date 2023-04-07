@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"university_chain_it/x/universitychainit/types"
 )
 
 // UniversityKeys.json
@@ -104,14 +105,14 @@ func ReadForeignUniversityInfo() (universityInfo []UniversityKeys, err error) {
 
 }
 
-func ReadCourseExams(NameUniversity string, departmentName string, courseType int, courseName string) (exams []Exam, err error) {
+func GetJSONFromCourseExams(NameUniversity string, departmentName string, courseType string, courseName string) (examsJSON string, err error) {
 
 	// Open our jsonFile
 	jsonFile, err := os.OpenFile("data/"+universityInfoJSON, os.O_RDONLY, 0444)
 	// if we os.Open returns an error then handle it
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "Error "+err.Error())
-		return exams, err
+		return examsJSON, err
 	}
 	fmt.Println("Successfully Opened " + universityInfoJSON)
 	// defer the closing of our jsonFile so that we can parse it later on
@@ -120,7 +121,7 @@ func ReadCourseExams(NameUniversity string, departmentName string, courseType in
 	byteValue, err := io.ReadAll(jsonFile)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "Error "+err.Error())
-		return exams, err
+		return examsJSON, err
 	}
 
 	var uList UniList
@@ -128,7 +129,7 @@ func ReadCourseExams(NameUniversity string, departmentName string, courseType in
 	fmt.Println("Successfully Unmarshalled " + universityInfoJSON)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "Error "+err.Error())
-		return exams, err
+		return examsJSON, err
 	}
 
 	i := 0
@@ -142,22 +143,40 @@ func ReadCourseExams(NameUniversity string, departmentName string, courseType in
 	}
 	if !found {
 		fmt.Printf("University %s not found", NameUniversity)
-		return exams, err
+		return examsJSON, types.ErrWrongNameUniversity
 	}
 
 	j := 0
 	found = false
-	for i < len(uList.UniversityList[i].DepartmentList) && !found {
+	for j < len(uList.UniversityList[i].DepartmentList) && !found {
 		if uList.UniversityList[i].DepartmentList[j].Name == departmentName {
 			found = true
 		} else {
 			j++
 		}
 	}
+	if !found {
+		fmt.Fprintln(os.Stderr, "Department "+departmentName+" not found")
+		return examsJSON, types.ErrWrongDepartment
+	}
+	type_course := -1
+	switch courseType {
+	case "master":
+		type_course = 0
+	case "bachelor":
+		type_course = 1
+	case "single cycle":
+		type_course = 2
+	}
+	if type_course == -1 {
+		fmt.Fprintln(os.Stderr, "Course type "+courseType+" not found")
+		return examsJSON, types.ErrWrongCourseType
+	}
+
 	k := 0
 	found = false
-	for j < len(uList.UniversityList[i].DepartmentList[j].CoursesTypeList[courseType].Courses) && !found {
-		if uList.UniversityList[i].DepartmentList[j].CoursesTypeList[courseType].Courses[k].CourseOfStudy == courseName {
+	for k < len(uList.UniversityList[i].DepartmentList[j].CoursesTypeList[type_course].Courses) && !found {
+		if uList.UniversityList[i].DepartmentList[j].CoursesTypeList[type_course].Courses[k].CourseOfStudy == courseName {
 			found = true
 		} else {
 			k++
@@ -165,13 +184,36 @@ func ReadCourseExams(NameUniversity string, departmentName string, courseType in
 	}
 	if !found {
 		fmt.Fprintln(os.Stderr, "Course "+courseName+" not found")
-		return exams, err
+		return examsJSON, types.ErrWrongCourseOfStudy
 	}
 
-	exams = uList.UniversityList[i].DepartmentList[j].CoursesTypeList[courseType].Courses[k].Exams
+	exams := uList.UniversityList[i].DepartmentList[j].CoursesTypeList[type_course].Courses[k].Exams
 
-	err = nil
-	return exams, err
+	mapExams := make(map[string]ExamStruct)
+
+	for i = 0; i < len(exams); i++ {
+		examStruct := ExamStruct{
+			Exam_label:      "",
+			Exam_date:       "",
+			Credits:         uint8(exams[i].Credits),
+			Marks:           0,
+			Course_year:     0,
+			Status:          false,
+			Attendance_year: 0,
+			Exam_type:       exams[i].ExamType,
+		}
+		mapExams[exams[i].ExamName] = examStruct
+	}
+
+	resultByteJSON, err := json.Marshal(mapExams)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "Error "+err.Error())
+		return examsJSON, err
+	}
+
+	examsJSON = string(resultByteJSON)
+
+	return examsJSON, err
 
 }
 

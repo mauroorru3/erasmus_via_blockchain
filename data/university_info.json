@@ -22,7 +22,7 @@
                                 "name": "master",
                                 "courses": [
                                     {
-                                    "courseOfStudy": "CS - BDT - Big Data Technologies",
+                                    "courseOfStudy": "cs",
                                     "exams": [
                                                 {
                                                     "Name and Surname": "Domenico Asprucci",
@@ -117,7 +117,7 @@
                                 "name": "master",
                                 "courses": [
                                     {
-                                    "courseOfStudy": "CS - BDT - Big Data Technologies",
+                                    "courseOfStudy": "cs",
                                     "exams": [
                                                 {
                                                     "Name and Surname": "Domenico Asprucci",

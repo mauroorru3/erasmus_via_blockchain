@@ -7,9 +7,9 @@ export const protobufPackage = "university_chain_it.universitychainit";
 export interface StudentInfo {
   name: string;
   surname: string;
-  courseType: number;
+  courseType: string;
   courseOfStudy: string;
-  status: number;
+  status: string;
   currentYearOfStudy: number;
   outOfCourse: boolean;
   numberOfYearsOutOfCourse: number;
@@ -19,9 +19,9 @@ export interface StudentInfo {
 const baseStudentInfo: object = {
   name: "",
   surname: "",
-  courseType: 0,
+  courseType: "",
   courseOfStudy: "",
-  status: 0,
+  status: "",
   currentYearOfStudy: 0,
   outOfCourse: false,
   numberOfYearsOutOfCourse: 0,
@@ -36,14 +36,14 @@ export const StudentInfo = {
     if (message.surname !== "") {
       writer.uint32(18).string(message.surname);
     }
-    if (message.courseType !== 0) {
-      writer.uint32(24).uint64(message.courseType);
+    if (message.courseType !== "") {
+      writer.uint32(26).string(message.courseType);
     }
     if (message.courseOfStudy !== "") {
       writer.uint32(34).string(message.courseOfStudy);
     }
-    if (message.status !== 0) {
-      writer.uint32(40).uint64(message.status);
+    if (message.status !== "") {
+      writer.uint32(42).string(message.status);
     }
     if (message.currentYearOfStudy !== 0) {
       writer.uint32(48).uint64(message.currentYearOfStudy);
@@ -74,13 +74,13 @@ export const StudentInfo = {
           message.surname = reader.string();
           break;
         case 3:
-          message.courseType = longToNumber(reader.uint64() as Long);
+          message.courseType = reader.string();
           break;
         case 4:
           message.courseOfStudy = reader.string();
           break;
         case 5:
-          message.status = longToNumber(reader.uint64() as Long);
+          message.status = reader.string();
           break;
         case 6:
           message.currentYearOfStudy = longToNumber(reader.uint64() as Long);
@@ -117,9 +117,9 @@ export const StudentInfo = {
       message.surname = "";
     }
     if (object.courseType !== undefined && object.courseType !== null) {
-      message.courseType = Number(object.courseType);
+      message.courseType = String(object.courseType);
     } else {
-      message.courseType = 0;
+      message.courseType = "";
     }
     if (object.courseOfStudy !== undefined && object.courseOfStudy !== null) {
       message.courseOfStudy = String(object.courseOfStudy);
@@ -127,9 +127,9 @@ export const StudentInfo = {
       message.courseOfStudy = "";
     }
     if (object.status !== undefined && object.status !== null) {
-      message.status = Number(object.status);
+      message.status = String(object.status);
     } else {
-      message.status = 0;
+      message.status = "";
     }
     if (
       object.currentYearOfStudy !== undefined &&
@@ -195,7 +195,7 @@ export const StudentInfo = {
     if (object.courseType !== undefined && object.courseType !== null) {
       message.courseType = object.courseType;
     } else {
-      message.courseType = 0;
+      message.courseType = "";
     }
     if (object.courseOfStudy !== undefined && object.courseOfStudy !== null) {
       message.courseOfStudy = object.courseOfStudy;
@@ -205,7 +205,7 @@ export const StudentInfo = {
     if (object.status !== undefined && object.status !== null) {
       message.status = object.status;
     } else {
-      message.status = 0;
+      message.status = "";
     }
     if (
       object.currentYearOfStudy !== undefined &&
