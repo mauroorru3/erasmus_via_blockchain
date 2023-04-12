@@ -65,7 +65,7 @@ func TestConfigureChainJustConfigured(t *testing.T) {
 
 	require.EqualError(t,
 		err,
-		"the chain configuration has already been performed")
+		"the initial configuration of the chain has already been performed")
 	require.EqualValues(t, types.MsgConfigureChainResponse{
 		Status: -1,
 	}, *createResponse)

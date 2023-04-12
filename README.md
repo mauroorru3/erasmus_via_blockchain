@@ -28,6 +28,19 @@ docker run --rm -it -v $(pwd):/university_chain_it -w /university_chain_it -p 13
 
 # To interact with the running chain open another shell and try: 
 docker exec -it university_chain_it university_chain_itd status
+
+# To initialize the chain
+export bob=$(sudo docker exec university_chain_it university_chain_itd keys show bob -a) 
+sudo docker exec -it university_chain_it university_chain_itd tx universitychainit configure-chain --from $bob --gas auto 
+
+To show the chain info
+sudo docker exec -it university_chain_it university_chain_itd query universitychainit show-chain-info 
+
+# To insert a new student
+sudo docker exec -it university_chain_it university_chain_itd tx universitychainit register-new-student unipi Mario Rossi master cs "Computer Science" --from $bob --gas auto 
+
+# To show the inserted student
+sudo docker exec -it university_chain_it university_chain_itd query universitychainit show-stored-student unipi_1 
 ```
 
 ## Contributing
