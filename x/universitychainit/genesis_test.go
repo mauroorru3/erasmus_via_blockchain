@@ -34,7 +34,7 @@ func TestGenesis(t *testing.T) {
 			AchievedCredits: 71,
 		},
 		PersonalInfo: &types.PersonalInfo{
-			Gender:             4,
+			Gender:             "4",
 			DateOfBirth:        "52",
 			PrimaryNationality: "85",
 			CountryOfBirth:     "7",

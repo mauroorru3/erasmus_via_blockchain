@@ -69,6 +69,21 @@ export interface UniversitychainitMsgConfigureChainResponse {
   status?: number;
 }
 
+export interface UniversitychainitMsgInsertStudentContactInfoResponse {
+  /** @format int32 */
+  status?: number;
+}
+
+export interface UniversitychainitMsgInsertStudentPersonalInfoResponse {
+  /** @format int32 */
+  status?: number;
+}
+
+export interface UniversitychainitMsgInsertStudentResidenceInfoResponse {
+  /** @format int32 */
+  status?: number;
+}
+
 export interface UniversitychainitMsgRegisterNewStudentResponse {
   studentIndex?: string;
 }
@@ -79,8 +94,7 @@ export interface UniversitychainitMsgRegisterNewStudentResponse {
 export type UniversitychainitParams = object;
 
 export interface UniversitychainitPersonalInfo {
-  /** @format int64 */
-  gender?: number;
+  gender?: string;
   dateOfBirth?: string;
   primaryNationality?: string;
   countryOfBirth?: string;

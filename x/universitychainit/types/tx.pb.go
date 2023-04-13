@@ -251,41 +251,517 @@ func (m *MsgRegisterNewStudentResponse) GetStudentIndex() string {
 	return ""
 }
 
+type MsgInsertStudentPersonalInfo struct {
+	Creator            string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	University         string `protobuf:"bytes,2,opt,name=university,proto3" json:"university,omitempty"`
+	StudentIndex       string `protobuf:"bytes,3,opt,name=studentIndex,proto3" json:"studentIndex,omitempty"`
+	Gender             string `protobuf:"bytes,4,opt,name=gender,proto3" json:"gender,omitempty"`
+	DateOfBirth        string `protobuf:"bytes,5,opt,name=dateOfBirth,proto3" json:"dateOfBirth,omitempty"`
+	PrimaryNationality string `protobuf:"bytes,6,opt,name=primaryNationality,proto3" json:"primaryNationality,omitempty"`
+	CountryOfBirth     string `protobuf:"bytes,7,opt,name=countryOfBirth,proto3" json:"countryOfBirth,omitempty"`
+	ProvinceOfBirth    string `protobuf:"bytes,8,opt,name=provinceOfBirth,proto3" json:"provinceOfBirth,omitempty"`
+	TownOfBirth        string `protobuf:"bytes,9,opt,name=townOfBirth,proto3" json:"townOfBirth,omitempty"`
+	TaxCode            string `protobuf:"bytes,10,opt,name=taxCode,proto3" json:"taxCode,omitempty"`
+}
+
+func (m *MsgInsertStudentPersonalInfo) Reset()         { *m = MsgInsertStudentPersonalInfo{} }
+func (m *MsgInsertStudentPersonalInfo) String() string { return proto.CompactTextString(m) }
+func (*MsgInsertStudentPersonalInfo) ProtoMessage()    {}
+func (*MsgInsertStudentPersonalInfo) Descriptor() ([]byte, []int) {
+	return fileDescriptor_5083021dc5214058, []int{4}
+}
+func (m *MsgInsertStudentPersonalInfo) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgInsertStudentPersonalInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgInsertStudentPersonalInfo.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgInsertStudentPersonalInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgInsertStudentPersonalInfo.Merge(m, src)
+}
+func (m *MsgInsertStudentPersonalInfo) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgInsertStudentPersonalInfo) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgInsertStudentPersonalInfo.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgInsertStudentPersonalInfo proto.InternalMessageInfo
+
+func (m *MsgInsertStudentPersonalInfo) GetCreator() string {
+	if m != nil {
+		return m.Creator
+	}
+	return ""
+}
+
+func (m *MsgInsertStudentPersonalInfo) GetUniversity() string {
+	if m != nil {
+		return m.University
+	}
+	return ""
+}
+
+func (m *MsgInsertStudentPersonalInfo) GetStudentIndex() string {
+	if m != nil {
+		return m.StudentIndex
+	}
+	return ""
+}
+
+func (m *MsgInsertStudentPersonalInfo) GetGender() string {
+	if m != nil {
+		return m.Gender
+	}
+	return ""
+}
+
+func (m *MsgInsertStudentPersonalInfo) GetDateOfBirth() string {
+	if m != nil {
+		return m.DateOfBirth
+	}
+	return ""
+}
+
+func (m *MsgInsertStudentPersonalInfo) GetPrimaryNationality() string {
+	if m != nil {
+		return m.PrimaryNationality
+	}
+	return ""
+}
+
+func (m *MsgInsertStudentPersonalInfo) GetCountryOfBirth() string {
+	if m != nil {
+		return m.CountryOfBirth
+	}
+	return ""
+}
+
+func (m *MsgInsertStudentPersonalInfo) GetProvinceOfBirth() string {
+	if m != nil {
+		return m.ProvinceOfBirth
+	}
+	return ""
+}
+
+func (m *MsgInsertStudentPersonalInfo) GetTownOfBirth() string {
+	if m != nil {
+		return m.TownOfBirth
+	}
+	return ""
+}
+
+func (m *MsgInsertStudentPersonalInfo) GetTaxCode() string {
+	if m != nil {
+		return m.TaxCode
+	}
+	return ""
+}
+
+type MsgInsertStudentPersonalInfoResponse struct {
+	Status int32 `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
+}
+
+func (m *MsgInsertStudentPersonalInfoResponse) Reset()         { *m = MsgInsertStudentPersonalInfoResponse{} }
+func (m *MsgInsertStudentPersonalInfoResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgInsertStudentPersonalInfoResponse) ProtoMessage()    {}
+func (*MsgInsertStudentPersonalInfoResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_5083021dc5214058, []int{5}
+}
+func (m *MsgInsertStudentPersonalInfoResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgInsertStudentPersonalInfoResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgInsertStudentPersonalInfoResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgInsertStudentPersonalInfoResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgInsertStudentPersonalInfoResponse.Merge(m, src)
+}
+func (m *MsgInsertStudentPersonalInfoResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgInsertStudentPersonalInfoResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgInsertStudentPersonalInfoResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgInsertStudentPersonalInfoResponse proto.InternalMessageInfo
+
+func (m *MsgInsertStudentPersonalInfoResponse) GetStatus() int32 {
+	if m != nil {
+		return m.Status
+	}
+	return 0
+}
+
+type MsgInsertStudentContactInfo struct {
+	Creator        string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	University     string `protobuf:"bytes,2,opt,name=university,proto3" json:"university,omitempty"`
+	StudentIndex   string `protobuf:"bytes,3,opt,name=studentIndex,proto3" json:"studentIndex,omitempty"`
+	ContactAddress string `protobuf:"bytes,4,opt,name=contactAddress,proto3" json:"contactAddress,omitempty"`
+	Email          string `protobuf:"bytes,5,opt,name=email,proto3" json:"email,omitempty"`
+	MobilePhone    string `protobuf:"bytes,6,opt,name=mobilePhone,proto3" json:"mobilePhone,omitempty"`
+}
+
+func (m *MsgInsertStudentContactInfo) Reset()         { *m = MsgInsertStudentContactInfo{} }
+func (m *MsgInsertStudentContactInfo) String() string { return proto.CompactTextString(m) }
+func (*MsgInsertStudentContactInfo) ProtoMessage()    {}
+func (*MsgInsertStudentContactInfo) Descriptor() ([]byte, []int) {
+	return fileDescriptor_5083021dc5214058, []int{6}
+}
+func (m *MsgInsertStudentContactInfo) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgInsertStudentContactInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgInsertStudentContactInfo.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgInsertStudentContactInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgInsertStudentContactInfo.Merge(m, src)
+}
+func (m *MsgInsertStudentContactInfo) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgInsertStudentContactInfo) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgInsertStudentContactInfo.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgInsertStudentContactInfo proto.InternalMessageInfo
+
+func (m *MsgInsertStudentContactInfo) GetCreator() string {
+	if m != nil {
+		return m.Creator
+	}
+	return ""
+}
+
+func (m *MsgInsertStudentContactInfo) GetUniversity() string {
+	if m != nil {
+		return m.University
+	}
+	return ""
+}
+
+func (m *MsgInsertStudentContactInfo) GetStudentIndex() string {
+	if m != nil {
+		return m.StudentIndex
+	}
+	return ""
+}
+
+func (m *MsgInsertStudentContactInfo) GetContactAddress() string {
+	if m != nil {
+		return m.ContactAddress
+	}
+	return ""
+}
+
+func (m *MsgInsertStudentContactInfo) GetEmail() string {
+	if m != nil {
+		return m.Email
+	}
+	return ""
+}
+
+func (m *MsgInsertStudentContactInfo) GetMobilePhone() string {
+	if m != nil {
+		return m.MobilePhone
+	}
+	return ""
+}
+
+type MsgInsertStudentContactInfoResponse struct {
+	Status int32 `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
+}
+
+func (m *MsgInsertStudentContactInfoResponse) Reset()         { *m = MsgInsertStudentContactInfoResponse{} }
+func (m *MsgInsertStudentContactInfoResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgInsertStudentContactInfoResponse) ProtoMessage()    {}
+func (*MsgInsertStudentContactInfoResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_5083021dc5214058, []int{7}
+}
+func (m *MsgInsertStudentContactInfoResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgInsertStudentContactInfoResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgInsertStudentContactInfoResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgInsertStudentContactInfoResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgInsertStudentContactInfoResponse.Merge(m, src)
+}
+func (m *MsgInsertStudentContactInfoResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgInsertStudentContactInfoResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgInsertStudentContactInfoResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgInsertStudentContactInfoResponse proto.InternalMessageInfo
+
+func (m *MsgInsertStudentContactInfoResponse) GetStatus() int32 {
+	if m != nil {
+		return m.Status
+	}
+	return 0
+}
+
+type MsgInsertStudentResidenceInfo struct {
+	Creator      string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	University   string `protobuf:"bytes,2,opt,name=university,proto3" json:"university,omitempty"`
+	StudentIndex string `protobuf:"bytes,3,opt,name=studentIndex,proto3" json:"studentIndex,omitempty"`
+	Country      string `protobuf:"bytes,4,opt,name=country,proto3" json:"country,omitempty"`
+	Province     string `protobuf:"bytes,5,opt,name=province,proto3" json:"province,omitempty"`
+	Town         string `protobuf:"bytes,6,opt,name=town,proto3" json:"town,omitempty"`
+	PostCode     string `protobuf:"bytes,7,opt,name=postCode,proto3" json:"postCode,omitempty"`
+	Address      string `protobuf:"bytes,8,opt,name=address,proto3" json:"address,omitempty"`
+	HouseNumber  string `protobuf:"bytes,9,opt,name=houseNumber,proto3" json:"houseNumber,omitempty"`
+	HomePhone    string `protobuf:"bytes,10,opt,name=homePhone,proto3" json:"homePhone,omitempty"`
+}
+
+func (m *MsgInsertStudentResidenceInfo) Reset()         { *m = MsgInsertStudentResidenceInfo{} }
+func (m *MsgInsertStudentResidenceInfo) String() string { return proto.CompactTextString(m) }
+func (*MsgInsertStudentResidenceInfo) ProtoMessage()    {}
+func (*MsgInsertStudentResidenceInfo) Descriptor() ([]byte, []int) {
+	return fileDescriptor_5083021dc5214058, []int{8}
+}
+func (m *MsgInsertStudentResidenceInfo) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgInsertStudentResidenceInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgInsertStudentResidenceInfo.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgInsertStudentResidenceInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgInsertStudentResidenceInfo.Merge(m, src)
+}
+func (m *MsgInsertStudentResidenceInfo) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgInsertStudentResidenceInfo) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgInsertStudentResidenceInfo.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgInsertStudentResidenceInfo proto.InternalMessageInfo
+
+func (m *MsgInsertStudentResidenceInfo) GetCreator() string {
+	if m != nil {
+		return m.Creator
+	}
+	return ""
+}
+
+func (m *MsgInsertStudentResidenceInfo) GetUniversity() string {
+	if m != nil {
+		return m.University
+	}
+	return ""
+}
+
+func (m *MsgInsertStudentResidenceInfo) GetStudentIndex() string {
+	if m != nil {
+		return m.StudentIndex
+	}
+	return ""
+}
+
+func (m *MsgInsertStudentResidenceInfo) GetCountry() string {
+	if m != nil {
+		return m.Country
+	}
+	return ""
+}
+
+func (m *MsgInsertStudentResidenceInfo) GetProvince() string {
+	if m != nil {
+		return m.Province
+	}
+	return ""
+}
+
+func (m *MsgInsertStudentResidenceInfo) GetTown() string {
+	if m != nil {
+		return m.Town
+	}
+	return ""
+}
+
+func (m *MsgInsertStudentResidenceInfo) GetPostCode() string {
+	if m != nil {
+		return m.PostCode
+	}
+	return ""
+}
+
+func (m *MsgInsertStudentResidenceInfo) GetAddress() string {
+	if m != nil {
+		return m.Address
+	}
+	return ""
+}
+
+func (m *MsgInsertStudentResidenceInfo) GetHouseNumber() string {
+	if m != nil {
+		return m.HouseNumber
+	}
+	return ""
+}
+
+func (m *MsgInsertStudentResidenceInfo) GetHomePhone() string {
+	if m != nil {
+		return m.HomePhone
+	}
+	return ""
+}
+
+type MsgInsertStudentResidenceInfoResponse struct {
+	Status int32 `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
+}
+
+func (m *MsgInsertStudentResidenceInfoResponse) Reset()         { *m = MsgInsertStudentResidenceInfoResponse{} }
+func (m *MsgInsertStudentResidenceInfoResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgInsertStudentResidenceInfoResponse) ProtoMessage()    {}
+func (*MsgInsertStudentResidenceInfoResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_5083021dc5214058, []int{9}
+}
+func (m *MsgInsertStudentResidenceInfoResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgInsertStudentResidenceInfoResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgInsertStudentResidenceInfoResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgInsertStudentResidenceInfoResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgInsertStudentResidenceInfoResponse.Merge(m, src)
+}
+func (m *MsgInsertStudentResidenceInfoResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgInsertStudentResidenceInfoResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgInsertStudentResidenceInfoResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgInsertStudentResidenceInfoResponse proto.InternalMessageInfo
+
+func (m *MsgInsertStudentResidenceInfoResponse) GetStatus() int32 {
+	if m != nil {
+		return m.Status
+	}
+	return 0
+}
+
 func init() {
 	proto.RegisterType((*MsgConfigureChain)(nil), "university_chain_it.universitychainit.MsgConfigureChain")
 	proto.RegisterType((*MsgConfigureChainResponse)(nil), "university_chain_it.universitychainit.MsgConfigureChainResponse")
 	proto.RegisterType((*MsgRegisterNewStudent)(nil), "university_chain_it.universitychainit.MsgRegisterNewStudent")
 	proto.RegisterType((*MsgRegisterNewStudentResponse)(nil), "university_chain_it.universitychainit.MsgRegisterNewStudentResponse")
+	proto.RegisterType((*MsgInsertStudentPersonalInfo)(nil), "university_chain_it.universitychainit.MsgInsertStudentPersonalInfo")
+	proto.RegisterType((*MsgInsertStudentPersonalInfoResponse)(nil), "university_chain_it.universitychainit.MsgInsertStudentPersonalInfoResponse")
+	proto.RegisterType((*MsgInsertStudentContactInfo)(nil), "university_chain_it.universitychainit.MsgInsertStudentContactInfo")
+	proto.RegisterType((*MsgInsertStudentContactInfoResponse)(nil), "university_chain_it.universitychainit.MsgInsertStudentContactInfoResponse")
+	proto.RegisterType((*MsgInsertStudentResidenceInfo)(nil), "university_chain_it.universitychainit.MsgInsertStudentResidenceInfo")
+	proto.RegisterType((*MsgInsertStudentResidenceInfoResponse)(nil), "university_chain_it.universitychainit.MsgInsertStudentResidenceInfoResponse")
 }
 
 func init() { proto.RegisterFile("universitychainit/tx.proto", fileDescriptor_5083021dc5214058) }
 
 var fileDescriptor_5083021dc5214058 = []byte{
-	// 375 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x93, 0xcf, 0x4a, 0xc3, 0x40,
-	0x10, 0xc6, 0xbb, 0xfd, 0x8b, 0x83, 0x16, 0x5c, 0x50, 0x62, 0xc1, 0x20, 0x41, 0xc5, 0x4b, 0x53,
-	0xb0, 0x17, 0x0f, 0x1e, 0xc4, 0x0a, 0xe2, 0xa1, 0x15, 0xa2, 0x27, 0x2f, 0x25, 0xb6, 0xd3, 0x98,
-	0x43, 0x37, 0x61, 0x77, 0xa3, 0xcd, 0x3b, 0x78, 0xf0, 0xe8, 0x5b, 0xf8, 0x1a, 0x1e, 0x7b, 0xf4,
-	0x28, 0xed, 0xd9, 0x77, 0x90, 0x6c, 0xfa, 0xc7, 0x36, 0x11, 0x8a, 0xde, 0x32, 0xbf, 0x99, 0xf9,
-	0xf6, 0xdb, 0x7c, 0x2c, 0x54, 0x02, 0xe6, 0x3e, 0x22, 0x17, 0xae, 0x0c, 0x3b, 0x0f, 0xb6, 0xcb,
-	0x5c, 0x59, 0x93, 0x03, 0xd3, 0xe7, 0x9e, 0xf4, 0xe8, 0xc1, 0xbc, 0xd7, 0x56, 0xcd, 0xb6, 0x2b,
-	0xcd, 0xc4, 0xbc, 0x51, 0x85, 0xcd, 0xa6, 0x70, 0x1a, 0x1e, 0xeb, 0xb9, 0x4e, 0xc0, 0xb1, 0x11,
-	0x61, 0xaa, 0x41, 0xa9, 0xc3, 0xd1, 0x96, 0x1e, 0xd7, 0xc8, 0x1e, 0x39, 0x5a, 0xb3, 0xa6, 0xa5,
-	0x51, 0x87, 0x9d, 0xc4, 0xb8, 0x85, 0xc2, 0xf7, 0x98, 0x40, 0xba, 0x0d, 0x45, 0x21, 0x6d, 0x19,
-	0x08, 0xb5, 0x55, 0xb0, 0x26, 0x95, 0xf1, 0x45, 0x60, 0xab, 0x29, 0x1c, 0x0b, 0x1d, 0x57, 0x48,
-	0xe4, 0x2d, 0x7c, 0xba, 0x91, 0x41, 0x17, 0x99, 0xfc, 0xfd, 0x20, 0xaa, 0x03, 0xcc, 0xcd, 0x6a,
-	0x59, 0xd5, 0xfc, 0x41, 0x28, 0x85, 0x3c, 0xb3, 0xfb, 0xa8, 0xe5, 0x54, 0x47, 0x7d, 0x47, 0x6a,
-	0x22, 0xe0, 0x0a, 0xe7, 0x63, 0xb5, 0x49, 0x19, 0xa9, 0x75, 0xbc, 0x80, 0x0b, 0xbc, 0x0d, 0x7d,
-	0xd4, 0x0a, 0xb1, 0xda, 0x9c, 0xd0, 0x7d, 0xd8, 0x88, 0xab, 0xeb, 0x5e, 0x64, 0x2d, 0xd4, 0x8a,
-	0x6a, 0x64, 0x11, 0xd2, 0x43, 0x28, 0x77, 0xd1, 0xb7, 0xb9, 0xec, 0x23, 0x93, 0xad, 0xe8, 0x98,
-	0x92, 0x1a, 0x5b, 0xa2, 0x46, 0x03, 0x76, 0x53, 0xaf, 0x3b, 0xfb, 0x51, 0x06, 0xac, 0x8b, 0x18,
-	0x5d, 0xb1, 0x2e, 0x0e, 0x26, 0x77, 0x5f, 0x60, 0xc7, 0x6f, 0x59, 0xc8, 0x35, 0x85, 0x43, 0x9f,
-	0x09, 0x94, 0x97, 0xe2, 0x39, 0x31, 0x57, 0xca, 0xd6, 0x4c, 0x24, 0x55, 0x39, 0xfb, 0xeb, 0xe6,
-	0xcc, 0xfa, 0x2b, 0x01, 0x9a, 0x12, 0xe4, 0xe9, 0xea, 0xc2, 0xc9, 0xed, 0xca, 0xc5, 0x7f, 0xb6,
-	0xa7, 0xd6, 0xce, 0x2f, 0xdf, 0x47, 0x3a, 0x19, 0x8e, 0x74, 0xf2, 0x39, 0xd2, 0xc9, 0xcb, 0x58,
-	0xcf, 0x0c, 0xc7, 0x7a, 0xe6, 0x63, 0xac, 0x67, 0xee, 0xaa, 0x29, 0xf2, 0xb5, 0x41, 0x2d, 0xe5,
-	0xf5, 0x84, 0x3e, 0x8a, 0xfb, 0xa2, 0x7a, 0x41, 0xf5, 0xef, 0x00, 0x00, 0x00, 0xff, 0xff, 0x6b,
-	0x1b, 0xf2, 0x1f, 0x5f, 0x03, 0x00, 0x00,
+	// 732 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xbc, 0x56, 0x4f, 0x4f, 0x13, 0x41,
+	0x14, 0x67, 0xf9, 0x53, 0xe0, 0xa9, 0x18, 0x27, 0x6a, 0x96, 0x15, 0x1b, 0xb2, 0x82, 0xe1, 0x42,
+	0x49, 0xe4, 0xe2, 0xc1, 0xbf, 0x94, 0xc4, 0xa0, 0xb6, 0x90, 0xea, 0xc9, 0x0b, 0x59, 0xba, 0xaf,
+	0xed, 0x24, 0x74, 0xa6, 0x99, 0x99, 0x85, 0xf6, 0x3b, 0x78, 0xf0, 0xe8, 0x67, 0x30, 0x31, 0xf1,
+	0x0b, 0x18, 0xaf, 0x1e, 0x39, 0x9a, 0x78, 0x31, 0x70, 0xf6, 0xe6, 0x07, 0x30, 0x33, 0x3b, 0xbb,
+	0xfd, 0x5f, 0x08, 0x10, 0x6e, 0x7d, 0xbf, 0x79, 0xf3, 0x7b, 0xbf, 0xfd, 0xbd, 0xd7, 0xb7, 0x0b,
+	0x5e, 0xc4, 0xe8, 0x01, 0x0a, 0x49, 0x55, 0xab, 0x5c, 0x0b, 0x28, 0xa3, 0x6a, 0x4d, 0x35, 0x73,
+	0x0d, 0xc1, 0x15, 0x27, 0xcb, 0xed, 0xb3, 0x5d, 0x73, 0xb8, 0x4b, 0x55, 0xae, 0x2f, 0xdf, 0x5f,
+	0x85, 0x5b, 0x05, 0x59, 0xcd, 0x73, 0x56, 0xa1, 0xd5, 0x48, 0x60, 0x5e, 0xc3, 0xc4, 0x85, 0xe9,
+	0xb2, 0xc0, 0x40, 0x71, 0xe1, 0x3a, 0x8b, 0xce, 0xca, 0x6c, 0x29, 0x09, 0xfd, 0x75, 0x98, 0xef,
+	0x4b, 0x2f, 0xa1, 0x6c, 0x70, 0x26, 0x91, 0xdc, 0x85, 0x8c, 0x54, 0x81, 0x8a, 0xa4, 0xb9, 0x35,
+	0x55, 0xb2, 0x91, 0xff, 0xd7, 0x81, 0x3b, 0x05, 0x59, 0x2d, 0x61, 0x95, 0x4a, 0x85, 0xa2, 0x88,
+	0x87, 0xef, 0x54, 0x14, 0x22, 0x53, 0xc3, 0x0b, 0x91, 0x2c, 0x40, 0x5b, 0xac, 0x3b, 0x6e, 0x0e,
+	0x3b, 0x10, 0x42, 0x60, 0x92, 0x05, 0x75, 0x74, 0x27, 0xcc, 0x89, 0xf9, 0xad, 0xd9, 0x64, 0x24,
+	0x0c, 0x3c, 0x19, 0xb3, 0xd9, 0x50, 0xb3, 0x95, 0x79, 0x24, 0x24, 0xbe, 0x6f, 0x35, 0xd0, 0x9d,
+	0x8a, 0xd9, 0xda, 0x08, 0x59, 0x82, 0x1b, 0x71, 0xb4, 0x5d, 0xd1, 0xd2, 0x5a, 0x6e, 0xc6, 0xa4,
+	0x74, 0x83, 0xe4, 0x21, 0xcc, 0x85, 0xd8, 0x08, 0x84, 0xaa, 0x23, 0x53, 0x45, 0x5d, 0x66, 0xda,
+	0xa4, 0xf5, 0xa0, 0x7e, 0x1e, 0xee, 0x0f, 0x7c, 0xdc, 0xd4, 0x28, 0x1f, 0xae, 0xcb, 0x18, 0xda,
+	0x62, 0x21, 0x36, 0xed, 0xb3, 0x77, 0x61, 0xfe, 0xbf, 0x71, 0x58, 0x28, 0xc8, 0xea, 0x16, 0x93,
+	0x28, 0x94, 0x25, 0xd8, 0x41, 0x21, 0x39, 0x0b, 0xf6, 0xb7, 0x58, 0x85, 0x5f, 0xc0, 0xbb, 0xde,
+	0xf2, 0x13, 0xfd, 0xe5, 0x75, 0x2f, 0xab, 0xc8, 0x42, 0x14, 0xd6, 0x4a, 0x1b, 0x91, 0x45, 0xb8,
+	0x16, 0x06, 0x0a, 0xb7, 0x2b, 0x1b, 0x54, 0xa8, 0x9a, 0xb5, 0xb2, 0x13, 0x22, 0x39, 0x20, 0x0d,
+	0x41, 0xeb, 0x81, 0x68, 0x15, 0x03, 0x45, 0xb5, 0x5c, 0xad, 0x22, 0x36, 0x74, 0xc0, 0x89, 0x76,
+	0xb5, 0xcc, 0x23, 0xa6, 0x44, 0x2b, 0x21, 0xb5, 0xae, 0x76, 0xa3, 0x64, 0x05, 0x6e, 0x36, 0x04,
+	0x3f, 0xa0, 0xac, 0x9c, 0x56, 0x9f, 0x31, 0x89, 0xbd, 0xb0, 0xd6, 0xa8, 0xf8, 0x21, 0x4b, 0xb2,
+	0x66, 0x63, 0x8d, 0x1d, 0x90, 0xf6, 0x4e, 0x05, 0xcd, 0x3c, 0x0f, 0xd1, 0x85, 0xd8, 0x3b, 0x1b,
+	0xfa, 0xcf, 0x60, 0x69, 0x94, 0xeb, 0xa7, 0xce, 0xfa, 0x6f, 0x07, 0xee, 0xf5, 0x12, 0xe4, 0x39,
+	0x53, 0x41, 0x59, 0x5d, 0x41, 0xd7, 0x8c, 0x97, 0xa6, 0xd8, 0xcb, 0x30, 0x14, 0x28, 0xa5, 0xed,
+	0x5e, 0x0f, 0x4a, 0x6e, 0xc3, 0x14, 0xd6, 0x03, 0xba, 0x6f, 0xfb, 0x17, 0x07, 0xda, 0xb7, 0x3a,
+	0xdf, 0xa3, 0xfb, 0xb8, 0x53, 0xe3, 0x0c, 0x6d, 0xcb, 0x3a, 0x21, 0xff, 0x29, 0x3c, 0x18, 0xf1,
+	0x70, 0xa7, 0x9a, 0xf3, 0x7d, 0xdc, 0xfc, 0x33, 0xba, 0xee, 0x97, 0x50, 0xd2, 0x10, 0x59, 0x19,
+	0xaf, 0xc0, 0x1e, 0xcd, 0x1e, 0x0f, 0x55, 0xb2, 0x20, 0x6c, 0x48, 0x3c, 0x98, 0x49, 0xa6, 0xc8,
+	0x7a, 0x92, 0xc6, 0x7a, 0xd5, 0xe8, 0xd9, 0xb1, 0x7e, 0x98, 0xdf, 0x26, 0x9f, 0x4b, 0x65, 0x26,
+	0x68, 0xda, 0xe6, 0xdb, 0x58, 0x57, 0x09, 0xac, 0xfb, 0xf1, 0x80, 0x26, 0xa1, 0x36, 0xb8, 0xc6,
+	0x23, 0x89, 0xc5, 0xa8, 0xbe, 0x87, 0x22, 0x19, 0xcc, 0x0e, 0x88, 0x2c, 0xc0, 0x6c, 0x8d, 0xd7,
+	0x6d, 0x03, 0xe2, 0xd1, 0x6c, 0x03, 0xfe, 0x73, 0x58, 0x1e, 0x69, 0xdf, 0x69, 0x0d, 0x78, 0xf4,
+	0x23, 0x03, 0x13, 0x05, 0x59, 0x25, 0x1f, 0x1d, 0x98, 0xeb, 0xd9, 0xf9, 0x8f, 0x73, 0x67, 0x7a,
+	0x61, 0xe4, 0xfa, 0xd6, 0xbf, 0xf7, 0xe2, 0xbc, 0x37, 0x53, 0xb9, 0x9f, 0x1d, 0x20, 0x03, 0xde,
+	0x0e, 0x4f, 0xce, 0x4e, 0xdc, 0x7f, 0xdb, 0xdb, 0xbc, 0xc8, 0xed, 0x54, 0xda, 0x57, 0x07, 0xe6,
+	0x87, 0xef, 0xe0, 0xfc, 0xd9, 0x6b, 0x0c, 0x25, 0xf1, 0xde, 0x5c, 0x02, 0x49, 0xaa, 0xf7, 0x8b,
+	0x03, 0xee, 0xd0, 0xe5, 0xb3, 0x71, 0xce, 0x4a, 0x1d, 0x1c, 0xde, 0xeb, 0x8b, 0x73, 0xa4, 0x62,
+	0xbf, 0x39, 0xe0, 0x8d, 0x58, 0x06, 0x9b, 0xe7, 0x2c, 0xd5, 0xc5, 0xe2, 0xbd, 0xbd, 0x0c, 0x96,
+	0x44, 0xf2, 0xc6, 0xab, 0x9f, 0xc7, 0x59, 0xe7, 0xe8, 0x38, 0xeb, 0xfc, 0x39, 0xce, 0x3a, 0x9f,
+	0x4e, 0xb2, 0x63, 0x47, 0x27, 0xd9, 0xb1, 0x5f, 0x27, 0xd9, 0xb1, 0x0f, 0xab, 0x03, 0xca, 0xac,
+	0x35, 0xd7, 0x06, 0x7c, 0xa2, 0xb5, 0x1a, 0x28, 0xf7, 0x32, 0xe6, 0x33, 0x6d, 0xfd, 0x7f, 0x00,
+	0x00, 0x00, 0xff, 0xff, 0x54, 0xbd, 0xf2, 0xf3, 0xc4, 0x09, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -302,6 +778,9 @@ const _ = grpc.SupportPackageIsVersion4
 type MsgClient interface {
 	ConfigureChain(ctx context.Context, in *MsgConfigureChain, opts ...grpc.CallOption) (*MsgConfigureChainResponse, error)
 	RegisterNewStudent(ctx context.Context, in *MsgRegisterNewStudent, opts ...grpc.CallOption) (*MsgRegisterNewStudentResponse, error)
+	InsertStudentPersonalInfo(ctx context.Context, in *MsgInsertStudentPersonalInfo, opts ...grpc.CallOption) (*MsgInsertStudentPersonalInfoResponse, error)
+	InsertStudentContactInfo(ctx context.Context, in *MsgInsertStudentContactInfo, opts ...grpc.CallOption) (*MsgInsertStudentContactInfoResponse, error)
+	InsertStudentResidenceInfo(ctx context.Context, in *MsgInsertStudentResidenceInfo, opts ...grpc.CallOption) (*MsgInsertStudentResidenceInfoResponse, error)
 }
 
 type msgClient struct {
@@ -330,10 +809,40 @@ func (c *msgClient) RegisterNewStudent(ctx context.Context, in *MsgRegisterNewSt
 	return out, nil
 }
 
+func (c *msgClient) InsertStudentPersonalInfo(ctx context.Context, in *MsgInsertStudentPersonalInfo, opts ...grpc.CallOption) (*MsgInsertStudentPersonalInfoResponse, error) {
+	out := new(MsgInsertStudentPersonalInfoResponse)
+	err := c.cc.Invoke(ctx, "/university_chain_it.universitychainit.Msg/InsertStudentPersonalInfo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) InsertStudentContactInfo(ctx context.Context, in *MsgInsertStudentContactInfo, opts ...grpc.CallOption) (*MsgInsertStudentContactInfoResponse, error) {
+	out := new(MsgInsertStudentContactInfoResponse)
+	err := c.cc.Invoke(ctx, "/university_chain_it.universitychainit.Msg/InsertStudentContactInfo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) InsertStudentResidenceInfo(ctx context.Context, in *MsgInsertStudentResidenceInfo, opts ...grpc.CallOption) (*MsgInsertStudentResidenceInfoResponse, error) {
+	out := new(MsgInsertStudentResidenceInfoResponse)
+	err := c.cc.Invoke(ctx, "/university_chain_it.universitychainit.Msg/InsertStudentResidenceInfo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 type MsgServer interface {
 	ConfigureChain(context.Context, *MsgConfigureChain) (*MsgConfigureChainResponse, error)
 	RegisterNewStudent(context.Context, *MsgRegisterNewStudent) (*MsgRegisterNewStudentResponse, error)
+	InsertStudentPersonalInfo(context.Context, *MsgInsertStudentPersonalInfo) (*MsgInsertStudentPersonalInfoResponse, error)
+	InsertStudentContactInfo(context.Context, *MsgInsertStudentContactInfo) (*MsgInsertStudentContactInfoResponse, error)
+	InsertStudentResidenceInfo(context.Context, *MsgInsertStudentResidenceInfo) (*MsgInsertStudentResidenceInfoResponse, error)
 }
 
 // UnimplementedMsgServer can be embedded to have forward compatible implementations.
@@ -345,6 +854,15 @@ func (*UnimplementedMsgServer) ConfigureChain(ctx context.Context, req *MsgConfi
 }
 func (*UnimplementedMsgServer) RegisterNewStudent(ctx context.Context, req *MsgRegisterNewStudent) (*MsgRegisterNewStudentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RegisterNewStudent not implemented")
+}
+func (*UnimplementedMsgServer) InsertStudentPersonalInfo(ctx context.Context, req *MsgInsertStudentPersonalInfo) (*MsgInsertStudentPersonalInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method InsertStudentPersonalInfo not implemented")
+}
+func (*UnimplementedMsgServer) InsertStudentContactInfo(ctx context.Context, req *MsgInsertStudentContactInfo) (*MsgInsertStudentContactInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method InsertStudentContactInfo not implemented")
+}
+func (*UnimplementedMsgServer) InsertStudentResidenceInfo(ctx context.Context, req *MsgInsertStudentResidenceInfo) (*MsgInsertStudentResidenceInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method InsertStudentResidenceInfo not implemented")
 }
 
 func RegisterMsgServer(s grpc1.Server, srv MsgServer) {
@@ -387,6 +905,60 @@ func _Msg_RegisterNewStudent_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_InsertStudentPersonalInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgInsertStudentPersonalInfo)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).InsertStudentPersonalInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/university_chain_it.universitychainit.Msg/InsertStudentPersonalInfo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).InsertStudentPersonalInfo(ctx, req.(*MsgInsertStudentPersonalInfo))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_InsertStudentContactInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgInsertStudentContactInfo)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).InsertStudentContactInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/university_chain_it.universitychainit.Msg/InsertStudentContactInfo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).InsertStudentContactInfo(ctx, req.(*MsgInsertStudentContactInfo))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_InsertStudentResidenceInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgInsertStudentResidenceInfo)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).InsertStudentResidenceInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/university_chain_it.universitychainit.Msg/InsertStudentResidenceInfo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).InsertStudentResidenceInfo(ctx, req.(*MsgInsertStudentResidenceInfo))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Msg_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "university_chain_it.universitychainit.Msg",
 	HandlerType: (*MsgServer)(nil),
@@ -398,6 +970,18 @@ var _Msg_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RegisterNewStudent",
 			Handler:    _Msg_RegisterNewStudent_Handler,
+		},
+		{
+			MethodName: "InsertStudentPersonalInfo",
+			Handler:    _Msg_InsertStudentPersonalInfo_Handler,
+		},
+		{
+			MethodName: "InsertStudentContactInfo",
+			Handler:    _Msg_InsertStudentContactInfo_Handler,
+		},
+		{
+			MethodName: "InsertStudentResidenceInfo",
+			Handler:    _Msg_InsertStudentResidenceInfo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -564,6 +1148,341 @@ func (m *MsgRegisterNewStudentResponse) MarshalToSizedBuffer(dAtA []byte) (int, 
 	return len(dAtA) - i, nil
 }
 
+func (m *MsgInsertStudentPersonalInfo) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgInsertStudentPersonalInfo) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgInsertStudentPersonalInfo) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.TaxCode) > 0 {
+		i -= len(m.TaxCode)
+		copy(dAtA[i:], m.TaxCode)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.TaxCode)))
+		i--
+		dAtA[i] = 0x52
+	}
+	if len(m.TownOfBirth) > 0 {
+		i -= len(m.TownOfBirth)
+		copy(dAtA[i:], m.TownOfBirth)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.TownOfBirth)))
+		i--
+		dAtA[i] = 0x4a
+	}
+	if len(m.ProvinceOfBirth) > 0 {
+		i -= len(m.ProvinceOfBirth)
+		copy(dAtA[i:], m.ProvinceOfBirth)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.ProvinceOfBirth)))
+		i--
+		dAtA[i] = 0x42
+	}
+	if len(m.CountryOfBirth) > 0 {
+		i -= len(m.CountryOfBirth)
+		copy(dAtA[i:], m.CountryOfBirth)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.CountryOfBirth)))
+		i--
+		dAtA[i] = 0x3a
+	}
+	if len(m.PrimaryNationality) > 0 {
+		i -= len(m.PrimaryNationality)
+		copy(dAtA[i:], m.PrimaryNationality)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.PrimaryNationality)))
+		i--
+		dAtA[i] = 0x32
+	}
+	if len(m.DateOfBirth) > 0 {
+		i -= len(m.DateOfBirth)
+		copy(dAtA[i:], m.DateOfBirth)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.DateOfBirth)))
+		i--
+		dAtA[i] = 0x2a
+	}
+	if len(m.Gender) > 0 {
+		i -= len(m.Gender)
+		copy(dAtA[i:], m.Gender)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Gender)))
+		i--
+		dAtA[i] = 0x22
+	}
+	if len(m.StudentIndex) > 0 {
+		i -= len(m.StudentIndex)
+		copy(dAtA[i:], m.StudentIndex)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.StudentIndex)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.University) > 0 {
+		i -= len(m.University)
+		copy(dAtA[i:], m.University)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.University)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Creator) > 0 {
+		i -= len(m.Creator)
+		copy(dAtA[i:], m.Creator)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Creator)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgInsertStudentPersonalInfoResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgInsertStudentPersonalInfoResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgInsertStudentPersonalInfoResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Status != 0 {
+		i = encodeVarintTx(dAtA, i, uint64(m.Status))
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgInsertStudentContactInfo) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgInsertStudentContactInfo) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgInsertStudentContactInfo) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.MobilePhone) > 0 {
+		i -= len(m.MobilePhone)
+		copy(dAtA[i:], m.MobilePhone)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.MobilePhone)))
+		i--
+		dAtA[i] = 0x32
+	}
+	if len(m.Email) > 0 {
+		i -= len(m.Email)
+		copy(dAtA[i:], m.Email)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Email)))
+		i--
+		dAtA[i] = 0x2a
+	}
+	if len(m.ContactAddress) > 0 {
+		i -= len(m.ContactAddress)
+		copy(dAtA[i:], m.ContactAddress)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.ContactAddress)))
+		i--
+		dAtA[i] = 0x22
+	}
+	if len(m.StudentIndex) > 0 {
+		i -= len(m.StudentIndex)
+		copy(dAtA[i:], m.StudentIndex)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.StudentIndex)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.University) > 0 {
+		i -= len(m.University)
+		copy(dAtA[i:], m.University)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.University)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Creator) > 0 {
+		i -= len(m.Creator)
+		copy(dAtA[i:], m.Creator)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Creator)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgInsertStudentContactInfoResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgInsertStudentContactInfoResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgInsertStudentContactInfoResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Status != 0 {
+		i = encodeVarintTx(dAtA, i, uint64(m.Status))
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgInsertStudentResidenceInfo) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgInsertStudentResidenceInfo) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgInsertStudentResidenceInfo) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.HomePhone) > 0 {
+		i -= len(m.HomePhone)
+		copy(dAtA[i:], m.HomePhone)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.HomePhone)))
+		i--
+		dAtA[i] = 0x52
+	}
+	if len(m.HouseNumber) > 0 {
+		i -= len(m.HouseNumber)
+		copy(dAtA[i:], m.HouseNumber)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.HouseNumber)))
+		i--
+		dAtA[i] = 0x4a
+	}
+	if len(m.Address) > 0 {
+		i -= len(m.Address)
+		copy(dAtA[i:], m.Address)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Address)))
+		i--
+		dAtA[i] = 0x42
+	}
+	if len(m.PostCode) > 0 {
+		i -= len(m.PostCode)
+		copy(dAtA[i:], m.PostCode)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.PostCode)))
+		i--
+		dAtA[i] = 0x3a
+	}
+	if len(m.Town) > 0 {
+		i -= len(m.Town)
+		copy(dAtA[i:], m.Town)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Town)))
+		i--
+		dAtA[i] = 0x32
+	}
+	if len(m.Province) > 0 {
+		i -= len(m.Province)
+		copy(dAtA[i:], m.Province)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Province)))
+		i--
+		dAtA[i] = 0x2a
+	}
+	if len(m.Country) > 0 {
+		i -= len(m.Country)
+		copy(dAtA[i:], m.Country)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Country)))
+		i--
+		dAtA[i] = 0x22
+	}
+	if len(m.StudentIndex) > 0 {
+		i -= len(m.StudentIndex)
+		copy(dAtA[i:], m.StudentIndex)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.StudentIndex)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.University) > 0 {
+		i -= len(m.University)
+		copy(dAtA[i:], m.University)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.University)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Creator) > 0 {
+		i -= len(m.Creator)
+		copy(dAtA[i:], m.Creator)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Creator)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgInsertStudentResidenceInfoResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgInsertStudentResidenceInfoResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgInsertStudentResidenceInfoResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Status != 0 {
+		i = encodeVarintTx(dAtA, i, uint64(m.Status))
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintTx(dAtA []byte, offset int, v uint64) int {
 	offset -= sovTx(v)
 	base := offset
@@ -646,6 +1565,173 @@ func (m *MsgRegisterNewStudentResponse) Size() (n int) {
 	l = len(m.StudentIndex)
 	if l > 0 {
 		n += 1 + l + sovTx(uint64(l))
+	}
+	return n
+}
+
+func (m *MsgInsertStudentPersonalInfo) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Creator)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.University)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.StudentIndex)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Gender)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.DateOfBirth)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.PrimaryNationality)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.CountryOfBirth)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.ProvinceOfBirth)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.TownOfBirth)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.TaxCode)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	return n
+}
+
+func (m *MsgInsertStudentPersonalInfoResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Status != 0 {
+		n += 1 + sovTx(uint64(m.Status))
+	}
+	return n
+}
+
+func (m *MsgInsertStudentContactInfo) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Creator)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.University)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.StudentIndex)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.ContactAddress)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Email)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.MobilePhone)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	return n
+}
+
+func (m *MsgInsertStudentContactInfoResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Status != 0 {
+		n += 1 + sovTx(uint64(m.Status))
+	}
+	return n
+}
+
+func (m *MsgInsertStudentResidenceInfo) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Creator)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.University)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.StudentIndex)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Country)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Province)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Town)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.PostCode)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Address)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.HouseNumber)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.HomePhone)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	return n
+}
+
+func (m *MsgInsertStudentResidenceInfoResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Status != 0 {
+		n += 1 + sovTx(uint64(m.Status))
 	}
 	return n
 }
@@ -1142,6 +2228,1195 @@ func (m *MsgRegisterNewStudentResponse) Unmarshal(dAtA []byte) error {
 			}
 			m.StudentIndex = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgInsertStudentPersonalInfo) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgInsertStudentPersonalInfo: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgInsertStudentPersonalInfo: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Creator = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field University", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.University = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field StudentIndex", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.StudentIndex = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Gender", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Gender = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DateOfBirth", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.DateOfBirth = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 6:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field PrimaryNationality", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.PrimaryNationality = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 7:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field CountryOfBirth", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.CountryOfBirth = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 8:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ProvinceOfBirth", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ProvinceOfBirth = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 9:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field TownOfBirth", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.TownOfBirth = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 10:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field TaxCode", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.TaxCode = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgInsertStudentPersonalInfoResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgInsertStudentPersonalInfoResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgInsertStudentPersonalInfoResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Status", wireType)
+			}
+			m.Status = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Status |= int32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgInsertStudentContactInfo) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgInsertStudentContactInfo: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgInsertStudentContactInfo: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Creator = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field University", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.University = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field StudentIndex", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.StudentIndex = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ContactAddress", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ContactAddress = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Email", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Email = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 6:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field MobilePhone", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.MobilePhone = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgInsertStudentContactInfoResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgInsertStudentContactInfoResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgInsertStudentContactInfoResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Status", wireType)
+			}
+			m.Status = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Status |= int32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgInsertStudentResidenceInfo) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgInsertStudentResidenceInfo: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgInsertStudentResidenceInfo: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Creator = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field University", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.University = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field StudentIndex", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.StudentIndex = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Country", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Country = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Province", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Province = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 6:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Town", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Town = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 7:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field PostCode", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.PostCode = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 8:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Address", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Address = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 9:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field HouseNumber", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.HouseNumber = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 10:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field HomePhone", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.HomePhone = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgInsertStudentResidenceInfoResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgInsertStudentResidenceInfoResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgInsertStudentResidenceInfoResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Status", wireType)
+			}
+			m.Status = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Status |= int32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
 		default:
 			iNdEx = preIndex
 			skippy, err := skipTx(dAtA[iNdEx:])

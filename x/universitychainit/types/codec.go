@@ -10,6 +10,9 @@ import (
 func RegisterCodec(cdc *codec.LegacyAmino) {
 	cdc.RegisterConcrete(&MsgConfigureChain{}, "universitychainit/ConfigureChain", nil)
 	cdc.RegisterConcrete(&MsgRegisterNewStudent{}, "universitychainit/RegisterNewStudent", nil)
+	cdc.RegisterConcrete(&MsgInsertStudentPersonalInfo{}, "universitychainit/InsertStudentPersonalInfo", nil)
+	cdc.RegisterConcrete(&MsgInsertStudentContactInfo{}, "universitychainit/InsertStudentContactInfo", nil)
+	cdc.RegisterConcrete(&MsgInsertStudentResidenceInfo{}, "universitychainit/InsertStudentResidenceInfo", nil)
 	// this line is used by starport scaffolding # 2
 }
 
@@ -19,6 +22,15 @@ func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 	)
 	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgRegisterNewStudent{},
+	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgInsertStudentPersonalInfo{},
+	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgInsertStudentContactInfo{},
+	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgInsertStudentResidenceInfo{},
 	)
 	// this line is used by starport scaffolding # 3
 

@@ -6,11 +6,17 @@ import { Registry, OfflineSigner, EncodeObject, DirectSecp256k1HdWallet } from "
 import { Api } from "./rest";
 import { MsgConfigureChain } from "./types/universitychainit/tx";
 import { MsgRegisterNewStudent } from "./types/universitychainit/tx";
+import { MsgInsertStudentResidenceInfo } from "./types/universitychainit/tx";
+import { MsgInsertStudentPersonalInfo } from "./types/universitychainit/tx";
+import { MsgInsertStudentContactInfo } from "./types/universitychainit/tx";
 
 
 const types = [
   ["/university_chain_it.universitychainit.MsgConfigureChain", MsgConfigureChain],
   ["/university_chain_it.universitychainit.MsgRegisterNewStudent", MsgRegisterNewStudent],
+  ["/university_chain_it.universitychainit.MsgInsertStudentResidenceInfo", MsgInsertStudentResidenceInfo],
+  ["/university_chain_it.universitychainit.MsgInsertStudentPersonalInfo", MsgInsertStudentPersonalInfo],
+  ["/university_chain_it.universitychainit.MsgInsertStudentContactInfo", MsgInsertStudentContactInfo],
   
 ];
 export const MissingWalletError = new Error("wallet is required");
@@ -45,6 +51,9 @@ const txClient = async (wallet: OfflineSigner, { addr: addr }: TxClientOptions =
     signAndBroadcast: (msgs: EncodeObject[], { fee, memo }: SignAndBroadcastOptions = {fee: defaultFee, memo: ""}) => client.signAndBroadcast(address, msgs, fee,memo),
     msgConfigureChain: (data: MsgConfigureChain): EncodeObject => ({ typeUrl: "/university_chain_it.universitychainit.MsgConfigureChain", value: MsgConfigureChain.fromPartial( data ) }),
     msgRegisterNewStudent: (data: MsgRegisterNewStudent): EncodeObject => ({ typeUrl: "/university_chain_it.universitychainit.MsgRegisterNewStudent", value: MsgRegisterNewStudent.fromPartial( data ) }),
+    msgInsertStudentResidenceInfo: (data: MsgInsertStudentResidenceInfo): EncodeObject => ({ typeUrl: "/university_chain_it.universitychainit.MsgInsertStudentResidenceInfo", value: MsgInsertStudentResidenceInfo.fromPartial( data ) }),
+    msgInsertStudentPersonalInfo: (data: MsgInsertStudentPersonalInfo): EncodeObject => ({ typeUrl: "/university_chain_it.universitychainit.MsgInsertStudentPersonalInfo", value: MsgInsertStudentPersonalInfo.fromPartial( data ) }),
+    msgInsertStudentContactInfo: (data: MsgInsertStudentContactInfo): EncodeObject => ({ typeUrl: "/university_chain_it.universitychainit.MsgInsertStudentContactInfo", value: MsgInsertStudentContactInfo.fromPartial( data ) }),
     
   };
 };

@@ -32,6 +32,18 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgRegisterNewStudent int = 100
 
+	opWeightMsgInsertStudentPersonalInfo = "op_weight_msg_insert_student_personal_info"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgInsertStudentPersonalInfo int = 100
+
+	opWeightMsgInsertStudentContactInfo = "op_weight_msg_insert_student_contact_info"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgInsertStudentContactInfo int = 100
+
+	opWeightMsgInsertStudentResidenceInfo = "op_weight_msg_insert_student_residence_info"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgInsertStudentResidenceInfo int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -87,6 +99,39 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgRegisterNewStudent,
 		universitychainitsimulation.SimulateMsgRegisterNewStudent(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgInsertStudentPersonalInfo int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgInsertStudentPersonalInfo, &weightMsgInsertStudentPersonalInfo, nil,
+		func(_ *rand.Rand) {
+			weightMsgInsertStudentPersonalInfo = defaultWeightMsgInsertStudentPersonalInfo
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgInsertStudentPersonalInfo,
+		universitychainitsimulation.SimulateMsgInsertStudentPersonalInfo(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgInsertStudentContactInfo int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgInsertStudentContactInfo, &weightMsgInsertStudentContactInfo, nil,
+		func(_ *rand.Rand) {
+			weightMsgInsertStudentContactInfo = defaultWeightMsgInsertStudentContactInfo
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgInsertStudentContactInfo,
+		universitychainitsimulation.SimulateMsgInsertStudentContactInfo(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgInsertStudentResidenceInfo int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgInsertStudentResidenceInfo, &weightMsgInsertStudentResidenceInfo, nil,
+		func(_ *rand.Rand) {
+			weightMsgInsertStudentResidenceInfo = defaultWeightMsgInsertStudentResidenceInfo
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgInsertStudentResidenceInfo,
+		universitychainitsimulation.SimulateMsgInsertStudentResidenceInfo(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	// this line is used by starport scaffolding # simapp/module/operation

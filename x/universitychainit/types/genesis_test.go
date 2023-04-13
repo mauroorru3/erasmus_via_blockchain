@@ -42,7 +42,7 @@ func TestGenesisState_Validate(t *testing.T) {
 					AchievedCredits: 32,
 				},
 				PersonalInfo: &types.PersonalInfo{
-					Gender:             18,
+					Gender:             "18",
 					DateOfBirth:        "58",
 					PrimaryNationality: "73",
 					CountryOfBirth:     "97",

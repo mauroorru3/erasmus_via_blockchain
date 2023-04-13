@@ -4,7 +4,7 @@ import { Writer, Reader } from "protobufjs/minimal";
 export const protobufPackage = "university_chain_it.universitychainit";
 
 export interface PersonalInfo {
-  gender: number;
+  gender: string;
   dateOfBirth: string;
   primaryNationality: string;
   countryOfBirth: string;
@@ -14,7 +14,7 @@ export interface PersonalInfo {
 }
 
 const basePersonalInfo: object = {
-  gender: 0,
+  gender: "",
   dateOfBirth: "",
   primaryNationality: "",
   countryOfBirth: "",
@@ -25,8 +25,8 @@ const basePersonalInfo: object = {
 
 export const PersonalInfo = {
   encode(message: PersonalInfo, writer: Writer = Writer.create()): Writer {
-    if (message.gender !== 0) {
-      writer.uint32(8).uint32(message.gender);
+    if (message.gender !== "") {
+      writer.uint32(10).string(message.gender);
     }
     if (message.dateOfBirth !== "") {
       writer.uint32(18).string(message.dateOfBirth);
@@ -57,7 +57,7 @@ export const PersonalInfo = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.gender = reader.uint32();
+          message.gender = reader.string();
           break;
         case 2:
           message.dateOfBirth = reader.string();
@@ -88,9 +88,9 @@ export const PersonalInfo = {
   fromJSON(object: any): PersonalInfo {
     const message = { ...basePersonalInfo } as PersonalInfo;
     if (object.gender !== undefined && object.gender !== null) {
-      message.gender = Number(object.gender);
+      message.gender = String(object.gender);
     } else {
-      message.gender = 0;
+      message.gender = "";
     }
     if (object.dateOfBirth !== undefined && object.dateOfBirth !== null) {
       message.dateOfBirth = String(object.dateOfBirth);
@@ -153,7 +153,7 @@ export const PersonalInfo = {
     if (object.gender !== undefined && object.gender !== null) {
       message.gender = object.gender;
     } else {
-      message.gender = 0;
+      message.gender = "";
     }
     if (object.dateOfBirth !== undefined && object.dateOfBirth !== null) {
       message.dateOfBirth = object.dateOfBirth;
