@@ -48,6 +48,7 @@ message MsgInsertStudentPersonalInfo {
   string provinceOfBirth = 8;
   string townOfBirth = 9;
   string taxCode = 10;
+  uint32 incomeBracket = 11;
 }
 
 message MsgInsertStudentPersonalInfoResponse {

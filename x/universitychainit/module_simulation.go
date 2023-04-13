@@ -3,15 +3,16 @@ package universitychainit
 import (
 	"math/rand"
 
+	"university_chain_it/testutil/sample"
+	universitychainitsimulation "university_chain_it/x/universitychainit/simulation"
+	"university_chain_it/x/universitychainit/types"
+
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	simappparams "github.com/cosmos/cosmos-sdk/simapp/params"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
-	"university_chain_it/testutil/sample"
-	universitychainitsimulation "university_chain_it/x/universitychainit/simulation"
-	"university_chain_it/x/universitychainit/types"
 )
 
 // avoid unused import issue
@@ -43,6 +44,10 @@ const (
 	opWeightMsgInsertStudentResidenceInfo = "op_weight_msg_insert_student_residence_info"
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgInsertStudentResidenceInfo int = 100
+
+	opWeightMsgFunCanc = "op_weight_msg_fun_canc"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgFunCanc int = 100
 
 	// this line is used by starport scaffolding # simapp/module/const
 )
@@ -133,6 +138,13 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		weightMsgInsertStudentResidenceInfo,
 		universitychainitsimulation.SimulateMsgInsertStudentResidenceInfo(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
+
+	var weightMsgFunCanc int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgFunCanc, &weightMsgFunCanc, nil,
+		func(_ *rand.Rand) {
+			weightMsgFunCanc = defaultWeightMsgFunCanc
+		},
+	)
 
 	// this line is used by starport scaffolding # simapp/module/operation
 

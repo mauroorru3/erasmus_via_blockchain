@@ -9,7 +9,7 @@ const TypeMsgInsertStudentPersonalInfo = "insert_student_personal_info"
 
 var _ sdk.Msg = &MsgInsertStudentPersonalInfo{}
 
-func NewMsgInsertStudentPersonalInfo(creator string, university string, studentIndex string, gender string, dateOfBirth string, primaryNationality string, countryOfBirth string, provinceOfBirth string, townOfBirth string, taxCode string) *MsgInsertStudentPersonalInfo {
+func NewMsgInsertStudentPersonalInfo(creator string, university string, studentIndex string, gender string, dateOfBirth string, primaryNationality string, countryOfBirth string, provinceOfBirth string, townOfBirth string, taxCode string, incomeBracket uint32) *MsgInsertStudentPersonalInfo {
 	return &MsgInsertStudentPersonalInfo{
 		Creator:            creator,
 		University:         university,
@@ -21,6 +21,7 @@ func NewMsgInsertStudentPersonalInfo(creator string, university string, studentI
 		ProvinceOfBirth:    provinceOfBirth,
 		TownOfBirth:        townOfBirth,
 		TaxCode:            taxCode,
+		IncomeBracket:      incomeBracket,
 	}
 }
 

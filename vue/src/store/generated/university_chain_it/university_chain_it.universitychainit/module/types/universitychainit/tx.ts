@@ -36,6 +36,7 @@ export interface MsgInsertStudentPersonalInfo {
   provinceOfBirth: string;
   townOfBirth: string;
   taxCode: string;
+  incomeBracket: number;
 }
 
 export interface MsgInsertStudentPersonalInfoResponse {
@@ -449,6 +450,7 @@ const baseMsgInsertStudentPersonalInfo: object = {
   provinceOfBirth: "",
   townOfBirth: "",
   taxCode: "",
+  incomeBracket: 0,
 };
 
 export const MsgInsertStudentPersonalInfo = {
@@ -485,6 +487,9 @@ export const MsgInsertStudentPersonalInfo = {
     }
     if (message.taxCode !== "") {
       writer.uint32(82).string(message.taxCode);
+    }
+    if (message.incomeBracket !== 0) {
+      writer.uint32(88).uint32(message.incomeBracket);
     }
     return writer;
   },
@@ -530,6 +535,9 @@ export const MsgInsertStudentPersonalInfo = {
           break;
         case 10:
           message.taxCode = reader.string();
+          break;
+        case 11:
+          message.incomeBracket = reader.uint32();
           break;
         default:
           reader.skipType(tag & 7);
@@ -599,6 +607,11 @@ export const MsgInsertStudentPersonalInfo = {
     } else {
       message.taxCode = "";
     }
+    if (object.incomeBracket !== undefined && object.incomeBracket !== null) {
+      message.incomeBracket = Number(object.incomeBracket);
+    } else {
+      message.incomeBracket = 0;
+    }
     return message;
   },
 
@@ -620,6 +633,8 @@ export const MsgInsertStudentPersonalInfo = {
     message.townOfBirth !== undefined &&
       (obj.townOfBirth = message.townOfBirth);
     message.taxCode !== undefined && (obj.taxCode = message.taxCode);
+    message.incomeBracket !== undefined &&
+      (obj.incomeBracket = message.incomeBracket);
     return obj;
   },
 
@@ -684,6 +699,11 @@ export const MsgInsertStudentPersonalInfo = {
       message.taxCode = object.taxCode;
     } else {
       message.taxCode = "";
+    }
+    if (object.incomeBracket !== undefined && object.incomeBracket !== null) {
+      message.incomeBracket = object.incomeBracket;
+    } else {
+      message.incomeBracket = 0;
     }
     return message;
   },

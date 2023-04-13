@@ -70,18 +70,6 @@ func (k msgServer) RegisterNewStudent(goCtx context.Context, msg *types.MsgRegis
 					}, err
 				}
 
-				taxesData, err := utilfunc.IntializeTaxesStruct(20000, unipiInfo.TaxesBrackets)
-				if err != nil {
-					return &types.MsgRegisterNewStudentResponse{
-						StudentIndex: "-1",
-					}, err
-				}
-				erasmusData, err := utilfunc.IntializeErasmusStruct(20000)
-				if err != nil {
-					return &types.MsgRegisterNewStudentResponse{
-						StudentIndex: "-1",
-					}, err
-				}
 				tot_credits := -1
 				switch msg.CourseType {
 				case "master":
@@ -107,7 +95,7 @@ func (k msgServer) RegisterNewStudent(goCtx context.Context, msg *types.MsgRegis
 					TaxesData: &types.TaxesInfo{
 						Status:       false,
 						TotalAmount:  0,
-						TaxesHistory: taxesData,
+						TaxesHistory: "",
 					},
 					ErasmusData: &types.ErasmusInfo{
 						ErasmusStudent:      "No",
@@ -117,7 +105,7 @@ func (k msgServer) RegisterNewStudent(goCtx context.Context, msg *types.MsgRegis
 						ExamsPassed:         0,
 						TotalCredits:        0,
 						AchievedCredits:     0,
-						Career:              erasmusData,
+						Career:              "",
 						PreviousStudentFifo: "-1",
 						NextStudentFifo:     "-1",
 					},
@@ -151,18 +139,6 @@ func (k msgServer) RegisterNewStudent(goCtx context.Context, msg *types.MsgRegis
 						StudentIndex: "-1",
 					}, err
 				}
-				taxesData, err := utilfunc.IntializeTaxesStruct(20000, uniroma1Info.TaxesBrackets)
-				if err != nil {
-					return &types.MsgRegisterNewStudentResponse{
-						StudentIndex: "-1",
-					}, err
-				}
-				erasmusData, err := utilfunc.IntializeErasmusStruct(20000)
-				if err != nil {
-					return &types.MsgRegisterNewStudentResponse{
-						StudentIndex: "-1",
-					}, err
-				}
 				tot_credits := -1
 				switch msg.CourseType {
 				case "master":
@@ -188,7 +164,7 @@ func (k msgServer) RegisterNewStudent(goCtx context.Context, msg *types.MsgRegis
 					TaxesData: &types.TaxesInfo{
 						Status:       false,
 						TotalAmount:  0,
-						TaxesHistory: taxesData,
+						TaxesHistory: "",
 					},
 					ErasmusData: &types.ErasmusInfo{
 						ErasmusStudent:      "No",
@@ -198,7 +174,7 @@ func (k msgServer) RegisterNewStudent(goCtx context.Context, msg *types.MsgRegis
 						ExamsPassed:         0,
 						TotalCredits:        0,
 						AchievedCredits:     0,
-						Career:              erasmusData,
+						Career:              "",
 						PreviousStudentFifo: "-1",
 						NextStudentFifo:     "-1",
 					},

@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"university_chain_it/x/universitychainit/types"
+	"university_chain_it/x/universitychainit/utilfunc"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
@@ -28,6 +29,7 @@ func (k msgServer) InsertStudentPersonalInfo(goCtx context.Context, msg *types.M
 		searchedStudent, found := k.Keeper.GetStoredStudent(ctx, msg.GetUniversity()+"_"+msg.GetStudentIndex())
 
 		if found {
+
 			if searchedStudent.GetStudentData().GetStudentKey() == msg.Creator {
 				searchedStudent.PersonalData = &types.PersonalInfo{
 					Gender:             msg.Gender,
@@ -44,14 +46,50 @@ func (k msgServer) InsertStudentPersonalInfo(goCtx context.Context, msg *types.M
 						Status: -1,
 					}, err
 				}
-
-				k.Keeper.SetStoredStudent(ctx, searchedStudent)
-
+			} else {
 				return &types.MsgInsertStudentPersonalInfoResponse{
-					Status: 0,
-				}, nil
+					Status: -1,
+				}, types.ErrStudentNotPresent
+			}
+
+			var taxesData, erasmusData string
+			var err error
+
+			switch msg.University {
+			case "unipi":
+				unipiInfo, _ := k.Keeper.GetUniversityInfo(ctx, msg.University)
+				taxesData, err = utilfunc.IntializeTaxesStruct(msg.IncomeBracket, unipiInfo.TaxesBrackets)
+				if err != nil {
+					return &types.MsgInsertStudentPersonalInfoResponse{
+						Status: -1,
+					}, err
+				}
+			case "uniroma1":
+				uniroma1Info, _ := k.Keeper.GetUniversityInfo(ctx, msg.University)
+				taxesData, err = utilfunc.IntializeTaxesStruct(msg.IncomeBracket, uniroma1Info.TaxesBrackets)
+				if err != nil {
+					return &types.MsgInsertStudentPersonalInfoResponse{
+						Status: -1,
+					}, err
+				}
 
 			}
+
+			erasmusData, err = utilfunc.IntializeErasmusStruct(msg.IncomeBracket)
+			if err != nil {
+				return &types.MsgInsertStudentPersonalInfoResponse{
+					Status: -1,
+				}, err
+			}
+
+			searchedStudent.TaxesData.TaxesHistory = taxesData
+			searchedStudent.ErasmusData.Career = erasmusData
+
+			k.Keeper.SetStoredStudent(ctx, searchedStudent)
+
+			return &types.MsgInsertStudentPersonalInfoResponse{
+				Status: 0,
+			}, nil
 
 		}
 
