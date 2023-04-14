@@ -12,6 +12,7 @@ service Msg {
   rpc InsertStudentPersonalInfo(MsgInsertStudentPersonalInfo) returns (MsgInsertStudentPersonalInfoResponse);
   rpc InsertStudentContactInfo(MsgInsertStudentContactInfo) returns (MsgInsertStudentContactInfoResponse);
   rpc InsertStudentResidenceInfo(MsgInsertStudentResidenceInfo) returns (MsgInsertStudentResidenceInfoResponse);
+  rpc InsertExamGrade(MsgInsertExamGrade) returns (MsgInsertExamGradeResponse);
 // this line is used by starport scaffolding # proto/tx/rpc
 }
 
@@ -82,6 +83,18 @@ message MsgInsertStudentResidenceInfo {
 }
 
 message MsgInsertStudentResidenceInfoResponse {
+  int32 status = 1;
+}
+
+message MsgInsertExamGrade {
+  string creator = 1;
+  string university = 2;
+  string studentIndex = 3;
+  string examName = 4;
+  string grade = 5;
+}
+
+message MsgInsertExamGradeResponse {
   int32 status = 1;
 }
 

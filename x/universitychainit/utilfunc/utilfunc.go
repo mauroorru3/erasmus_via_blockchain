@@ -205,8 +205,8 @@ func GetJSONFromCourseExams(NameUniversity string, departmentName string, course
 			Exam_label:      "",
 			Exam_date:       "",
 			Credits:         uint8(exams[i].Credits),
-			Marks:           0,
-			Course_year:     0,
+			Marks:           "",
+			Course_year:     uint16(time.Now().Year()),
 			Status:          false,
 			Attendance_year: 0,
 			Exam_type:       exams[i].ExamType,
@@ -318,4 +318,41 @@ func GetJSONFromTaxesBrackets(taxesBrackets Taxes_struct) (taxesJSON string, err
 	taxesJSON = string(resultByteJSON)
 
 	return taxesJSON, err
+}
+
+func SetExamGrade(examsString string, examName string, grade string) (examsJSON string, credits uint8, err error) {
+
+	mapExams := make(map[string]ExamStruct)
+
+	err = json.Unmarshal([]byte(examsString), &mapExams)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "Error "+err.Error())
+		return examsJSON, credits, err
+	}
+
+	val, ok := mapExams[examName]
+	if ok {
+		if val.Marks == "" {
+			credits = val.Credits
+			val.Attendance_year = uint16(time.Now().Year())
+			val.Exam_date = time.Now().String()
+			val.Status = true
+			val.Marks = grade
+			mapExams[examName] = val
+		} else {
+			return examsJSON, credits, types.ErrGradeAlreadyAssigned
+		}
+	} else {
+		return examsJSON, credits, types.ErrWrongExamName
+	}
+
+	resultByteJSON, err := json.Marshal(mapExams)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "Error "+err.Error())
+		return examsJSON, credits, err
+	}
+
+	examsJSON = string(resultByteJSON)
+
+	return examsJSON, credits, err
 }

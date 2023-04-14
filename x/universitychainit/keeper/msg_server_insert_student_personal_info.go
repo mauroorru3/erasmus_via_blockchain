@@ -84,6 +84,7 @@ func (k msgServer) InsertStudentPersonalInfo(goCtx context.Context, msg *types.M
 
 			searchedStudent.TaxesData.TaxesHistory = taxesData
 			searchedStudent.ErasmusData.Career = erasmusData
+			searchedStudent.StudentData.CompleteInformation[0] = 1
 
 			k.Keeper.SetStoredStudent(ctx, searchedStudent)
 

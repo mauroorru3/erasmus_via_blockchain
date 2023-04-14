@@ -13,5 +13,5 @@ message StudentInfo {
   bool outOfCourse = 7; 
   uint32 numberOfYearsOutOfCourse = 8; 
   string studentKey = 9; 
-  
+  repeated int32 completeInformation = 10; 
 }

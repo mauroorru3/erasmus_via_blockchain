@@ -69,6 +69,11 @@ export interface UniversitychainitMsgConfigureChainResponse {
   status?: number;
 }
 
+export interface UniversitychainitMsgInsertExamGradeResponse {
+  /** @format int32 */
+  status?: number;
+}
+
 export interface UniversitychainitMsgInsertStudentContactInfoResponse {
   /** @format int32 */
   status?: number;
@@ -261,6 +266,7 @@ export interface UniversitychainitStudentInfo {
   /** @format int64 */
   numberOfYearsOutOfCourse?: number;
   studentKey?: string;
+  completeInformation?: number[];
 }
 
 export interface UniversitychainitTaxesInfo {

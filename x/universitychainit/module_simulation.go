@@ -49,6 +49,10 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgFunCanc int = 100
 
+	opWeightMsgInsertExamGrade = "op_weight_msg_insert_exam_grade"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgInsertExamGrade int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -145,6 +149,17 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 			weightMsgFunCanc = defaultWeightMsgFunCanc
 		},
 	)
+
+	var weightMsgInsertExamGrade int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgInsertExamGrade, &weightMsgInsertExamGrade, nil,
+		func(_ *rand.Rand) {
+			weightMsgInsertExamGrade = defaultWeightMsgInsertExamGrade
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgInsertExamGrade,
+		universitychainitsimulation.SimulateMsgInsertExamGrade(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
 
 	// this line is used by starport scaffolding # simapp/module/operation
 

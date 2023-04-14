@@ -40,6 +40,7 @@ func (k msgServer) InsertStudentContactInfo(goCtx context.Context, msg *types.Ms
 					}, err
 				}
 
+				searchedStudent.StudentData.CompleteInformation[2] = 1
 				k.Keeper.SetStoredStudent(ctx, searchedStudent)
 
 				return &types.MsgInsertStudentContactInfoResponse{

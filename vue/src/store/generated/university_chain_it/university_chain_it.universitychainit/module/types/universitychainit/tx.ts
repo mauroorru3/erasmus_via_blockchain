@@ -73,6 +73,18 @@ export interface MsgInsertStudentResidenceInfoResponse {
   status: number;
 }
 
+export interface MsgInsertExamGrade {
+  creator: string;
+  university: string;
+  studentIndex: string;
+  examName: string;
+  grade: string;
+}
+
+export interface MsgInsertExamGradeResponse {
+  status: number;
+}
+
 const baseMsgConfigureChain: object = { creator: "" };
 
 export const MsgConfigureChain = {
@@ -1315,6 +1327,208 @@ export const MsgInsertStudentResidenceInfoResponse = {
   },
 };
 
+const baseMsgInsertExamGrade: object = {
+  creator: "",
+  university: "",
+  studentIndex: "",
+  examName: "",
+  grade: "",
+};
+
+export const MsgInsertExamGrade = {
+  encode(
+    message: MsgInsertExamGrade,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.creator !== "") {
+      writer.uint32(10).string(message.creator);
+    }
+    if (message.university !== "") {
+      writer.uint32(18).string(message.university);
+    }
+    if (message.studentIndex !== "") {
+      writer.uint32(26).string(message.studentIndex);
+    }
+    if (message.examName !== "") {
+      writer.uint32(34).string(message.examName);
+    }
+    if (message.grade !== "") {
+      writer.uint32(42).string(message.grade);
+    }
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgInsertExamGrade {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseMsgInsertExamGrade } as MsgInsertExamGrade;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.creator = reader.string();
+          break;
+        case 2:
+          message.university = reader.string();
+          break;
+        case 3:
+          message.studentIndex = reader.string();
+          break;
+        case 4:
+          message.examName = reader.string();
+          break;
+        case 5:
+          message.grade = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgInsertExamGrade {
+    const message = { ...baseMsgInsertExamGrade } as MsgInsertExamGrade;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = String(object.creator);
+    } else {
+      message.creator = "";
+    }
+    if (object.university !== undefined && object.university !== null) {
+      message.university = String(object.university);
+    } else {
+      message.university = "";
+    }
+    if (object.studentIndex !== undefined && object.studentIndex !== null) {
+      message.studentIndex = String(object.studentIndex);
+    } else {
+      message.studentIndex = "";
+    }
+    if (object.examName !== undefined && object.examName !== null) {
+      message.examName = String(object.examName);
+    } else {
+      message.examName = "";
+    }
+    if (object.grade !== undefined && object.grade !== null) {
+      message.grade = String(object.grade);
+    } else {
+      message.grade = "";
+    }
+    return message;
+  },
+
+  toJSON(message: MsgInsertExamGrade): unknown {
+    const obj: any = {};
+    message.creator !== undefined && (obj.creator = message.creator);
+    message.university !== undefined && (obj.university = message.university);
+    message.studentIndex !== undefined &&
+      (obj.studentIndex = message.studentIndex);
+    message.examName !== undefined && (obj.examName = message.examName);
+    message.grade !== undefined && (obj.grade = message.grade);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<MsgInsertExamGrade>): MsgInsertExamGrade {
+    const message = { ...baseMsgInsertExamGrade } as MsgInsertExamGrade;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = object.creator;
+    } else {
+      message.creator = "";
+    }
+    if (object.university !== undefined && object.university !== null) {
+      message.university = object.university;
+    } else {
+      message.university = "";
+    }
+    if (object.studentIndex !== undefined && object.studentIndex !== null) {
+      message.studentIndex = object.studentIndex;
+    } else {
+      message.studentIndex = "";
+    }
+    if (object.examName !== undefined && object.examName !== null) {
+      message.examName = object.examName;
+    } else {
+      message.examName = "";
+    }
+    if (object.grade !== undefined && object.grade !== null) {
+      message.grade = object.grade;
+    } else {
+      message.grade = "";
+    }
+    return message;
+  },
+};
+
+const baseMsgInsertExamGradeResponse: object = { status: 0 };
+
+export const MsgInsertExamGradeResponse = {
+  encode(
+    message: MsgInsertExamGradeResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.status !== 0) {
+      writer.uint32(8).int32(message.status);
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): MsgInsertExamGradeResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseMsgInsertExamGradeResponse,
+    } as MsgInsertExamGradeResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.status = reader.int32();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgInsertExamGradeResponse {
+    const message = {
+      ...baseMsgInsertExamGradeResponse,
+    } as MsgInsertExamGradeResponse;
+    if (object.status !== undefined && object.status !== null) {
+      message.status = Number(object.status);
+    } else {
+      message.status = 0;
+    }
+    return message;
+  },
+
+  toJSON(message: MsgInsertExamGradeResponse): unknown {
+    const obj: any = {};
+    message.status !== undefined && (obj.status = message.status);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<MsgInsertExamGradeResponse>
+  ): MsgInsertExamGradeResponse {
+    const message = {
+      ...baseMsgInsertExamGradeResponse,
+    } as MsgInsertExamGradeResponse;
+    if (object.status !== undefined && object.status !== null) {
+      message.status = object.status;
+    } else {
+      message.status = 0;
+    }
+    return message;
+  },
+};
+
 /** Msg defines the Msg service. */
 export interface Msg {
   ConfigureChain(
@@ -1329,10 +1543,13 @@ export interface Msg {
   InsertStudentContactInfo(
     request: MsgInsertStudentContactInfo
   ): Promise<MsgInsertStudentContactInfoResponse>;
-  /** this line is used by starport scaffolding # proto/tx/rpc */
   InsertStudentResidenceInfo(
     request: MsgInsertStudentResidenceInfo
   ): Promise<MsgInsertStudentResidenceInfoResponse>;
+  /** this line is used by starport scaffolding # proto/tx/rpc */
+  InsertExamGrade(
+    request: MsgInsertExamGrade
+  ): Promise<MsgInsertExamGradeResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -1407,6 +1624,20 @@ export class MsgClientImpl implements Msg {
     );
     return promise.then((data) =>
       MsgInsertStudentResidenceInfoResponse.decode(new Reader(data))
+    );
+  }
+
+  InsertExamGrade(
+    request: MsgInsertExamGrade
+  ): Promise<MsgInsertExamGradeResponse> {
+    const data = MsgInsertExamGrade.encode(request).finish();
+    const promise = this.rpc.request(
+      "university_chain_it.universitychainit.Msg",
+      "InsertExamGrade",
+      data
+    );
+    return promise.then((data) =>
+      MsgInsertExamGradeResponse.decode(new Reader(data))
     );
   }
 }

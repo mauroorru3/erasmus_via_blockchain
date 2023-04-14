@@ -30105,6 +30105,11 @@ paths:
                           format: int64
                         studentKey:
                           type: string
+                        completeInformation:
+                          type: array
+                          items:
+                            type: integer
+                            format: int32
                     transcriptData:
                       type: object
                       properties:
@@ -30346,6 +30351,11 @@ paths:
                         format: int64
                       studentKey:
                         type: string
+                      completeInformation:
+                        type: array
+                        items:
+                          type: integer
+                          format: int32
                   transcriptData:
                     type: object
                     properties:
@@ -30503,6 +30513,11 @@ paths:
                     format: int64
                   studentKey:
                     type: string
+                  completeInformation:
+                    type: array
+                    items:
+                      type: integer
+                      format: int32
         default:
           description: An unexpected error response.
           schema:
@@ -50860,6 +50875,12 @@ definitions:
       status:
         type: integer
         format: int32
+  university_chain_it.universitychainit.MsgInsertExamGradeResponse:
+    type: object
+    properties:
+      status:
+        type: integer
+        format: int32
   university_chain_it.universitychainit.MsgInsertStudentContactInfoResponse:
     type: object
     properties:
@@ -51025,6 +51046,11 @@ definitions:
                   format: int64
                 studentKey:
                   type: string
+                completeInformation:
+                  type: array
+                  items:
+                    type: integer
+                    format: int32
             transcriptData:
               type: object
               properties:
@@ -51358,6 +51384,11 @@ definitions:
                 format: int64
               studentKey:
                 type: string
+              completeInformation:
+                type: array
+                items:
+                  type: integer
+                  format: int32
           transcriptData:
             type: object
             properties:
@@ -51483,6 +51514,11 @@ definitions:
             format: int64
           studentKey:
             type: string
+          completeInformation:
+            type: array
+            items:
+              type: integer
+              format: int32
   university_chain_it.universitychainit.QueryGetTaxesInfoResponse:
     type: object
     properties:
@@ -51595,6 +51631,11 @@ definitions:
             format: int64
           studentKey:
             type: string
+          completeInformation:
+            type: array
+            items:
+              type: integer
+              format: int32
       transcriptData:
         type: object
         properties:
@@ -51717,6 +51758,11 @@ definitions:
         format: int64
       studentKey:
         type: string
+      completeInformation:
+        type: array
+        items:
+          type: integer
+          format: int32
   university_chain_it.universitychainit.TaxesInfo:
     type: object
     properties:

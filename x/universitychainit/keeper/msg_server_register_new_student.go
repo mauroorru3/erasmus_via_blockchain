@@ -55,6 +55,7 @@ func (k msgServer) RegisterNewStudent(goCtx context.Context, msg *types.MsgRegis
 					CurrentYearOfStudy:       1,
 					OutOfCourse:              false,
 					NumberOfYearsOutOfCourse: 0,
+					CompleteInformation:      []int32{0, 0, 0},
 					StudentKey:               msg.Creator,
 				}
 				err := newStudentInfo.Validate()

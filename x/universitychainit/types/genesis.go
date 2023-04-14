@@ -26,10 +26,10 @@ func DefaultGenesis() *GenesisState {
 		TaxesInfo:           nil,
 		ErasmusInfo:         nil,
 		ChainInfo: ChainInfo{
-			HubKey:                "",
-			ChainAdministratorKey: "cosmos1ga559f4vhx98u0exa5cvtxr4vxnk00tqfc0rlc", // bob address, to change
-			ChainKey:              "",
-			Country:               "",
+			HubKey:                "cosmos1nqg8gn5kdvs3na2psm9fp2sad7yka8tmh90dpd",
+			ChainAdministratorKey: "cosmos1cc90wwv6k78yrp6x59et2jhj03ryxy8jq54cxs",
+			ChainKey:              "cosmos1lw4azenln0hdr09q6ckmyg4vac46vdxpw9yrcc",
+			Country:               "Italy",
 			InitStatus:            false,
 		},
 		ForeignUniversitiesList: []ForeignUniversities{},

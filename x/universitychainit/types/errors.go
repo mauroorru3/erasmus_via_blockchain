@@ -25,4 +25,8 @@ var (
 	ErrWrongDate                     = sdkerrors.Register(ModuleName, 1112, "the student birth date is wrong")
 	ErrWrongTaxCode                  = sdkerrors.Register(ModuleName, 1113, "the student tax code is wrong")
 	ErrWrongMobileNumber             = sdkerrors.Register(ModuleName, 1114, "the student mobile number is wrong")
+	ErrWrongExamName                 = sdkerrors.Register(ModuleName, 1115, "the exam does not exists")
+	ErrUnauthorisedUser              = sdkerrors.Register(ModuleName, 1116, "the user is not authorised to enter the grade for the exam under consideration")
+	ErrWrongExamGrade                = sdkerrors.Register(ModuleName, 1117, "the exam grade is wrong")
+	ErrGradeAlreadyAssigned          = sdkerrors.Register(ModuleName, 1118, "the exam grade was already assigned")
 )

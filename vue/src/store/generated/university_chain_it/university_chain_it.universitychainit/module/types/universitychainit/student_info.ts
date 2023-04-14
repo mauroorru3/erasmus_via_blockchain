@@ -13,6 +13,7 @@ export interface StudentInfo {
   outOfCourse: boolean;
   numberOfYearsOutOfCourse: number;
   studentKey: string;
+  completeInformation: number[];
 }
 
 const baseStudentInfo: object = {
@@ -25,6 +26,7 @@ const baseStudentInfo: object = {
   outOfCourse: false,
   numberOfYearsOutOfCourse: 0,
   studentKey: "",
+  completeInformation: 0,
 };
 
 export const StudentInfo = {
@@ -56,6 +58,11 @@ export const StudentInfo = {
     if (message.studentKey !== "") {
       writer.uint32(74).string(message.studentKey);
     }
+    writer.uint32(82).fork();
+    for (const v of message.completeInformation) {
+      writer.int32(v);
+    }
+    writer.ldelim();
     return writer;
   },
 
@@ -63,6 +70,7 @@ export const StudentInfo = {
     const reader = input instanceof Uint8Array ? new Reader(input) : input;
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = { ...baseStudentInfo } as StudentInfo;
+    message.completeInformation = [];
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -93,6 +101,16 @@ export const StudentInfo = {
         case 9:
           message.studentKey = reader.string();
           break;
+        case 10:
+          if ((tag & 7) === 2) {
+            const end2 = reader.uint32() + reader.pos;
+            while (reader.pos < end2) {
+              message.completeInformation.push(reader.int32());
+            }
+          } else {
+            message.completeInformation.push(reader.int32());
+          }
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -103,6 +121,7 @@ export const StudentInfo = {
 
   fromJSON(object: any): StudentInfo {
     const message = { ...baseStudentInfo } as StudentInfo;
+    message.completeInformation = [];
     if (object.name !== undefined && object.name !== null) {
       message.name = String(object.name);
     } else {
@@ -156,6 +175,14 @@ export const StudentInfo = {
     } else {
       message.studentKey = "";
     }
+    if (
+      object.completeInformation !== undefined &&
+      object.completeInformation !== null
+    ) {
+      for (const e of object.completeInformation) {
+        message.completeInformation.push(Number(e));
+      }
+    }
     return message;
   },
 
@@ -174,11 +201,17 @@ export const StudentInfo = {
     message.numberOfYearsOutOfCourse !== undefined &&
       (obj.numberOfYearsOutOfCourse = message.numberOfYearsOutOfCourse);
     message.studentKey !== undefined && (obj.studentKey = message.studentKey);
+    if (message.completeInformation) {
+      obj.completeInformation = message.completeInformation.map((e) => e);
+    } else {
+      obj.completeInformation = [];
+    }
     return obj;
   },
 
   fromPartial(object: DeepPartial<StudentInfo>): StudentInfo {
     const message = { ...baseStudentInfo } as StudentInfo;
+    message.completeInformation = [];
     if (object.name !== undefined && object.name !== null) {
       message.name = object.name;
     } else {
@@ -229,6 +262,14 @@ export const StudentInfo = {
       message.studentKey = object.studentKey;
     } else {
       message.studentKey = "";
+    }
+    if (
+      object.completeInformation !== undefined &&
+      object.completeInformation !== null
+    ) {
+      for (const e of object.completeInformation) {
+        message.completeInformation.push(e);
+      }
     }
     return message;
   },

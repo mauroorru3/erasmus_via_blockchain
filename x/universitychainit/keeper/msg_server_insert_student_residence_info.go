@@ -45,6 +45,8 @@ func (k msgServer) InsertStudentResidenceInfo(goCtx context.Context, msg *types.
 					}, err
 				}
 
+				searchedStudent.StudentData.CompleteInformation[1] = 1
+
 				k.Keeper.SetStoredStudent(ctx, searchedStudent)
 
 				return &types.MsgInsertStudentResidenceInfoResponse{
