@@ -29,4 +29,5 @@ var (
 	ErrUnauthorisedUser              = sdkerrors.Register(ModuleName, 1116, "the user is not authorised to enter the grade for the exam under consideration")
 	ErrWrongExamGrade                = sdkerrors.Register(ModuleName, 1117, "the exam grade is wrong")
 	ErrGradeAlreadyAssigned          = sdkerrors.Register(ModuleName, 1118, "the exam grade was already assigned")
+	ErrIncompleteStudentInformation  = sdkerrors.Register(ModuleName, 1119, "the student must first enter all information about him/herself")
 )

@@ -38,16 +38,25 @@ func (k msgServer) InsertExamGrade(goCtx context.Context, msg *types.MsgInsertEx
 
 		searchedStudent, found := k.Keeper.GetStoredStudent(ctx, msg.GetUniversity()+"_"+msg.GetStudentIndex())
 		if found {
-			JSONExams, credits, err := utilfunc.SetExamGrade(searchedStudent.TranscriptData.ExamsData, msg.ExamName, msg.Grade)
-			if err != nil {
+
+			completeInfo := searchedStudent.StudentData.CompleteInformation
+
+			if completeInfo[0] == 0 || completeInfo[1] == 0 || completeInfo[2] == 0 {
 				return &types.MsgInsertExamGradeResponse{
 					Status: -1,
-				}, err
+				}, types.ErrIncompleteStudentInformation
+			} else {
+				JSONExams, credits, err := utilfunc.SetExamGrade(searchedStudent.TranscriptData.ExamsData, msg.ExamName, msg.Grade)
+				if err != nil {
+					return &types.MsgInsertExamGradeResponse{
+						Status: -1,
+					}, err
+				}
+				searchedStudent.TranscriptData.ExamsData = JSONExams
+				searchedStudent.TranscriptData.AchievedCredits += uint32(credits)
+				searchedStudent.TranscriptData.ExamsPassed += 1
+				k.Keeper.SetStoredStudent(ctx, searchedStudent)
 			}
-			searchedStudent.TranscriptData.ExamsData = JSONExams
-			searchedStudent.TranscriptData.AchievedCredits += uint32(credits)
-			searchedStudent.TranscriptData.ExamsPassed += 1
-			k.Keeper.SetStoredStudent(ctx, searchedStudent)
 
 		} else {
 			return &types.MsgInsertExamGradeResponse{
