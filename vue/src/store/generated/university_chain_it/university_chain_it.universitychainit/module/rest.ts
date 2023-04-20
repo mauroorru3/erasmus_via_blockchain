@@ -89,6 +89,11 @@ export interface UniversitychainitMsgInsertStudentResidenceInfoResponse {
   status?: number;
 }
 
+export interface UniversitychainitMsgPayTaxesResponse {
+  /** @format int32 */
+  status?: number;
+}
+
 export interface UniversitychainitMsgRegisterNewStudentResponse {
   studentIndex?: string;
 }

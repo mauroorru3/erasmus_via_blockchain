@@ -36,6 +36,7 @@ func GetTxCmd() *cobra.Command {
 	cmd.AddCommand(CmdInsertStudentContactInfo())
 	cmd.AddCommand(CmdInsertStudentResidenceInfo())
 	cmd.AddCommand(CmdInsertExamGrade())
+	cmd.AddCommand(CmdPayTaxes())
 	// this line is used by starport scaffolding # 1
 
 	return cmd

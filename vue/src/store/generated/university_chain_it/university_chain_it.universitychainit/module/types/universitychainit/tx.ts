@@ -85,6 +85,16 @@ export interface MsgInsertExamGradeResponse {
   status: number;
 }
 
+export interface MsgPayTaxes {
+  creator: string;
+  university: string;
+  studentIndex: string;
+}
+
+export interface MsgPayTaxesResponse {
+  status: number;
+}
+
 const baseMsgConfigureChain: object = { creator: "" };
 
 export const MsgConfigureChain = {
@@ -1529,6 +1539,158 @@ export const MsgInsertExamGradeResponse = {
   },
 };
 
+const baseMsgPayTaxes: object = {
+  creator: "",
+  university: "",
+  studentIndex: "",
+};
+
+export const MsgPayTaxes = {
+  encode(message: MsgPayTaxes, writer: Writer = Writer.create()): Writer {
+    if (message.creator !== "") {
+      writer.uint32(10).string(message.creator);
+    }
+    if (message.university !== "") {
+      writer.uint32(18).string(message.university);
+    }
+    if (message.studentIndex !== "") {
+      writer.uint32(26).string(message.studentIndex);
+    }
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgPayTaxes {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseMsgPayTaxes } as MsgPayTaxes;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.creator = reader.string();
+          break;
+        case 2:
+          message.university = reader.string();
+          break;
+        case 3:
+          message.studentIndex = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgPayTaxes {
+    const message = { ...baseMsgPayTaxes } as MsgPayTaxes;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = String(object.creator);
+    } else {
+      message.creator = "";
+    }
+    if (object.university !== undefined && object.university !== null) {
+      message.university = String(object.university);
+    } else {
+      message.university = "";
+    }
+    if (object.studentIndex !== undefined && object.studentIndex !== null) {
+      message.studentIndex = String(object.studentIndex);
+    } else {
+      message.studentIndex = "";
+    }
+    return message;
+  },
+
+  toJSON(message: MsgPayTaxes): unknown {
+    const obj: any = {};
+    message.creator !== undefined && (obj.creator = message.creator);
+    message.university !== undefined && (obj.university = message.university);
+    message.studentIndex !== undefined &&
+      (obj.studentIndex = message.studentIndex);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<MsgPayTaxes>): MsgPayTaxes {
+    const message = { ...baseMsgPayTaxes } as MsgPayTaxes;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = object.creator;
+    } else {
+      message.creator = "";
+    }
+    if (object.university !== undefined && object.university !== null) {
+      message.university = object.university;
+    } else {
+      message.university = "";
+    }
+    if (object.studentIndex !== undefined && object.studentIndex !== null) {
+      message.studentIndex = object.studentIndex;
+    } else {
+      message.studentIndex = "";
+    }
+    return message;
+  },
+};
+
+const baseMsgPayTaxesResponse: object = { status: 0 };
+
+export const MsgPayTaxesResponse = {
+  encode(
+    message: MsgPayTaxesResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.status !== 0) {
+      writer.uint32(8).int32(message.status);
+    }
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgPayTaxesResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseMsgPayTaxesResponse } as MsgPayTaxesResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.status = reader.int32();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgPayTaxesResponse {
+    const message = { ...baseMsgPayTaxesResponse } as MsgPayTaxesResponse;
+    if (object.status !== undefined && object.status !== null) {
+      message.status = Number(object.status);
+    } else {
+      message.status = 0;
+    }
+    return message;
+  },
+
+  toJSON(message: MsgPayTaxesResponse): unknown {
+    const obj: any = {};
+    message.status !== undefined && (obj.status = message.status);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<MsgPayTaxesResponse>): MsgPayTaxesResponse {
+    const message = { ...baseMsgPayTaxesResponse } as MsgPayTaxesResponse;
+    if (object.status !== undefined && object.status !== null) {
+      message.status = object.status;
+    } else {
+      message.status = 0;
+    }
+    return message;
+  },
+};
+
 /** Msg defines the Msg service. */
 export interface Msg {
   ConfigureChain(
@@ -1546,10 +1708,11 @@ export interface Msg {
   InsertStudentResidenceInfo(
     request: MsgInsertStudentResidenceInfo
   ): Promise<MsgInsertStudentResidenceInfoResponse>;
-  /** this line is used by starport scaffolding # proto/tx/rpc */
   InsertExamGrade(
     request: MsgInsertExamGrade
   ): Promise<MsgInsertExamGradeResponse>;
+  /** this line is used by starport scaffolding # proto/tx/rpc */
+  PayTaxes(request: MsgPayTaxes): Promise<MsgPayTaxesResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -1639,6 +1802,16 @@ export class MsgClientImpl implements Msg {
     return promise.then((data) =>
       MsgInsertExamGradeResponse.decode(new Reader(data))
     );
+  }
+
+  PayTaxes(request: MsgPayTaxes): Promise<MsgPayTaxesResponse> {
+    const data = MsgPayTaxes.encode(request).finish();
+    const promise = this.rpc.request(
+      "university_chain_it.universitychainit.Msg",
+      "PayTaxes",
+      data
+    );
+    return promise.then((data) => MsgPayTaxesResponse.decode(new Reader(data)));
   }
 }
 

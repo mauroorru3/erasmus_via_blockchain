@@ -50899,6 +50899,12 @@ definitions:
       status:
         type: integer
         format: int32
+  university_chain_it.universitychainit.MsgPayTaxesResponse:
+    type: object
+    properties:
+      status:
+        type: integer
+        format: int32
   university_chain_it.universitychainit.MsgRegisterNewStudentResponse:
     type: object
     properties:

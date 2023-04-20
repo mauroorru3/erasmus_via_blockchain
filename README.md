@@ -64,13 +64,40 @@ sudo docker exec -it university_chain_it university_chain_itd query universitych
 
 sudo docker exec -it university_chain_it university_chain_itd tx universitychainit register-new-student unipi Mario Rossi master cs "Computer Science" --from $Mario_Rossi --gas auto  
 
+# To insert student's personal information:
+
+sudo docker exec -it university_chain_it university_chain_itd tx universitychainit insert-student-personal-info unipi 1 male 1994-06-06 italian italy Rome Rome 1111111111111111 20000 --from $Mario_Rossi --gas auto 
+
+# To insert student's contact information:
+
+sudo docker exec -it university_chain_it university_chain_itd tx universitychainit insert-student-contact-info unipi 1 "via roma" mario.rossi@example.it 0000000000 --from $Mario_Rossi --gas auto 
+
+# To insert student's residence information:
+
+sudo docker exec -it university_chain_it university_chain_itd tx universitychainit insert-student-residence-info unipi 1 italy PI Pisa 56100 "via roma" 3 0000000000 --from $Mario_Rossi --gas auto 
+
 # To show the inserted student:
 
 sudo docker exec -it university_chain_it university_chain_itd query universitychainit show-stored-student unipi_1 
 
+# To show the accounts the addresses' budget:
+
+sudo docker exec -it university_chain_it university_chain_itd query bank balances $Mario_Rossi 
+sudo docker exec -it university_chain_it university_chain_itd query bank balances $unipi
+
+# To pay the university taxes: 
+
+sudo docker exec -it university_chain_it university_chain_itd tx universitychainit pay-taxes unipi 1 --from $Mario_Rossi --gas auto 
+
+# To show the changes to the budget of the addresses after the payment of taxes:
+
+sudo docker exec -it university_chain_it university_chain_itd query bank balances $Mario_Rossi 
+sudo docker exec -it university_chain_it university_chain_itd query bank balances $unipi
+
 # To assign a grade to an exam:
 
 sudo docker exec -it university_chain_it university_chain_itd tx universitychainit insert-exam-grade unipi 1 "Algorithm engineering" 25 --from $prof_ae --gas auto 
+
 ```
 
 ## Contributing

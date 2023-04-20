@@ -5,11 +5,12 @@ import (
 
 	"github.com/tendermint/tendermint/libs/log"
 
+	"university_chain_it/x/universitychainit/types"
+
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 	"github.com/ignite-hq/cli/ignite/pkg/cosmosibckeeper"
-	"university_chain_it/x/universitychainit/types"
 )
 
 type (
@@ -19,10 +20,12 @@ type (
 		storeKey   sdk.StoreKey
 		memKey     sdk.StoreKey
 		paramstore paramtypes.Subspace
+		bank       types.BankEscrowKeeper
 	}
 )
 
 func NewKeeper(
+	bank types.BankEscrowKeeper,
 	cdc codec.BinaryCodec,
 	storeKey,
 	memKey sdk.StoreKey,
@@ -38,6 +41,7 @@ func NewKeeper(
 	}
 
 	return &Keeper{
+		bank: bank,
 		Keeper: cosmosibckeeper.NewKeeper(
 			types.PortKey,
 			storeKey,

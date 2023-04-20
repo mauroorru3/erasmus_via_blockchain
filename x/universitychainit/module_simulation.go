@@ -53,6 +53,10 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgInsertExamGrade int = 100
 
+	opWeightMsgPayTaxes = "op_weight_msg_pay_taxes"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgPayTaxes int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -159,6 +163,17 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgInsertExamGrade,
 		universitychainitsimulation.SimulateMsgInsertExamGrade(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgPayTaxes int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgPayTaxes, &weightMsgPayTaxes, nil,
+		func(_ *rand.Rand) {
+			weightMsgPayTaxes = defaultWeightMsgPayTaxes
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgPayTaxes,
+		universitychainitsimulation.SimulateMsgPayTaxes(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	// this line is used by starport scaffolding # simapp/module/operation

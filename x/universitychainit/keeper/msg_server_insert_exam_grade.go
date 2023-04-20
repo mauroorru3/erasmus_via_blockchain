@@ -39,23 +39,40 @@ func (k msgServer) InsertExamGrade(goCtx context.Context, msg *types.MsgInsertEx
 		searchedStudent, found := k.Keeper.GetStoredStudent(ctx, msg.GetUniversity()+"_"+msg.GetStudentIndex())
 		if found {
 
-			completeInfo := searchedStudent.StudentData.CompleteInformation
+			err = utilfunc.CheckCompleteInformation(searchedStudent)
 
-			if completeInfo[0] == 0 || completeInfo[1] == 0 || completeInfo[2] == 0 {
+			if err != nil {
 				return &types.MsgInsertExamGradeResponse{
 					Status: -1,
 				}, types.ErrIncompleteStudentInformation
 			} else {
-				JSONExams, credits, err := utilfunc.SetExamGrade(searchedStudent.TranscriptData.ExamsData, msg.ExamName, msg.Grade)
+
+				ok, err := utilfunc.CheckTaxPayment(searchedStudent)
+
 				if err != nil {
 					return &types.MsgInsertExamGradeResponse{
 						Status: -1,
 					}, err
+				} else {
+
+					if ok {
+						JSONExams, credits, err := utilfunc.SetExamGrade(searchedStudent.TranscriptData.ExamsData, msg.ExamName, msg.Grade)
+						if err != nil {
+							return &types.MsgInsertExamGradeResponse{
+								Status: -1,
+							}, err
+						}
+						searchedStudent.TranscriptData.ExamsData = JSONExams
+						searchedStudent.TranscriptData.AchievedCredits += uint32(credits)
+						searchedStudent.TranscriptData.ExamsPassed += 1
+						k.Keeper.SetStoredStudent(ctx, searchedStudent)
+					} else {
+						return &types.MsgInsertExamGradeResponse{
+							Status: -1,
+						}, types.ErrUnpaidTaxes
+					}
 				}
-				searchedStudent.TranscriptData.ExamsData = JSONExams
-				searchedStudent.TranscriptData.AchievedCredits += uint32(credits)
-				searchedStudent.TranscriptData.ExamsPassed += 1
-				k.Keeper.SetStoredStudent(ctx, searchedStudent)
+
 			}
 
 		} else {

@@ -335,7 +335,7 @@ func SetExamGrade(examsString string, examName string, grade string) (examsJSON 
 		if val.Marks == "" {
 			credits = val.Credits
 			val.Attendance_year = uint16(time.Now().Year())
-			val.Exam_date = time.Now().String()
+			val.Exam_date = time.Now().Format("01-02-2006")
 			val.Status = true
 			val.Marks = grade
 			mapExams[examName] = val
@@ -355,4 +355,16 @@ func SetExamGrade(examsString string, examName string, grade string) (examsJSON 
 	examsJSON = string(resultByteJSON)
 
 	return examsJSON, credits, err
+}
+
+func CheckCompleteInformation(student types.StoredStudent) (err error) {
+
+	completeInfo := student.StudentData.CompleteInformation
+
+	if completeInfo[0] == 0 || completeInfo[1] == 0 || completeInfo[2] == 0 {
+
+		return types.ErrIncompleteStudentInformation
+	} else {
+		return err
+	}
 }
