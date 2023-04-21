@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"university_chain_it/x/universitychainit/keeper"
+	"university_chain_it/x/universitychainit/testutil"
 	"university_chain_it/x/universitychainit/types"
 
 	"github.com/cosmos/cosmos-sdk/codec"
@@ -21,6 +22,11 @@ import (
 )
 
 func UniversitychainitKeeper(t testing.TB) (*keeper.Keeper, sdk.Context) {
+
+	return UniversitychainitWithMocks(t, nil)
+}
+
+func UniversitychainitWithMocks(t testing.TB, bank *testutil.MockBankKeeperComplete) (*keeper.Keeper, sdk.Context) {
 	logger := log.NewNopLogger()
 
 	storeKey := sdk.NewKVStoreKey(types.StoreKey)
@@ -58,6 +64,7 @@ func UniversitychainitKeeper(t testing.TB) (*keeper.Keeper, sdk.Context) {
 		"UniversitychainitParams",
 	)
 	k := keeper.NewKeeper(
+		bank,
 		appCodec,
 		storeKey,
 		memStoreKey,

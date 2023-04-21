@@ -12,25 +12,29 @@ import (
 	"university_chain_it/x/universitychainit/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/require"
 )
 
-func setupMsgServerConfigureChain(t testing.TB) (types.MsgServer, context.Context) {
-	k, ctx := keepertest.UniversitychainitKeeper(t)
+func setupMsgServerConfigureChain(t testing.TB) (types.MsgServer, keeper.Keeper, context.Context, *gomock.Controller, *testutil.MockBankKeeperComplete) {
+	ctrl := gomock.NewController(t)
+	bankMock := testutil.NewMockBankKeeperComplete(ctrl)
+	k, ctx := keepertest.UniversitychainitWithMocks(t, bankMock)
 	universitychainit.InitGenesis(ctx, *k, *types.DefaultGenesis())
-	return keeper.NewMsgServerImpl(*k), sdk.WrapSDKContext(ctx)
+	server := keeper.NewMsgServerImpl(*k)
+	context := sdk.WrapSDKContext(ctx)
+	return server, *k, context, ctrl, bankMock
 }
 
 func TestConfigureChain(t *testing.T) {
-	msgServer, context := setupMsgServerConfigureChain(t)
-
+	msgServer, _, context, _, _ := setupMsgServerConfigureChain(t)
 	err := os.Chdir("/university_chain_it")
 	if err != nil {
 		log.Println(err)
 	}
 
 	createResponse, err := msgServer.ConfigureChain(context, &types.MsgConfigureChain{
-		Creator: testutil.Bob,
+		Creator: testutil.Chain_admin,
 	})
 	require.Nil(t, err)
 	require.EqualValues(t, types.MsgConfigureChainResponse{
@@ -39,9 +43,9 @@ func TestConfigureChain(t *testing.T) {
 }
 
 func TestConfigureChainWrongCreator(t *testing.T) {
-	msgServer, context := setupMsgServerConfigureChain(t)
+	msgServer, _, context, _, _ := setupMsgServerConfigureChain(t)
 	createResponse, err := msgServer.ConfigureChain(context, &types.MsgConfigureChain{
-		Creator: testutil.Alice,
+		Creator: testutil.Mario_Rossi,
 	})
 	require.EqualError(t,
 		err,
@@ -52,15 +56,15 @@ func TestConfigureChainWrongCreator(t *testing.T) {
 }
 
 func TestConfigureChainJustConfigured(t *testing.T) {
-	msgServer, context := setupMsgServerConfigureChain(t)
+	msgServer, _, context, _, _ := setupMsgServerConfigureChain(t)
 
 	createResponse, err := msgServer.ConfigureChain(context, &types.MsgConfigureChain{
-		Creator: testutil.Bob,
+		Creator: testutil.Chain_admin,
 	})
 	require.Nil(t, err)
 
 	createResponse, err = msgServer.ConfigureChain(context, &types.MsgConfigureChain{
-		Creator: testutil.Bob,
+		Creator: testutil.Chain_admin,
 	})
 
 	require.EqualError(t,

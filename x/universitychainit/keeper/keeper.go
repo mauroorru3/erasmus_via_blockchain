@@ -20,12 +20,12 @@ type (
 		storeKey   sdk.StoreKey
 		memKey     sdk.StoreKey
 		paramstore paramtypes.Subspace
-		bank       types.BankEscrowKeeper
+		bank       types.BankKeeperComplete
 	}
 )
 
 func NewKeeper(
-	bank types.BankEscrowKeeper,
+	bank types.BankKeeperComplete,
 	cdc codec.BinaryCodec,
 	storeKey,
 	memKey sdk.StoreKey,

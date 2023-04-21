@@ -9,11 +9,6 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-const (
-	alice = testutil.Alice
-	bob   = testutil.Bob
-)
-
 func GetStoredStudent1() types.StoredStudent {
 	return types.StoredStudent{
 		Index: "1",
@@ -26,7 +21,7 @@ func GetStoredStudent1() types.StoredStudent {
 			CurrentYearOfStudy:       1,
 			OutOfCourse:              false,
 			NumberOfYearsOutOfCourse: 0,
-			StudentKey:               alice,
+			StudentKey:               testutil.Mario_Rossi,
 		},
 		TranscriptData: &types.TranscriptOfRecords{},
 		PersonalData:   &types.PersonalInfo{},
@@ -38,7 +33,7 @@ func GetStoredStudent1() types.StoredStudent {
 }
 
 func TestCanGetAddress(t *testing.T) {
-	aliceAddress, err1 := sdk.AccAddressFromBech32(alice)
+	aliceAddress, err1 := sdk.AccAddressFromBech32(testutil.Mario_Rossi)
 	studentAddress, err2 := GetStoredStudent1().GetStudentAddress()
 	require.Equal(t, aliceAddress, studentAddress)
 	require.Nil(t, err2)

@@ -15,7 +15,7 @@ ENV PATH=$GOROOT/bin:$GOPATH/bin:$PATH
 
 RUN mkdir -p $GOPATH/bin
 
-ENV PACKAGES curl gcc jq
+ENV PACKAGES curl gcc jq make
 RUN apt-get update
 RUN apt-get install -y $PACKAGES
 
@@ -40,7 +40,3 @@ COPY go.mod /university_chain_it/go.mod
 RUN go mod download
 RUN rm /university_chain_it/go.mod
 
-# Create the image
-# $ docker build -f Dockerfile-ubuntu . -t university_chain_it_i
-# To run server on it
-# docker run --rm -it -v $(pwd):/university_chain_it -w /university_chain_it -p 1317:1317 -p 3000:3000 -p 4500:4500 -p 5000:5000 -p 26657:26657 --name university_chain_it university_chain_it_i ignite chain serve --reset-once
