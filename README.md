@@ -98,6 +98,12 @@ sudo docker exec -it university_chain_it university_chain_itd query bank balance
 
 sudo docker exec -it university_chain_it university_chain_itd tx universitychainit insert-exam-grade unipi 1 "Algorithm engineering" 25 --from $prof_ae --gas auto 
 
+# To perform the tests:
+
+sudo docker run --rm -it -v $(pwd):/university_chain_it -w /university_chain_it university_chain_it_i go test university_chain_it/x/universitychainit/types
+
+sudo docker run --rm -it -v $(pwd):/university_chain_it -w /university_chain_it university_chain_it_i go test university_chain_it/x/universitychainit/keeper
+
 ```
 
 ## Contributing
