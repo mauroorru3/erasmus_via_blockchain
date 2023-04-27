@@ -100,6 +100,8 @@ sudo docker exec -it university_chain_it university_chain_itd tx universitychain
 
 # To perform the tests:
 
+sudo docker run --rm -it -v $(pwd):/university_chain_it -w /university_chain_it university_chain_it_i make mock-expected-keepers 
+
 sudo docker run --rm -it -v $(pwd):/university_chain_it -w /university_chain_it university_chain_it_i go test university_chain_it/x/universitychainit/types
 
 sudo docker run --rm -it -v $(pwd):/university_chain_it -w /university_chain_it university_chain_it_i go test university_chain_it/x/universitychainit/keeper
