@@ -6,11 +6,13 @@ export const protobufPackage = "university_chain_it.universitychainit";
 export interface ForeignUniversities {
   universityName: string;
   foreignUniversitiesKey: string;
+  foreignUniversitiesCountry: string;
 }
 
 const baseForeignUniversities: object = {
   universityName: "",
   foreignUniversitiesKey: "",
+  foreignUniversitiesCountry: "",
 };
 
 export const ForeignUniversities = {
@@ -23,6 +25,9 @@ export const ForeignUniversities = {
     }
     if (message.foreignUniversitiesKey !== "") {
       writer.uint32(18).string(message.foreignUniversitiesKey);
+    }
+    if (message.foreignUniversitiesCountry !== "") {
+      writer.uint32(26).string(message.foreignUniversitiesCountry);
     }
     return writer;
   },
@@ -39,6 +44,9 @@ export const ForeignUniversities = {
           break;
         case 2:
           message.foreignUniversitiesKey = reader.string();
+          break;
+        case 3:
+          message.foreignUniversitiesCountry = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -63,6 +71,16 @@ export const ForeignUniversities = {
     } else {
       message.foreignUniversitiesKey = "";
     }
+    if (
+      object.foreignUniversitiesCountry !== undefined &&
+      object.foreignUniversitiesCountry !== null
+    ) {
+      message.foreignUniversitiesCountry = String(
+        object.foreignUniversitiesCountry
+      );
+    } else {
+      message.foreignUniversitiesCountry = "";
+    }
     return message;
   },
 
@@ -72,6 +90,8 @@ export const ForeignUniversities = {
       (obj.universityName = message.universityName);
     message.foreignUniversitiesKey !== undefined &&
       (obj.foreignUniversitiesKey = message.foreignUniversitiesKey);
+    message.foreignUniversitiesCountry !== undefined &&
+      (obj.foreignUniversitiesCountry = message.foreignUniversitiesCountry);
     return obj;
   },
 
@@ -89,6 +109,14 @@ export const ForeignUniversities = {
       message.foreignUniversitiesKey = object.foreignUniversitiesKey;
     } else {
       message.foreignUniversitiesKey = "";
+    }
+    if (
+      object.foreignUniversitiesCountry !== undefined &&
+      object.foreignUniversitiesCountry !== null
+    ) {
+      message.foreignUniversitiesCountry = object.foreignUniversitiesCountry;
+    } else {
+      message.foreignUniversitiesCountry = "";
     }
     return message;
   },

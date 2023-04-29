@@ -34,8 +34,9 @@ func (k msgServer) ConfigureChain(goCtx context.Context, msg *types.MsgConfigure
 			for i = 0; i < len(foreignUniversitiesList); i++ {
 
 				foreignUniversity := types.ForeignUniversities{
-					UniversityName:         foreignUniversitiesList[i].Name,
-					ForeignUniversitiesKey: foreignUniversitiesList[i].Address,
+					UniversityName:             foreignUniversitiesList[i].Name,
+					ForeignUniversitiesCountry: foreignUniversitiesList[i].Country,
+					ForeignUniversitiesKey:     foreignUniversitiesList[i].Address,
 				}
 				err = foreignUniversity.Validate()
 				if err != nil {

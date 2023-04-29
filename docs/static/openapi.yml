@@ -29616,6 +29616,8 @@ paths:
                       type: string
                     foreignUniversitiesKey:
                       type: string
+                    foreignUniversitiesCountry:
+                      type: string
               pagination:
                 type: object
                 properties:
@@ -29736,6 +29738,8 @@ paths:
                   universityName:
                     type: string
                   foreignUniversitiesKey:
+                    type: string
+                  foreignUniversitiesCountry:
                     type: string
         default:
           description: An unexpected error response.
@@ -50869,7 +50873,15 @@ definitions:
         type: string
       foreignUniversitiesKey:
         type: string
+      foreignUniversitiesCountry:
+        type: string
   university_chain_it.universitychainit.MsgConfigureChainResponse:
+    type: object
+    properties:
+      status:
+        type: integer
+        format: int32
+  university_chain_it.universitychainit.MsgInsertErasmusRequestResponse:
     type: object
     properties:
       status:
@@ -50952,6 +50964,8 @@ definitions:
             universityName:
               type: string
             foreignUniversitiesKey:
+              type: string
+            foreignUniversitiesCountry:
               type: string
       pagination:
         type: object
@@ -51304,6 +51318,8 @@ definitions:
           universityName:
             type: string
           foreignUniversitiesKey:
+            type: string
+          foreignUniversitiesCountry:
             type: string
   university_chain_it.universitychainit.QueryGetPersonalInfoResponse:
     type: object

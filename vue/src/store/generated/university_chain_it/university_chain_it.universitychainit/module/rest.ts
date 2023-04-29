@@ -62,9 +62,15 @@ export interface UniversitychainitErasmusInfo {
 export interface UniversitychainitForeignUniversities {
   universityName?: string;
   foreignUniversitiesKey?: string;
+  foreignUniversitiesCountry?: string;
 }
 
 export interface UniversitychainitMsgConfigureChainResponse {
+  /** @format int32 */
+  status?: number;
+}
+
+export interface UniversitychainitMsgInsertErasmusRequestResponse {
   /** @format int32 */
   status?: number;
 }
