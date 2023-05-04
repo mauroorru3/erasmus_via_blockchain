@@ -66,14 +66,15 @@ type Taxes_struct struct {
 }
 
 type University struct {
-	Name             string           `json:"name"`
-	Country          string           `json:"country"`
-	Secretariat_key  string           `json:"secretariat_key"`
-	University_key   string           `json:"university_key"`
-	Deadline_taxes   string           `json:"deadline_taxes"`
-	Deadline_erasmus string           `json:"deadline_erasmus"`
-	DepartmentList   []DepartmentList `json:"departmentList"`
-	Taxes_brackets   Taxes_struct     `json:"taxes_brackets"`
+	Name              string           `json:"name"`
+	Country           string           `json:"country"`
+	Secretariat_key   string           `json:"secretariat_key"`
+	University_key    string           `json:"university_key"`
+	Deadline_taxes    string           `json:"deadline_taxes"`
+	Deadline_erasmus  string           `json:"deadline_erasmus"`
+	Max_erasmus_exams int32            `json:"max_erasmus_exams"`
+	DepartmentList    []DepartmentList `json:"departmentList"`
+	Taxes_brackets    Taxes_struct     `json:"taxes_brackets"`
 }
 
 type UniList struct {

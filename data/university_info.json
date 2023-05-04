@@ -8,6 +8,7 @@
         "university_key": "cosmos1mhmthq4cx8ltfexahqrhutqxu9d26zltwhh39n",
         "deadline_taxes": "2023-12-31",
         "deadline_erasmus": "2023-12-31",
+        "max_erasmus_exams": 3,
         "taxes_brackets": {
             "first": [6500, 0], 
             "second": [28000,200],
@@ -109,6 +110,7 @@
                 "university_key": "cosmos13nrfelferv5a7dkd5rnt9r7ku7wgma9g52l0rf",
                 "deadline_taxes": "2023-12-31",
                 "deadline_erasmus": "2023-12-31", 
+                "max_erasmus_exams": 3,
                 "taxes_brackets": {
                     "first": [6500, 0], 
                     "second": [28000,200],

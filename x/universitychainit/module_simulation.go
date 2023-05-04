@@ -61,6 +61,10 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgInsertErasmusRequest int = 100
 
+	opWeightMsgInsertErasmusExam = "op_weight_msg_insert_erasmus_exam"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgInsertErasmusExam int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -189,6 +193,17 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgInsertErasmusRequest,
 		universitychainitsimulation.SimulateMsgInsertErasmusRequest(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgInsertErasmusExam int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgInsertErasmusExam, &weightMsgInsertErasmusExam, nil,
+		func(_ *rand.Rand) {
+			weightMsgInsertErasmusExam = defaultWeightMsgInsertErasmusExam
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgInsertErasmusExam,
+		universitychainitsimulation.SimulateMsgInsertErasmusExam(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	// this line is used by starport scaffolding # simapp/module/operation

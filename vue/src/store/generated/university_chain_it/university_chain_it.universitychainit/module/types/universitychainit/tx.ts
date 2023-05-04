@@ -108,6 +108,17 @@ export interface MsgInsertErasmusRequestResponse {
   status: number;
 }
 
+export interface MsgInsertErasmusExam {
+  creator: string;
+  university: string;
+  studentIndex: string;
+  examName: string;
+}
+
+export interface MsgInsertErasmusExamResponse {
+  status: number;
+}
+
 const baseMsgConfigureChain: object = { creator: "" };
 
 export const MsgConfigureChain = {
@@ -1947,6 +1958,190 @@ export const MsgInsertErasmusRequestResponse = {
   },
 };
 
+const baseMsgInsertErasmusExam: object = {
+  creator: "",
+  university: "",
+  studentIndex: "",
+  examName: "",
+};
+
+export const MsgInsertErasmusExam = {
+  encode(
+    message: MsgInsertErasmusExam,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.creator !== "") {
+      writer.uint32(10).string(message.creator);
+    }
+    if (message.university !== "") {
+      writer.uint32(18).string(message.university);
+    }
+    if (message.studentIndex !== "") {
+      writer.uint32(26).string(message.studentIndex);
+    }
+    if (message.examName !== "") {
+      writer.uint32(34).string(message.examName);
+    }
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgInsertErasmusExam {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseMsgInsertErasmusExam } as MsgInsertErasmusExam;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.creator = reader.string();
+          break;
+        case 2:
+          message.university = reader.string();
+          break;
+        case 3:
+          message.studentIndex = reader.string();
+          break;
+        case 4:
+          message.examName = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgInsertErasmusExam {
+    const message = { ...baseMsgInsertErasmusExam } as MsgInsertErasmusExam;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = String(object.creator);
+    } else {
+      message.creator = "";
+    }
+    if (object.university !== undefined && object.university !== null) {
+      message.university = String(object.university);
+    } else {
+      message.university = "";
+    }
+    if (object.studentIndex !== undefined && object.studentIndex !== null) {
+      message.studentIndex = String(object.studentIndex);
+    } else {
+      message.studentIndex = "";
+    }
+    if (object.examName !== undefined && object.examName !== null) {
+      message.examName = String(object.examName);
+    } else {
+      message.examName = "";
+    }
+    return message;
+  },
+
+  toJSON(message: MsgInsertErasmusExam): unknown {
+    const obj: any = {};
+    message.creator !== undefined && (obj.creator = message.creator);
+    message.university !== undefined && (obj.university = message.university);
+    message.studentIndex !== undefined &&
+      (obj.studentIndex = message.studentIndex);
+    message.examName !== undefined && (obj.examName = message.examName);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<MsgInsertErasmusExam>): MsgInsertErasmusExam {
+    const message = { ...baseMsgInsertErasmusExam } as MsgInsertErasmusExam;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = object.creator;
+    } else {
+      message.creator = "";
+    }
+    if (object.university !== undefined && object.university !== null) {
+      message.university = object.university;
+    } else {
+      message.university = "";
+    }
+    if (object.studentIndex !== undefined && object.studentIndex !== null) {
+      message.studentIndex = object.studentIndex;
+    } else {
+      message.studentIndex = "";
+    }
+    if (object.examName !== undefined && object.examName !== null) {
+      message.examName = object.examName;
+    } else {
+      message.examName = "";
+    }
+    return message;
+  },
+};
+
+const baseMsgInsertErasmusExamResponse: object = { status: 0 };
+
+export const MsgInsertErasmusExamResponse = {
+  encode(
+    message: MsgInsertErasmusExamResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.status !== 0) {
+      writer.uint32(8).int32(message.status);
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): MsgInsertErasmusExamResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseMsgInsertErasmusExamResponse,
+    } as MsgInsertErasmusExamResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.status = reader.int32();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgInsertErasmusExamResponse {
+    const message = {
+      ...baseMsgInsertErasmusExamResponse,
+    } as MsgInsertErasmusExamResponse;
+    if (object.status !== undefined && object.status !== null) {
+      message.status = Number(object.status);
+    } else {
+      message.status = 0;
+    }
+    return message;
+  },
+
+  toJSON(message: MsgInsertErasmusExamResponse): unknown {
+    const obj: any = {};
+    message.status !== undefined && (obj.status = message.status);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<MsgInsertErasmusExamResponse>
+  ): MsgInsertErasmusExamResponse {
+    const message = {
+      ...baseMsgInsertErasmusExamResponse,
+    } as MsgInsertErasmusExamResponse;
+    if (object.status !== undefined && object.status !== null) {
+      message.status = object.status;
+    } else {
+      message.status = 0;
+    }
+    return message;
+  },
+};
+
 /** Msg defines the Msg service. */
 export interface Msg {
   ConfigureChain(
@@ -1968,10 +2163,13 @@ export interface Msg {
     request: MsgInsertExamGrade
   ): Promise<MsgInsertExamGradeResponse>;
   PayTaxes(request: MsgPayTaxes): Promise<MsgPayTaxesResponse>;
-  /** this line is used by starport scaffolding # proto/tx/rpc */
   InsertErasmusRequest(
     request: MsgInsertErasmusRequest
   ): Promise<MsgInsertErasmusRequestResponse>;
+  /** this line is used by starport scaffolding # proto/tx/rpc */
+  InsertErasmusExam(
+    request: MsgInsertErasmusExam
+  ): Promise<MsgInsertErasmusExamResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -2084,6 +2282,20 @@ export class MsgClientImpl implements Msg {
     );
     return promise.then((data) =>
       MsgInsertErasmusRequestResponse.decode(new Reader(data))
+    );
+  }
+
+  InsertErasmusExam(
+    request: MsgInsertErasmusExam
+  ): Promise<MsgInsertErasmusExamResponse> {
+    const data = MsgInsertErasmusExam.encode(request).finish();
+    const promise = this.rpc.request(
+      "university_chain_it.universitychainit.Msg",
+      "InsertErasmusExam",
+      data
+    );
+    return promise.then((data) =>
+      MsgInsertErasmusExamResponse.decode(new Reader(data))
     );
   }
 }

@@ -30665,6 +30665,9 @@ paths:
                       type: string
                     taxesBrackets:
                       type: string
+                    maxErasmusExams:
+                      type: integer
+                      format: int32
               pagination:
                 type: object
                 properties:
@@ -30803,6 +30806,9 @@ paths:
                     type: string
                   taxesBrackets:
                     type: string
+                  maxErasmusExams:
+                    type: integer
+                    format: int32
         default:
           description: An unexpected error response.
           schema:
@@ -50881,6 +50887,12 @@ definitions:
       status:
         type: integer
         format: int32
+  university_chain_it.universitychainit.MsgInsertErasmusExamResponse:
+    type: object
+    properties:
+      status:
+        type: integer
+        format: int32
   university_chain_it.universitychainit.MsgInsertErasmusRequestResponse:
     type: object
     properties:
@@ -51224,6 +51236,9 @@ definitions:
               type: string
             taxesBrackets:
               type: string
+            maxErasmusExams:
+              type: integer
+              format: int32
       pagination:
         type: object
         properties:
@@ -51601,6 +51616,9 @@ definitions:
             type: string
           taxesBrackets:
             type: string
+          maxErasmusExams:
+            type: integer
+            format: int32
   university_chain_it.universitychainit.QueryParamsResponse:
     type: object
     properties:
@@ -51836,3 +51854,6 @@ definitions:
         type: string
       taxesBrackets:
         type: string
+      maxErasmusExams:
+        type: integer
+        format: int32

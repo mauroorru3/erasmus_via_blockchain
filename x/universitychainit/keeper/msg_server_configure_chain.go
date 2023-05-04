@@ -77,6 +77,7 @@ func (k msgServer) ConfigureChain(goCtx context.Context, msg *types.MsgConfigure
 						FifoTailErasmus: "-1",
 						DeadlineTaxes:   universityInfoList[i].Deadline_taxes,
 						DeadlineErasmus: universityInfoList[i].Deadline_erasmus,
+						MaxErasmusExams: universityInfoList[i].Max_erasmus_exams,
 						TaxesBrackets:   taxesBracketsJSON,
 					})
 

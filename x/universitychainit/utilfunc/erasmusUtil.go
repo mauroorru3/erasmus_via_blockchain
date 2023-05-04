@@ -6,6 +6,7 @@ import (
 	"io"
 	"os"
 	"strconv"
+	"time"
 	"university_chain_it/x/universitychainit/types"
 )
 
@@ -281,7 +282,10 @@ func CheckErasmusParams(durationInMonths string, erasmusType string, student *ty
 
 	var erasmusCareer []ErasmusCareerStruct
 
-	json.Unmarshal([]byte(student.ErasmusData.Career), &erasmusCareer)
+	err = json.Unmarshal([]byte(student.ErasmusData.Career), &erasmusCareer)
+	if err != nil {
+		return err
+	}
 
 	var contritbutionErasmus uint32
 
@@ -336,7 +340,7 @@ func CheckErasmusParams(durationInMonths string, erasmusType string, student *ty
 		erasmusCareer[lenCareer-1].Status = "to start" // to start, in progress or terminated
 		erasmusCareer[lenCareer-1].Contribution.Amount = contritbutionErasmus
 
-	} else if erasmusCareer[lenCareer-1].Duration_in_months > 0 && erasmusCareer[lenCareer-1].Status == "terminated" {
+	} else {
 
 		erasmusInfo := ErasmusCareerStruct{
 			Duration_in_months:            uint8(erasmusDuration),
@@ -361,10 +365,6 @@ func CheckErasmusParams(durationInMonths string, erasmusType string, student *ty
 		}
 
 		erasmusCareer = append(erasmusCareer, erasmusInfo)
-	} else if erasmusCareer[lenCareer-1].Duration_in_months > 0 && erasmusCareer[lenCareer-1].Status == "in progress" {
-		return types.ErrPreviousRequestInProgress
-	} else if erasmusCareer[lenCareer-1].Duration_in_months > 0 && erasmusCareer[lenCareer-1].Status == "to start" {
-		return types.ErrPreviousRequestStartup
 	}
 
 	// TO DO
@@ -381,4 +381,125 @@ func CheckErasmusParams(durationInMonths string, erasmusType string, student *ty
 	student.ErasmusData.Career = erasmusJSON
 
 	return err
+}
+
+func CheckErasmusStatus(student types.StoredStudent) (res string, err error) {
+
+	var erasmusCareer []ErasmusCareerStruct
+
+	err = json.Unmarshal([]byte(student.ErasmusData.Career), &erasmusCareer)
+	if err != nil {
+		return res, err
+	}
+
+	lenCareer := len(erasmusCareer)
+
+	res = erasmusCareer[lenCareer-1].Status
+
+	return res, err
+
+}
+
+func InsertErasmusExam(student *types.StoredStudent, examName string, maxErasmusExams int32) (err error) {
+
+	mapExams := make(map[string]ExamStruct)
+
+	err = json.Unmarshal([]byte(student.TranscriptData.ExamsData), &mapExams)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "Error "+err.Error())
+		return err
+	}
+
+	val, ok := mapExams[examName]
+	if ok {
+		if val.Marks != "" {
+			return types.ErrExamAlreadyHeld
+		} else {
+
+			var erasmusCareer []ErasmusCareerStruct
+
+			err = json.Unmarshal([]byte(student.ErasmusData.Career), &erasmusCareer)
+			if err != nil {
+				return err
+			}
+
+			lenCareer := len(erasmusCareer)
+
+			var resultByteJSON []byte
+			mapExamsErasmus := make(map[string]ExamStruct)
+
+			if erasmusCareer[lenCareer-1].Exams_data == "" {
+
+				mapExamsErasmus[examName] = val
+				resultByteJSON, err = json.Marshal(mapExamsErasmus)
+				if err != nil {
+					return err
+				}
+
+				examsErasmusJSON := string(resultByteJSON)
+
+				erasmusCareer[lenCareer-1].Exams_data = examsErasmusJSON
+
+			} else {
+
+				err = json.Unmarshal([]byte(erasmusCareer[lenCareer-1].Exams_data), &mapExamsErasmus)
+				if err != nil {
+					fmt.Fprintln(os.Stderr, "Error "+err.Error())
+					return err
+				}
+
+				numExamsPlan := len(mapExamsErasmus)
+				if numExamsPlan == int(maxErasmusExams) {
+					return types.ErrMaxNumberErasmusExamReached
+				}
+
+				_, found := mapExamsErasmus[examName]
+				if !found {
+					mapExamsErasmus[examName] = val
+					resultByteJSON, err = json.Marshal(mapExamsErasmus)
+					if err != nil {
+						return err
+					}
+
+					examsErasmusJSON := string(resultByteJSON)
+
+					erasmusCareer[lenCareer-1].Exams_data = examsErasmusJSON
+				} else {
+					return types.ErrErasmusExamAlreadyInserted
+				}
+			}
+
+			erasmusCareer[lenCareer-1].Total_exams += 1
+			erasmusCareer[lenCareer-1].Total_credits += val.Credits
+
+			resultByteJSON, err = json.Marshal(erasmusCareer)
+			if err != nil {
+				return err
+			}
+
+			student.ErasmusData.Career = string(resultByteJSON)
+
+		}
+	} else {
+		return types.ErrErasmusExamNotFound
+	}
+
+	return err
+
+}
+
+func CheckErasmusDeadline(erasmusDeadline string) error {
+
+	date := time.Now()
+
+	deadline, err := time.Parse("2006-01-02", erasmusDeadline)
+	if err != nil {
+		return err
+	}
+
+	if date.Before(deadline) {
+		return nil
+	} else {
+		return types.ErrErasmusDeadlineExceeded
+	}
 }

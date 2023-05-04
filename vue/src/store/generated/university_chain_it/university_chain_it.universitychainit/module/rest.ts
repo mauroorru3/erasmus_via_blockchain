@@ -70,6 +70,11 @@ export interface UniversitychainitMsgConfigureChainResponse {
   status?: number;
 }
 
+export interface UniversitychainitMsgInsertErasmusExamResponse {
+  /** @format int32 */
+  status?: number;
+}
+
 export interface UniversitychainitMsgInsertErasmusRequestResponse {
   /** @format int32 */
   status?: number;
@@ -317,6 +322,9 @@ export interface UniversitychainitUniversityInfo {
   deadlineTaxes?: string;
   deadlineErasmus?: string;
   taxesBrackets?: string;
+
+  /** @format int32 */
+  maxErasmusExams?: number;
 }
 
 /**

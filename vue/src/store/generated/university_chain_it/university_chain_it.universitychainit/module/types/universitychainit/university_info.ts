@@ -14,6 +14,7 @@ export interface UniversityInfo {
   deadlineTaxes: string;
   deadlineErasmus: string;
   taxesBrackets: string;
+  maxErasmusExams: number;
 }
 
 const baseUniversityInfo: object = {
@@ -27,6 +28,7 @@ const baseUniversityInfo: object = {
   deadlineTaxes: "",
   deadlineErasmus: "",
   taxesBrackets: "",
+  maxErasmusExams: 0,
 };
 
 export const UniversityInfo = {
@@ -60,6 +62,9 @@ export const UniversityInfo = {
     }
     if (message.taxesBrackets !== "") {
       writer.uint32(82).string(message.taxesBrackets);
+    }
+    if (message.maxErasmusExams !== 0) {
+      writer.uint32(88).int32(message.maxErasmusExams);
     }
     return writer;
   },
@@ -100,6 +105,9 @@ export const UniversityInfo = {
           break;
         case 10:
           message.taxesBrackets = reader.string();
+          break;
+        case 11:
+          message.maxErasmusExams = reader.int32();
           break;
         default:
           reader.skipType(tag & 7);
@@ -170,6 +178,14 @@ export const UniversityInfo = {
     } else {
       message.taxesBrackets = "";
     }
+    if (
+      object.maxErasmusExams !== undefined &&
+      object.maxErasmusExams !== null
+    ) {
+      message.maxErasmusExams = Number(object.maxErasmusExams);
+    } else {
+      message.maxErasmusExams = 0;
+    }
     return message;
   },
 
@@ -194,6 +210,8 @@ export const UniversityInfo = {
       (obj.deadlineErasmus = message.deadlineErasmus);
     message.taxesBrackets !== undefined &&
       (obj.taxesBrackets = message.taxesBrackets);
+    message.maxErasmusExams !== undefined &&
+      (obj.maxErasmusExams = message.maxErasmusExams);
     return obj;
   },
 
@@ -257,6 +275,14 @@ export const UniversityInfo = {
       message.taxesBrackets = object.taxesBrackets;
     } else {
       message.taxesBrackets = "";
+    }
+    if (
+      object.maxErasmusExams !== undefined &&
+      object.maxErasmusExams !== null
+    ) {
+      message.maxErasmusExams = object.maxErasmusExams;
+    } else {
+      message.maxErasmusExams = 0;
     }
     return message;
   },
