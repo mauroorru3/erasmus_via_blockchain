@@ -101,7 +101,7 @@ func TestInsertStudentResidenceInfoWrongUniversityName(t *testing.T) {
 
 	require.EqualError(t,
 		err,
-		"the student is not present")
+		"the university name does not exists")
 	require.EqualValues(t, types.MsgInsertStudentResidenceInfoResponse{
 		Status: -1,
 	}, *residenceInfoResponse)

@@ -9,7 +9,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
-func (k msgServer) InsertErasmusExam(goCtx context.Context, msg *types.MsgInsertErasmusExam) (*types.MsgInsertErasmusExamResponse, error) {
+func (k msgServer) StartErasmus(goCtx context.Context, msg *types.MsgStartErasmus) (*types.MsgStartErasmusResponse, error) {
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
@@ -18,14 +18,14 @@ func (k msgServer) InsertErasmusExam(goCtx context.Context, msg *types.MsgInsert
 		panic("ChainInfo not found")
 	} else {
 		if !chainInfo.InitStatus {
-			return &types.MsgInsertErasmusExamResponse{
+			return &types.MsgStartErasmusResponse{
 				Status: -1,
 			}, types.ErrChainConfigurationNotDone
 		} else {
 
-			uni, found := k.Keeper.GetUniversityInfo(ctx, msg.University)
+			uniInfo, found := k.Keeper.GetUniversityInfo(ctx, msg.University)
 			if !found {
-				return &types.MsgInsertErasmusExamResponse{
+				return &types.MsgStartErasmusResponse{
 					Status: -1,
 				}, types.ErrWrongNameUniversity
 			} else {
@@ -33,12 +33,12 @@ func (k msgServer) InsertErasmusExam(goCtx context.Context, msg *types.MsgInsert
 				searchedStudent, found := k.Keeper.GetStoredStudent(ctx, msg.GetUniversity()+"_"+msg.GetStudentIndex())
 
 				if !found {
-					return &types.MsgInsertErasmusExamResponse{
+					return &types.MsgStartErasmusResponse{
 						Status: -1,
 					}, types.ErrStudentNotPresent
 				} else {
 					if searchedStudent.GetStudentData().GetStudentKey() != msg.Creator {
-						return &types.MsgInsertErasmusExamResponse{
+						return &types.MsgStartErasmusResponse{
 							Status: -1,
 						}, types.ErrKeyEnteredMismatchStudent
 					} else {
@@ -46,7 +46,7 @@ func (k msgServer) InsertErasmusExam(goCtx context.Context, msg *types.MsgInsert
 						err := utilfunc.CheckCompleteInformation(searchedStudent)
 
 						if err != nil {
-							return &types.MsgInsertErasmusExamResponse{
+							return &types.MsgStartErasmusResponse{
 								Status: -1,
 							}, types.ErrIncompleteStudentInformation
 						} else {
@@ -56,49 +56,60 @@ func (k msgServer) InsertErasmusExam(goCtx context.Context, msg *types.MsgInsert
 							//var err error = nil
 
 							if err != nil {
-								return &types.MsgInsertErasmusExamResponse{
+								return &types.MsgStartErasmusResponse{
 									Status: -1,
 								}, err
 							} else {
 								if !ok {
-									return &types.MsgInsertErasmusExamResponse{
+									return &types.MsgStartErasmusResponse{
 										Status: -1,
 									}, types.ErrUnpaidTaxes
 								} else {
 
 									res, err := utilfunc.CheckErasmusStatus(searchedStudent)
 									if err != nil {
-										return &types.MsgInsertErasmusExamResponse{
+										return &types.MsgStartErasmusResponse{
 											Status: -1,
 										}, err
 									} else {
 										if res == "" {
-											return &types.MsgInsertErasmusExamResponse{
+											return &types.MsgStartErasmusResponse{
 												Status: -1,
 											}, types.ErrNoErasmusRequest
 										} else if res == "in progress" {
-											return &types.MsgInsertErasmusExamResponse{
+											return &types.MsgStartErasmusResponse{
 												Status: -1,
 											}, types.ErrPreviousRequestInProgress
 										} else if res == "terminated" {
-											return &types.MsgInsertErasmusExamResponse{
+											return &types.MsgStartErasmusResponse{
 												Status: -1,
 											}, types.ErrPreviousRequestCompleted
 										} else {
 
-											err := utilfunc.InsertErasmusExam(&searchedStudent, msg.ExamName, uni.MaxErasmusExams)
+											err := utilfunc.StartErasmus(ctx, &searchedStudent, &uniInfo)
 											if err != nil {
-												return &types.MsgInsertErasmusExamResponse{
+												return &types.MsgStartErasmusResponse{
 													Status: -1,
 												}, err
 											} else {
-												k.Keeper.SetStoredStudent(ctx, searchedStudent)
-												return &types.MsgInsertErasmusExamResponse{
-													Status: 0,
-												}, nil
-											}
-										}
 
+												err := k.Keeper.CollectAndSendErasmusContribution(ctx, &searchedStudent, uniInfo.UniversityKey)
+												if err != nil {
+													return &types.MsgStartErasmusResponse{
+														Status: -1,
+													}, err
+												} else {
+
+													k.Keeper.SendToFifoTail(ctx, &searchedStudent, &uniInfo)
+													k.Keeper.SetStoredStudent(ctx, searchedStudent)
+													k.Keeper.SetUniversityInfo(ctx, uniInfo)
+													return &types.MsgStartErasmusResponse{
+														Status: 0,
+													}, nil
+												}
+											}
+
+										}
 									}
 								}
 							}

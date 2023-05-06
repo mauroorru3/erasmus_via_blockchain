@@ -15,91 +15,101 @@ func (k msgServer) InsertErasmusRequest(goCtx context.Context, msg *types.MsgIns
 	chainInfo, found := k.Keeper.GetChainInfo(ctx)
 	if !found {
 		panic("ChainInfo not found")
-	}
-	if !chainInfo.InitStatus {
-		return &types.MsgInsertErasmusRequestResponse{
-			Status: -1,
-		}, types.ErrChainConfigurationNotDone
 	} else {
-		searchedStudent, found := k.Keeper.GetStoredStudent(ctx, msg.GetUniversity()+"_"+msg.GetStudentIndex())
-
-		if !found {
+		if !chainInfo.InitStatus {
 			return &types.MsgInsertErasmusRequestResponse{
 				Status: -1,
-			}, types.ErrStudentNotPresent
+			}, types.ErrChainConfigurationNotDone
 		} else {
-			if searchedStudent.GetStudentData().GetStudentKey() != msg.Creator {
+
+			uniInfo, found := k.GetUniversityInfo(ctx, msg.University)
+			if !found {
 				return &types.MsgInsertErasmusRequestResponse{
 					Status: -1,
-				}, types.ErrKeyEnteredMismatchStudent
+				}, types.ErrWrongNameUniversity
 			} else {
 
-				err := utilfunc.CheckCompleteInformation(searchedStudent)
+				searchedStudent, found := k.Keeper.GetStoredStudent(ctx, msg.GetUniversity()+"_"+msg.GetStudentIndex())
 
-				if err != nil {
+				if !found {
 					return &types.MsgInsertErasmusRequestResponse{
 						Status: -1,
-					}, types.ErrIncompleteStudentInformation
+					}, types.ErrStudentNotPresent
 				} else {
-
-					ok, err := utilfunc.CheckTaxPayment(searchedStudent)
-
-					if err != nil {
+					if searchedStudent.GetStudentData().GetStudentKey() != msg.Creator {
 						return &types.MsgInsertErasmusRequestResponse{
 							Status: -1,
-						}, err
+						}, types.ErrKeyEnteredMismatchStudent
 					} else {
-						if !ok {
+
+						err := utilfunc.CheckCompleteInformation(searchedStudent)
+
+						if err != nil {
 							return &types.MsgInsertErasmusRequestResponse{
 								Status: -1,
-							}, types.ErrUnpaidTaxes
+							}, types.ErrIncompleteStudentInformation
 						} else {
 
-							foreignUni, found := k.Keeper.GetForeignUniversities(ctx, msg.ForeignUniversityName)
-							if !found {
+							ok, err := utilfunc.CheckTaxPayment(searchedStudent)
+							//var ok bool = true
+							//var err error = nil
+
+							if err != nil {
 								return &types.MsgInsertErasmusRequestResponse{
 									Status: -1,
-								}, types.ErrWrongForeignUniversity
+								}, err
 							} else {
-
-								res, err := utilfunc.CheckErasmusStatus(searchedStudent)
-								if err != nil {
+								if !ok {
 									return &types.MsgInsertErasmusRequestResponse{
 										Status: -1,
-									}, err
-								}
-								if res == "in progress" {
-									return &types.MsgInsertErasmusRequestResponse{
-										Status: -1,
-									}, types.ErrPreviousRequestInProgress
-								} else if res == "to start" {
-									return &types.MsgInsertErasmusRequestResponse{
-										Status: -1,
-									}, types.ErrPreviousRequestStartup
+									}, types.ErrUnpaidTaxes
 								} else {
 
-									uniInfo, found := k.GetUniversityInfo(ctx, msg.University)
+									foreignUni, found := k.Keeper.GetForeignUniversities(ctx, msg.ForeignUniversityName)
 									if !found {
 										return &types.MsgInsertErasmusRequestResponse{
 											Status: -1,
-										}, types.ErrWrongNameUniversity
+										}, types.ErrWrongForeignUniversity
 									} else {
-										err := utilfunc.CheckErasmusDeadline(uniInfo.DeadlineErasmus)
+
+										res, err := utilfunc.CheckErasmusStatus(searchedStudent)
 										if err != nil {
 											return &types.MsgInsertErasmusRequestResponse{
 												Status: -1,
 											}, err
 										} else {
-
-											err = utilfunc.CheckErasmusParams(msg.DurationInMonths, msg.ErasmusType, &searchedStudent, msg.ForeignUniversityName, foreignUni.ForeignUniversitiesCountry)
-											if err != nil {
+											if res == "in progress" {
 												return &types.MsgInsertErasmusRequestResponse{
 													Status: -1,
-												}, err
+												}, types.ErrPreviousRequestInProgress
+											} else if res == "to start" {
+												return &types.MsgInsertErasmusRequestResponse{
+													Status: -1,
+												}, types.ErrPreviousRequestStartup
 											} else {
-												k.Keeper.SetStoredStudent(ctx, searchedStudent)
-											}
 
+												err := utilfunc.CheckErasmusDeadline(ctx, uniInfo.DeadlineErasmus)
+												if err != nil {
+													return &types.MsgInsertErasmusRequestResponse{
+														Status: -1,
+													}, err
+												} else {
+
+													err = utilfunc.CheckErasmusParams(msg.DurationInMonths, msg.ErasmusType, &searchedStudent, msg.ForeignUniversityName, foreignUni.ForeignUniversitiesCountry)
+													if err != nil {
+														return &types.MsgInsertErasmusRequestResponse{
+															Status: -1,
+														}, err
+													} else {
+														k.Keeper.SetStoredStudent(ctx, searchedStudent)
+														return &types.MsgInsertErasmusRequestResponse{
+															Status: 0,
+														}, nil
+													}
+
+												}
+
+											}
 										}
 									}
 								}
@@ -111,7 +121,4 @@ func (k msgServer) InsertErasmusRequest(goCtx context.Context, msg *types.MsgIns
 		}
 	}
 
-	return &types.MsgInsertErasmusRequestResponse{
-		Status: 0,
-	}, nil
 }

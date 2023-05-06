@@ -8,12 +8,18 @@ import (
 	"strconv"
 	"time"
 	"university_chain_it/x/universitychainit/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 var erasmusTypeMap = map[string]int{
 	"study":       1,
 	"traineeship": 1,
 }
+
+const (
+	DeadlineLayout = "2006-01-02 15:04:05"
+)
 
 //-----------------------------------------
 // Erasmus Career
@@ -280,6 +286,8 @@ func CheckErasmusParams(durationInMonths string, erasmusType string, student *ty
 
 	student.ErasmusData.ErasmusStudent = "No"
 
+	student.ErasmusData.NumberTimes++
+
 	var erasmusCareer []ErasmusCareerStruct
 
 	err = json.Unmarshal([]byte(student.ErasmusData.Career), &erasmusCareer)
@@ -469,8 +477,10 @@ func InsertErasmusExam(student *types.StoredStudent, examName string, maxErasmus
 				}
 			}
 
-			erasmusCareer[lenCareer-1].Total_exams += 1
+			erasmusCareer[lenCareer-1].Total_exams++
+			student.ErasmusData.TotalExams++
 			erasmusCareer[lenCareer-1].Total_credits += val.Credits
+			student.ErasmusData.TotalCredits += uint32(val.Credits)
 
 			resultByteJSON, err = json.Marshal(erasmusCareer)
 			if err != nil {
@@ -488,18 +498,107 @@ func InsertErasmusExam(student *types.StoredStudent, examName string, maxErasmus
 
 }
 
-func CheckErasmusDeadline(erasmusDeadline string) error {
+func CheckErasmusDeadline(ctx sdk.Context, erasmusDeadline string) error {
 
-	date := time.Now()
-
-	deadline, err := time.Parse("2006-01-02", erasmusDeadline)
+	deadline, err := time.Parse(DeadlineLayout, erasmusDeadline)
 	if err != nil {
 		return err
 	}
 
-	if date.Before(deadline) {
-		return nil
-	} else {
+	if deadline.Before(ctx.BlockTime()) {
 		return types.ErrErasmusDeadlineExceeded
+	} else {
+		return nil
 	}
+}
+
+func StartErasmus(ctx sdk.Context, student *types.StoredStudent, uniInfo *types.UniversityInfo) (err error) {
+
+	var erasmusCareer []ErasmusCareerStruct
+
+	err = json.Unmarshal([]byte(student.ErasmusData.Career), &erasmusCareer)
+	if err != nil {
+		return err
+	}
+
+	lenCareer := len(erasmusCareer)
+
+	/*
+		endDate := startDate.AddDate(0, int(erasmusCareer[lenCareer-1].Duration_in_months), 0)
+		erasmusCareer[lenCareer-1].Start_date = startDate.Format("2006-01-02")
+		erasmusCareer[lenCareer-1].End_date = endDate.Format("2006-01-02")
+		erasmusCareer[lenCareer-1].Status = "in progress"
+		student.ErasmusData.ErasmusStudent = "outgoing"
+	*/
+
+	// I will enter just 30 seconds to see if the end the Erasmus period works.
+
+	startDate := ctx.BlockTime()
+
+	endDate := ctx.BlockTime().Add(time.Duration(10 * time.Second))
+	//endDate := ctx.BlockTime().Add(time.Duration(-1))
+	erasmusCareer[lenCareer-1].Start_date = FormatDeadline(startDate)
+	erasmusCareer[lenCareer-1].End_date = FormatDeadline(endDate)
+	erasmusCareer[lenCareer-1].Status = "in progress"
+	student.ErasmusData.ErasmusStudent = "outgoing"
+
+	resultByteJSON, err := json.Marshal(erasmusCareer)
+	if err != nil {
+		return err
+	}
+
+	student.ErasmusData.Career = string(resultByteJSON)
+
+	return err
+
+}
+
+func FormatDeadline(deadline time.Time) string {
+	//loc, _ := time.LoadLocation("Europe/Rome")
+	//return deadline.In(loc).Format(DeadlineLayout)
+	return deadline.Format(DeadlineLayout)
+}
+
+func GetErasmusDeadline(student types.StoredStudent) (date time.Time, err error) {
+
+	var erasmusCareer []ErasmusCareerStruct
+
+	err = json.Unmarshal([]byte(student.ErasmusData.Career), &erasmusCareer)
+	if err != nil {
+		return date, err
+	}
+
+	lenCareer := len(erasmusCareer)
+
+	finishDate, err := time.Parse(DeadlineLayout, erasmusCareer[lenCareer-1].End_date)
+	if err != nil {
+		return date, err
+	}
+
+	return finishDate, err
+}
+
+func CloseErasmusPeriod(student *types.StoredStudent) (err error) {
+
+	var erasmusCareer []ErasmusCareerStruct
+
+	err = json.Unmarshal([]byte(student.ErasmusData.Career), &erasmusCareer)
+	if err != nil {
+		return err
+	}
+
+	lenCareer := len(erasmusCareer)
+
+	student.ErasmusData.ErasmusStudent = "outgoing (completed)"
+
+	erasmusCareer[lenCareer-1].Status = "terminated"
+
+	resultByteJSON, err := json.Marshal(erasmusCareer)
+	if err != nil {
+		return err
+	}
+
+	student.ErasmusData.Career = string(resultByteJSON)
+
+	return err
 }

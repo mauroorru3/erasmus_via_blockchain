@@ -50934,6 +50934,12 @@ definitions:
     properties:
       studentIndex:
         type: string
+  university_chain_it.universitychainit.MsgStartErasmusResponse:
+    type: object
+    properties:
+      status:
+        type: integer
+        format: int32
   university_chain_it.universitychainit.Params:
     type: object
     description: Params defines the parameters for the module.

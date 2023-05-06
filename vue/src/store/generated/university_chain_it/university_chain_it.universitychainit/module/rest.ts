@@ -109,6 +109,11 @@ export interface UniversitychainitMsgRegisterNewStudentResponse {
   studentIndex?: string;
 }
 
+export interface UniversitychainitMsgStartErasmusResponse {
+  /** @format int32 */
+  status?: number;
+}
+
 /**
  * Params defines the parameters for the module.
  */

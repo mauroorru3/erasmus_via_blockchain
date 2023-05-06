@@ -11,15 +11,16 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
+	"university_chain_it/x/universitychainit/client/cli"
+	"university_chain_it/x/universitychainit/keeper"
+	"university_chain_it/x/universitychainit/types"
+
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"
 	cdctypes "github.com/cosmos/cosmos-sdk/codec/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 	porttypes "github.com/cosmos/ibc-go/v3/modules/core/05-port/types"
-	"university_chain_it/x/universitychainit/client/cli"
-	"university_chain_it/x/universitychainit/keeper"
-	"university_chain_it/x/universitychainit/types"
 )
 
 var (
@@ -172,6 +173,7 @@ func (am AppModule) BeginBlock(_ sdk.Context, _ abci.RequestBeginBlock) {}
 
 // EndBlock executes all ABCI EndBlock logic respective to the capability module. It
 // returns no validator updates.
-func (am AppModule) EndBlock(_ sdk.Context, _ abci.RequestEndBlock) []abci.ValidatorUpdate {
+func (am AppModule) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.ValidatorUpdate {
+	am.keeper.TerminateExpiredErasmusPeriods(sdk.WrapSDKContext(ctx))
 	return []abci.ValidatorUpdate{}
 }

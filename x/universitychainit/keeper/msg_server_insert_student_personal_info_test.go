@@ -103,7 +103,7 @@ func TestInsertStudentPersonalInfoWrongUniversityName(t *testing.T) {
 
 	require.EqualError(t,
 		err,
-		"the student is not present")
+		"the university name does not exists")
 	require.EqualValues(t, types.MsgInsertStudentPersonalInfoResponse{
 		Status: -1,
 	}, *personalInfoResponse)

@@ -16,6 +16,7 @@ service Msg {
   rpc PayTaxes(MsgPayTaxes) returns (MsgPayTaxesResponse);
   rpc InsertErasmusRequest(MsgInsertErasmusRequest) returns (MsgInsertErasmusRequestResponse);
   rpc InsertErasmusExam(MsgInsertErasmusExam) returns (MsgInsertErasmusExamResponse);
+  rpc StartErasmus(MsgStartErasmus) returns (MsgStartErasmusResponse);
 // this line is used by starport scaffolding # proto/tx/rpc
 }
 
@@ -132,6 +133,16 @@ message MsgInsertErasmusExam {
 }
 
 message MsgInsertErasmusExamResponse {
+  int32 status = 1;
+}
+
+message MsgStartErasmus {
+  string creator = 1;
+  string university = 2;
+  string studentIndex = 3;
+}
+
+message MsgStartErasmusResponse {
   int32 status = 1;
 }
 

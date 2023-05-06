@@ -17,54 +17,57 @@ func (k msgServer) PayTaxes(goCtx context.Context, msg *types.MsgPayTaxes) (*typ
 	chainInfo, found := k.Keeper.GetChainInfo(ctx)
 	if !found {
 		panic("ChainInfo not found")
-	}
-	if !chainInfo.InitStatus {
-		fmt.Fprintln(os.Stderr, "The initial configuration of the chain has not yet been performed.")
-		return &types.MsgPayTaxesResponse{
-			Status: -1,
-		}, types.ErrChainConfigurationNotDone
 	} else {
+		if !chainInfo.InitStatus {
+			fmt.Fprintln(os.Stderr, "The initial configuration of the chain has not yet been performed.")
+			return &types.MsgPayTaxesResponse{
+				Status: -1,
+			}, types.ErrChainConfigurationNotDone
+		} else {
 
-		searchedStudent, found := k.Keeper.GetStoredStudent(ctx, msg.GetUniversity()+"_"+msg.GetStudentIndex())
+			uniInfo, found := k.Keeper.GetUniversityInfo(ctx, msg.University)
+			if !found {
+				return &types.MsgPayTaxesResponse{
+					Status: -1,
+				}, types.ErrWrongNameUniversity
+			} else {
 
-		if found {
-
-			if searchedStudent.GetStudentData().GetStudentKey() == msg.Creator {
-
-				err := utilfunc.CheckCompleteInformation(searchedStudent)
-
-				if err != nil {
+				searchedStudent, found := k.Keeper.GetStoredStudent(ctx, msg.GetUniversity()+"_"+msg.GetStudentIndex())
+				if !found {
 					return &types.MsgPayTaxesResponse{
 						Status: -1,
-					}, types.ErrIncompleteStudentInformation
+					}, types.ErrStudentNotPresent
 				} else {
 
-					switch msg.University {
-					case "unipi":
-						unipiInfo, _ := k.Keeper.GetUniversityInfo(ctx, msg.University)
-						err := k.Keeper.CollectAndPayTaxes(ctx, &searchedStudent, unipiInfo.UniversityKey)
-						if err != nil {
-							return &types.MsgPayTaxesResponse{
-								Status: -1,
-							}, err
-						}
+					if searchedStudent.GetStudentData().GetStudentKey() != msg.Creator {
+						return &types.MsgPayTaxesResponse{
+							Status: -1,
+						}, types.ErrKeyEnteredMismatchStudent
+					} else {
 
-					case "uniroma1":
-						uniroma1Info, _ := k.Keeper.GetUniversityInfo(ctx, msg.University)
-						err := k.Keeper.CollectAndPayTaxes(ctx, &searchedStudent, uniroma1Info.UniversityKey)
+						err := utilfunc.CheckCompleteInformation(searchedStudent)
+
 						if err != nil {
 							return &types.MsgPayTaxesResponse{
 								Status: -1,
-							}, err
+							}, types.ErrIncompleteStudentInformation
+						} else {
+
+							err := k.Keeper.CollectAndPayTaxes(ctx, &searchedStudent, uniInfo.UniversityKey)
+							if err != nil {
+								return &types.MsgPayTaxesResponse{
+									Status: -1,
+								}, err
+							}
+
+							k.Keeper.SetStoredStudent(ctx, searchedStudent)
+							return &types.MsgPayTaxesResponse{
+								Status: 0,
+							}, nil
 						}
 					}
-					k.Keeper.SetStoredStudent(ctx, searchedStudent)
 				}
 			}
 		}
 	}
-
-	return &types.MsgPayTaxesResponse{
-		Status: 0,
-	}, nil
 }

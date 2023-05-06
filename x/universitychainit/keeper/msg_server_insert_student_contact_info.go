@@ -16,45 +16,54 @@ func (k msgServer) InsertStudentContactInfo(goCtx context.Context, msg *types.Ms
 	chainInfo, found := k.Keeper.GetChainInfo(ctx)
 	if !found {
 		panic("ChainInfo not found")
-	}
-	if !chainInfo.InitStatus {
-		fmt.Fprintln(os.Stderr, "The initial configuration of the chain has not yet been performed.")
-		return &types.MsgInsertStudentContactInfoResponse{
-			Status: -1,
-		}, types.ErrChainConfigurationNotDone
 	} else {
+		if !chainInfo.InitStatus {
+			fmt.Fprintln(os.Stderr, "The initial configuration of the chain has not yet been performed.")
+			return &types.MsgInsertStudentContactInfoResponse{
+				Status: -1,
+			}, types.ErrChainConfigurationNotDone
+		} else {
 
-		searchedStudent, found := k.Keeper.GetStoredStudent(ctx, msg.GetUniversity()+"_"+msg.GetStudentIndex())
+			_, found := k.Keeper.GetUniversityInfo(ctx, msg.University)
+			if !found {
+				return &types.MsgInsertStudentContactInfoResponse{
+					Status: -1,
+				}, types.ErrWrongNameUniversity
+			} else {
 
-		if found {
-			if searchedStudent.GetStudentData().GetStudentKey() == msg.Creator {
-				searchedStudent.ContactData = &types.ContactInfo{
-					ContactAddress: msg.ContactAddress,
-					Email:          msg.Email,
-					MobilePhone:    msg.MobilePhone,
-				}
-				err := searchedStudent.ContactData.Validate()
-				if err != nil {
+				searchedStudent, found := k.Keeper.GetStoredStudent(ctx, msg.GetUniversity()+"_"+msg.GetStudentIndex())
+				if !found {
 					return &types.MsgInsertStudentContactInfoResponse{
 						Status: -1,
-					}, err
+					}, types.ErrStudentNotPresent
+				} else {
+					if searchedStudent.GetStudentData().GetStudentKey() != msg.Creator {
+						return &types.MsgInsertStudentContactInfoResponse{
+							Status: -1,
+						}, types.ErrKeyEnteredMismatchStudent
+					} else {
+						searchedStudent.ContactData = &types.ContactInfo{
+							ContactAddress: msg.ContactAddress,
+							Email:          msg.Email,
+							MobilePhone:    msg.MobilePhone,
+						}
+						err := searchedStudent.ContactData.Validate()
+						if err != nil {
+							return &types.MsgInsertStudentContactInfoResponse{
+								Status: -1,
+							}, err
+						} else {
+
+							searchedStudent.StudentData.CompleteInformation[2] = 1
+							k.Keeper.SetStoredStudent(ctx, searchedStudent)
+
+							return &types.MsgInsertStudentContactInfoResponse{
+								Status: 0,
+							}, nil
+						}
+					}
 				}
-
-				searchedStudent.StudentData.CompleteInformation[2] = 1
-				k.Keeper.SetStoredStudent(ctx, searchedStudent)
-
-				return &types.MsgInsertStudentContactInfoResponse{
-					Status: 0,
-				}, nil
-
 			}
-
 		}
-
-		return &types.MsgInsertStudentContactInfoResponse{
-			Status: -1,
-		}, types.ErrStudentNotPresent
-
 	}
-
 }
