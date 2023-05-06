@@ -535,7 +535,7 @@ func StartErasmus(ctx sdk.Context, student *types.StoredStudent, uniInfo *types.
 
 	startDate := ctx.BlockTime()
 
-	endDate := ctx.BlockTime().Add(time.Duration(10 * time.Second))
+	endDate := ctx.BlockTime().Add(time.Duration(30 * time.Second))
 	//endDate := ctx.BlockTime().Add(time.Duration(-1))
 	erasmusCareer[lenCareer-1].Start_date = FormatDeadline(startDate)
 	erasmusCareer[lenCareer-1].End_date = FormatDeadline(endDate)
@@ -554,9 +554,10 @@ func StartErasmus(ctx sdk.Context, student *types.StoredStudent, uniInfo *types.
 }
 
 func FormatDeadline(deadline time.Time) string {
-	//loc, _ := time.LoadLocation("Europe/Rome")
-	//return deadline.In(loc).Format(DeadlineLayout)
-	return deadline.Format(DeadlineLayout)
+	loc, _ := time.LoadLocation("Europe/Rome")
+	newTime := deadline.In(loc)
+	return newTime.Format(DeadlineLayout)
+	//return deadline.Format(DeadlineLayout)
 }
 
 func GetErasmusDeadline(student types.StoredStudent) (date time.Time, err error) {

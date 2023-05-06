@@ -2,7 +2,7 @@ package keeper
 
 import (
 	"context"
-	"fmt"
+	"time"
 	"university_chain_it/x/universitychainit/utilfunc"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -34,30 +34,18 @@ func (k Keeper) TerminateExpiredErasmusPeriods(goCtx context.Context) {
 				if err != nil {
 					panic(err)
 				}
-				fmt.Println("****************")
-				fmt.Println("deadline " + deadline.String())
-				fmt.Println("blocktime " + ctx.BlockTime().Local().String())
-				fmt.Println("blocktime " + ctx.BlockTime().String())
-				fmt.Println("blocktime " + ctx.BlockTime().GoString())
-				fmt.Println("****************")
 
-				//loc, _ := time.LoadLocation("Europe/Rome")
-				//currentTime := ctx.BlockTime()
-				//if deadline.Before(currentTime.In(loc)) {
-				if deadline.Before(ctx.BlockTime()) {
+				s := utilfunc.FormatDeadline(ctx.BlockTime())
+				formattedStartDate, _ := time.Parse(utilfunc.DeadlineLayout, s)
+				if deadline.Before(formattedStartDate) {
+					//if deadline.Before(ctx.BlockTime()) {
 
-					fmt.Println("****************")
-					fmt.Println("QUI 1")
-					fmt.Println("****************")
 					// Erasmus period is past deadline
 					k.RemoveFromFifo(ctx, &storedStudent, &uniList[i])
 					k.SetStoredStudent(ctx, storedStudent)
 					// Move along FIFO
 					studentIndex = uniList[i].FifoHeadErasmus
 				} else {
-					fmt.Println("****************")
-					fmt.Println("QUI 2")
-					fmt.Println("****************")
 					finish = true
 				}
 

@@ -154,57 +154,53 @@ func TestTerminateExpiredErasmusPeriods(t *testing.T) {
 
 	// Commented code because of the bank module
 
-	/*
+	startErasmusResponse, err := msgServer.StartErasmus(context, &types.MsgStartErasmus{
+		Creator:      testutil.Mario_Rossi,
+		University:   "unipi",
+		StudentIndex: "1",
+	})
 
-		startErasmusResponse, err := msgServer.StartErasmus(context, &types.MsgStartErasmus{
-			Creator:      testutil.Mario_Rossi,
-			University:   "unipi",
-			StudentIndex: "1",
-		})
+	require.Nil(t, err)
+	require.EqualValues(t, types.MsgStartErasmusResponse{
+		Status: 0,
+	}, *startErasmusResponse)
 
-		require.Nil(t, err)
-		require.EqualValues(t, types.MsgStartErasmusResponse{
-			Status: 0,
-		}, *startErasmusResponse)
+	_, found = keeper.GetStoredStudent(ctx, "unipi_1")
+	require.True(t, found)
 
-		_, found = keeper.GetStoredStudent(ctx, "unipi_1")
-		require.True(t, found)
+	systemInfo, found := keeper.GetUniversityInfo(ctx, "unipi")
+	require.True(t, found)
+	require.EqualValues(t, types.UniversityInfo{
+		UniversityName:  "unipi",
+		NextStudentId:   2,
+		SecretariatKey:  "cosmos1sf3zdq9q7tzfk9l83g05padqky4v9tld2dhsur",
+		UniversityKey:   "cosmos1mhmthq4cx8ltfexahqrhutqxu9d26zltwhh39n",
+		FifoHeadErasmus: "unipi_1",
+		FifoTailErasmus: "unipi_1",
+		DeadlineTaxes:   "2023-12-31 12:00:00",
+		DeadlineErasmus: "2023-12-31 12:00:00",
+		TaxesBrackets:   "{\"first\":[6500,0],\"second\":[28000,200],\"third\":[60000,400],\"fourth\":800}",
+		MaxErasmusExams: 3,
+		CaiKey:          "",
+	}, systemInfo)
 
-		systemInfo, found := keeper.GetUniversityInfo(ctx, "unipi")
-		require.True(t, found)
-		require.EqualValues(t, types.UniversityInfo{
-			UniversityName:  "unipi",
-			NextStudentId:   2,
-			SecretariatKey:  "cosmos1sf3zdq9q7tzfk9l83g05padqky4v9tld2dhsur",
-			UniversityKey:   "cosmos1mhmthq4cx8ltfexahqrhutqxu9d26zltwhh39n",
-			FifoHeadErasmus: "unipi_1",
-			FifoTailErasmus: "unipi_1",
-			DeadlineTaxes:   "2023-12-31 12:00:00",
-			DeadlineErasmus: "2023-12-31 12:00:00",
-			TaxesBrackets:   "{\"first\":[6500,0],\"second\":[28000,200],\"third\":[60000,400],\"fourth\":800}",
-			MaxErasmusExams: 3,
-			CaiKey:          "",
-		}, systemInfo)
+	keeper.TerminateExpiredErasmusPeriods(context)
 
-		keeper.TerminateExpiredErasmusPeriods(context)
+	systemInfo, found = keeper.GetUniversityInfo(ctx, "unipi")
+	require.True(t, found)
+	require.EqualValues(t, types.UniversityInfo{
 
-		systemInfo, found = keeper.GetUniversityInfo(ctx, "unipi")
-		require.True(t, found)
-		require.EqualValues(t, types.UniversityInfo{
-
-			UniversityName:  "unipi",
-			NextStudentId:   2,
-			SecretariatKey:  "cosmos1sf3zdq9q7tzfk9l83g05padqky4v9tld2dhsur",
-			UniversityKey:   "cosmos1mhmthq4cx8ltfexahqrhutqxu9d26zltwhh39n",
-			FifoHeadErasmus: "",
-			FifoTailErasmus: "",
-			DeadlineTaxes:   "2023-12-31 12:00:00",
-			DeadlineErasmus: "2023-12-31 12:00:00",
-			TaxesBrackets:   "{\"first\":[6500,0],\"second\":[28000,200],\"third\":[60000,400],\"fourth\":800}",
-			MaxErasmusExams: 3,
-			CaiKey:          "",
-		}, systemInfo)
-
-	*/
+		UniversityName:  "unipi",
+		NextStudentId:   2,
+		SecretariatKey:  "cosmos1sf3zdq9q7tzfk9l83g05padqky4v9tld2dhsur",
+		UniversityKey:   "cosmos1mhmthq4cx8ltfexahqrhutqxu9d26zltwhh39n",
+		FifoHeadErasmus: "",
+		FifoTailErasmus: "",
+		DeadlineTaxes:   "2023-12-31 12:00:00",
+		DeadlineErasmus: "2023-12-31 12:00:00",
+		TaxesBrackets:   "{\"first\":[6500,0],\"second\":[28000,200],\"third\":[60000,400],\"fourth\":800}",
+		MaxErasmusExams: 3,
+		CaiKey:          "",
+	}, systemInfo)
 
 }

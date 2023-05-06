@@ -98,6 +98,18 @@ sudo docker exec -it university_chain_it university_chain_itd query bank balance
 
 sudo docker exec -it university_chain_it university_chain_itd tx universitychainit insert-exam-grade unipi 1 "Algorithm engineering" 25 --from $prof_ae --gas auto 
 
+# To insert an Erasmus request:
+
+sudo docker exec -it university_chain_it university_chain_itd tx universitychainit insert-erasmus-request unipi 1 6 tum study --from $Mario_Rossi --gas auto 
+
+# To add an Erasmus exam:
+
+sudo docker exec -it university_chain_it university_chain_itd tx universitychainit insert-erasmus-exam unipi 1 "Advanced databases" --from $Mario_Rossi --gas auto 
+
+# To start the Erasmus:
+
+sudo docker exec -it university_chain_it university_chain_itd tx universitychainit start-erasmus unipi 1 --from $Mario_Rossi --gas auto 
+
 # To perform the tests:
 
 sudo docker run --rm -it -v $(pwd):/university_chain_it -w /university_chain_it university_chain_it_i make mock-expected-keepers 
